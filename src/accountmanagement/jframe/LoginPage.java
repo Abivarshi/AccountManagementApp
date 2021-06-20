@@ -7,6 +7,12 @@ package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -16,6 +22,7 @@ public class LoginPage extends javax.swing.JFrame {
 
     String username;
     String passWord;
+    String shopName;
 
     DataBaseConnection db = new DataBaseConnection();
     ResultSet rs;
@@ -71,7 +78,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         jLabel3.setText("Shop");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(getShopList());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,10 +96,10 @@ public class LoginPage extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, 117, Short.MAX_VALUE)
                     .addComponent(jTextField1)
                     .addComponent(jTextField2))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,22 +128,29 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         username = jTextField1.getText();
         passWord = jTextField2.getText();
+        shopName = jComboBox2.getItemAt(jComboBox2.getSelectedIndex());
 
-        if (db.getUser("shop1", username, passWord)){
-            System.out.println(username + " exists");
-            new Dashboard().setVisible(true);
+        if (db.getUser(shopName, username, passWord)) {
+            new Till(shopName).setVisible(true);
             setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+    private ComboBoxModel getShopList() {
+        ArrayList<String> shopList = new ArrayList<>();
+        ResultSet res = db.getShopList();
+        try {
+            while (res.next()) {
+                shopList.add(res.getString("shopName"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-////Create the combo box, select item at index 4.
-////Indices start at 0, so 4 specifies the pig.
-//JComboBox shopList = new JComboBox(shopList);
-//petList.setSelectedIndex(4);
-//petList.addActionListener(this);
-    
+        ComboBoxModel model = new DefaultComboBoxModel(shopList.toArray());
+        return model;
+    }
+
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -146,7 +160,6 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
-     * @param args the command line arguments
      */
     public void run() {
         /* Set the Nimbus look and feel */
@@ -172,7 +185,7 @@ public class LoginPage extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-System.out.println("In main");
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

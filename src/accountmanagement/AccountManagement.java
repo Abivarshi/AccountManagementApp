@@ -6,6 +6,7 @@
 package accountmanagement;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.Till;
 import accountmanagement.jframe.LoginPage;
 import java.sql.ResultSet;
 
@@ -20,23 +21,27 @@ public class AccountManagement {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//        DataBaseConnection db = new DataBaseConnection();
-//        ResultSet rs;
-//
-//        try {
-//            db.createUserTable("shop2");
-//            rs = db.addUser("shop1", "admin", "admin", "admin");
+        DataBaseConnection db = new DataBaseConnection();
+        ResultSet rs;
+
+        try {
+//            db.createShop("Shop1");
+//            db.createShop("Shop2");
+//            rs = db.addUser("Shop1", "a", "a", "admin");
+//            db.addUser("Shop1", "u", "u", "user");
 //
 //            while (rs.next()) {
 //                System.out.println(rs.getString("username") + " " + rs.getString("role"));
 //            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
+            //db.createTillTable("Shop1");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         LoginPage loginPage = new LoginPage();
         loginPage.run();
+//            new Till("Shop1").setVisible(true);
     }
     
 }
