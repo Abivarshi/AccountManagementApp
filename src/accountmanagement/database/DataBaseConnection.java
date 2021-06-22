@@ -72,7 +72,7 @@ public class DataBaseConnection {
         return res;
     }
 
-    public Boolean getUser(String shopName, String username, String password) {
+    public Boolean login(String shopName, String username, String password) {
 
         try {
             if (con == null || !connectedShop.equals(shopName)) {
@@ -90,6 +90,108 @@ public class DataBaseConnection {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    public void createTabDetailTable(String shopName) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        Statement state = con.createStatement();
+        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='TabDetail'");
+        if (!res.next()) {
+            System.out.println("Building the TabDetail table...");
+
+            Statement state2 = con.createStatement();
+            state2.executeUpdate("CREATE TABLE TabDetail(id integer,"
+                    + "TabName varchar(60),"
+                    + "primary key (id));");
+
+        }
+    }
+
+    public void insertTabDetail(String shopName, String tabName) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        PreparedStatement prep = con.prepareStatement("INSERT INTO TabDetail values(?,?);");
+        prep.setString(2, tabName);
+        prep.execute();
+    }
+
+    public ResultSet getTabDetail(String shopName) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT TabName FROM TabDetail");
+            return res;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public void createTabTable(String shopName, String tabName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        ResultSet res;
+        try {
+            insertTabDetail(shopName, tabName);
+
+            Statement state = con.createStatement();
+            res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='" + tabName + "'");
+            if (!res.next()) {
+                System.out.println("Building the " + tabName + " table...");
+
+                Statement state2 = con.createStatement();
+                state2.executeUpdate("create table " + tabName + "(id integer,"
+                        + "Date varchar(60),"
+                        + "primary key (id));");
+
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ResultSetMetaData getItems(String shopName, String tabName) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM " + tabName);
+            ResultSetMetaData metadata = res.getMetaData();
+            return metadata;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void insertItemToTab(String shopName, String tabName,String item) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        System.out.println("Alter the "+tabName+" table..." + item);
+
+        try {
+            Statement state = con.createStatement();
+            state.executeUpdate("ALTER TABLE "+tabName+" ADD " + item + " FLOAT NULL;");
+            System.out.println("Alter the "+tabName+" table..." + item);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void createTillTable(String shopName) throws ClassNotFoundException, SQLException {
@@ -208,7 +310,6 @@ public class DataBaseConnection {
     }
 
     public ResultSet getShopList() {
-
         try {
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:shop.db");
@@ -217,7 +318,7 @@ public class DataBaseConnection {
             Statement state = con.createStatement();
             ResultSet res = state.executeQuery("SELECT * FROM shop");
             return res;
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

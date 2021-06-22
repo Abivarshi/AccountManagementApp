@@ -6,6 +6,7 @@
 package accountmanagement;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.Dashboard;
 import accountmanagement.jframe.Till;
 import accountmanagement.jframe.LoginPage;
 import java.sql.ResultSet;
@@ -34,14 +35,14 @@ public class AccountManagement {
 //                System.out.println(rs.getString("username") + " " + rs.getString("role"));
 //            }
 
-            //db.createTillTable("Shop1");
+//            db.createTabDetailTable("Shop1");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        LoginPage loginPage = new LoginPage();
-        loginPage.run();
-//            new Till("Shop1").setVisible(true);
+//        LoginPage loginPage = new LoginPage();
+//        loginPage.run();
+            new Dashboard("Shop1").setVisible(true);
     }
     
 }
