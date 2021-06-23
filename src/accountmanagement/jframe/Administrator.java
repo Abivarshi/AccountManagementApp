@@ -6,7 +6,12 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.administrator.AdminExpenditure;
+import accountmanagement.jframe.administrator.AdminPurcharse;
+import accountmanagement.jframe.administrator.Staff;
+import accountmanagement.jframe.administrator.User;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -33,7 +38,6 @@ public class Administrator extends javax.swing.JPanel {
     public Administrator(String shopName) {
         this.shopName = shopName;
         initComponents();
-        getTabList();
     }
 
     /**
@@ -45,54 +49,130 @@ public class Administrator extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        newTabPanel = new javax.swing.JPanel();
-        tabNameTextBox = new javax.swing.JTextField();
-        addButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        staffButton = new javax.swing.JButton();
+        userButton = new javax.swing.JButton();
+        expenditureButton = new javax.swing.JButton();
+        purcharseButton = new javax.swing.JButton();
 
-        newTabPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add New Tab", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(0, 0, 51))); // NOI18N
-        newTabPanel.setForeground(new java.awt.Color(0, 0, 102));
+        jPanel1.setLayout(new java.awt.CardLayout());
 
-        addButton.setText("Add");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        staffButton.setBackground(new java.awt.Color(0, 0, 51));
+        staffButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        staffButton.setText("Staff");
+        staffButton.setBorder(null);
+        staffButton.setBorderPainted(false);
+        staffButton.setContentAreaFilled(false);
+        staffButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        staffButton.setFocusPainted(false);
+        staffButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                staffButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                staffButtonMouseHoverOut(evt);
+            }
+        });
+        staffButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                staffButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout newTabPanelLayout = new javax.swing.GroupLayout(newTabPanel);
-        newTabPanel.setLayout(newTabPanelLayout);
-        newTabPanelLayout.setHorizontalGroup(
-            newTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(newTabPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(addButton)
-                .addGap(28, 28, 28))
-        );
-        newTabPanelLayout.setVerticalGroup(
-            newTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(newTabPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(newTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tabNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton))
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
+        userButton.setBackground(new java.awt.Color(0, 0, 51));
+        userButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        userButton.setText("User");
+        userButton.setBorder(null);
+        userButton.setBorderPainted(false);
+        userButton.setContentAreaFilled(false);
+        userButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        userButton.setFocusPainted(false);
+        userButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                userButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                userButtonMouseHoverOut(evt);
+            }
+        });
+        userButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userButtonActionPerformed(evt);
+            }
+        });
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        expenditureButton.setBackground(new java.awt.Color(0, 0, 51));
+        expenditureButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        expenditureButton.setText("Expenditure");
+        expenditureButton.setBorder(null);
+        expenditureButton.setBorderPainted(false);
+        expenditureButton.setContentAreaFilled(false);
+        expenditureButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        expenditureButton.setFocusPainted(false);
+        expenditureButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                expenditureButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                expenditureButtonMouseHoverOut(evt);
+            }
+        });
+        expenditureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expenditureButtonActionPerformed(evt);
+            }
+        });
+
+        purcharseButton.setBackground(new java.awt.Color(0, 0, 51));
+        purcharseButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        purcharseButton.setText("Purcharse");
+        purcharseButton.setBorder(null);
+        purcharseButton.setBorderPainted(false);
+        purcharseButton.setContentAreaFilled(false);
+        purcharseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        purcharseButton.setFocusPainted(false);
+        purcharseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                purcharseButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                purcharseButtonMouseHoverOut(evt);
+            }
+        });
+        purcharseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purcharseButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 195, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(staffButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(expenditureButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(purcharseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(staffButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(purcharseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(expenditureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(309, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -100,40 +180,73 @@ public class Administrator extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(newTabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 384, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(newTabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE))))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    private void staffButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHover
+        staffButton.setForeground(Color.red);
+    }//GEN-LAST:event_staffButtonMouseHover
 
-        String tabName = tabNameTextBox.getText();
-        db.createTabTable(this.shopName, tabName);
-//        jPanel1.revalidate();
-//        jPanel1.repaint();
-//        jPanel1.add(new JTextField("AAA"));
-        getTabList();
-    }//GEN-LAST:event_addButtonActionPerformed
+    private void staffButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHoverOut
+        staffButton.setForeground(Color.white);
+    }//GEN-LAST:event_staffButtonMouseHoverOut
+
+    private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
+        jPanel1.add("Staff", new Staff(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_staffButtonActionPerformed
+
+    private void userButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userButtonMouseHover
+        userButton.setForeground(Color.red);
+    }//GEN-LAST:event_userButtonMouseHover
+
+    private void userButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userButtonMouseHoverOut
+        userButton.setForeground(Color.white);
+    }//GEN-LAST:event_userButtonMouseHoverOut
+
+    private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
+        jPanel1.add("User", new User(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_userButtonActionPerformed
+
+    private void expenditureButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHover
+        expenditureButton.setForeground(Color.red);
+    }//GEN-LAST:event_expenditureButtonMouseHover
+
+    private void expenditureButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHoverOut
+        expenditureButton.setForeground(Color.white);
+    }//GEN-LAST:event_expenditureButtonMouseHoverOut
+
+    private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
+        jPanel1.add("AdminExpenditure",new AdminExpenditure(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_expenditureButtonActionPerformed
+
+    private void purcharseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHover
+        purcharseButton.setForeground(Color.red);
+    }//GEN-LAST:event_purcharseButtonMouseHover
+
+    private void purcharseButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHoverOut
+        purcharseButton.setForeground(Color.white);
+    }//GEN-LAST:event_purcharseButtonMouseHoverOut
+
+    private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
+        jPanel1.add("AdminPurcharse",new AdminPurcharse(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_purcharseButtonActionPerformed
 
     private void getTabList(){
         ResultSet res = db.getTabDetail(shopName);
@@ -165,10 +278,11 @@ public class Administrator extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
+    private javax.swing.JButton expenditureButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel newTabPanel;
-    private javax.swing.JTextField tabNameTextBox;
+    private javax.swing.JButton purcharseButton;
+    private javax.swing.JButton staffButton;
+    private javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables
 }

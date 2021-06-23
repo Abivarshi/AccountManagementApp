@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accountmanagement.jframe;
+package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
 
 /**
  *
- * @author acer
+ * @author COMPAQ
  */
-public class StaffTime extends javax.swing.JPanel {
-
+public class AdminPurcharse extends javax.swing.JPanel {
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     /**
-     * Creates new form Till
+     * Creates new form AdminPurcharse
      */
-    public StaffTime(String shopName) {
+    public AdminPurcharse(String shopName) {
         this.shopName = shopName;
         initComponents();
     }
@@ -32,37 +31,27 @@ public class StaffTime extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, 161, -1));
-
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel2.setText("Date");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 38, 167, 20));
-
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setText("Reset");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 90, 30));
+        jLabel1.setText("Purcharse Type");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 31, 113, 22));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 114, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

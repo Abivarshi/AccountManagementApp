@@ -11,14 +11,14 @@ import accountmanagement.database.DataBaseConnection;
  *
  * @author acer
  */
-public class StaffTime extends javax.swing.JPanel {
+public class Purcharse extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     /**
      * Creates new form Till
      */
-    public StaffTime(String shopName) {
+    public Purcharse(String shopName) {
         this.shopName = shopName;
         initComponents();
     }

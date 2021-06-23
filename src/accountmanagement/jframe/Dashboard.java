@@ -55,6 +55,7 @@ public class Dashboard extends javax.swing.JFrame {
         salesButton = new javax.swing.JButton();
         pettyButton = new javax.swing.JButton();
         staffTimeButton = new javax.swing.JButton();
+        salesButton1 = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -262,6 +263,29 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        salesButton1.setBackground(new java.awt.Color(0, 0, 51));
+        salesButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        salesButton1.setForeground(new java.awt.Color(255, 255, 255));
+        salesButton1.setText("Report");
+        salesButton1.setBorder(null);
+        salesButton1.setBorderPainted(false);
+        salesButton1.setContentAreaFilled(false);
+        salesButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salesButton1.setFocusPainted(false);
+        salesButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                salesButton1MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salesButton1MouseHoverOut(evt);
+            }
+        });
+        salesButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
@@ -277,7 +301,8 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(salesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sheet2Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pettyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(staffTimeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(staffTimeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(salesButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
@@ -301,6 +326,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(staffTimeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(salesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -314,9 +341,9 @@ public class Dashboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1031, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,9 +383,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseButtonMouseHoverOut
 
     private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseButtonActionPerformed
-//        rightPanel.add("Purchase", new Purchase(shopName));
-//        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.next(rightPanel);
+        rightPanel.add("Purcharse", new Purcharse(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_purchaseButtonActionPerformed
 
     private void expenditureButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHover
@@ -370,9 +397,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-//        rightPanel.add("Expenditure", new Expenditure(shopName));
-//        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.next(rightPanel);
+        rightPanel.add("Expenditure", new Expenditure(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
@@ -440,10 +467,22 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_staffTimeButtonMouseHoverOut
 
     private void staffTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffTimeButtonActionPerformed
-//        rightPanel.add("StaffTime", new StaffTime(shopName));
-//        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.next(rightPanel);
+        rightPanel.add("StaffTime", new StaffTime(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_staffTimeButtonActionPerformed
+
+    private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesButton1MouseHover
+
+    private void salesButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesButton1MouseHoverOut
+
+    private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesButton1ActionPerformed
 
     private void getTabList() {
         ResultSet res = db.getTabDetail(shopName);
@@ -483,6 +522,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton purchaseButton;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JButton salesButton;
+    private javax.swing.JButton salesButton1;
     private javax.swing.JButton sheet2Button;
     private javax.swing.JButton staffTimeButton;
     private javax.swing.JButton tillButton;
