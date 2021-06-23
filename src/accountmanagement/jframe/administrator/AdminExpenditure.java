@@ -6,6 +6,13 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.TillJframe;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -20,6 +27,7 @@ public class AdminExpenditure extends javax.swing.JPanel {
     public AdminExpenditure(String shopName) {
         this.shopName = shopName;
         initComponents();
+        getExpenditureList();
     }
 
     /**
@@ -34,6 +42,7 @@ public class AdminExpenditure extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,13 +54,41 @@ public class AdminExpenditure extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 90, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 270, 290));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        db.addItemToExpenditure(shopName, jTextField1.getText());
+    }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void getExpenditureList(){
+        ResultSet res = db.getExpenditureDetail(shopName);
+        try {
+            int i = 1;
+            while (res.next()) {
+                String name = res.getString("Name");
+                JLabel label = new JLabel(name);
+                label.setBounds(0, 30 * i, 100, 30);
+                jPanel1.add(label);
+                i = i + 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

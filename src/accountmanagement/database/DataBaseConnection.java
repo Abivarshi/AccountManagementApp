@@ -284,8 +284,8 @@ public class DataBaseConnection {
         try {
             Statement state = con.createStatement();
             state.executeUpdate("ALTER TABLE Expenditure ADD " + item + " FLOAT NULL;");
-
-        } catch (SQLException ex) {
+            insertExpenditureDetail(shopName, item);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -339,8 +339,8 @@ public class DataBaseConnection {
         try {
             Statement state = con.createStatement();
             state.executeUpdate("ALTER TABLE Purchase ADD " + item + " FLOAT NULL;");
-
-        } catch (SQLException ex) {
+            insertPurchaseDetail(shopName, item);
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
