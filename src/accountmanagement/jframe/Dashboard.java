@@ -412,9 +412,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_salesButtonMouseHoverOut
 
     private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed
-//        rightPanel.add("Sales", new Sales(shopName));
-//        CardLayout layout = (CardLayout) rightPanel.getLayout();
-//        layout.next(rightPanel);
+        rightPanel.add("Sales", new Sales(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_salesButtonActionPerformed
 
     private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
