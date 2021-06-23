@@ -55,7 +55,8 @@ public class Dashboard extends javax.swing.JFrame {
         salesButton = new javax.swing.JButton();
         pettyButton = new javax.swing.JButton();
         staffTimeButton = new javax.swing.JButton();
-        salesButton1 = new javax.swing.JButton();
+        reportButton = new javax.swing.JButton();
+        summaryButton = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,6 +97,14 @@ public class Dashboard extends javax.swing.JFrame {
         tillButton.setContentAreaFilled(false);
         tillButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tillButton.setFocusPainted(false);
+        tillButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tillButtonHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tillButtonMouseHoverOut(evt);
+            }
+        });
         tillButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tillButtonActionPerformed(evt);
@@ -263,26 +272,49 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        salesButton1.setBackground(new java.awt.Color(0, 0, 51));
-        salesButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        salesButton1.setForeground(new java.awt.Color(255, 255, 255));
-        salesButton1.setText("Report");
-        salesButton1.setBorder(null);
-        salesButton1.setBorderPainted(false);
-        salesButton1.setContentAreaFilled(false);
-        salesButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        salesButton1.setFocusPainted(false);
-        salesButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        reportButton.setBackground(new java.awt.Color(0, 0, 51));
+        reportButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        reportButton.setForeground(new java.awt.Color(255, 255, 255));
+        reportButton.setText("Report");
+        reportButton.setBorder(null);
+        reportButton.setBorderPainted(false);
+        reportButton.setContentAreaFilled(false);
+        reportButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reportButton.setFocusPainted(false);
+        reportButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                salesButton1MouseHover(evt);
+                reportButtonMouseHover(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                salesButton1MouseHoverOut(evt);
+                reportButtonMouseHoverOut(evt);
             }
         });
-        salesButton1.addActionListener(new java.awt.event.ActionListener() {
+        reportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salesButton1ActionPerformed(evt);
+                reportButtonActionPerformed(evt);
+            }
+        });
+
+        summaryButton.setBackground(new java.awt.Color(0, 0, 51));
+        summaryButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        summaryButton.setForeground(new java.awt.Color(255, 255, 255));
+        summaryButton.setText("Summary");
+        summaryButton.setBorder(null);
+        summaryButton.setBorderPainted(false);
+        summaryButton.setContentAreaFilled(false);
+        summaryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        summaryButton.setFocusPainted(false);
+        summaryButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                summaryButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                summaryButtonMouseHoverOut(evt);
+            }
+        });
+        summaryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                summaryButtonActionPerformed(evt);
             }
         });
 
@@ -302,7 +334,8 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(sheet2Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pettyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(staffTimeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(salesButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(reportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(summaryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
@@ -327,7 +360,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(summaryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -389,11 +424,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseButtonActionPerformed
 
     private void expenditureButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHover
-        // TODO add your handling code here:
+        expenditureButton.setForeground(Color.red);
     }//GEN-LAST:event_expenditureButtonMouseHover
 
     private void expenditureButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHoverOut
-        // TODO add your handling code here:
+        expenditureButton.setForeground(Color.white);
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
@@ -403,11 +438,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
-        // TODO add your handling code here:
+        bankButton.setForeground(Color.red);
     }//GEN-LAST:event_bankButtonMouseHover
 
     private void bankButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHoverOut
-        // TODO add your handling code here:
+        bankButton.setForeground(Color.white);
     }//GEN-LAST:event_bankButtonMouseHoverOut
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
@@ -417,11 +452,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_bankButtonActionPerformed
 
     private void sheet2ButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHover
-        // TODO add your handling code here:
+        sheet2Button.setForeground(Color.red);
     }//GEN-LAST:event_sheet2ButtonMouseHover
 
     private void sheet2ButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHoverOut
-        // TODO add your handling code here:
+        sheet2Button.setForeground(Color.white);
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
@@ -431,11 +466,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_sheet2ButtonActionPerformed
 
     private void salesButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHover
-        // TODO add your handling code here:
+        salesButton.setForeground(Color.red);
     }//GEN-LAST:event_salesButtonMouseHover
 
     private void salesButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHoverOut
-        // TODO add your handling code here:
+        salesButton.setForeground(Color.white);
     }//GEN-LAST:event_salesButtonMouseHoverOut
 
     private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed
@@ -445,11 +480,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_salesButtonActionPerformed
 
     private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
-        // TODO add your handling code here:
+        pettyButton.setForeground(Color.red);
     }//GEN-LAST:event_pettyButtonMouseHover
 
     private void pettyButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHoverOut
-        // TODO add your handling code here:
+        pettyButton.setForeground(Color.white);
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
@@ -459,11 +494,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_pettyButtonActionPerformed
 
     private void staffTimeButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTimeButtonMouseHover
-        // TODO add your handling code here:
+        staffTimeButton.setForeground(Color.red);
     }//GEN-LAST:event_staffTimeButtonMouseHover
 
     private void staffTimeButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTimeButtonMouseHoverOut
-        // TODO add your handling code here:
+       staffTimeButton.setForeground(Color.white);
     }//GEN-LAST:event_staffTimeButtonMouseHoverOut
 
     private void staffTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffTimeButtonActionPerformed
@@ -472,17 +507,39 @@ public class Dashboard extends javax.swing.JFrame {
         layout.next(rightPanel);
     }//GEN-LAST:event_staffTimeButtonActionPerformed
 
-    private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salesButton1MouseHover
+    private void reportButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportButtonMouseHover
+        reportButton.setForeground(Color.red);
+    }//GEN-LAST:event_reportButtonMouseHover
 
-    private void salesButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHoverOut
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salesButton1MouseHoverOut
+    private void reportButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportButtonMouseHoverOut
+        reportButton.setForeground(Color.white);
+    }//GEN-LAST:event_reportButtonMouseHoverOut
 
-    private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
+    private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
+        rightPanel.add("Report", new Report(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_reportButtonActionPerformed
+
+    private void summaryButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summaryButtonMouseHover
+        summaryButton.setForeground(Color.red);
+    }//GEN-LAST:event_summaryButtonMouseHover
+
+    private void summaryButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summaryButtonMouseHoverOut
+        summaryButton.setForeground(Color.white);
+    }//GEN-LAST:event_summaryButtonMouseHoverOut
+
+    private void summaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summaryButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_salesButton1ActionPerformed
+    }//GEN-LAST:event_summaryButtonActionPerformed
+
+    private void tillButtonHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonHover
+        tillButton.setForeground(Color.red);
+    }//GEN-LAST:event_tillButtonHover
+
+    private void tillButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHoverOut
+        tillButton.setForeground(Color.white);
+    }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void getTabList() {
         ResultSet res = db.getTabDetail(shopName);
@@ -520,11 +577,12 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel leftPanel;
     private javax.swing.JButton pettyButton;
     private javax.swing.JButton purchaseButton;
+    private javax.swing.JButton reportButton;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JButton salesButton;
-    private javax.swing.JButton salesButton1;
     private javax.swing.JButton sheet2Button;
     private javax.swing.JButton staffTimeButton;
+    private javax.swing.JButton summaryButton;
     private javax.swing.JButton tillButton;
     // End of variables declaration//GEN-END:variables
 }

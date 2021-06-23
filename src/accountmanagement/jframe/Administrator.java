@@ -56,6 +56,7 @@ public class Administrator extends javax.swing.JPanel {
         expenditureButton = new javax.swing.JButton();
         purcharseButton = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
