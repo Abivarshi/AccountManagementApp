@@ -106,6 +106,8 @@ public class DataBaseConnection {
             state2.executeUpdate("CREATE TABLE TabDetail(id integer,"
                     + "TabName varchar(60),"
                     + "primary key (id));");
+            
+            insertDefaultTabDetail(shopName);
 
         }
     }
@@ -117,6 +119,20 @@ public class DataBaseConnection {
         PreparedStatement prep = con.prepareStatement("INSERT INTO TabDetail values(?,?);");
         prep.setString(2, tabName);
         prep.execute();
+    }
+
+    public void insertDefaultTabDetail(String shopName) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        createTabTable(shopName, "Till");
+        createTabTable(shopName, "Expenditure");
+        createTabTable(shopName, "Purchase");
+        createTabTable(shopName, "Bank");
+        createTabTable(shopName, "Petty");
+        createTabTable(shopName, "Staff");
+        createTabTable(shopName, "Staff_Time");
+        createTabTable(shopName, "Sales");
     }
 
     public ResultSet getTabDetail(String shopName) {
@@ -306,7 +322,7 @@ public class DataBaseConnection {
         prep.execute();
 
         createUserTable(shopName);
-        createTillTable(shopName);
+        createTabDetailTable(shopName);
     }
 
     public ResultSet getShopList() {

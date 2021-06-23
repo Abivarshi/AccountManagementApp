@@ -7,7 +7,7 @@ package accountmanagement;
 
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.Dashboard;
-import accountmanagement.jframe.Till;
+import accountmanagement.jframe.TillJframe;
 import accountmanagement.jframe.LoginPage;
 import java.sql.ResultSet;
 
@@ -43,6 +43,7 @@ public class AccountManagement {
 //        LoginPage loginPage = new LoginPage();
 //        loginPage.run();
             new Dashboard("Shop1").setVisible(true);
+//            new Till("Shop1").setVisible(true);
     }
     
 }

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
@@ -128,6 +129,10 @@ public class Administrator extends javax.swing.JPanel {
 
         String tabName = tabNameTextBox.getText();
         db.createTabTable(this.shopName, tabName);
+//        jPanel1.revalidate();
+//        jPanel1.repaint();
+//        jPanel1.add(new JTextField("AAA"));
+        getTabList();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void getTabList(){
@@ -145,7 +150,7 @@ public class Administrator extends javax.swing.JPanel {
                 i = i + 1;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Till.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

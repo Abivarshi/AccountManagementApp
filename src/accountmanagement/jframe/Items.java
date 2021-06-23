@@ -112,7 +112,7 @@ public class Items extends javax.swing.JPanel {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Till.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
