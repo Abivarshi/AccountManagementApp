@@ -104,17 +104,11 @@ public class AdminPurcharse extends javax.swing.JPanel {
     private void getPurchaseList(){
         ResultSet res = db.getPurchaseDetail(shopName);
         try {
-            int i = 1;
             while (res.next()) {
                 String name = res.getString("Name");
-//                JLabel label = new JLabel(name);
-//                
-//                label.setBounds(0, 30 * i, 100, 30);
-//                jPanel1.add(label);
                 String tableModel[]={name};
                 DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
                 tbModel.addRow(tableModel);
-                i = i + 1;
             }
         } catch (SQLException ex) {
             Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
