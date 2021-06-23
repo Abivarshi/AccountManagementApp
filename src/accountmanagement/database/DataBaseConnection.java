@@ -6,6 +6,7 @@
 package accountmanagement.database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -150,7 +151,215 @@ public class DataBaseConnection {
             return null;
         }
     }
+    
+    public void createStaff(String shopName) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
 
+        Statement state = con.createStatement();
+        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='Staff'");
+        if (!res.next()) {
+            System.out.println("Building the Staff table...");
+
+            Statement state2 = con.createStatement();
+            state2.executeUpdate("CREATE TABLE Staff(id integer,"
+                    + "StaffName VARCHAR(60),"
+                    + "SalaryPercentage FLOAT,"
+                    + "Till YESNO,"
+                    + "Floor YESNO,"
+                    + "CashCarry YESNO,"
+                    + "Management YESNO,"
+                    + "primary key (id));");
+        }
+    }
+    
+    public void insertStaff(String shopName, String staffName, Float salaryPercentage, HashMap<String, Boolean> type) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff values(?,?,?,?,?,?,?);");
+        prep.setString(2, staffName);
+        prep.setFloat(3, salaryPercentage);
+        prep.setBoolean(4, type.get("Till"));
+        prep.setBoolean(5, type.get("Floor"));
+        prep.setBoolean(6, type.get("CashCarry"));
+        prep.setBoolean(7, type.get("Management"));
+        prep.execute();
+    }
+
+    public ResultSet getStaff(String shopName) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM Staff");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void createStaffTime(String shopName) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        Statement state = con.createStatement();
+        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='StaffTime'");
+        if (!res.next()) {
+            System.out.println("Building the Staff table...");
+
+            Statement state2 = con.createStatement();
+            state2.executeUpdate("CREATE TABLE StaffTime(id integer,"
+                    + "Date DATE"
+                    + "StaffName VARCHAR(60),"
+                    + "Type VARCHAR(60),"
+                    + "StartTime FLOAT,"
+                    + "EndTime FLOAT,"
+                    + "primary key (id));");
+        }
+    }
+    
+    public void insertStaffTime(String shopName, Date date, String staffName, String staffType, Float start, Float end) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff (Date, StaffName, Type, StartTime, EndTime) VALUES ("
+                + "'" + date + "', '" + staffName + ", '" + staffType + "', " + start + ", " + end +");");
+        prep.execute();
+    }
+    
+    public ResultSet getStaffTime(String shopName, String date) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM StaffTime WHERE Date='" + date + "'");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void createExpenditureDetail(String shopName) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        Statement state = con.createStatement();
+        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='ExpenditureDetail'");
+        if (!res.next()) {
+            System.out.println("Building the ExpenditureDetail table...");
+
+            Statement state2 = con.createStatement();
+            state2.executeUpdate("CREATE TABLE ExpenditureDetail(id integer,"
+                    + "Name varchar(60),"
+                    + "primary key (id));");
+
+        }
+    }
+    
+    public void insertExpenditureDetail(String shopName, String name) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        PreparedStatement prep = con.prepareStatement("INSERT INTO ExpenditureDetail(Name) values('" + name + "');");
+        prep.execute();
+    }
+
+    public void addItemToExpenditure(String shopName, String item) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        System.out.println("Alter the Expenditure table..." + shopName + " " + item);
+        try {
+            Statement state = con.createStatement();
+            state.executeUpdate("ALTER TABLE Expenditure ADD " + item + " FLOAT NULL;");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ResultSet getExpenditureDetail(String shopName) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM ExpenditureDetail");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void createPurchaseDetail(String shopName) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        Statement state = con.createStatement();
+        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='PurchaseDetail'");
+        if (!res.next()) {
+            System.out.println("Building the PurchaseDetail table...");
+
+            Statement state2 = con.createStatement();
+            state2.executeUpdate("CREATE TABLE PurchaseDetail(id integer,"
+                    + "Name varchar(60),"
+                    + "primary key (id));");
+
+        }
+    }
+    
+    public void insertPurchaseDetail(String shopName, String name) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        PreparedStatement prep = con.prepareStatement("INSERT INTO PurchaseDetail(Name) values('" + name + "');");
+        prep.execute();
+    }
+
+    public void addItemToPurchase(String shopName, String item) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        System.out.println("Alter the Purschase table..." + shopName + " " + item);
+        try {
+            Statement state = con.createStatement();
+            state.executeUpdate("ALTER TABLE Purchase ADD " + item + " FLOAT NULL;");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ResultSet getPurchaseDetail(String shopName) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM PurchaseDetail");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public void createTabTable(String shopName, String tabName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -167,7 +376,7 @@ public class DataBaseConnection {
 
                 Statement state2 = con.createStatement();
                 state2.executeUpdate("create table " + tabName + "(id integer,"
-                        + "Date varchar(60),"
+                        + "Date DATE,"
                         + "primary key (id));");
 
             }
@@ -209,7 +418,7 @@ public class DataBaseConnection {
         }
 
     }
-
+    
     public void createTillTable(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -323,6 +532,12 @@ public class DataBaseConnection {
 
         createUserTable(shopName);
         createTabDetailTable(shopName);
+        createStaff(shopName);
+        createStaffTime(shopName);
+        createExpenditureDetail(shopName);
+        createPurchaseDetail(shopName);
+        createTabTable(shopName, "Expenditure");
+        createTabTable(shopName, "Purchase");
     }
 
     public ResultSet getShopList() {
