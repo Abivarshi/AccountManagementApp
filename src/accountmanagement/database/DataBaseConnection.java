@@ -558,4 +558,8 @@ public class DataBaseConnection {
             return null;
         }
     }
+    
+    public void logout() throws SQLException{
+        con.close();
+    }
 }

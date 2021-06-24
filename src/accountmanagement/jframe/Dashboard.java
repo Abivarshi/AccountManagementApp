@@ -600,7 +600,14 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_tillButtonHover
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        
+        try {
+            db.logout();
+            setVisible(false);
+            LoginPage loginPage = new LoginPage();
+            loginPage.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHoverOut
@@ -622,7 +629,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void administratorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_administratorButton1ActionPerformed
-    
+
     private ActionListener populateTabPanel(String tabName) {
         return (ActionEvent e) -> {
             rightPanel.add("Items", new Items(shopName, tabName));
