@@ -77,7 +77,19 @@ public class Purcharse extends javax.swing.JPanel {
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 510));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 530, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 800, 530));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -96,9 +108,15 @@ public class Purcharse extends javax.swing.JPanel {
             for (int i = 3; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);
                 JLabel label = new JLabel(columnName);
-                label.setBounds(50, 30 * i, 100, 30);
+                label.setFont(new java.awt.Font("Tahoma", 0, 12));
+                label.setBounds(20, 30 * (i - 3), 130, 20);
+
                 JTextField textField = new JTextField();
-                textField.setBounds(200, 30 * i, 100, 30);
+                textField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+                textField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+                textField.setText("0");
+                textField.setBounds(220, 30 * (i - 3), 96, 20);
+
                 jPanel1.add(label);
                 jPanel1.add(textField);
                 listOfTextFields.put(columnName, textField);
