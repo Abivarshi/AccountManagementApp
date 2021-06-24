@@ -137,11 +137,13 @@ public class ExpenditureReport extends javax.swing.JPanel {
             column.add("Different");
 
             JTable jt = new JTable(data.toArray(new String[0][0]), column.toArray());
-            jt.setBounds(30, 40, 2000, 300);
+            jt.setBounds(30, 40, 1500, 300);
+            jt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            jt.setPreferredSize(new java.awt.Dimension(800, 64));
             jt.setDefaultRenderer(String.class, new LineWrapCellRenderer());
         
             JScrollPane sp = new JScrollPane(jt);
-            sp.setBounds(10, 20, 400, 500);
+            sp.setBounds(10, 20, 775, 500);
             sp.setBackground(Color.white);
             jPanel1.add(sp);
 
