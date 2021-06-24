@@ -25,23 +25,24 @@ public class Dashboard extends javax.swing.JFrame {
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     private final String role;
+    private final String userName;
     /**
      * Creates new form Dashboard
      *
      * @param shopName
      * @param role
      */
-    public Dashboard(String shopName, String role) {
+    public Dashboard(String shopName, String role,String userName) {
         this.shopName = shopName;
         this.role=role;
+        this.userName=userName;
         initComponents();
         if(role.equals("admin")){
             administratorButton.setVisible(true);
         }else{
             administratorButton.setVisible(false);
         }
-        
-        
+        userNameLabal.setText(userName);
 //        getTabList();
     }
 
@@ -67,6 +68,7 @@ public class Dashboard extends javax.swing.JFrame {
         summaryButton = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        userNameLabal = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         administratorButton = new javax.swing.JButton();
@@ -360,6 +362,29 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
+        userNameLabal.setBackground(new java.awt.Color(0, 0, 51));
+        userNameLabal.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        userNameLabal.setForeground(new java.awt.Color(255, 255, 255));
+        userNameLabal.setBorder(null);
+        userNameLabal.setBorderPainted(false);
+        userNameLabal.setContentAreaFilled(false);
+        userNameLabal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        userNameLabal.setFocusPainted(false);
+        userNameLabal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        userNameLabal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MouseHoverOut(evt);
+            }
+        });
+        userNameLabal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameLabalActionPerformed(evt);
+            }
+        });
+
         logoutButton.setBackground(new java.awt.Color(0, 0, 51));
         logoutButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -371,10 +396,10 @@ public class Dashboard extends javax.swing.JFrame {
         logoutButton.setFocusPainted(false);
         logoutButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MouseHover(evt);
+                logoutButtonMouseHover(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                MouseHoverOut(evt);
+                logoutButtonMouseHoverOut(evt);
             }
         });
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -388,14 +413,19 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userNameLabal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userNameLabal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
@@ -607,23 +637,16 @@ public class Dashboard extends javax.swing.JFrame {
         tillButton.setForeground(Color.red);
     }//GEN-LAST:event_tillButtonHover
 
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        try {
-            db.logout();
-            setVisible(false);
-            LoginPage loginPage = new LoginPage();
-            loginPage.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_logoutButtonActionPerformed
+    private void userNameLabalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameLabalActionPerformed
+        
+    }//GEN-LAST:event_userNameLabalActionPerformed
 
     private void MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHoverOut
-        logoutButton.setForeground(Color.white);
+        
     }//GEN-LAST:event_MouseHoverOut
 
     private void MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHover
-        logoutButton.setForeground(Color.red);
+        
     }//GEN-LAST:event_MouseHover
 
     private void administratorButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButtonMouseHover
@@ -639,6 +662,25 @@ public class Dashboard extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) rightPanel.getLayout();
         layout.next(rightPanel);
     }//GEN-LAST:event_administratorButtonActionPerformed
+
+    private void logoutButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutButtonMouseHover
+        logoutButton.setForeground(Color.red);
+    }//GEN-LAST:event_logoutButtonMouseHover
+
+    private void logoutButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutButtonMouseHoverOut
+        logoutButton.setForeground(Color.white);
+    }//GEN-LAST:event_logoutButtonMouseHoverOut
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        try {
+            db.logout();
+            setVisible(false);
+            LoginPage loginPage = new LoginPage();
+            loginPage.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     private ActionListener populateTabPanel(String tabName) {
         return (ActionEvent e) -> {
@@ -665,5 +707,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton staffTimeButton;
     private javax.swing.JButton summaryButton;
     private javax.swing.JButton tillButton;
+    private javax.swing.JButton userNameLabal;
     // End of variables declaration//GEN-END:variables
 }

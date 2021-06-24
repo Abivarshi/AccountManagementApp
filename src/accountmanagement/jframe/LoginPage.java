@@ -114,7 +114,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         if (db.login(shopName, username, passWord)) {
             String role =db.getUserType(shopName, username, passWord);
-            new Dashboard(shopName,role).setVisible(true);
+            new Dashboard(shopName,role,username).setVisible(true);
             setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
