@@ -6,6 +6,10 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,11 +19,12 @@ public class Staff extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+
     /**
      * Creates new form Staff
      */
     public Staff(String shopName) {
-        this.shopName=shopName;
+        this.shopName = shopName;
         initComponents();
     }
 
@@ -34,14 +39,16 @@ public class Staff extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        managementCheckBox = new javax.swing.JCheckBox();
+        tillCheckBox = new javax.swing.JCheckBox();
+        floorCheckBox = new javax.swing.JCheckBox();
+        cashCarryCheckBox = new javax.swing.JCheckBox();
+        salaryPercentageTextField = new javax.swing.JTextField();
+        staffNameTextField = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        successLabel = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,54 +59,103 @@ public class Staff extends javax.swing.JPanel {
         jLabel2.setText("Salary Percentage");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 71, -1, -1));
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Management Hours");
-        add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+        managementCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        managementCheckBox.setText("Management Hours");
+        add(managementCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
 
-        jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox2.setText("Till Hours");
-        add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, -1));
+        tillCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        tillCheckBox.setText("Till Hours");
+        add(tillCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, -1));
 
-        jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox3.setText("Floor Hours");
-        add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+        floorCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        floorCheckBox.setText("Floor Hours");
+        add(floorCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
 
-        jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox4.setText("Cash Carry Hours");
-        add(jCheckBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 100, -1));
+        cashCarryCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        cashCarryCheckBox.setText("Cash Carry Hours");
+        add(cashCarryCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
+        add(salaryPercentageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 100, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        staffNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                staffNameTextFieldActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 100, -1));
+        add(staffNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 100, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 90, 30));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 90, 30));
 
         jLabel3.setText("Working Type");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        successLabel.setForeground(new java.awt.Color(0, 153, 51));
+        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 190, 20));
+
+        warningLabel.setForeground(new java.awt.Color(204, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 190, 20));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void staffNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_staffNameTextFieldActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String staffName = staffNameTextField.getText();
+        String staffPercentage = salaryPercentageTextField.getText();
+        if (!staffName.isEmpty() && !staffPercentage.isEmpty()) {
+            try {
+                db.addStaff(shopName, staffName, Float.parseFloat(staffPercentage), tillCheckBox.isSelected(), floorCheckBox.isSelected(), cashCarryCheckBox.isSelected(), managementCheckBox.isSelected());
+                successLabel.setText("Staff added successfully...");
+                ResultSet set = db.getStaff("Shop1");
+                while (set.next()) {
+                    System.out.print(set.getString("staffName"));
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException ex) {
+                successLabel.setText("**Salary Percentage should be a number");
+                staffNameTextField.setText("");
+                salaryPercentageTextField.setText("");
+                tillCheckBox.setSelected(false);
+                cashCarryCheckBox.setSelected(false);
+                managementCheckBox.setSelected(false);
+                floorCheckBox.setSelected(false);
+                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            successLabel.setText("**All are mandatory fields should be filled");
+            staffNameTextField.setText("");
+            salaryPercentageTextField.setText("");
+            tillCheckBox.setSelected(false);
+            cashCarryCheckBox.setSelected(false);
+            managementCheckBox.setSelected(false);
+            floorCheckBox.setSelected(false);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox cashCarryCheckBox;
+    private javax.swing.JCheckBox floorCheckBox;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JCheckBox managementCheckBox;
+    private javax.swing.JTextField salaryPercentageTextField;
+    private javax.swing.JTextField staffNameTextField;
+    private javax.swing.JLabel successLabel;
+    private javax.swing.JCheckBox tillCheckBox;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

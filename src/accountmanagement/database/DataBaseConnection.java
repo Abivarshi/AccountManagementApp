@@ -70,6 +70,24 @@ public class DataBaseConnection {
         ResultSet res = state.executeQuery("select * from user where username='" + username + "'");
         return res;
     }
+    
+    public ResultSet addStaff(String shopName, String staffName, float salaryPercentage, Boolean till, Boolean floor, Boolean cashCarry, Boolean management) throws ClassNotFoundException, SQLException {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        PreparedStatement prep = con.prepareStatement("insert into Staff values(?,?,?,?,?,?,?);");
+        prep.setString(2, staffName);
+        prep.setFloat(3, salaryPercentage);
+        prep.setBoolean(4, till);
+        prep.setBoolean(5, floor);
+        prep.setBoolean(6, cashCarry);
+        prep.setBoolean(7, management);
+        prep.execute();
+
+        Statement state = con.createStatement();
+        ResultSet res = state.executeQuery("select * from Staff where staffName='" + staffName + "'");
+        return res;
+    }
 
     public Boolean login(String shopName, String username, String password) {
 
