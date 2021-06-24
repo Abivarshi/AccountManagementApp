@@ -38,11 +38,12 @@ public class AccountManagement {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        LoginPage loginPage = new LoginPage();
-//        loginPage.run();
-            new Dashboard("Shop1").setVisible(true);
+//
+        LoginPage loginPage = new LoginPage();
+        loginPage.run();
+//            new Dashboard("Shop1").setVisible(true);
 //            new Till("Shop1").setVisible(true);
+//            System.out.print(db.getUserType("Shop1", "a", "a"));
     }
     
 }

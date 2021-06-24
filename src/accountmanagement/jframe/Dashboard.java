@@ -24,15 +24,24 @@ public class Dashboard extends javax.swing.JFrame {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-
+    private final String role;
     /**
      * Creates new form Dashboard
      *
      * @param shopName
+     * @param role
      */
-    public Dashboard(String shopName) {
+    public Dashboard(String shopName, String role) {
         this.shopName = shopName;
+        this.role=role;
         initComponents();
+        if(role.equals("admin")){
+            administratorButton.setVisible(true);
+        }else{
+            administratorButton.setVisible(false);
+        }
+        
+        
 //        getTabList();
     }
 
@@ -60,12 +69,11 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        administratorButton1 = new javax.swing.JButton();
+        administratorButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Account Management");
         setAlwaysOnTop(true);
-        setPreferredSize(new java.awt.Dimension(1200, 1100));
 
         leftPanel.setBackground(new java.awt.Color(0, 0, 102));
         leftPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -392,26 +400,26 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
-        administratorButton1.setBackground(new java.awt.Color(0, 0, 51));
-        administratorButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        administratorButton1.setForeground(new java.awt.Color(255, 255, 255));
-        administratorButton1.setText("Administrator");
-        administratorButton1.setBorder(null);
-        administratorButton1.setBorderPainted(false);
-        administratorButton1.setContentAreaFilled(false);
-        administratorButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        administratorButton1.setFocusPainted(false);
-        administratorButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        administratorButton.setBackground(new java.awt.Color(0, 0, 51));
+        administratorButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        administratorButton.setForeground(new java.awt.Color(255, 255, 255));
+        administratorButton.setText("Administrator");
+        administratorButton.setBorder(null);
+        administratorButton.setBorderPainted(false);
+        administratorButton.setContentAreaFilled(false);
+        administratorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        administratorButton.setFocusPainted(false);
+        administratorButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                administratorButton1MouseHover(evt);
+                administratorButtonMouseHover(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                administratorButton1MouseHoverOut(evt);
+                administratorButtonMouseHoverOut(evt);
             }
         });
-        administratorButton1.addActionListener(new java.awt.event.ActionListener() {
+        administratorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                administratorButton1ActionPerformed(evt);
+                administratorButtonActionPerformed(evt);
             }
         });
 
@@ -421,14 +429,14 @@ public class Dashboard extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(administratorButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                .addComponent(administratorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(administratorButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(administratorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2))
         );
 
@@ -618,19 +626,19 @@ public class Dashboard extends javax.swing.JFrame {
         logoutButton.setForeground(Color.red);
     }//GEN-LAST:event_MouseHover
 
-    private void administratorButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButton1MouseHover
-        administratorButton1.setForeground(Color.red);
-    }//GEN-LAST:event_administratorButton1MouseHover
+    private void administratorButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButtonMouseHover
+        administratorButton.setForeground(Color.red);
+    }//GEN-LAST:event_administratorButtonMouseHover
 
-    private void administratorButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButton1MouseHoverOut
-        administratorButton1.setForeground(Color.white);
-    }//GEN-LAST:event_administratorButton1MouseHoverOut
+    private void administratorButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButtonMouseHoverOut
+        administratorButton.setForeground(Color.white);
+    }//GEN-LAST:event_administratorButtonMouseHoverOut
 
-    private void administratorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorButton1ActionPerformed
+    private void administratorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorButtonActionPerformed
         rightPanel.add("Administrator", new Administrator(shopName));
         CardLayout layout = (CardLayout) rightPanel.getLayout();
         layout.next(rightPanel);
-    }//GEN-LAST:event_administratorButton1ActionPerformed
+    }//GEN-LAST:event_administratorButtonActionPerformed
 
     private ActionListener populateTabPanel(String tabName) {
         return (ActionEvent e) -> {
@@ -641,7 +649,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton administratorButton1;
+    private javax.swing.JButton administratorButton;
     private javax.swing.JButton bankButton;
     private javax.swing.JButton expenditureButton;
     private javax.swing.JPanel jPanel1;

@@ -6,6 +6,11 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,12 +20,12 @@ public class User extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-    
+
     /**
      * Creates new form User
      */
     public User(String shopName) {
-        this.shopName=shopName;
+        this.shopName = shopName;
         initComponents();
     }
 
@@ -34,21 +39,24 @@ public class User extends javax.swing.JPanel {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        userTypeCombo = new javax.swing.JComboBox();
         userType = new javax.swing.JLabel();
         userType1 = new javax.swing.JLabel();
         userType2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        userNameTextField = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        passwordTextField = new javax.swing.JPasswordField();
+        userType3 = new javax.swing.JLabel();
+        confirmPasswordTextField = new javax.swing.JPasswordField();
+        warningLabel = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Supervisor", "User", " " }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 94, -1));
+        userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Supervisor", "User", " " }));
+        add(userTypeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 94, -1));
 
         userType.setText("User Type");
         userType.setToolTipText("");
@@ -61,24 +69,75 @@ public class User extends javax.swing.JPanel {
         userType2.setText("Password");
         userType2.setToolTipText("");
         add(userType2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 86, 20));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 90, -1));
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 90, -1));
+        add(userNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 90, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 90, 30));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 90, 30));
+        add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 90, -1));
+
+        userType3.setText("Confirm Password");
+        userType3.setToolTipText("");
+        add(userType3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 86, 20));
+        add(confirmPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 90, -1));
+
+        warningLabel.setForeground(new java.awt.Color(204, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 270, 20));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String pass = new String(passwordTextField.getPassword());
+        String conPass = new String(confirmPasswordTextField.getPassword());
+        String userName = userNameTextField.getText();
+        if (!userName.isEmpty() && passwordTextField.getPassword().length != 0 && confirmPasswordTextField.getPassword().length != 0) {
+            if (pass.equals(conPass)) {
+                if (db.getUserType(shopName, userName, pass) == null) {
+                    try {
+                        db.addUser(shopName, userName, pass, userTypeCombo.getSelectedItem().toString());
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    warningLabel.setText("**This user name password already exist");
+                    passwordTextField.setText("");
+                    confirmPasswordTextField.setText("");
+                    userNameTextField.setText("");
+                }
+            } else {
+                warningLabel.setText("**Password mismatch");
+                passwordTextField.setText("");
+                confirmPasswordTextField.setText("");
+                userNameTextField.setText("");
+            }
+        } else {
+            warningLabel.setText("**All are mandatory fields");
+            passwordTextField.setText("");
+            confirmPasswordTextField.setText("");
+            userNameTextField.setText("");
+        }
+        System.out.println(pass);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField confirmPasswordTextField;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JTextField userNameTextField;
     private javax.swing.JLabel userType;
     private javax.swing.JLabel userType1;
     private javax.swing.JLabel userType2;
+    private javax.swing.JLabel userType3;
+    private javax.swing.JComboBox userTypeCombo;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

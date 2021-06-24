@@ -113,7 +113,8 @@ public class LoginPage extends javax.swing.JFrame {
         shopName = jComboBox2.getItemAt(jComboBox2.getSelectedIndex());
 
         if (db.login(shopName, username, passWord)) {
-            new Dashboard(shopName).setVisible(true);
+            String role =db.getUserType(shopName, username, passWord);
+            new Dashboard(shopName,role).setVisible(true);
             setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

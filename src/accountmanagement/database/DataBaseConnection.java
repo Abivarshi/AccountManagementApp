@@ -227,7 +227,7 @@ public class DataBaseConnection {
         }
 
     }
-    
+
     public ResultSetMetaData getTabColumns(String shopName, String tabName) {
         try {
             if (con == null || !connectedShop.equals(shopName)) {
@@ -238,7 +238,7 @@ public class DataBaseConnection {
             ResultSet res = state.executeQuery("SELECT * FROM " + tabName);
             ResultSetMetaData metadata = res.getMetaData();
             return metadata;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -368,8 +368,26 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
-    public void logout() throws SQLException{
+
+    public void logout() throws SQLException {
         con.close();
     }
+
+    public String getUserType(String shopName, String username, String password) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        String role = "";
+        try {
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("select * from user where username='" + username + "'and password='" + password + "'");
+            while (res.next()) {
+                role = res.getString("role");
+            }
+        }catch(Exception e){
+            
+        }
+        return role;
+    }
+
 }
