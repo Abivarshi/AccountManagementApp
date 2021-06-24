@@ -10,6 +10,8 @@ import accountmanagement.jframe.administrator.AdminExpenditure;
 import accountmanagement.jframe.administrator.AdminPurcharse;
 import accountmanagement.jframe.administrator.Staff;
 import accountmanagement.jframe.administrator.User;
+import accountmanagement.jframe.report.BankReport;
+import accountmanagement.jframe.report.PettyReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -62,7 +64,7 @@ public class Report extends javax.swing.JPanel {
         salesButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.CardLayout());
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -360,7 +362,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add("PettyReport",new PettyReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_pettyButtonActionPerformed
 
     private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
@@ -372,7 +376,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButtonMouseHoverOut
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add("BankReport", new BankReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_bankButtonActionPerformed
 
     private void staffButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHover

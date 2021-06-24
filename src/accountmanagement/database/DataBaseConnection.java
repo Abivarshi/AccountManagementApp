@@ -360,6 +360,23 @@ public class DataBaseConnection {
         }
     }
     
+    public void addItemToBank(String shopName, String item) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        try {
+            Statement state = con.createStatement();
+            if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+            }
+            PreparedStatement prep = con.prepareStatement("INSERT INTO Bank values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            prep.setString(2, item);
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void createTabTable(String shopName, String tabName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);

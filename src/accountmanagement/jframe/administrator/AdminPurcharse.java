@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,6 +45,8 @@ public class AdminPurcharse extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,6 +97,10 @@ public class AdminPurcharse extends javax.swing.JPanel {
         }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 230, 270));
+
+        jScrollPane2.setViewportView(jList1);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 150, 270));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -107,8 +114,9 @@ public class AdminPurcharse extends javax.swing.JPanel {
             while (res.next()) {
                 String name = res.getString("Name");
                 String tableModel[]={name};
-                DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
-                tbModel.addRow(tableModel);
+//                DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
+//                tbModel.addRow(tableModel);
+                jList1.setListData(tableModel);
             }
         } catch (SQLException ex) {
             Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,7 +125,9 @@ public class AdminPurcharse extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

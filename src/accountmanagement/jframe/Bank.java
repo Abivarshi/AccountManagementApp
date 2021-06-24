@@ -45,7 +45,7 @@ public class Bank extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        saveBankButton = new javax.swing.JButton();
         jTextField22 = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jTextField23 = new javax.swing.JTextField();
@@ -176,11 +176,16 @@ public class Bank extends javax.swing.JPanel {
         jButton1.setText("Reset");
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 90, 30));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 102));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 90, 30));
+        saveBankButton.setBackground(new java.awt.Color(0, 0, 102));
+        saveBankButton.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        saveBankButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveBankButton.setText("Save");
+        saveBankButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBankButtonActionPerformed(evt);
+            }
+        });
+        add(saveBankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 90, 30));
 
         jTextField22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField22.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -493,10 +498,13 @@ public class Bank extends javax.swing.JPanel {
         add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 130, 20));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveBankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBankButtonActionPerformed
+        db.addItemToBank(shopName, shopName);
+    }//GEN-LAST:event_saveBankButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -571,5 +579,6 @@ public class Bank extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField49;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton saveBankButton;
     // End of variables declaration//GEN-END:variables
 }
