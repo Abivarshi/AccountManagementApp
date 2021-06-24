@@ -112,10 +112,10 @@ public class Purcharse extends javax.swing.JPanel {
                 label.setBounds(20, 30 * (i - 3), 130, 20);
 
                 JTextField textField = new JTextField();
-                textField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+                textField.setFont(new java.awt.Font("Tahoma", 0, 12));
                 textField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
                 textField.setText("0");
-                textField.setBounds(220, 30 * (i - 3), 96, 20);
+                textField.setBounds(220, 30 * (i - 3), 96, 25);
 
                 jPanel1.add(label);
                 jPanel1.add(textField);

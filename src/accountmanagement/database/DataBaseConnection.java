@@ -321,6 +321,14 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Bank", "P_BestWay");
         alterTabTable(shopName, "Bank", "PB_BorrowMoney");
     }
+    
+    public void createDefaultTill(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        alterTabTable(shopName, "TillReport", "Expenditure");
+        alterTabTable(shopName, "TillReport", "Purchase");
+    }
 
     public void createShop(String shopName) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
@@ -348,7 +356,8 @@ public class DataBaseConnection {
         createStaffTime(shopName);
         createTabTable(shopName, "Expenditure");
         createTabTable(shopName, "Purcharse");
-        createTabTable(shopName, "Till");
+        createTabTable(shopName, "TillReport");
+        createTabTable(shopName, "TillBackOffice");
         createTabTable(shopName, "Bank");
         createDefaultBank(shopName);
         createTabTable(shopName, "Petty");

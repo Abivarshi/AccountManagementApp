@@ -5,8 +5,20 @@
  */
 package accountmanagement.jframe.report;
 
-import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.util.LineWrapCellRenderer;
+import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.Border;
 
 /**
  *
@@ -16,8 +28,11 @@ public class ExpenditureReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+
     /**
      * Creates new form Till
+     *
+     * @param shopName
      */
     public ExpenditureReport(String shopName) {
         this.shopName = shopName;
@@ -38,6 +53,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,6 +69,11 @@ public class ExpenditureReport extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
         jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -62,7 +83,72 @@ public class ExpenditureReport extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("To Date");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 550, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 800, 550));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        ResultSet res = db.getValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser1.getDate()));
+        ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
+        try {
+            List<String[]> data = new ArrayList();
+            List<String> column = new ArrayList();
+            column.add("Date");
+            boolean firstEntry = true;
+            while (res.next()) {
+                String dateCol = metadata.getColumnName(2);
+                String date = res.getString(dateCol);
+                List<String> values = new ArrayList();
+                values.add(date);
+                float expenditure = 10;
+                float totalExpenditure = 0;
+                for (int i = 3; i <= metadata.getColumnCount(); i++) {
+                    String columnName = metadata.getColumnName(i);
+                    Float value = res.getFloat(columnName);
+                    values.add(value.toString());
+                    totalExpenditure = totalExpenditure + value;
+                    if (firstEntry) {
+                        column.add(columnName);
+                    }
+                }
+                values.add(String.valueOf(totalExpenditure));
+                values.add(String.valueOf(expenditure));
+                values.add(String.valueOf(expenditure - totalExpenditure));
+                data.add(values.toArray(new String[0]));
+
+                firstEntry = false;
+            }
+            column.add("TotalExpenditure");
+            column.add("Expenditure");
+            column.add("Different");
+
+            JTable jt = new JTable(data.toArray(new String[0][0]), column.toArray());
+            jt.setBounds(30, 40, 2000, 300);
+            jt.setDefaultRenderer(String.class, new LineWrapCellRenderer());
+        
+            JScrollPane sp = new JScrollPane(jt);
+            sp.setBounds(10, 20, 400, 500);
+            sp.setBackground(Color.white);
+            jPanel1.add(sp);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -71,5 +157,6 @@ public class ExpenditureReport extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

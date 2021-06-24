@@ -26,6 +26,7 @@ public class AccountManagement {
         ResultSet rs;
 
         try {
+
 //            db.createShop("Shop1");
 //            rs = db.addUser("Shop1", "a", "a", "admin");
 //            db.addUser("Shop1", "u", "u", "user");
@@ -39,9 +40,9 @@ public class AccountManagement {
             e.printStackTrace();
         }
 //
-        LoginPage loginPage = new LoginPage();
-        loginPage.run();
-//            new Dashboard("Shop1").setVisible(true);
+//        LoginPage loginPage = new LoginPage();
+//        loginPage.run();
+            new Dashboard("Shop1", "admin").setVisible(true);
 //            new Till("Shop1").setVisible(true);
 //            System.out.print(db.getUserType("Shop1", "a", "a"));
     }

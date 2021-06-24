@@ -6,6 +6,15 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import static accountmanagement.jframe.Purcharse.listOfTextFields;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,10 +26,12 @@ public class Expenditure extends javax.swing.JPanel {
     private final String shopName;
     /**
      * Creates new form Till
+     * @param shopName
      */
     public Expenditure(String shopName) {
         this.shopName = shopName;
         initComponents();
+        populateExpenditure();
     }
 
     /**
@@ -36,6 +47,7 @@ public class Expenditure extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,14 +67,68 @@ public class Expenditure extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 530, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 800, 530));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        HashMap<String, Float> purchaseValues = new HashMap();
+        for (String name : listOfTextFields.keySet()) {
+            System.out.println(name + ": " + listOfTextFields.get(name).getText());
+            purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser1.getDate()), purchaseValues);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void populateExpenditure() {
+        ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
+        try {
+            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+                String columnName = metadata.getColumnName(i);
+                JLabel label = new JLabel(columnName);
+                label.setFont(new java.awt.Font("Tahoma", 0, 12));
+                label.setBounds(20, 30 * (i - 3), 130, 20);
+
+                JTextField textField = new JTextField();
+                textField.setFont(new java.awt.Font("Tahoma", 0, 12));
+                textField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+                textField.setText("0");
+                textField.setBounds(220, 30 * (i - 3), 96, 25);
+
+                jPanel1.add(label);
+                jPanel1.add(textField);
+                listOfTextFields.put(columnName, textField);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Purcharse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

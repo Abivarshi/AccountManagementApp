@@ -7,14 +7,12 @@ package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.TillJframe;
-import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +23,7 @@ public class AdminPurcharse extends javax.swing.JPanel {
     private final String shopName;
     /**
      * Creates new form AdminPurcharse
+     * @param shopName
      */
     public AdminPurcharse(String shopName) {
         this.shopName = shopName;
@@ -78,11 +77,12 @@ public class AdminPurcharse extends javax.swing.JPanel {
     private void getPurcharseList(){
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
         try {
-            for (int i = 2; i <= metadata.getColumnCount(); i++) {
+            List<String> items = new ArrayList();
+            for (int i = 3; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);
-                String tableModel[]={columnName};
-                jList1.setListData(tableModel);
+                items.add(columnName);
             }
+            jList1.setListData(items.toArray());
         } catch (SQLException ex) {
             Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
         }

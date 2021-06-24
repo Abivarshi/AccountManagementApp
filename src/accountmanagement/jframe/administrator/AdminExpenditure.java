@@ -7,24 +7,26 @@ package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.TillJframe;
-import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author COMPAQ
  */
 public class AdminExpenditure extends javax.swing.JPanel {
+
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+
     /**
      * Creates new form AdminPurcharse
+     *
+     * @param shopName
      */
     public AdminExpenditure(String shopName) {
         this.shopName = shopName;
@@ -75,19 +77,20 @@ public class AdminExpenditure extends javax.swing.JPanel {
         db.alterTabTable(shopName, "Expenditure", jTextField1.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void getExpenditureList(){
+    private void getExpenditureList() {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
         try {
-            for (int i = 2; i <= metadata.getColumnCount(); i++) {
+            List<String> items = new ArrayList();
+            for (int i = 3; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);
-                String tableModel[]={columnName};
-                jList1.setListData(tableModel);
+                items.add(columnName);
             }
+            jList1.setListData(items.toArray());
         } catch (SQLException ex) {
             Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
