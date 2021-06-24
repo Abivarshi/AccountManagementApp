@@ -7,7 +7,11 @@ package accountmanagement.jframe.report;
 
 import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -176,7 +180,14 @@ public class BankReport extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        db.getValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()));
+        ResultSet rs = db.getValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()));
+        try {
+            while(rs.next()){
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
