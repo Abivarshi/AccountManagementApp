@@ -83,7 +83,8 @@ public class BankReport extends javax.swing.JPanel {
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable1.setPreferredSize(new java.awt.Dimension(6000, 64));
+        jTable1.setPreferredSize(new java.awt.Dimension(2500, 64));
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
