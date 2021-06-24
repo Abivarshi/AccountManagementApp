@@ -152,6 +152,11 @@ public class Sales extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
@@ -159,6 +164,17 @@ public class Sales extends javax.swing.JPanel {
         jButton2.setText("Save");
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextField1.setText("0");
+        jTextField12.setText("0");
+        jTextField2.setText("0");
+        jTextField3.setText("0");
+        jTextField4.setText("0");
+        jTextField5.setText("0");
+        jTextField6.setText("0");
+        jTextField7.setText("0");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

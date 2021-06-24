@@ -34,7 +34,7 @@ public class Till extends javax.swing.JPanel {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -79,7 +79,7 @@ public class Till extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         jTextField21 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -94,7 +94,7 @@ public class Till extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 167, 20));
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "From Report", "From BackOffice" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "From Report", "From BackOffice" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 170, 20));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -317,9 +317,14 @@ public class Till extends javax.swing.JPanel {
         jLabel24.setText("PayZone");
         add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 167, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setText("Reset");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 90, 30));
+        resetButton.setBackground(new java.awt.Color(255, 102, 102));
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+        add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -327,9 +332,32 @@ public class Till extends javax.swing.JPanel {
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        jTextField1.setText("0");
+        jTextField10.setText("0");
+        jTextField11.setText("0");
+        jTextField12.setText("0");
+        jTextField13.setText("0");
+        jTextField14.setText("0");
+        jTextField15.setText("0");
+        jTextField16.setText("0");
+        jTextField17.setText("0");
+        jTextField18.setText("0");
+        jTextField19.setText("0");
+        jTextField2.setText("0");
+        jTextField20.setText("0");
+        jTextField21.setText("0");
+        jTextField3.setText("0");
+        jTextField4.setText("0");
+        jTextField5.setText("0");
+        jTextField6.setText("0");
+        jTextField7.setText("0");
+        jTextField8.setText("0");
+        jTextField9.setText("0");
+    }//GEN-LAST:event_resetButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -378,5 +406,6 @@ public class Till extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton resetButton;
     // End of variables declaration//GEN-END:variables
 }

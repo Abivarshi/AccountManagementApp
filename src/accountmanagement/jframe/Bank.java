@@ -20,6 +20,7 @@ public class Bank extends javax.swing.JPanel {
 
     /**
      * Creates new form Till
+     *
      * @param shopName
      */
     public Bank(String shopName) {
@@ -177,6 +178,11 @@ public class Bank extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 90, 30));
 
         saveBankButton.setBackground(new java.awt.Color(0, 0, 102));
@@ -540,6 +546,41 @@ public class Bank extends javax.swing.JPanel {
         db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
 
     }//GEN-LAST:event_saveBankButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        EB_BankCharge.setText("0");
+        EB_CardMachine.setText("0");
+        EB_ElevenCharge.setText("0");
+        EB_PayZoneRental.setText("0");
+        EM_Alarm.setText("0");
+        EM_BT.setText("0");
+        EM_CapitalGains.setText("0");
+        EM_Electric.setText("0");
+        EM_Nest.setText("0");
+        EM_Rent.setText("0");
+        EM_SalarayMike.setText("0");
+        EM_SalarySathees.setText("0");
+        EM_ToiletBlock.setText("0");
+        EM_Water.setText("0");
+        EY_BIFFA.setText("0");
+        EY_Buil.setText("0");
+        EY_OffFee.setText("0");
+        EY_ShopInsurance.setText("0");
+        FB_CashPlus.setText("0");
+        FB_ElevenCard.setText("0");
+        FB_MilkVouture.setText("0");
+        FB_NETWEST.setText("0");
+        MI_NoteMachine.setText("0");
+        MI_PayZone.setText("0");
+        PB_BorrowMoney.setText("0");
+        P_BestWay.setText("0");
+        P_CostCutter.setText("0");
+        P_NI.setText("0");
+        SMO_Camlot.setText("0");
+        SMO_Oyster.setText("0");
+        SMO_PayPoint.setText("0");
+        SMO_PayZone.setText("0");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

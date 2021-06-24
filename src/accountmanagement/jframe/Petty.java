@@ -153,6 +153,11 @@ public class Petty extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
@@ -400,6 +405,34 @@ public class Petty extends javax.swing.JPanel {
         jLabel62.setText("Pay Back");
         add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 130, 20));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         jTextField12.setText("0");
+        jTextField13.setText("0");
+        jTextField14.setText("0");
+        jTextField22.setText("0");
+        jTextField24.setText("0");
+        jTextField28.setText("0");
+        jTextField29.setText("0");
+        jTextField30.setText("0");
+        jTextField31.setText("0");
+        jTextField32.setText("0");
+        jTextField33.setText("0");
+        jTextField34.setText("0");
+        jTextField35.setText("0");
+        jTextField36.setText("0");
+        jTextField38.setText("0");
+        jTextField39.setText("0");
+        jTextField40.setText("0");
+        jTextField44.setText("0");
+        jTextField45.setText("0");
+        jTextField46.setText("0");
+        jTextField47.setText("0");
+        jTextField50.setText("0");
+        jTextField51.setText("0");
+        jTextField6.setText("0");
+        jTextField7.setText("0");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
