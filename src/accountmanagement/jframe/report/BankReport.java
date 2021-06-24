@@ -38,6 +38,9 @@ public class BankReport extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,6 +65,65 @@ public class BankReport extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("To Date");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Date", "From Bank NETWEST", "From Bank CashPlus", "From Bank ElevenCard", "From Bank Milk Vouture", "Money in PayZone", "Money in Note Machine", "Service Money Out Pay Point", "Service Money Out Pay Zone", "Service Money Out Oyster", "Service Money Out Camlot", "Expenditure Money Out Salaray Mike", "Expenditure Money Out SalarySathees", "Expenditure Money Out Capital Gains", "Expenditure Money Out BT", "Expenditure Money Out Nest", "Expenditure Money Out Rent", "Expenditure Money Out Water", "Expenditure Money Out Alarm", "Expenditure Money Out Electric", "Expenditure Money Out toilet Block", "Expenditure Money Out Yearly Shop Insu", "Expenditure Money Out Yearly BIFFA", "Expenditure Money Out Yearly BUIL/INSU", "Expenditure Money Out Yearly OFF/FEE", "null", "Title 27", "Title 28", "Title 29", "Title 30", "Title 31", "Title 32", "Title 33"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setResizable(false);
+            jTable1.getColumnModel().getColumn(9).setResizable(false);
+            jTable1.getColumnModel().getColumn(10).setResizable(false);
+            jTable1.getColumnModel().getColumn(11).setResizable(false);
+            jTable1.getColumnModel().getColumn(12).setResizable(false);
+            jTable1.getColumnModel().getColumn(13).setResizable(false);
+            jTable1.getColumnModel().getColumn(14).setResizable(false);
+            jTable1.getColumnModel().getColumn(15).setResizable(false);
+            jTable1.getColumnModel().getColumn(16).setResizable(false);
+            jTable1.getColumnModel().getColumn(17).setResizable(false);
+            jTable1.getColumnModel().getColumn(18).setResizable(false);
+            jTable1.getColumnModel().getColumn(19).setResizable(false);
+            jTable1.getColumnModel().getColumn(20).setResizable(false);
+            jTable1.getColumnModel().getColumn(21).setResizable(false);
+            jTable1.getColumnModel().getColumn(22).setResizable(false);
+            jTable1.getColumnModel().getColumn(23).setResizable(false);
+            jTable1.getColumnModel().getColumn(24).setResizable(false);
+            jTable1.getColumnModel().getColumn(25).setResizable(false);
+        }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 810, 530));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 810, 530));
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -71,5 +133,8 @@ public class BankReport extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

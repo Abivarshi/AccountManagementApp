@@ -11,7 +11,14 @@ import accountmanagement.jframe.administrator.AdminPurcharse;
 import accountmanagement.jframe.administrator.Staff;
 import accountmanagement.jframe.administrator.User;
 import accountmanagement.jframe.report.BankReport;
+import accountmanagement.jframe.report.DifferenceReport;
+import accountmanagement.jframe.report.ExpenditureReport;
 import accountmanagement.jframe.report.PettyReport;
+import accountmanagement.jframe.report.PurcharseReport;
+import accountmanagement.jframe.report.SalesReport;
+import accountmanagement.jframe.report.Sheet2Report;
+import accountmanagement.jframe.report.StaffReport;
+import accountmanagement.jframe.report.TillReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -53,7 +60,7 @@ public class Report extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        stheet2Button = new javax.swing.JButton();
+        sheet2Button = new javax.swing.JButton();
         tillButton = new javax.swing.JButton();
         expenditureButton = new javax.swing.JButton();
         purcharseButton = new javax.swing.JButton();
@@ -69,28 +76,28 @@ public class Report extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        stheet2Button.setBackground(new java.awt.Color(0, 0, 51));
-        stheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        stheet2Button.setText("Sheet2");
-        stheet2Button.setBorder(null);
-        stheet2Button.setBorderPainted(false);
-        stheet2Button.setContentAreaFilled(false);
-        stheet2Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        stheet2Button.setFocusPainted(false);
-        stheet2Button.addMouseListener(new java.awt.event.MouseAdapter() {
+        sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
+        sheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        sheet2Button.setText("Sheet2");
+        sheet2Button.setBorder(null);
+        sheet2Button.setBorderPainted(false);
+        sheet2Button.setContentAreaFilled(false);
+        sheet2Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sheet2Button.setFocusPainted(false);
+        sheet2Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                stheet2ButtonMouseHover(evt);
+                sheet2ButtonMouseHover(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                stheet2ButtonMouseHoverOut(evt);
+                sheet2ButtonMouseHoverOut(evt);
             }
         });
-        stheet2Button.addActionListener(new java.awt.event.ActionListener() {
+        sheet2Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stheet2ButtonActionPerformed(evt);
+                sheet2ButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(stheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 67, 130, 33));
+        jPanel2.add(sheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 67, 130, 33));
 
         tillButton.setBackground(new java.awt.Color(0, 0, 51));
         tillButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -293,17 +300,19 @@ public class Report extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void stheet2ButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stheet2ButtonMouseHover
-        stheet2Button.setForeground(Color.red);
-    }//GEN-LAST:event_stheet2ButtonMouseHover
+    private void sheet2ButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHover
+        sheet2Button.setForeground(Color.red);
+    }//GEN-LAST:event_sheet2ButtonMouseHover
 
-    private void stheet2ButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stheet2ButtonMouseHoverOut
-        stheet2Button.setForeground(Color.white);
-    }//GEN-LAST:event_stheet2ButtonMouseHoverOut
+    private void sheet2ButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHoverOut
+        sheet2Button.setForeground(Color.white);
+    }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
-    private void stheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stheet2ButtonActionPerformed
-        
-    }//GEN-LAST:event_stheet2ButtonActionPerformed
+    private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
+        jPanel1.add("sheet2Report",new Sheet2Report(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_sheet2ButtonActionPerformed
 
     private void tillButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHover
         tillButton.setForeground(Color.red);
@@ -314,7 +323,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-        
+        jPanel1.add("TillReport",new TillReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
 
     private void expenditureButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHover
@@ -326,7 +337,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-        
+        jPanel1.add("ExpenditureReport",new ExpenditureReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void purcharseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHover
@@ -338,7 +351,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
-        
+        jPanel1.add("PurcharseReport",new PurcharseReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed
 
     private void differenceButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_differenceButtonMouseHover
@@ -350,7 +365,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_differenceButtonMouseHoverOut
 
     private void differenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differenceButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add("DifferenceReport",new DifferenceReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_differenceButtonActionPerformed
 
     private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
@@ -390,7 +407,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButtonMouseHoverOut
 
     private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add("StaffReport", new StaffReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_staffButtonActionPerformed
 
     private void salesButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHover
@@ -402,7 +421,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButtonMouseHoverOut
 
     private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add("SalesReport", new SalesReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButtonActionPerformed
 
     private void getTabList(){
@@ -443,8 +464,8 @@ public class Report extends javax.swing.JPanel {
     private javax.swing.JButton pettyButton;
     private javax.swing.JButton purcharseButton;
     private javax.swing.JButton salesButton;
+    private javax.swing.JButton sheet2Button;
     private javax.swing.JButton staffButton;
-    private javax.swing.JButton stheet2Button;
     private javax.swing.JButton tillButton;
     // End of variables declaration//GEN-END:variables
 }
