@@ -307,7 +307,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHover
 
     private void sheet2ButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHoverOut
-        sheet2Button.setForeground(Color.white);
+        sheet2Button.setForeground(Color.black);
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
@@ -321,7 +321,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHover
 
     private void tillButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHoverOut
-        tillButton.setForeground(Color.white);
+        tillButton.setForeground(Color.black);
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
@@ -335,7 +335,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHover
 
     private void expenditureButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHoverOut
-        expenditureButton.setForeground(Color.white);
+        expenditureButton.setForeground(Color.black);
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
@@ -349,7 +349,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHover
 
     private void purcharseButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHoverOut
-        purcharseButton.setForeground(Color.white);
+        purcharseButton.setForeground(Color.black);
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
@@ -363,7 +363,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_differenceButtonMouseHover
 
     private void differenceButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_differenceButtonMouseHoverOut
-       differenceButton.setForeground(Color.white);
+       differenceButton.setForeground(Color.black);
     }//GEN-LAST:event_differenceButtonMouseHoverOut
 
     private void differenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differenceButtonActionPerformed
@@ -377,7 +377,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonMouseHover
 
     private void pettyButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHoverOut
-        pettyButton.setForeground(Color.white);
+        pettyButton.setForeground(Color.black);
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
@@ -391,7 +391,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButtonMouseHover
 
     private void bankButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHoverOut
-        bankButton.setForeground(Color.white);
+        bankButton.setForeground(Color.black);
     }//GEN-LAST:event_bankButtonMouseHoverOut
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
@@ -405,7 +405,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButtonMouseHover
 
     private void staffButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHoverOut
-        staffButton.setForeground(Color.white);
+        staffButton.setForeground(Color.black);
     }//GEN-LAST:event_staffButtonMouseHoverOut
 
     private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
@@ -419,7 +419,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButtonMouseHover
 
     private void salesButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHoverOut
-        salesButton.setForeground(Color.white);
+        salesButton.setForeground(Color.black);
     }//GEN-LAST:event_salesButtonMouseHoverOut
 
     private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed

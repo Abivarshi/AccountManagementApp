@@ -84,14 +84,14 @@ public class BankReport extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Date", "From Bank NETWEST", "From Bank CashPlus", "From Bank ElevenCard", "From Bank Milk Vouture", "Money in PayZone", "Money in Note Machine", "Service Money Out Pay Point", "Service Money Out Pay Zone", "Service Money Out Oyster", "Service Money Out Camlot", "Expenditure Money Out Salaray Mike", "Expenditure Money Out SalarySathees", "Expenditure Money Out Capital Gains", "Expenditure Money Out BT", "Expenditure Money Out Nest", "Expenditure Money Out Rent", "Expenditure Money Out Water", "Expenditure Money Out Alarm", "Expenditure Money Out Electric", "Expenditure Money Out toilet Block", "Expenditure Money Out Yearly Shop Insu", "Expenditure Money Out Yearly BIFFA", "Expenditure Money Out Yearly BUIL/INSU", "Expenditure Money Out Yearly OFF/FEE", "Expenditure Eleven charge", "Expenditure Card Machine", "Expenditure Bank Changrge", "Expenditure Payzone Rental", "Purcharse Costcutter", "Purcharse NI", "Purcharse BestWay", "PayBack Barrow Money"
+                "Date", "From Bank NETWEST", "From Bank CashPlus", "From Bank ElevenCard", "From Bank Milk Vouture", "Money in PayZone", "Money in Note Machine", "Service Money Out Pay Point", "Service Money Out Pay Zone", "Service Money Out Oyster", "Service Money Out Camlot", "Expenditure Money Out Salaray Mike", "Expenditure Money Out SalarySathees", "Expenditure Money Out Capital Gains", "Expenditure Money Out BT", "Expenditure Money Out Nest", "Expenditure Money Out Rent", "Expenditure Money Out Water", "Expenditure Money Out Alarm", "Expenditure Money Out Electric", "Expenditure Money Out toilet Block", "Expenditure Money Out Yearly Shop Insu", "Expenditure Money Out Yearly BIFFA", "Expenditure Money Out Yearly BUIL/INSU", "Expenditure Money Out Yearly OFF/FEE", "Expenditure Eleven charge", "Expenditure Card Machine", "Expenditure Bank Changrge", "Expenditure Payzone Rental", "Purcharse Costcutter", "Purcharse NI", "Purcharse BestWay", "PayBack Barrow Money", "Sub Total Expense", "Sub Total Purcharse", "Balance in Bank"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -140,6 +140,9 @@ public class BankReport extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(30).setResizable(false);
             jTable1.getColumnModel().getColumn(31).setResizable(false);
             jTable1.getColumnModel().getColumn(32).setResizable(false);
+            jTable1.getColumnModel().getColumn(33).setResizable(false);
+            jTable1.getColumnModel().getColumn(34).setResizable(false);
+            jTable1.getColumnModel().getColumn(35).setResizable(false);
         }
 
         jScrollPane1.setHorizontalScrollBarPolicy(
@@ -194,14 +197,38 @@ public class BankReport extends javax.swing.JPanel {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Bank");
         try {
             while (res.next()) {
-                String date = metadata.getColumnName(2);
+                String dateCol = metadata.getColumnName(2);
+                String date = res.getString(dateCol);
                 List<String> values = new ArrayList();
                 values.add(date);
+                float subTotalExpenditure=0;
+                float subTotalPurcharse=0;
+                float balanceInBank=0;
                 for (int i = 3; i <= metadata.getColumnCount(); i++) {
                     String columnName = metadata.getColumnName(i);
                     Float value = res.getFloat(columnName);
                     values.add(value.toString());
+                    if(i>12 && i<31){
+                        subTotalExpenditure=subTotalExpenditure+value;
+                    }
+                    if(i>31 && i<35){
+                        subTotalPurcharse=subTotalPurcharse+value;
+                    }
+                    if(i>2 && i<8){
+                        balanceInBank=balanceInBank+value;
+                    }
+                    if(i>8 && i<13){
+                        balanceInBank=balanceInBank-value;
+                    }
+                    if(i==34){
+                        balanceInBank=balanceInBank-value;
+                    }
                 }
+                balanceInBank = balanceInBank-subTotalExpenditure-subTotalPurcharse;
+                values.add(String.valueOf(subTotalExpenditure));
+                values.add(String.valueOf(subTotalPurcharse));
+                values.add(String.valueOf(balanceInBank));
+                
                 DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
                 tbModel.addRow(values.toArray());
             }
