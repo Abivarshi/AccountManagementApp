@@ -46,7 +46,6 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         leftPanel = new javax.swing.JPanel();
-        administratorButton = new javax.swing.JButton();
         tillButton = new javax.swing.JButton();
         purchaseButton = new javax.swing.JButton();
         expenditureButton = new javax.swing.JButton();
@@ -58,36 +57,19 @@ public class Dashboard extends javax.swing.JFrame {
         reportButton = new javax.swing.JButton();
         summaryButton = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        logoutButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        administratorButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Account Management");
+        setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(1200, 1100));
 
         leftPanel.setBackground(new java.awt.Color(0, 0, 102));
         leftPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         leftPanel.setForeground(new java.awt.Color(255, 255, 255));
-
-        administratorButton.setBackground(new java.awt.Color(0, 0, 51));
-        administratorButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        administratorButton.setForeground(new java.awt.Color(255, 255, 255));
-        administratorButton.setText("Administrator");
-        administratorButton.setBorder(null);
-        administratorButton.setBorderPainted(false);
-        administratorButton.setContentAreaFilled(false);
-        administratorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        administratorButton.setFocusPainted(false);
-        administratorButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MouseHover(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                MouseHoverOut(evt);
-            }
-        });
-        administratorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                administratorButtonActionPerformed(evt);
-            }
-        });
 
         tillButton.setBackground(new java.awt.Color(204, 204, 255));
         tillButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -322,7 +304,6 @@ public class Dashboard extends javax.swing.JFrame {
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(administratorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(tillButton, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -342,8 +323,6 @@ public class Dashboard extends javax.swing.JFrame {
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(administratorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sheet2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,154 +345,133 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        rightPanel.setBackground(new java.awt.Color(255, 255, 255));
         rightPanel.setMaximumSize(new java.awt.Dimension(1900, 1000));
         rightPanel.setPreferredSize(new java.awt.Dimension(1500, 960));
         rightPanel.setLayout(new java.awt.CardLayout());
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
+
+        logoutButton.setBackground(new java.awt.Color(0, 0, 51));
+        logoutButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        logoutButton.setForeground(new java.awt.Color(255, 255, 255));
+        logoutButton.setText("Logout");
+        logoutButton.setBorder(null);
+        logoutButton.setBorderPainted(false);
+        logoutButton.setContentAreaFilled(false);
+        logoutButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoutButton.setFocusPainted(false);
+        logoutButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MouseHoverOut(evt);
+            }
+        });
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
+
+        administratorButton1.setBackground(new java.awt.Color(0, 0, 51));
+        administratorButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        administratorButton1.setForeground(new java.awt.Color(255, 255, 255));
+        administratorButton1.setText("Administrator");
+        administratorButton1.setBorder(null);
+        administratorButton1.setBorderPainted(false);
+        administratorButton1.setContentAreaFilled(false);
+        administratorButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        administratorButton1.setFocusPainted(false);
+        administratorButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                administratorButton1MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                administratorButton1MouseHoverOut(evt);
+            }
+        });
+        administratorButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                administratorButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(administratorButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(administratorButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1051, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
+                    .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void administratorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorButtonActionPerformed
-        rightPanel.add("Administrator", new Administrator(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_administratorButtonActionPerformed
+    private void summaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summaryButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_summaryButtonActionPerformed
 
-    private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-        rightPanel.add("Till", new Till(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_tillButtonActionPerformed
+    private void summaryButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summaryButtonMouseHoverOut
+        summaryButton.setForeground(Color.white);
+    }//GEN-LAST:event_summaryButtonMouseHoverOut
 
-    private void MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHover
-        administratorButton.setForeground(Color.red);
-    }//GEN-LAST:event_MouseHover
-
-    private void MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHoverOut
-        administratorButton.setForeground(Color.white);
-    }//GEN-LAST:event_MouseHoverOut
-
-    private void purchaseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseButtonMouseHover
-        purchaseButton.setForeground(Color.red);
-    }//GEN-LAST:event_purchaseButtonMouseHover
-
-    private void purchaseButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseButtonMouseHoverOut
-        purchaseButton.setForeground(Color.white);
-    }//GEN-LAST:event_purchaseButtonMouseHoverOut
-
-    private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseButtonActionPerformed
-        rightPanel.add("Purcharse", new Purcharse(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_purchaseButtonActionPerformed
-
-    private void expenditureButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHover
-        expenditureButton.setForeground(Color.red);
-    }//GEN-LAST:event_expenditureButtonMouseHover
-
-    private void expenditureButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHoverOut
-        expenditureButton.setForeground(Color.white);
-    }//GEN-LAST:event_expenditureButtonMouseHoverOut
-
-    private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-        rightPanel.add("Expenditure", new Expenditure(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_expenditureButtonActionPerformed
-
-    private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
-        bankButton.setForeground(Color.red);
-    }//GEN-LAST:event_bankButtonMouseHover
-
-    private void bankButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHoverOut
-        bankButton.setForeground(Color.white);
-    }//GEN-LAST:event_bankButtonMouseHoverOut
-
-    private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
-        rightPanel.add("Bank", new Bank(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_bankButtonActionPerformed
-
-    private void sheet2ButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHover
-        sheet2Button.setForeground(Color.red);
-    }//GEN-LAST:event_sheet2ButtonMouseHover
-
-    private void sheet2ButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHoverOut
-        sheet2Button.setForeground(Color.white);
-    }//GEN-LAST:event_sheet2ButtonMouseHoverOut
-
-    private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        rightPanel.add("Sheet2", new Sheet2(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_sheet2ButtonActionPerformed
-
-    private void salesButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHover
-        salesButton.setForeground(Color.red);
-    }//GEN-LAST:event_salesButtonMouseHover
-
-    private void salesButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHoverOut
-        salesButton.setForeground(Color.white);
-    }//GEN-LAST:event_salesButtonMouseHoverOut
-
-    private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed
-        rightPanel.add("Sales", new Sales(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_salesButtonActionPerformed
-
-    private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
-        pettyButton.setForeground(Color.red);
-    }//GEN-LAST:event_pettyButtonMouseHover
-
-    private void pettyButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHoverOut
-        pettyButton.setForeground(Color.white);
-    }//GEN-LAST:event_pettyButtonMouseHoverOut
-
-    private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
-        rightPanel.add("Petty", new Petty(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_pettyButtonActionPerformed
-
-    private void staffTimeButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTimeButtonMouseHover
-        staffTimeButton.setForeground(Color.red);
-    }//GEN-LAST:event_staffTimeButtonMouseHover
-
-    private void staffTimeButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTimeButtonMouseHoverOut
-       staffTimeButton.setForeground(Color.white);
-    }//GEN-LAST:event_staffTimeButtonMouseHoverOut
-
-    private void staffTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffTimeButtonActionPerformed
-        rightPanel.add("StaffTime", new StaffTime(shopName));
-        CardLayout layout = (CardLayout) rightPanel.getLayout();
-        layout.next(rightPanel);
-    }//GEN-LAST:event_staffTimeButtonActionPerformed
-
-    private void reportButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportButtonMouseHover
-        reportButton.setForeground(Color.red);
-    }//GEN-LAST:event_reportButtonMouseHover
-
-    private void reportButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportButtonMouseHoverOut
-        reportButton.setForeground(Color.white);
-    }//GEN-LAST:event_reportButtonMouseHoverOut
+    private void summaryButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summaryButtonMouseHover
+        summaryButton.setForeground(Color.red);
+    }//GEN-LAST:event_summaryButtonMouseHover
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
         rightPanel.add("Report", new Report(shopName));
@@ -521,25 +479,149 @@ public class Dashboard extends javax.swing.JFrame {
         layout.next(rightPanel);
     }//GEN-LAST:event_reportButtonActionPerformed
 
-    private void summaryButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summaryButtonMouseHover
-        summaryButton.setForeground(Color.red);
-    }//GEN-LAST:event_summaryButtonMouseHover
+    private void reportButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportButtonMouseHoverOut
+        reportButton.setForeground(Color.white);
+    }//GEN-LAST:event_reportButtonMouseHoverOut
 
-    private void summaryButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summaryButtonMouseHoverOut
-        summaryButton.setForeground(Color.white);
-    }//GEN-LAST:event_summaryButtonMouseHoverOut
+    private void reportButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportButtonMouseHover
+        reportButton.setForeground(Color.red);
+    }//GEN-LAST:event_reportButtonMouseHover
 
-    private void summaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summaryButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_summaryButtonActionPerformed
+    private void staffTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffTimeButtonActionPerformed
+        rightPanel.add("StaffTime", new StaffTime(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_staffTimeButtonActionPerformed
+
+    private void staffTimeButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTimeButtonMouseHoverOut
+        staffTimeButton.setForeground(Color.white);
+    }//GEN-LAST:event_staffTimeButtonMouseHoverOut
+
+    private void staffTimeButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffTimeButtonMouseHover
+        staffTimeButton.setForeground(Color.red);
+    }//GEN-LAST:event_staffTimeButtonMouseHover
+
+    private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
+        rightPanel.add("Petty", new Petty(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_pettyButtonActionPerformed
+
+    private void pettyButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHoverOut
+        pettyButton.setForeground(Color.white);
+    }//GEN-LAST:event_pettyButtonMouseHoverOut
+
+    private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
+        pettyButton.setForeground(Color.red);
+    }//GEN-LAST:event_pettyButtonMouseHover
+
+    private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed
+        rightPanel.add("Sales", new Sales(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_salesButtonActionPerformed
+
+    private void salesButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHoverOut
+        salesButton.setForeground(Color.white);
+    }//GEN-LAST:event_salesButtonMouseHoverOut
+
+    private void salesButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButtonMouseHover
+        salesButton.setForeground(Color.red);
+    }//GEN-LAST:event_salesButtonMouseHover
+
+    private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
+        rightPanel.add("Sheet2", new Sheet2(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_sheet2ButtonActionPerformed
+
+    private void sheet2ButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHoverOut
+        sheet2Button.setForeground(Color.white);
+    }//GEN-LAST:event_sheet2ButtonMouseHoverOut
+
+    private void sheet2ButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHover
+        sheet2Button.setForeground(Color.red);
+    }//GEN-LAST:event_sheet2ButtonMouseHover
+
+    private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
+        rightPanel.add("Bank", new Bank(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_bankButtonActionPerformed
+
+    private void bankButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHoverOut
+        bankButton.setForeground(Color.white);
+    }//GEN-LAST:event_bankButtonMouseHoverOut
+
+    private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
+        bankButton.setForeground(Color.red);
+    }//GEN-LAST:event_bankButtonMouseHover
+
+    private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
+        rightPanel.add("Expenditure", new Expenditure(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_expenditureButtonActionPerformed
+
+    private void expenditureButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHoverOut
+        expenditureButton.setForeground(Color.white);
+    }//GEN-LAST:event_expenditureButtonMouseHoverOut
+
+    private void expenditureButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHover
+        expenditureButton.setForeground(Color.red);
+    }//GEN-LAST:event_expenditureButtonMouseHover
+
+    private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseButtonActionPerformed
+        rightPanel.add("Purcharse", new Purcharse(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_purchaseButtonActionPerformed
+
+    private void purchaseButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseButtonMouseHoverOut
+        purchaseButton.setForeground(Color.white);
+    }//GEN-LAST:event_purchaseButtonMouseHoverOut
+
+    private void purchaseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseButtonMouseHover
+        purchaseButton.setForeground(Color.red);
+    }//GEN-LAST:event_purchaseButtonMouseHover
+
+    private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
+        rightPanel.add("Till", new Till(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
+    }//GEN-LAST:event_tillButtonActionPerformed
+
+    private void tillButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHoverOut
+        tillButton.setForeground(Color.white);
+    }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonHover
         tillButton.setForeground(Color.red);
     }//GEN-LAST:event_tillButtonHover
 
-    private void tillButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHoverOut
-        tillButton.setForeground(Color.white);
-    }//GEN-LAST:event_tillButtonMouseHoverOut
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHoverOut
+        logoutButton.setForeground(Color.white);
+    }//GEN-LAST:event_MouseHoverOut
+
+    private void MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHover
+        logoutButton.setForeground(Color.red);
+    }//GEN-LAST:event_MouseHover
+
+    private void administratorButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButton1MouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_administratorButton1MouseHover
+
+    private void administratorButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButton1MouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_administratorButton1MouseHoverOut
+
+    private void administratorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_administratorButton1ActionPerformed
     
     private ActionListener populateTabPanel(String tabName) {
         return (ActionEvent e) -> {
@@ -550,10 +632,13 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton administratorButton;
+    private javax.swing.JButton administratorButton1;
     private javax.swing.JButton bankButton;
     private javax.swing.JButton expenditureButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel leftPanel;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JButton pettyButton;
     private javax.swing.JButton purchaseButton;
     private javax.swing.JButton reportButton;

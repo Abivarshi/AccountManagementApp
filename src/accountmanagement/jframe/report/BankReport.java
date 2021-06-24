@@ -7,6 +7,7 @@ package accountmanagement.jframe.report;
 
 import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -52,6 +53,11 @@ public class BankReport extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
@@ -167,6 +173,11 @@ public class BankReport extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        db.getValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()));
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
