@@ -93,65 +93,65 @@ public class DataBaseConnection {
         }
     }
 
-    public void createTabDetailTable(String shopName) throws ClassNotFoundException, SQLException {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
+//    public void createTabDetailTable(String shopName) throws ClassNotFoundException, SQLException {
+//        if (con == null || !connectedShop.equals(shopName)) {
+//            getConnection(shopName);
+//        }
+//
+//        Statement state = con.createStatement();
+//        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='TabDetail'");
+//        if (!res.next()) {
+//            System.out.println("Building the TabDetail table...");
+//
+//            Statement state2 = con.createStatement();
+//            state2.executeUpdate("CREATE TABLE TabDetail(id integer,"
+//                    + "TabName varchar(60),"
+//                    + "primary key (id));");
+//
+//            insertDefaultTabDetail(shopName);
+//
+//        }
+//    }
+//
+//    public void insertTabDetail(String shopName, String tabName) throws ClassNotFoundException, SQLException {
+//        if (con == null || !connectedShop.equals(shopName)) {
+//            getConnection(shopName);
+//        }
+//        PreparedStatement prep = con.prepareStatement("INSERT INTO TabDetail values(?,?);");
+//        prep.setString(2, tabName);
+//        prep.execute();
+//    }
+//
+//    public void insertDefaultTabDetail(String shopName) throws ClassNotFoundException, SQLException {
+//        if (con == null || !connectedShop.equals(shopName)) {
+//            getConnection(shopName);
+//        }
+//        createTabTable(shopName, "Till");
+//        createTabTable(shopName, "Expenditure");
+//        createTabTable(shopName, "Purchase");
+//        createTabTable(shopName, "Bank");
+//        createTabTable(shopName, "Petty");
+//        createTabTable(shopName, "Staff");
+//        createTabTable(shopName, "Staff_Time");
+//        createTabTable(shopName, "Sales");
+//    }
 
-        Statement state = con.createStatement();
-        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='TabDetail'");
-        if (!res.next()) {
-            System.out.println("Building the TabDetail table...");
+//    public ResultSet getTabDetail(String shopName) {
+//
+//        try {
+//            if (con == null || !connectedShop.equals(shopName)) {
+//                getConnection(shopName);
+//            }
+//            Statement state = con.createStatement();
+//            ResultSet res = state.executeQuery("SELECT TabName FROM TabDetail");
+//            return res;
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//    }
 
-            Statement state2 = con.createStatement();
-            state2.executeUpdate("CREATE TABLE TabDetail(id integer,"
-                    + "TabName varchar(60),"
-                    + "primary key (id));");
-            
-            insertDefaultTabDetail(shopName);
-
-        }
-    }
-
-    public void insertTabDetail(String shopName, String tabName) throws ClassNotFoundException, SQLException {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        PreparedStatement prep = con.prepareStatement("INSERT INTO TabDetail values(?,?);");
-        prep.setString(2, tabName);
-        prep.execute();
-    }
-
-    public void insertDefaultTabDetail(String shopName) throws ClassNotFoundException, SQLException {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        createTabTable(shopName, "Till");
-        createTabTable(shopName, "Expenditure");
-        createTabTable(shopName, "Purchase");
-        createTabTable(shopName, "Bank");
-        createTabTable(shopName, "Petty");
-        createTabTable(shopName, "Staff");
-        createTabTable(shopName, "Staff_Time");
-        createTabTable(shopName, "Sales");
-    }
-
-    public ResultSet getTabDetail(String shopName) {
-
-        try {
-            if (con == null || !connectedShop.equals(shopName)) {
-                getConnection(shopName);
-            }
-            Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("SELECT TabName FROM TabDetail");
-            return res;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-    
     public void createStaff(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -173,7 +173,7 @@ public class DataBaseConnection {
                     + "primary key (id));");
         }
     }
-    
+
     public void insertStaff(String shopName, String staffName, Float salaryPercentage, HashMap<String, Boolean> type) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -203,7 +203,7 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
+
     public void createStaffTime(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -224,16 +224,16 @@ public class DataBaseConnection {
                     + "primary key (id));");
         }
     }
-    
+
     public void insertStaffTime(String shopName, Date date, String staffName, String staffType, Float start, Float end) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
         PreparedStatement prep = con.prepareStatement("INSERT INTO Staff (Date, StaffName, Type, StartTime, EndTime) VALUES ("
-                + "'" + date + "', '" + staffName + ", '" + staffType + "', " + start + ", " + end +");");
+                + "'" + date + "', '" + staffName + ", '" + staffType + "', " + start + ", " + end + ");");
         prep.execute();
     }
-    
+
     public ResultSet getStaffTime(String shopName, String date) {
 
         try {
@@ -249,7 +249,7 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
+
     public void createExpenditureDetail(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -267,7 +267,7 @@ public class DataBaseConnection {
 
         }
     }
-    
+
     public void insertExpenditureDetail(String shopName, String name) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -275,21 +275,21 @@ public class DataBaseConnection {
         PreparedStatement prep = con.prepareStatement("INSERT INTO ExpenditureDetail(Name) values('" + name + "');");
         prep.execute();
     }
+//
+//    public void addItemToExpenditure(String shopName, String item) {
+//        if (con == null || !connectedShop.equals(shopName)) {
+//            getConnection(shopName);
+//        }
+//        System.out.println("Alter the Expenditure table..." + shopName + " " + item);
+//        try {
+//            Statement state = con.createStatement();
+//            state.executeUpdate("ALTER TABLE Expenditure ADD " + item + " FLOAT NULL;");
+//            insertExpenditureDetail(shopName, item);
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
-    public void addItemToExpenditure(String shopName, String item) {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        System.out.println("Alter the Expenditure table..." + shopName + " " + item);
-        try {
-            Statement state = con.createStatement();
-            state.executeUpdate("ALTER TABLE Expenditure ADD " + item + " FLOAT NULL;");
-            insertExpenditureDetail(shopName, item);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     public ResultSet getExpenditureDetail(String shopName) {
 
         try {
@@ -304,7 +304,7 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
+
     public void createPurchaseDetail(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -322,7 +322,7 @@ public class DataBaseConnection {
 
         }
     }
-    
+
     public void insertPurchaseDetail(String shopName, String name) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -330,21 +330,21 @@ public class DataBaseConnection {
         PreparedStatement prep = con.prepareStatement("INSERT INTO PurchaseDetail(Name) values('" + name + "');");
         prep.execute();
     }
+//
+//    public void addItemToPurchase(String shopName, String item) {
+//        if (con == null || !connectedShop.equals(shopName)) {
+//            getConnection(shopName);
+//        }
+//        System.out.println("Alter the Purschase table..." + shopName + " " + item);
+//        try {
+//            Statement state = con.createStatement();
+//            state.executeUpdate("ALTER TABLE Purchase ADD " + item + " FLOAT NULL;");
+//            insertPurchaseDetail(shopName, item);
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
-    public void addItemToPurchase(String shopName, String item) {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        System.out.println("Alter the Purschase table..." + shopName + " " + item);
-        try {
-            Statement state = con.createStatement();
-            state.executeUpdate("ALTER TABLE Purchase ADD " + item + " FLOAT NULL;");
-            insertPurchaseDetail(shopName, item);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     public ResultSet getPurchaseDetail(String shopName) {
 
         try {
@@ -359,24 +359,24 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
-    public void addItemToBank(String shopName, String item) {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        try {
-            Statement state = con.createStatement();
-            if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-            }
-            PreparedStatement prep = con.prepareStatement("INSERT INTO Bank values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-            prep.setString(2, item);
-            prep.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+
+//    public void addItemToBank(String shopName, String item) {
+//        if (con == null || !connectedShop.equals(shopName)) {
+//            getConnection(shopName);
+//        }
+//        try {
+//            Statement state = con.createStatement();
+//            if (con == null || !connectedShop.equals(shopName)) {
+//                getConnection(shopName);
+//            }
+//            PreparedStatement prep = con.prepareStatement("INSERT INTO Bank values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+//            prep.setString(2, item);
+//            prep.execute();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+
     public void createTabTable(String shopName, String tabName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -384,8 +384,6 @@ public class DataBaseConnection {
 
         ResultSet res;
         try {
-            insertTabDetail(shopName, tabName);
-
             Statement state = con.createStatement();
             res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='" + tabName + "'");
             if (!res.next()) {
@@ -395,15 +393,69 @@ public class DataBaseConnection {
                 state2.executeUpdate("create table " + tabName + "(id integer,"
                         + "Date DATE,"
                         + "primary key (id));");
-
             }
-            
-        } catch (ClassNotFoundException | SQLException ex) {
+
+        } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public ResultSetMetaData getItems(String shopName, String tabName) {
+    public void alterTabTable(String shopName, String tabName, String item) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        System.out.println("Alter the " + tabName + " table..." + item);
+
+        try {
+            Statement state = con.createStatement();
+            state.executeUpdate("ALTER TABLE " + tabName + " ADD " + item + " FLOAT NULL;");
+            System.out.println("Alter the " + tabName + " table..." + item);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void createDefaultBank(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        alterTabTable(shopName, "Bank", "FB_NETWEST");
+        alterTabTable(shopName, "Bank", "FB_CashPlus");
+        alterTabTable(shopName, "Bank", "FB_ElevenCard");
+        alterTabTable(shopName, "Bank", "FB_MilkVouture");
+        alterTabTable(shopName, "Bank", "MI_PayZone");
+        alterTabTable(shopName, "Bank", "MI_NoteMachine");
+        alterTabTable(shopName, "Bank", "SMO_PayPoint");
+        alterTabTable(shopName, "Bank", "SMO_PayZone");
+        alterTabTable(shopName, "Bank", "SMO_Oyster");
+        alterTabTable(shopName, "Bank", "SMO_Camlot");
+        alterTabTable(shopName, "Bank", "EM_SalarayMike");
+        alterTabTable(shopName, "Bank", "EM_SalarySathees");
+        alterTabTable(shopName, "Bank", "EM_CapitalGains");
+        alterTabTable(shopName, "Bank", "EM_BT");
+        alterTabTable(shopName, "Bank", "EM_Nest");
+        alterTabTable(shopName, "Bank", "EM_Rent");
+        alterTabTable(shopName, "Bank", "EM_Water");
+        alterTabTable(shopName, "Bank", "EM_Alarm");
+        alterTabTable(shopName, "Bank", "EM_Electric");
+        alterTabTable(shopName, "Bank", "EM_ToiletBlock");
+        alterTabTable(shopName, "Bank", "EY_ShopInsurance");
+        alterTabTable(shopName, "Bank", "EY_BIFFA");
+        alterTabTable(shopName, "Bank", "EY_Buil");
+        alterTabTable(shopName, "Bank", "EY_OffFee");
+        alterTabTable(shopName, "Bank", "EB_ElevenCharge");
+        alterTabTable(shopName, "Bank", "EB_CardMachine");
+        alterTabTable(shopName, "Bank", "EB_BankCharge");
+        alterTabTable(shopName, "Bank", "EB_PayZoneRental");
+        alterTabTable(shopName, "Bank", "P_CostCutter");
+        alterTabTable(shopName, "Bank", "P_NI");
+        alterTabTable(shopName, "Bank", "P_BestWay");
+        alterTabTable(shopName, "Bank", "PB_BorrowMoney");
+    }
+
+    public ResultSetMetaData getTabColumns(String shopName, String tabName) {
         try {
             if (con == null || !connectedShop.equals(shopName)) {
                 getConnection(shopName);
@@ -418,85 +470,17 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
-    public void insertItemToTab(String shopName, String tabName,String item) {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        System.out.println("Alter the "+tabName+" table..." + item);
 
-        try {
-            Statement state = con.createStatement();
-            state.executeUpdate("ALTER TABLE "+tabName+" ADD " + item + " FLOAT NULL;");
-            System.out.println("Alter the "+tabName+" table..." + item);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-    
-    public void createTillTable(String shopName) throws ClassNotFoundException, SQLException {
+    public void insertValuesTabTable(String shopName, String tabName, String date, HashMap<String, Float> values) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
 
-        Statement state = con.createStatement();
-        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='till'");
-        if (!res.next()) {
-            System.out.println("Building the Till table...");
-
-            Statement state2 = con.createStatement();
-            state2.executeUpdate("create table till(id integer,"
-                    + "Date varchar(60),"
-                    + "primary key (id));");
-
-        }
-    }
-
-    public void addItemToTill(String shopName, String item) {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        System.out.println("Alter the till table..." + shopName + " " + item);
-
-        try {
-            Statement state = con.createStatement();
-            state.executeUpdate("ALTER TABLE till ADD " + item + " FLOAT NULL;");
-            System.out.println("Alter the till table..." + item);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public ResultSetMetaData getTillItems(String shopName) {
-        try {
-            if (con == null || !connectedShop.equals(shopName)) {
-                getConnection(shopName);
-            }
-
-            Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("SELECT * FROM till");
-            ResultSetMetaData metadata = res.getMetaData();
-            return metadata;
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-
-    public void insertTill(String shopName, String date, HashMap<String, Float> till) {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-
-        String fun = "INSERT INTO till( date, ";
+        String fun = "INSERT INTO " + tabName + "( date, ";
         String value = "('" + date + "',";
-        for (String i : till.keySet()) {
+        for (String i : values.keySet()) {
             fun = fun + i + ",";
-            value = value + till.get(i) + ",";
+            value = value + values.get(i) + ",";
         }
         fun = fun.substring(0, fun.length() - 1) + ")" + " VALUES " + value.substring(0, value.length() - 1) + ");";
 
@@ -510,7 +494,7 @@ public class DataBaseConnection {
 
     }
 
-    public ResultSet getTill(String shopName, String date) {
+    public ResultSet getValuesTabTable(String shopName, String tabName, String date) {
 
         try {
             if (con == null || !connectedShop.equals(shopName)) {
@@ -518,7 +502,7 @@ public class DataBaseConnection {
             }
 
             Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("SELECT * FROM till WHERE date='" + date + "'");
+            ResultSet res = state.executeQuery("SELECT * FROM " + tabName + " WHERE date='" + date + "'");
             return res;
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -548,13 +532,16 @@ public class DataBaseConnection {
         prep.execute();
 
         createUserTable(shopName);
-        createTabDetailTable(shopName);
         createStaff(shopName);
         createStaffTime(shopName);
         createExpenditureDetail(shopName);
         createPurchaseDetail(shopName);
         createTabTable(shopName, "Expenditure");
         createTabTable(shopName, "Purchase");
+        createTabTable(shopName, "Till");
+        createTabTable(shopName, "Bank");
+        createDefaultBank(shopName);
+        createTabTable(shopName, "Petty");
     }
 
     public ResultSet getShopList() {

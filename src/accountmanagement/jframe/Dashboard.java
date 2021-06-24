@@ -540,27 +540,6 @@ public class Dashboard extends javax.swing.JFrame {
     private void tillButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHoverOut
         tillButton.setForeground(Color.white);
     }//GEN-LAST:event_tillButtonMouseHoverOut
-
-    private void getTabList() {
-        ResultSet res = db.getTabDetail(shopName);
-        try {
-            int i = 1;
-            while (res.next()) {
-                String tabName = res.getString("TabName");
-                JButton button = new JButton(tabName);
-                button.setBounds(0, 110 + 60 * (i-1), 218, 42);
-                button.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-                button.setText(tabName);
-                button.setBorderPainted(false);
-                button.setFocusPainted(false);
-                button.addActionListener(populateTabPanel(tabName));
-                leftPanel.add(tabName, button);
-                i = i + 1;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     private ActionListener populateTabPanel(String tabName) {
         return (ActionEvent e) -> {

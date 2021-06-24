@@ -249,26 +249,7 @@ public class Administrator extends javax.swing.JPanel {
         layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed
 
-    private void getTabList(){
-        ResultSet res = db.getTabDetail(shopName);
-        try {
-            int i = 1;
-            while (res.next()) {
-                String tabName = res.getString("TabName");
-                JButton button = new JButton(tabName);
-                button.setBounds(30, 30 * i, 100, 30);
-                button.setBorderPainted(false);
-                button.setFocusPainted(false);
-                button.addActionListener(populateItems(tabName));
-                jPanel2.add(tabName, button);
-                i = i + 1;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-
+   
     private ActionListener populateItems(String tabName) {
         return (ActionEvent e) -> {
             jPanel1.add("Items", new Items(shopName, tabName));

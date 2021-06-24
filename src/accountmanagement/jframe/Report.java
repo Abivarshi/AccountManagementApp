@@ -59,6 +59,7 @@ public class Report extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         sheet2Button = new javax.swing.JButton();
         tillButton = new javax.swing.JButton();
@@ -72,6 +73,7 @@ public class Report extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
+        jPanel1.add(jScrollPane1, "card2");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -426,41 +428,13 @@ public class Report extends javax.swing.JPanel {
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButtonActionPerformed
 
-    private void getTabList(){
-        ResultSet res = db.getTabDetail(shopName);
-        try {
-            int i = 1;
-            while (res.next()) {
-                String tabName = res.getString("TabName");
-                JButton button = new JButton(tabName);
-                button.setBounds(30, 30 * i, 100, 30);
-                button.setBorderPainted(false);
-                button.setFocusPainted(false);
-                button.addActionListener(populateItems(tabName));
-                jPanel2.add(tabName, button);
-                i = i + 1;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-
-    private ActionListener populateItems(String tabName) {
-        return (ActionEvent e) -> {
-            jPanel1.add("Items", new Items(shopName, tabName));
-            CardLayout layout = (CardLayout) jPanel1.getLayout();
-            layout.next(jPanel1);
-        };
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bankButton;
     private javax.swing.JButton differenceButton;
     private javax.swing.JButton expenditureButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton pettyButton;
     private javax.swing.JButton purcharseButton;
     private javax.swing.JButton salesButton;

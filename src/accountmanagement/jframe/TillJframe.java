@@ -214,7 +214,7 @@ public class TillJframe extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         String item = jTextField1.getText();
-        db.addItemToTill(this.shopName, item);
+//        db.addItemToTill(this.shopName, item);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -229,11 +229,11 @@ public class TillJframe extends javax.swing.JFrame {
                 date = listOfTextFields.get(label).getText();
             }
         }
-        db.insertTill(shopName, date, till);
+//        db.insertTill(shopName, date, till);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ResultSet rs = db.getTill(shopName, jTextField2.getText());
+        ResultSet rs = db.getValuesTabTable(shopName, "Till",jTextField2.getText());
         try {
             while (rs.next()) {
                 for (int i = 2; i <= metadata.getColumnCount(); i++) {
@@ -254,7 +254,7 @@ public class TillJframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void populateTill() {
-        metadata = db.getTillItems(shopName);
+        metadata = db.getTabColumns(shopName, "Till");
         try {
             for (int i = 3; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);

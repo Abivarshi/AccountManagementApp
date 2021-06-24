@@ -96,24 +96,24 @@ public class Items extends javax.swing.JPanel {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
 
         String item = tabNameTextBox.getText();
-        db.insertItemToTab(this.shopName, tabName, item);
+        db.alterTabTable(this.shopName, tabName, item);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void populateItems() {
-        ResultSetMetaData metadata = db.getItems(shopName, tabName);
-        try {
-            for (int i = 3; i <= metadata.getColumnCount(); i++) {
-                String columnName = metadata.getColumnName(i);
-                JLabel label = new JLabel(columnName);
-                label.setBounds(50, 80 + 25*(i-3), 100, 30);
-
-                System.out.println(metadata.getColumnName(i));
-                this.add(label);
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        ResultSetMetaData metadata = db.getItems(shopName, tabName);
+//        try {
+//            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+//                String columnName = metadata.getColumnName(i);
+//                JLabel label = new JLabel(columnName);
+//                label.setBounds(50, 80 + 25*(i-3), 100, 30);
+//
+//                System.out.println(metadata.getColumnName(i));
+//                this.add(label);
+//
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -43,8 +43,8 @@ public class AdminExpenditure extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,39 +63,15 @@ public class AdminExpenditure extends javax.swing.JPanel {
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 90, -1));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jScrollPane2.setViewportView(jList1);
 
-            },
-            new String [] {
-                "Existing Types"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 230, 270));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 270));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        db.addItemToExpenditure(shopName, jTextField1.getText());
+        db.alterTabTable(shopName, "Expenditure", jTextField1.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getExpenditureList(){
@@ -104,8 +80,9 @@ public class AdminExpenditure extends javax.swing.JPanel {
             while (res.next()) {
                 String name = res.getString("Name");
                 String tableModel[]={name};
-                DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
-                tbModel.addRow(tableModel);
+//                DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
+//                tbModel.addRow(tableModel);
+                jList1.setListData(tableModel);
             }
         } catch (SQLException ex) {
             Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,8 +92,8 @@ public class AdminExpenditure extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
