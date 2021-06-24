@@ -619,15 +619,17 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_MouseHover
 
     private void administratorButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButton1MouseHover
-        // TODO add your handling code here:
+        administratorButton1.setForeground(Color.red);
     }//GEN-LAST:event_administratorButton1MouseHover
 
     private void administratorButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButton1MouseHoverOut
-        // TODO add your handling code here:
+        administratorButton1.setForeground(Color.white);
     }//GEN-LAST:event_administratorButton1MouseHoverOut
 
     private void administratorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorButton1ActionPerformed
-        // TODO add your handling code here:
+        rightPanel.add("Administrator", new Administrator(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_administratorButton1ActionPerformed
 
     private ActionListener populateTabPanel(String tabName) {

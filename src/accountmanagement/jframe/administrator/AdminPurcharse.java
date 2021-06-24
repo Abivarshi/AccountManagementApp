@@ -8,6 +8,7 @@ package accountmanagement.jframe.administrator;
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.TillJframe;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ public class AdminPurcharse extends javax.swing.JPanel {
     public AdminPurcharse(String shopName) {
         this.shopName = shopName;
         initComponents();
-        getPurchaseList();
+        getPurcharseList();
     }
 
     /**
@@ -74,13 +75,12 @@ public class AdminPurcharse extends javax.swing.JPanel {
         db.alterTabTable(shopName, "Purcharse", jTextField1.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
-
-    private void getPurchaseList(){
-        ResultSet res = db.getPurchaseDetail(shopName);
+    private void getPurcharseList(){
+        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
         try {
-            while (res.next()) {
-                String name = res.getString("Name");
-                String tableModel[]={name};
+            for (int i = 2; i <= metadata.getColumnCount(); i++) {
+                String columnName = metadata.getColumnName(i);
+                String tableModel[]={columnName};
                 jList1.setListData(tableModel);
             }
         } catch (SQLException ex) {

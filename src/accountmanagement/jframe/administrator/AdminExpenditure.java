@@ -8,6 +8,7 @@ package accountmanagement.jframe.administrator;
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.TillJframe;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,13 +76,11 @@ public class AdminExpenditure extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getExpenditureList(){
-        ResultSet res = db.getExpenditureDetail(shopName);
+        ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
         try {
-            while (res.next()) {
-                String name = res.getString("Name");
-                String tableModel[]={name};
-//                DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
-//                tbModel.addRow(tableModel);
+            for (int i = 2; i <= metadata.getColumnCount(); i++) {
+                String columnName = metadata.getColumnName(i);
+                String tableModel[]={columnName};
                 jList1.setListData(tableModel);
             }
         } catch (SQLException ex) {

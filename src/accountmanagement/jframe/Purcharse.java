@@ -6,6 +6,14 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -15,12 +23,17 @@ public class Purcharse extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+    static HashMap<String, JTextField> listOfTextFields = new HashMap<>();
+
     /**
      * Creates new form Till
+     *
+     * @param shopName
      */
     public Purcharse(String shopName) {
         this.shopName = shopName;
         initComponents();
+        populatePurchase();
     }
 
     /**
@@ -36,6 +49,7 @@ public class Purcharse extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,14 +69,50 @@ public class Purcharse extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 510));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        HashMap<String, Float> purchaseValues = new HashMap();
+        for (String name : listOfTextFields.keySet()) {
+            System.out.println(name + ": " + listOfTextFields.get(name).getText());
+            purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        db.insertValuesTabTable(shopName, "Purcharse", sdf.format(jDateChooser1.getDate()), purchaseValues);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void populatePurchase() {
+        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
+        try {
+            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+                String columnName = metadata.getColumnName(i);
+                JLabel label = new JLabel(columnName);
+                label.setBounds(50, 30 * i, 100, 30);
+                JTextField textField = new JTextField();
+                textField.setBounds(200, 30 * i, 100, 30);
+                jPanel1.add(label);
+                jPanel1.add(textField);
+                listOfTextFields.put(columnName, textField);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Purcharse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
