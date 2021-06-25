@@ -198,7 +198,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButtonMouseHover
 
     private void staffButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHoverOut
-        staffButton.setForeground(Color.white);
+        staffButton.setForeground(Color.black);
     }//GEN-LAST:event_staffButtonMouseHoverOut
 
     private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
@@ -212,7 +212,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_userButtonMouseHover
 
     private void userButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userButtonMouseHoverOut
-        userButton.setForeground(Color.white);
+        userButton.setForeground(Color.black);
     }//GEN-LAST:event_userButtonMouseHoverOut
 
     private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
@@ -226,7 +226,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHover
 
     private void expenditureButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHoverOut
-        expenditureButton.setForeground(Color.white);
+        expenditureButton.setForeground(Color.black);
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
@@ -240,7 +240,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHover
 
     private void purcharseButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHoverOut
-        purcharseButton.setForeground(Color.white);
+        purcharseButton.setForeground(Color.black);
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed

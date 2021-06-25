@@ -6,6 +6,7 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
@@ -49,7 +50,7 @@ public class Bank extends javax.swing.JPanel {
         MI_NoteMachine = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
         saveBankButton = new javax.swing.JButton();
         FB_ElevenCard = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -113,6 +114,7 @@ public class Bank extends javax.swing.JPanel {
         PB_BorrowMoney = new javax.swing.JTextField();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(746, 960));
@@ -176,14 +178,14 @@ public class Bank extends javax.swing.JPanel {
         jLabel16.setText("Pay Zone");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 130, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        resetButton.setBackground(new java.awt.Color(255, 102, 102));
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 90, 30));
+        add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 90, 30));
 
         saveBankButton.setBackground(new java.awt.Color(0, 0, 102));
         saveBankButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -504,50 +506,60 @@ public class Bank extends javax.swing.JPanel {
         jLabel58.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel58.setText("Borrow Money");
         add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 130, 20));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 230, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveBankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBankButtonActionPerformed
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        warningLabel.setText("");
+        if (jDateChooser1.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        HashMap<String, Float> bankValues = new HashMap();
-        bankValues.put("FB_NETWEST", Float.parseFloat(FB_NETWEST.getText()));
-        bankValues.put("FB_CashPlus", Float.parseFloat(FB_CashPlus.getText()));
-        bankValues.put("FB_ElevenCard", Float.parseFloat(FB_ElevenCard.getText()));
-        bankValues.put("FB_MilkVouture", Float.parseFloat(FB_MilkVouture.getText()));
-        bankValues.put("MI_PayZone", Float.parseFloat(MI_PayZone.getText()));
-        bankValues.put("MI_NoteMachine", Float.parseFloat(MI_NoteMachine.getText()));
-        bankValues.put("SMO_PayPoint", Float.parseFloat(SMO_PayPoint.getText()));
-        bankValues.put("SMO_PayZone", Float.parseFloat(SMO_PayZone.getText()));
-        bankValues.put("SMO_Oyster", Float.parseFloat(SMO_Oyster.getText()));
-        bankValues.put("SMO_Camlot", Float.parseFloat(SMO_Camlot.getText()));
-        bankValues.put("EM_SalarayMike", Float.parseFloat(EM_SalarayMike.getText()));
-        bankValues.put("EM_SalarySathees", Float.parseFloat(EM_SalarySathees.getText()));
-        bankValues.put("EM_CapitalGains", Float.parseFloat(EM_CapitalGains.getText()));
-        bankValues.put("EM_BT", Float.parseFloat(EM_BT.getText()));
-        bankValues.put("EM_Nest", Float.parseFloat(EM_Nest.getText()));
-        bankValues.put("EM_Rent", Float.parseFloat(EM_Rent.getText()));
-        bankValues.put("EM_Water", Float.parseFloat(EM_Water.getText()));
-        bankValues.put("EM_Alarm", Float.parseFloat(EM_Alarm.getText()));
-        bankValues.put("EM_Electric", Float.parseFloat(EM_Electric.getText()));
-        bankValues.put("EM_ToiletBlock", Float.parseFloat(EM_ToiletBlock.getText()));
-        bankValues.put("EY_ShopInsurance", Float.parseFloat(EY_ShopInsurance.getText()));
-        bankValues.put("EY_BIFFA", Float.parseFloat(EY_BIFFA.getText()));
-        bankValues.put("EY_Buil", Float.parseFloat(EY_Buil.getText()));
-        bankValues.put("EY_OffFee", Float.parseFloat(EY_OffFee.getText()));
-        bankValues.put("EB_ElevenCharge", Float.parseFloat(EB_ElevenCharge.getText()));
-        bankValues.put("EB_CardMachine", Float.parseFloat(EB_CardMachine.getText()));
-        bankValues.put("EB_BankCharge", Float.parseFloat(EB_BankCharge.getText()));
-        bankValues.put("EB_PayZoneRental", Float.parseFloat(EB_PayZoneRental.getText()));
-        bankValues.put("P_CostCutter", Float.parseFloat(P_CostCutter.getText()));
-        bankValues.put("P_NI", Float.parseFloat(P_NI.getText()));
-        bankValues.put("P_BestWay", Float.parseFloat(P_BestWay.getText()));
-        bankValues.put("PB_BorrowMoney", Float.parseFloat(PB_BorrowMoney.getText()));
+            HashMap<String, Float> bankValues = new HashMap();
+            bankValues.put("FB_NETWEST", Float.parseFloat(FB_NETWEST.getText()));
+            bankValues.put("FB_CashPlus", Float.parseFloat(FB_CashPlus.getText()));
+            bankValues.put("FB_ElevenCard", Float.parseFloat(FB_ElevenCard.getText()));
+            bankValues.put("FB_MilkVouture", Float.parseFloat(FB_MilkVouture.getText()));
+            bankValues.put("MI_PayZone", Float.parseFloat(MI_PayZone.getText()));
+            bankValues.put("MI_NoteMachine", Float.parseFloat(MI_NoteMachine.getText()));
+            bankValues.put("SMO_PayPoint", Float.parseFloat(SMO_PayPoint.getText()));
+            bankValues.put("SMO_PayZone", Float.parseFloat(SMO_PayZone.getText()));
+            bankValues.put("SMO_Oyster", Float.parseFloat(SMO_Oyster.getText()));
+            bankValues.put("SMO_Camlot", Float.parseFloat(SMO_Camlot.getText()));
+            bankValues.put("EM_SalarayMike", Float.parseFloat(EM_SalarayMike.getText()));
+            bankValues.put("EM_SalarySathees", Float.parseFloat(EM_SalarySathees.getText()));
+            bankValues.put("EM_CapitalGains", Float.parseFloat(EM_CapitalGains.getText()));
+            bankValues.put("EM_BT", Float.parseFloat(EM_BT.getText()));
+            bankValues.put("EM_Nest", Float.parseFloat(EM_Nest.getText()));
+            bankValues.put("EM_Rent", Float.parseFloat(EM_Rent.getText()));
+            bankValues.put("EM_Water", Float.parseFloat(EM_Water.getText()));
+            bankValues.put("EM_Alarm", Float.parseFloat(EM_Alarm.getText()));
+            bankValues.put("EM_Electric", Float.parseFloat(EM_Electric.getText()));
+            bankValues.put("EM_ToiletBlock", Float.parseFloat(EM_ToiletBlock.getText()));
+            bankValues.put("EY_ShopInsurance", Float.parseFloat(EY_ShopInsurance.getText()));
+            bankValues.put("EY_BIFFA", Float.parseFloat(EY_BIFFA.getText()));
+            bankValues.put("EY_Buil", Float.parseFloat(EY_Buil.getText()));
+            bankValues.put("EY_OffFee", Float.parseFloat(EY_OffFee.getText()));
+            bankValues.put("EB_ElevenCharge", Float.parseFloat(EB_ElevenCharge.getText()));
+            bankValues.put("EB_CardMachine", Float.parseFloat(EB_CardMachine.getText()));
+            bankValues.put("EB_BankCharge", Float.parseFloat(EB_BankCharge.getText()));
+            bankValues.put("EB_PayZoneRental", Float.parseFloat(EB_PayZoneRental.getText()));
+            bankValues.put("P_CostCutter", Float.parseFloat(P_CostCutter.getText()));
+            bankValues.put("P_NI", Float.parseFloat(P_NI.getText()));
+            bankValues.put("P_BestWay", Float.parseFloat(P_BestWay.getText()));
+            bankValues.put("PB_BorrowMoney", Float.parseFloat(PB_BorrowMoney.getText()));
 //        System.out.println(sdf.format(jDateChooser1.getDate()));
-        db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
-
+            db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
+            warningLabel.setText("Expenditure added successfully..");
+            warningLabel.setForeground(Color.green);
+            resetButtonActionPerformed(evt);
+        } else {
+            warningLabel.setText("**Date should be selected");
+        }
     }//GEN-LAST:event_saveBankButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         EB_BankCharge.setText("0");
         EB_CardMachine.setText("0");
         EB_ElevenCharge.setText("0");
@@ -580,7 +592,7 @@ public class Bank extends javax.swing.JPanel {
         SMO_Oyster.setText("0");
         SMO_PayPoint.setText("0");
         SMO_PayZone.setText("0");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_resetButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -616,7 +628,6 @@ public class Bank extends javax.swing.JPanel {
     private javax.swing.JTextField SMO_Oyster;
     private javax.swing.JTextField SMO_PayPoint;
     private javax.swing.JTextField SMO_PayZone;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -659,6 +670,8 @@ public class Bank extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton resetButton;
     private javax.swing.JButton saveBankButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,36 +49,37 @@ public class ExpenditureReport extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserFrom = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        searchButton = new javax.swing.JButton();
+        jDateChooserTo = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 161, -1));
+        jDateChooserFrom.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooserFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("From Date");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 38, 80, 20));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 102));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(0, 0, 102));
+        searchButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
+        add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
-        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 161, -1));
+        jDateChooserTo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooserTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 161, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -94,15 +96,28 @@ public class ExpenditureReport extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 800, 550));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 530));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 240, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        ResultSet res = db.getValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser1.getDate()));
+        if (jDateChooserFrom.getDate() == null) {
+            jDateChooserFrom.setDate(currentDate);
+        }
+        if (jDateChooserTo.getDate() == null) {
+            jDateChooserTo.setDate(currentDate);
+        }
+        String fromDate=sdf.format(jDateChooserFrom.getDate());
+        String toDate=sdf.format(jDateChooserTo.getDate());
+        if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
+        ResultSet res = db.getValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooserFrom.getDate()),sdf.format(jDateChooserTo.getDate()));
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
         try {
             List<String[]> data = new ArrayList();
@@ -150,15 +165,19 @@ public class ExpenditureReport extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        }else{
+            warningLabel.setText("From Date should be earlier date");
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserFrom;
+    private com.toedter.calendar.JDateChooser jDateChooserTo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

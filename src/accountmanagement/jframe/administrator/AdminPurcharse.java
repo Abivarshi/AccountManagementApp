@@ -19,10 +19,13 @@ import java.util.logging.Logger;
  * @author COMPAQ
  */
 public class AdminPurcharse extends javax.swing.JPanel {
+
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+
     /**
      * Creates new form AdminPurcharse
+     *
      * @param shopName
      */
     public AdminPurcharse(String shopName) {
@@ -45,6 +48,8 @@ public class AdminPurcharse extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        warningLabel = new javax.swing.JLabel();
+        successLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,13 +73,29 @@ public class AdminPurcharse extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jList1);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 270));
+
+        warningLabel.setForeground(new java.awt.Color(204, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 220, 20));
+
+        successLabel.setForeground(new java.awt.Color(51, 153, 0));
+        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 220, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        db.alterTabTable(shopName, "Purcharse", jTextField1.getText());
+        successLabel.setText("");
+        warningLabel.setText("");
+        if (!db.isColumnExist(shopName, "Purcharse", jTextField1.getText())) {
+            db.alterTabTable(shopName, "Purcharse", jTextField1.getText());
+            getPurcharseList();
+            jTextField1.setText("");
+            successLabel.setText("Purcharse added Successfully..");
+        }else{
+            jTextField1.setText("");
+            warningLabel.setText("**Purcharse already exist.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void getPurcharseList(){
+    private void getPurcharseList() {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
         try {
             List<String> items = new ArrayList();
@@ -93,5 +114,7 @@ public class AdminPurcharse extends javax.swing.JPanel {
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel successLabel;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

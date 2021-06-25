@@ -262,6 +262,23 @@ public class DataBaseConnection {
             return null;
         }
     }
+    
+    public Boolean isColumnExist( String shopName, String tabName, String columnName) {
+        ResultSetMetaData metadata = getTabColumns(shopName, tabName);
+        Boolean isExist = false;
+        try {
+            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+                String colName = metadata.getColumnName(i);
+                if(colName.equalsIgnoreCase(columnName)){
+                    isExist = true;
+                }
+            }
+            return isExist;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 
     public void insertValuesTabTable(String shopName, String tabName, String date, HashMap<String, Float> values) {
         if (con == null || !connectedShop.equals(shopName)) {
@@ -286,7 +303,7 @@ public class DataBaseConnection {
 
     }
 
-    public ResultSet getValuesTabTable(String shopName, String tabName, String date) {
+    public ResultSet getValuesTabTable(String shopName, String tabName, String dateFrom ,String dateTo) {
 
         try {
             if (con == null || !connectedShop.equals(shopName)) {
@@ -294,7 +311,7 @@ public class DataBaseConnection {
             }
 
             Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("SELECT * FROM " + tabName + " WHERE Date='" + date + "'");
+            ResultSet res = state.executeQuery("SELECT * FROM " + tabName + " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'");
             return res;
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,6 +356,38 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Bank", "P_BestWay");
         alterTabTable(shopName, "Bank", "PB_BorrowMoney");
     }
+    
+//    public void createDefaultPetty(String shopName) {
+//        if (con == null || !connectedShop.equals(shopName)) {
+//            getConnection(shopName);
+//        }
+//        alterTabTable(shopName, "Petty", "Cash");
+//        alterTabTable(shopName, "Petty", "Coin");
+//        alterTabTable(shopName, "Petty", "BE_IOU_Paid");
+//        alterTabTable(shopName, "Petty", "CC_Ambiant");
+//        alterTabTable(shopName, "Petty", "CC_Chilled");
+//        alterTabTable(shopName, "Petty", "CC_Frozen");
+//        alterTabTable(shopName, "Petty", "CB_Payback");
+//        alterTabTable(shopName, "Petty", "CCard_Barrow");
+//        alterTabTable(shopName, "Petty", "CCB_Payback");
+//        alterTabTable(shopName, "Petty", "IOU_Payback");
+//        alterTabTable(shopName, "Petty", "P_CostCutter");
+//        alterTabTable(shopName, "Petty", "P_Dhamecha");
+//        alterTabTable(shopName, "Petty", "P_BeerShop");
+//        alterTabTable(shopName, "Petty", "P_Vegetable");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        alterTabTable(shopName, "Petty", "");
+//        
+//    }
     
     public void createDefaultTill(String shopName) {
         if (con == null || !connectedShop.equals(shopName)) {

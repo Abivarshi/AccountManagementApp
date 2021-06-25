@@ -24,8 +24,10 @@ public class Expenditure extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+
     /**
      * Creates new form Till
+     *
      * @param shopName
      */
     public Expenditure(String shopName) {
@@ -43,17 +45,19 @@ public class Expenditure extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        successLabel = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, 161, -1));
+        jDateChooser.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -62,7 +66,12 @@ public class Expenditure extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setText("Reset");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 90, 30));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,7 +81,7 @@ public class Expenditure extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 90, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -84,21 +93,38 @@ public class Expenditure extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 800, 530));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 510));
+
+        successLabel.setForeground(new java.awt.Color(51, 153, 0));
+        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 230, 20));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 230, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        HashMap<String, Float> purchaseValues = new HashMap();
-        for (String name : listOfTextFields.keySet()) {
-            System.out.println(name + ": " + listOfTextFields.get(name).getText());
-            purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+        successLabel.setText("");
+        warningLabel.setText("");
+        if (jDateChooser.getDate() != null) {
+            HashMap<String, Float> purchaseValues = new HashMap();
+            for (String name : listOfTextFields.keySet()) {
+                System.out.println(name + ": " + listOfTextFields.get(name).getText());
+                purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
+            successLabel.setText("Expenditure added successfully..");
+        }else{
+            warningLabel.setText("**Date should be selected");
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser1.getDate()), purchaseValues);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void populateExpenditure() {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
@@ -127,8 +153,10 @@ public class Expenditure extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel successLabel;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

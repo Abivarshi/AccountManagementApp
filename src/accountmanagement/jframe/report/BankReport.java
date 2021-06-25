@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,37 +48,44 @@ public class BankReport extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserFrom = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        searchButton = new javax.swing.JButton();
+        jDateChooserTo = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jDateChooserFrom.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooserFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("From Date");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 38, 80, 20));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 102));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Search");
-        jButton2.setFocusable(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(0, 0, 102));
+        searchButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchButton.setText("Search");
+        searchButton.setFocusable(false);
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
+        add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
-        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jDateChooserTo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooserTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 161, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("To Date");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,101 +158,80 @@ public class BankReport extends javax.swing.JPanel {
         jScrollPane1.setVerticalScrollBarPolicy(
             javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 113, 775, 513));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 88, 248, 19));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
+        tbModel.setRowCount(0);
+        Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        ResultSet res = db.getValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()));
-        ResultSetMetaData metadata = db.getTabColumns(shopName, "Bank");
-        try {
-            while (res.next()) {
-                String dateCol = metadata.getColumnName(2);
-                String date = res.getString(dateCol);
-                List<String> values = new ArrayList();
-                values.add(date);
-                float subTotalExpenditure=0;
-                float subTotalPurcharse=0;
-                float balanceInBank=0;
-                for (int i = 3; i <= metadata.getColumnCount(); i++) {
-                    String columnName = metadata.getColumnName(i);
-                    Float value = res.getFloat(columnName);
-                    values.add(value.toString());
-                    if(i>12 && i<31){
-                        subTotalExpenditure=subTotalExpenditure+value;
-                    }
-                    if(i>31 && i<35){
-                        subTotalPurcharse=subTotalPurcharse+value;
-                    }
-                    if(i>2 && i<8){
-                        balanceInBank=balanceInBank+value;
-                    }
-                    if(i>8 && i<13){
-                        balanceInBank=balanceInBank-value;
-                    }
-                    if(i==34){
-                        balanceInBank=balanceInBank-value;
-                    }
-                }
-                balanceInBank = balanceInBank-subTotalExpenditure-subTotalPurcharse;
-                values.add(String.valueOf(subTotalExpenditure));
-                values.add(String.valueOf(subTotalPurcharse));
-                values.add(String.valueOf(balanceInBank));
-                
-                DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
-                tbModel.addRow(values.toArray());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+        if (jDateChooserFrom.getDate() == null) {
+            jDateChooserFrom.setDate(currentDate);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (jDateChooserTo.getDate() == null) {
+            jDateChooserTo.setDate(currentDate);
+        }
+        String fromDate = sdf.format(jDateChooserFrom.getDate());
+        String toDate = sdf.format(jDateChooserTo.getDate());
+        if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
+            ResultSet res = db.getValuesTabTable(shopName, "Bank", sdf.format(jDateChooserFrom.getDate()), sdf.format(jDateChooserTo.getDate()));
+            ResultSetMetaData metadata = db.getTabColumns(shopName, "Bank");
+            try {
+                while (res.next()) {
+                    String dateCol = metadata.getColumnName(2);
+                    String date = res.getString(dateCol);
+                    List<String> values = new ArrayList();
+                    values.add(date);
+                    float subTotalExpenditure = 0;
+                    float subTotalPurcharse = 0;
+                    float balanceInBank = 0;
+                    for (int i = 3; i <= metadata.getColumnCount(); i++) {
+                        String columnName = metadata.getColumnName(i);
+                        Float value = res.getFloat(columnName);
+                        values.add(value.toString());
+                        if (i > 12 && i < 31) {
+                            subTotalExpenditure = subTotalExpenditure + value;
+                        }
+                        if (i > 31 && i < 35) {
+                            subTotalPurcharse = subTotalPurcharse + value;
+                        }
+                        if (i > 2 && i < 8) {
+                            balanceInBank = balanceInBank + value;
+                        }
+                        if (i > 8 && i < 13) {
+                            balanceInBank = balanceInBank - value;
+                        }
+                        if (i == 34) {
+                            balanceInBank = balanceInBank - value;
+                        }
+                    }
+                    balanceInBank = balanceInBank - subTotalExpenditure - subTotalPurcharse;
+                    values.add(String.valueOf(subTotalExpenditure));
+                    values.add(String.valueOf(subTotalPurcharse));
+                    values.add(String.valueOf(balanceInBank));
+                    tbModel.addRow(values.toArray());
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            warningLabel.setText("From Date should be earlier date");
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserFrom;
+    private com.toedter.calendar.JDateChooser jDateChooserTo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

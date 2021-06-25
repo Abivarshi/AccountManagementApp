@@ -6,6 +6,7 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import java.awt.Color;
 
 /**
  *
@@ -43,7 +44,7 @@ public class Petty extends javax.swing.JPanel {
         jTextField13 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField22 = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -93,6 +94,7 @@ public class Petty extends javax.swing.JPanel {
         jTextField51 = new javax.swing.JTextField();
         jLabel61 = new javax.swing.JLabel();
         jLabel62 = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(746, 960));
@@ -109,86 +111,91 @@ public class Petty extends javax.swing.JPanel {
         jTextField6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField6.setText("0");
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 96, 20));
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 96, 20));
 
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField7.setText("0");
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 96, 20));
+        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 96, 20));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Coins");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, 20));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 20));
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Cash");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 130, 20));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 130, 20));
 
         jTextField12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField12.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField12.setText("0");
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 96, 20));
+        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 96, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel14.setText("Cost Cutter");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 167, 20));
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 167, 20));
 
         jTextField13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField13.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField13.setText("0");
-        add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 96, 20));
+        add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 96, 20));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Chilled");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 120, 20));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 120, 20));
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Ambiant");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 130, 20));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 130, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        resetButton.setBackground(new java.awt.Color(255, 102, 102));
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 90, 30));
+        add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 90, 30));
 
         jTextField22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField22.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField22.setText("0");
-        add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 96, 20));
+        add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 96, 20));
 
         jLabel25.setBackground(new java.awt.Color(255, 255, 255));
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel25.setText("BE IOU PAID");
-        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 20));
+        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 120, 20));
 
         jTextField24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField24.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField24.setText("0");
-        add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 96, 20));
+        add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 96, 20));
 
         jLabel27.setBackground(new java.awt.Color(255, 255, 255));
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel27.setText("Cash Barrow");
-        add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 167, 20));
+        add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 167, 20));
 
         jLabel29.setBackground(new java.awt.Color(255, 255, 255));
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel29.setText("Pay Back");
-        add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 130, 20));
+        add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 130, 20));
 
         jTextField28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField28.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -348,65 +355,68 @@ public class Petty extends javax.swing.JPanel {
         jTextField46.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField46.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField46.setText("0");
-        add(jTextField46, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 96, 20));
+        add(jTextField46, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 96, 20));
 
         jLabel53.setBackground(new java.awt.Color(255, 255, 255));
         jLabel53.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel53.setText("IOU");
-        add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 167, 20));
+        add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 167, 20));
 
         jTextField47.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField47.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField47.setText("0");
-        add(jTextField47, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 96, 20));
+        add(jTextField47, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 96, 20));
 
         jLabel54.setBackground(new java.awt.Color(255, 255, 255));
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel54.setText("Pay Back");
-        add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 120, 20));
+        add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 120, 20));
 
         jTextField14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField14.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField14.setText("0");
-        add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 96, 20));
+        add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 96, 20));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Frozen");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 120, 20));
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 120, 20));
 
         jTextField50.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField50.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField50.setText("0");
-        add(jTextField50, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 96, 20));
+        add(jTextField50, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 96, 20));
 
         jLabel59.setBackground(new java.awt.Color(255, 255, 255));
         jLabel59.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel59.setText("C/Card");
-        add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 167, 20));
+        add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 167, 20));
 
         jLabel60.setBackground(new java.awt.Color(255, 255, 255));
         jLabel60.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel60.setText("Barrow");
-        add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 130, 20));
+        add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 130, 20));
 
         jTextField51.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField51.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTextField51.setText("0");
-        add(jTextField51, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 96, 20));
+        add(jTextField51, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 96, 20));
 
         jLabel61.setBackground(new java.awt.Color(255, 255, 255));
         jLabel61.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel61.setText("C/Card Barrow");
-        add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 167, 20));
+        add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 167, 20));
 
         jLabel62.setBackground(new java.awt.Color(255, 255, 255));
         jLabel62.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel62.setText("Pay Back");
-        add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 130, 20));
+        add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 130, 20));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 230, 20));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
          jTextField12.setText("0");
         jTextField13.setText("0");
         jTextField14.setText("0");
@@ -432,11 +442,22 @@ public class Petty extends javax.swing.JPanel {
         jTextField51.setText("0");
         jTextField6.setText("0");
         jTextField7.setText("0");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        warningLabel.setText("");
+        if (jDateChooser1.getDate() != null) {
+            
+            warningLabel.setText("Expenditure added successfully..");
+            warningLabel.setForeground(Color.green);
+            resetButtonActionPerformed(evt);
+        } else {
+            warningLabel.setText("**Date should be selected");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel13;
@@ -497,5 +518,7 @@ public class Petty extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField51;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton resetButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

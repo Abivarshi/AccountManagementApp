@@ -44,17 +44,19 @@ public class AdminExpenditure extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        expenditureTypeTextField = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        successLabel = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Expenditure Type");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 31, 100, 22));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 114, -1));
+        add(expenditureTypeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 114, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -71,10 +73,26 @@ public class AdminExpenditure extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jList1);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 270));
+
+        successLabel.setForeground(new java.awt.Color(51, 153, 0));
+        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 220, 20));
+
+        warningLabel.setForeground(new java.awt.Color(204, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 220, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        db.alterTabTable(shopName, "Expenditure", jTextField1.getText());
+        successLabel.setText("");
+        warningLabel.setText("");
+        if (!db.isColumnExist(shopName, "Expenditure", expenditureTypeTextField.getText())) {
+            db.alterTabTable(shopName, "Expenditure", expenditureTypeTextField.getText());
+            getExpenditureList();
+            expenditureTypeTextField.setText("");
+            successLabel.setText("Expenditure added Successfully..");
+        }else{
+            expenditureTypeTextField.setText("");
+            warningLabel.setText("**Expenditure already exist.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getExpenditureList() {
@@ -92,10 +110,12 @@ public class AdminExpenditure extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField expenditureTypeTextField;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel successLabel;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

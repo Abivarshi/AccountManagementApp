@@ -233,24 +233,24 @@ public class TillJframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ResultSet rs = db.getValuesTabTable(shopName, "Till",jTextField2.getText());
-        try {
-            while (rs.next()) {
-                for (int i = 2; i <= metadata.getColumnCount(); i++) {
-                    String columnName = metadata.getColumnName(i);
-                    JLabel label = new JLabel(columnName);
-                    label.setBounds(50, 30 * i, 100, 30);
-                    JLabel value = new JLabel(": " + rs.getString(columnName));
-                    value.setBounds(200, 30 * i, 100, 30);
-                    System.out.println(metadata.getColumnName(i) + ": " + rs.getString(columnName));
-                    jPanel4.add(new JTextField("Test"));
-                    jPanel4.add(label);
-                    jPanel4.add(value);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        ResultSet rs = db.getValuesTabTable(shopName, "Till",jTextField2.getText());
+//        try {
+//            while (rs.next()) {
+//                for (int i = 2; i <= metadata.getColumnCount(); i++) {
+//                    String columnName = metadata.getColumnName(i);
+//                    JLabel label = new JLabel(columnName);
+//                    label.setBounds(50, 30 * i, 100, 30);
+//                    JLabel value = new JLabel(": " + rs.getString(columnName));
+//                    value.setBounds(200, 30 * i, 100, 30);
+//                    System.out.println(metadata.getColumnName(i) + ": " + rs.getString(columnName));
+//                    jPanel4.add(new JTextField("Test"));
+//                    jPanel4.add(label);
+//                    jPanel4.add(value);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void populateTill() {
