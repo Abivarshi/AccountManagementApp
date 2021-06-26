@@ -190,7 +190,7 @@ public class DataBaseConnection {
                 + "'" + date + "', '" + staffName + ", '" + staffType + "', " + start + ", " + end + ");");
         PreparedStatement prep = con.prepareStatement("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime) VALUES ("
                 + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end + ");");
-        
+
         prep.execute();
     }
 //
@@ -288,18 +288,18 @@ public class DataBaseConnection {
             if (con == null || !connectedShop.equals(shopName)) {
                 getConnection(shopName);
             }
-            
-            if(tabName.equals("From Report")){
-                tabName="TillReport";
-            }else if(tabName.equals("From BackOffice")){
-                tabName="TillBackOffice";
+
+            if (tabName.equals("From Report")) {
+                tabName = "TillReport";
+            } else if (tabName.equals("From BackOffice")) {
+                tabName = "TillBackOffice";
             }
             System.out.println(tabName);
             Boolean isExist = false;
             Statement state = con.createStatement();
             ResultSet res = state.executeQuery("SELECT * FROM " + tabName + " WHERE Date='" + date + "'");
             if (res.next()) {
-                isExist=true;
+                isExist = true;
             }
             return isExist;
 
@@ -515,4 +515,15 @@ public class DataBaseConnection {
         return role;
     }
 
+    public void dropTable(String shopName, String tableName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        try {
+            Statement state = con.createStatement();
+            state.executeUpdate("DROP TABLE " + tableName);
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

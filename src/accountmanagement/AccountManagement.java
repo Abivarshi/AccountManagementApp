@@ -26,6 +26,8 @@ public class AccountManagement {
         ResultSet rs;
 
         try {
+            db.dropTable("Shop1", "StaffTime");
+            db.createStaffTime("Shop1");
 
 //            db.createShop("Shop1");
 //            rs = db.addUser("Shop1", "a", "a", "admin");
