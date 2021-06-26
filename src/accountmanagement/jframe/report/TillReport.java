@@ -81,22 +81,20 @@ public class TillReport extends javax.swing.JPanel {
         jLabel3.setText("To Date");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
 
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Date", "Yesterday Till Count", "Today Till Count", "Cash", "Coin", "Card", "Voucher Milk", "Voucher Pay Point", "Refund Goods", "Refund Services", "Refund Account Credit", "Purchase", "Expenditure", "Acc Pay", "Cash Back", "Instant PayOut", "Lottary PayOut", "Ins Lottary", "Lottary", "Oyster", "Pay Point", "PayZone"
+                "Type", "Date", "Yesterday Till Count", "Today Till Count", "Cash", "Coin", "Card", "Voucher Milk", "Voucher Pay Point", "Refund Goods", "Refund Services", "Refund Account Credit", "Purchase", "Expenditure", "Acc Pay", "Cash Back", "Instant PayOut", "Lottary PayOut", "Ins Lottary", "Lottary", "Oyster", "Pay Point", "PayZone", "Over/Short Till", "Over/Short Pay/Payzone/Bus"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -107,7 +105,7 @@ public class TillReport extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setPreferredSize(new java.awt.Dimension(2500, 64));
+        jTable1.setPreferredSize(new java.awt.Dimension(1800, 64));
         jTable1.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -133,9 +131,17 @@ public class TillReport extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(19).setResizable(false);
             jTable1.getColumnModel().getColumn(20).setResizable(false);
             jTable1.getColumnModel().getColumn(21).setResizable(false);
+            jTable1.getColumnModel().getColumn(22).setResizable(false);
+            jTable1.getColumnModel().getColumn(23).setResizable(false);
+            jTable1.getColumnModel().getColumn(24).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 500));
+        jScrollPane1.setHorizontalScrollBarPolicy(
+            javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(
+            javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 830, 480));
 
         warningLabel.setForeground(new java.awt.Color(153, 0, 0));
         add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 248, 19));
@@ -157,18 +163,76 @@ public class TillReport extends javax.swing.JPanel {
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             ResultSet res = db.getValuesTabTable(shopName, "TillReport", sdf.format(jDateChooserFrom.getDate()), sdf.format(jDateChooserTo.getDate()));
             ResultSetMetaData metadata = db.getTabColumns(shopName, "TillReport");
+            ResultSet resBackOffice = db.getValuesTabTable(shopName, "TillBackOffice", sdf.format(jDateChooserFrom.getDate()), sdf.format(jDateChooserTo.getDate()));
+            ResultSetMetaData metadataBackOffice = db.getTabColumns(shopName, "TillBackOffice");
             try {
                 while (res.next()) {
-                    String dateCol = metadata.getColumnName(2);
+                    String dateCol = metadataBackOffice.getColumnName(2);
+                    float cashDiff = 0;
+                    float tillOver=0;
+                    float otherOver=0;
                     String date = res.getString(dateCol);
+                    System.out.println(date);
                     List<String> values = new ArrayList();
+                    values.add("From Report");
                     values.add(date);
+                    
+                    String dateBackOffice = resBackOffice.getString(dateCol);
+                    List<String> valuesBackOffice = new ArrayList();
+                    valuesBackOffice.add("From Back Office");
+                    valuesBackOffice.add(dateBackOffice);
+                    
+                    List<String> valuesDiff= new ArrayList();
+                    valuesDiff.add("Short/Over");
+                    valuesDiff.add(dateBackOffice);
+                    
                     for (int i = 3; i <= metadata.getColumnCount(); i++) {
-                        String columnName = metadata.getColumnName(i);
+                        String columnName = metadataBackOffice.getColumnName(i);
                         Float value = res.getFloat(columnName);
                         values.add(value.toString());
+                        Float valueBackOffice = resBackOffice.getFloat(columnName);
+                        valuesBackOffice.add(valueBackOffice.toString());
+                        if(i==3){
+                            cashDiff = cashDiff-value-valueBackOffice;
+                        }
+                        if(i==4){
+                            cashDiff = cashDiff+value+valueBackOffice;
+                        }
+                        if(i==6){
+                            cashDiff = cashDiff+value;
+                        }
+                        if(i>9 && i<12){
+                            cashDiff = cashDiff+value;
+                        }
+                        if(i>12 && i<15){
+                            cashDiff = cashDiff+value;
+                        }
+                        if((i>6 && i<10)||i==12||(i>14 && i<19)){
+                            Float valueDiff=value-valueBackOffice;
+                            valuesDiff.add(valueDiff.toString());
+                            if(i==7 || i==8 || i==17 || i==18){
+                                tillOver=tillOver+valueDiff; 
+                            }
+                        }else if(i>19 && i<24){
+                            Float valueDiff=valueBackOffice-value;
+                            valuesDiff.add(valueDiff.toString());
+                            otherOver=otherOver+valueDiff;
+                        }
+                        else if(i==5){
+                            cashDiff = cashDiff+value-valueBackOffice;
+                        }
+                        else{
+                            valuesDiff.add("");
+                        }
                     }
+                    tillOver=tillOver+cashDiff;
+                    values.add(String.valueOf(tillOver));
+                    values.add(String.valueOf(otherOver));
+                    valuesDiff.add(4,String.valueOf(cashDiff));
                     tbModel.addRow(values.toArray());
+                    tbModel.addRow(valuesBackOffice.toArray());
+                    tbModel.addRow(valuesDiff.toArray());
+                    
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
