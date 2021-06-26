@@ -517,43 +517,49 @@ public class Bank extends javax.swing.JPanel {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
             HashMap<String, Float> bankValues = new HashMap();
-            bankValues.put("FB_NETWEST", Float.parseFloat(FB_NETWEST.getText()));
-            bankValues.put("FB_CashPlus", Float.parseFloat(FB_CashPlus.getText()));
-            bankValues.put("FB_ElevenCard", Float.parseFloat(FB_ElevenCard.getText()));
-            bankValues.put("FB_MilkVouture", Float.parseFloat(FB_MilkVouture.getText()));
-            bankValues.put("MI_PayZone", Float.parseFloat(MI_PayZone.getText()));
-            bankValues.put("MI_NoteMachine", Float.parseFloat(MI_NoteMachine.getText()));
-            bankValues.put("SMO_PayPoint", Float.parseFloat(SMO_PayPoint.getText()));
-            bankValues.put("SMO_PayZone", Float.parseFloat(SMO_PayZone.getText()));
-            bankValues.put("SMO_Oyster", Float.parseFloat(SMO_Oyster.getText()));
-            bankValues.put("SMO_Camlot", Float.parseFloat(SMO_Camlot.getText()));
-            bankValues.put("EM_SalarayMike", Float.parseFloat(EM_SalarayMike.getText()));
-            bankValues.put("EM_SalarySathees", Float.parseFloat(EM_SalarySathees.getText()));
-            bankValues.put("EM_CapitalGains", Float.parseFloat(EM_CapitalGains.getText()));
-            bankValues.put("EM_BT", Float.parseFloat(EM_BT.getText()));
-            bankValues.put("EM_Nest", Float.parseFloat(EM_Nest.getText()));
-            bankValues.put("EM_Rent", Float.parseFloat(EM_Rent.getText()));
-            bankValues.put("EM_Water", Float.parseFloat(EM_Water.getText()));
-            bankValues.put("EM_Alarm", Float.parseFloat(EM_Alarm.getText()));
-            bankValues.put("EM_Electric", Float.parseFloat(EM_Electric.getText()));
-            bankValues.put("EM_ToiletBlock", Float.parseFloat(EM_ToiletBlock.getText()));
-            bankValues.put("EY_ShopInsurance", Float.parseFloat(EY_ShopInsurance.getText()));
-            bankValues.put("EY_BIFFA", Float.parseFloat(EY_BIFFA.getText()));
-            bankValues.put("EY_Buil", Float.parseFloat(EY_Buil.getText()));
-            bankValues.put("EY_OffFee", Float.parseFloat(EY_OffFee.getText()));
-            bankValues.put("EB_ElevenCharge", Float.parseFloat(EB_ElevenCharge.getText()));
-            bankValues.put("EB_CardMachine", Float.parseFloat(EB_CardMachine.getText()));
-            bankValues.put("EB_BankCharge", Float.parseFloat(EB_BankCharge.getText()));
-            bankValues.put("EB_PayZoneRental", Float.parseFloat(EB_PayZoneRental.getText()));
-            bankValues.put("P_CostCutter", Float.parseFloat(P_CostCutter.getText()));
-            bankValues.put("P_NI", Float.parseFloat(P_NI.getText()));
-            bankValues.put("P_BestWay", Float.parseFloat(P_BestWay.getText()));
-            bankValues.put("PB_BorrowMoney", Float.parseFloat(PB_BorrowMoney.getText()));
-//        System.out.println(sdf.format(jDateChooser1.getDate()));
-            db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
-            warningLabel.setText("Expenditure added successfully..");
-            warningLabel.setForeground(Color.green);
-            resetButtonActionPerformed(evt);
+            try {
+                bankValues.put("FB_NETWEST", Float.parseFloat(FB_NETWEST.getText()));
+                bankValues.put("FB_CashPlus", Float.parseFloat(FB_CashPlus.getText()));
+                bankValues.put("FB_ElevenCard", Float.parseFloat(FB_ElevenCard.getText()));
+                bankValues.put("FB_MilkVouture", Float.parseFloat(FB_MilkVouture.getText()));
+                bankValues.put("MI_PayZone", Float.parseFloat(MI_PayZone.getText()));
+                bankValues.put("MI_NoteMachine", Float.parseFloat(MI_NoteMachine.getText()));
+                bankValues.put("SMO_PayPoint", Float.parseFloat(SMO_PayPoint.getText()));
+                bankValues.put("SMO_PayZone", Float.parseFloat(SMO_PayZone.getText()));
+                bankValues.put("SMO_Oyster", Float.parseFloat(SMO_Oyster.getText()));
+                bankValues.put("SMO_Camlot", Float.parseFloat(SMO_Camlot.getText()));
+                bankValues.put("EM_SalarayMike", Float.parseFloat(EM_SalarayMike.getText()));
+                bankValues.put("EM_SalarySathees", Float.parseFloat(EM_SalarySathees.getText()));
+                bankValues.put("EM_CapitalGains", Float.parseFloat(EM_CapitalGains.getText()));
+                bankValues.put("EM_BT", Float.parseFloat(EM_BT.getText()));
+                bankValues.put("EM_Nest", Float.parseFloat(EM_Nest.getText()));
+                bankValues.put("EM_Rent", Float.parseFloat(EM_Rent.getText()));
+                bankValues.put("EM_Water", Float.parseFloat(EM_Water.getText()));
+                bankValues.put("EM_Alarm", Float.parseFloat(EM_Alarm.getText()));
+                bankValues.put("EM_Electric", Float.parseFloat(EM_Electric.getText()));
+                bankValues.put("EM_ToiletBlock", Float.parseFloat(EM_ToiletBlock.getText()));
+                bankValues.put("EY_ShopInsurance", Float.parseFloat(EY_ShopInsurance.getText()));
+                bankValues.put("EY_BIFFA", Float.parseFloat(EY_BIFFA.getText()));
+                bankValues.put("EY_Buil", Float.parseFloat(EY_Buil.getText()));
+                bankValues.put("EY_OffFee", Float.parseFloat(EY_OffFee.getText()));
+                bankValues.put("EB_ElevenCharge", Float.parseFloat(EB_ElevenCharge.getText()));
+                bankValues.put("EB_CardMachine", Float.parseFloat(EB_CardMachine.getText()));
+                bankValues.put("EB_BankCharge", Float.parseFloat(EB_BankCharge.getText()));
+                bankValues.put("EB_PayZoneRental", Float.parseFloat(EB_PayZoneRental.getText()));
+                bankValues.put("P_CostCutter", Float.parseFloat(P_CostCutter.getText()));
+                bankValues.put("P_NI", Float.parseFloat(P_NI.getText()));
+                bankValues.put("P_BestWay", Float.parseFloat(P_BestWay.getText()));
+                bankValues.put("PB_BorrowMoney", Float.parseFloat(PB_BorrowMoney.getText()));
+
+                db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
+                warningLabel.setText("Expenditure added successfully..");
+                warningLabel.setForeground(Color.green);
+                resetButtonActionPerformed(evt);
+                
+            } catch (java.lang.NumberFormatException e) {
+                warningLabel.setText("**Values should be decimal");
+            }
+
         } else {
             warningLabel.setText("**Date should be selected");
         }

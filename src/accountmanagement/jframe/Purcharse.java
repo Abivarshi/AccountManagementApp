@@ -6,14 +6,17 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import java.awt.Color;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 /**
  *
@@ -23,7 +26,7 @@ public class Purcharse extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-    static HashMap<String, JTextField> listOfTextFields = new HashMap<>();
+    private static HashMap<String, JTextField> listOfTextFields = new HashMap<>();
 
     /**
      * Creates new form Till
@@ -50,6 +53,8 @@ public class Purcharse extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        successLabel = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,6 +69,11 @@ public class Purcharse extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
@@ -78,30 +88,73 @@ public class Purcharse extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        successLabel.setForeground(new java.awt.Color(51, 153, 0));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(558, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(warningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(successLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(473, Short.MAX_VALUE))
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 800, 530));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        HashMap<String, Float> purchaseValues = new HashMap();
-        for (String name : listOfTextFields.keySet()) {
-            System.out.println(name + ": " + listOfTextFields.get(name).getText());
-            purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+        successLabel.setText("");
+        warningLabel.setText("");
+        boolean canSave = true;
+        if (jDateChooser1.getDate() != null) {
+            HashMap<String, Float> purchaseValues = new HashMap();
+            for (String name : listOfTextFields.keySet()) {
+                System.out.println(name + ": " + listOfTextFields.get(name).getText());
+                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+                try {
+                    purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**Values should be decimal");
+                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    canSave = false;
+                    break;
+                }
+            }
+            if (canSave) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                db.insertValuesTabTable(shopName, "Purcharse", sdf.format(jDateChooser1.getDate()), purchaseValues);
+                successLabel.setText("Expenditure added successfully..");
+                resetText();
+            }
+        } else {
+            warningLabel.setText("**Date should be selected");
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        db.insertValuesTabTable(shopName, "Purcharse", sdf.format(jDateChooser1.getDate()), purchaseValues);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        resetText();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void resetText() {
+        for (String name : listOfTextFields.keySet()) {
+            listOfTextFields.get(name).setText("0");
+        }
+    }
+    
     private void populatePurchase() {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
         try {
@@ -132,5 +185,7 @@ public class Purcharse extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel successLabel;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

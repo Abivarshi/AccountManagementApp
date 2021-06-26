@@ -6,15 +6,17 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
-import static accountmanagement.jframe.Purcharse.listOfTextFields;
+import java.awt.Color;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 /**
  *
@@ -24,6 +26,7 @@ public class Expenditure extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+    private static HashMap<String, JTextField> listOfTextFields = new HashMap<>();
 
     /**
      * Creates new form Till
@@ -108,24 +111,42 @@ public class Expenditure extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         successLabel.setText("");
         warningLabel.setText("");
+        boolean canSave = true;
         if (jDateChooser.getDate() != null) {
             HashMap<String, Float> purchaseValues = new HashMap();
             for (String name : listOfTextFields.keySet()) {
                 System.out.println(name + ": " + listOfTextFields.get(name).getText());
-                purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+                try {
+                    purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**Values should be decimal");
+                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    canSave = false;
+                    break;
+                }
             }
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
-            successLabel.setText("Expenditure added successfully..");
-        }else{
+            if (canSave) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
+                successLabel.setText("Expenditure added successfully..");
+                resetText();
+            }
+        } else {
             warningLabel.setText("**Date should be selected");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        resetText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void resetText() {
+        for (String name : listOfTextFields.keySet()) {
+            listOfTextFields.get(name).setText("0");
+        }
+    }
+    
     private void populateExpenditure() {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
         try {
