@@ -173,7 +173,7 @@ public class DataBaseConnection {
 
             Statement state2 = con.createStatement();
             state2.executeUpdate("CREATE TABLE StaffTime(id integer,"
-                    + "Date DATE"
+                    + "Date DATE,"
                     + "StaffName VARCHAR(60),"
                     + "Type VARCHAR(60),"
                     + "StartTime FLOAT,"
@@ -182,30 +182,33 @@ public class DataBaseConnection {
         }
     }
 
-    public void insertStaffTime(String shopName, Date date, String staffName, String staffType, Float start, Float end) throws ClassNotFoundException, SQLException {
+    public void insertStaffTime(String shopName, String date, String staffName, String staffType, Float start, Float end) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff (Date, StaffName, Type, StartTime, EndTime) VALUES ("
+        System.out.println("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime) VALUES ("
                 + "'" + date + "', '" + staffName + ", '" + staffType + "', " + start + ", " + end + ");");
+        PreparedStatement prep = con.prepareStatement("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime) VALUES ("
+                + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end + ");");
+        
         prep.execute();
     }
-
-    public ResultSet getStaffTime(String shopName, String date) {
-
-        try {
-            if (con == null || !connectedShop.equals(shopName)) {
-                getConnection(shopName);
-            }
-
-            Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("SELECT * FROM StaffTime WHERE Date='" + date + "'");
-            return res;
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
+//
+//    public ResultSet getStaffTime(String shopName, String dateFrom, String dateTo) {
+//
+//        try {
+//            if (con == null || !connectedShop.equals(shopName)) {
+//                getConnection(shopName);
+//            }
+//
+//            Statement state = con.createStatement();
+//            ResultSet res = state.executeQuery("SELECT * FROM StaffTime WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'");
+//            return res;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//    }
 
     public void createTabTable(String shopName, String tabName) {
         if (con == null || !connectedShop.equals(shopName)) {
