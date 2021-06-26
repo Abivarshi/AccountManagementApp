@@ -57,7 +57,7 @@ public class User extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         userTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Supervisor", "User", " " }));
-        add(userTypeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 94, -1));
+        add(userTypeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 94, -1));
 
         userType.setText("User Type");
         userType.setToolTipText("");
@@ -70,7 +70,7 @@ public class User extends javax.swing.JPanel {
         userType2.setText("Password");
         userType2.setToolTipText("");
         add(userType2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 86, 20));
-        add(userNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 90, -1));
+        add(userNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 90, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,19 +80,19 @@ public class User extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 90, 30));
-        add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 90, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 90, 30));
+        add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 90, -1));
 
         userType3.setText("Confirm Password");
         userType3.setToolTipText("");
-        add(userType3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 86, 20));
-        add(confirmPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 90, -1));
+        add(userType3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 130, 20));
+        add(confirmPasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 90, -1));
 
         successLabel.setForeground(new java.awt.Color(51, 204, 0));
-        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 270, 20));
+        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 270, 20));
 
         warningLabel.setForeground(new java.awt.Color(204, 0, 0));
-        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 270, 20));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 270, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

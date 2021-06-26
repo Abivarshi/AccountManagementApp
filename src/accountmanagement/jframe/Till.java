@@ -6,6 +6,9 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 /**
  *
@@ -15,6 +18,7 @@ public class Till extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+
     /**
      * Creates new form Till
      */
@@ -36,51 +40,52 @@ public class Till extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        yesterdayTillCount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        todayTillCount = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        cash = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        coin = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        card = new javax.swing.JTextField();
+        voucherMilk = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        voucherPayPoint = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        refundAccountCredit = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        purchase = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        expenditure = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        accPay = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        refundGoods = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        refundServices = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        cashBack = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        instantPayOut = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        lottaryPayOut = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
+        insLottary = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        lottary = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
+        oyster = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
+        payPoint = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jTextField21 = new javax.swing.JTextField();
+        payZone = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         resetButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,105 +107,105 @@ public class Till extends javax.swing.JPanel {
         jLabel2.setText("Date");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 38, 167, 20));
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField1.setText("0");
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 96, 20));
+        yesterdayTillCount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        yesterdayTillCount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        yesterdayTillCount.setText("0");
+        add(yesterdayTillCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 96, 20));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Today Till Count");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 167, 20));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField2.setText("0");
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 96, 20));
+        todayTillCount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        todayTillCount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        todayTillCount.setText("0");
+        add(todayTillCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 96, 20));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Cash");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 167, 20));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField3.setText("0");
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 96, 20));
+        cash.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cash.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        cash.setText("0");
+        add(cash, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 96, 20));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Coin");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 167, 20));
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField4.setText("0");
-        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 96, 20));
+        coin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        coin.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        coin.setText("0");
+        add(coin, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 96, 20));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Card");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 167, 20));
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField5.setText("0");
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 96, 20));
+        card.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        card.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        card.setText("0");
+        add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 96, 20));
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField6.setText("0");
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 96, 20));
+        voucherMilk.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        voucherMilk.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        voucherMilk.setText("0");
+        add(voucherMilk, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 96, 20));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Voucher");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 167, 20));
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField7.setText("0");
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 96, 20));
+        voucherPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        voucherPayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        voucherPayPoint.setText("0");
+        add(voucherPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 96, 20));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("PayPoint");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 120, 20));
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField8.setText("0");
-        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 96, 20));
+        refundAccountCredit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        refundAccountCredit.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        refundAccountCredit.setText("0");
+        add(refundAccountCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 96, 20));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Account Credit");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 167, 20));
 
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField9.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField9.setText("0");
-        add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 96, 20));
+        purchase.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        purchase.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        purchase.setText("0");
+        add(purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 96, 20));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Purchase");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 167, 20));
 
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField10.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField10.setText("0");
-        add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 96, 20));
+        expenditure.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        expenditure.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        expenditure.setText("0");
+        add(expenditure, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 96, 20));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Expenditure");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 167, 20));
 
-        jTextField11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField11.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField11.setText("0");
-        add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 96, 20));
+        accPay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        accPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        accPay.setText("0");
+        add(accPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 96, 20));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -212,20 +217,20 @@ public class Till extends javax.swing.JPanel {
         jLabel13.setText("Milk");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 130, 20));
 
-        jTextField12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField12.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField12.setText("0");
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 96, 20));
+        refundGoods.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        refundGoods.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        refundGoods.setText("0");
+        add(refundGoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 96, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel14.setText("Refund");
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 167, 20));
 
-        jTextField13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField13.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField13.setText("0");
-        add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 96, 20));
+        refundServices.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        refundServices.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        refundServices.setText("0");
+        add(refundServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 96, 20));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -237,80 +242,80 @@ public class Till extends javax.swing.JPanel {
         jLabel16.setText("Goods");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 130, 20));
 
-        jTextField14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField14.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField14.setText("0");
-        add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, 96, 20));
+        cashBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cashBack.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        cashBack.setText("0");
+        add(cashBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, 96, 20));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Cash Back");
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 167, 20));
 
-        jTextField15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField15.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField15.setText("0");
-        add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 96, 20));
+        instantPayOut.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        instantPayOut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        instantPayOut.setText("0");
+        add(instantPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 96, 20));
 
         jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("Instant PayOut");
         add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 167, 20));
 
-        jTextField16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField16.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField16.setText("0");
-        add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 96, 20));
+        lottaryPayOut.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lottaryPayOut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        lottaryPayOut.setText("0");
+        add(lottaryPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 96, 20));
 
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("Lottary PayOut");
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 167, 20));
 
-        jTextField17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField17.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField17.setText("0");
-        add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, 96, 20));
+        insLottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        insLottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        insLottary.setText("0");
+        add(insLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, 96, 20));
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setText("Ins Lottary");
         add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 167, 20));
 
-        jTextField18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField18.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField18.setText("0");
-        add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 96, 20));
+        lottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        lottary.setText("0");
+        add(lottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 96, 20));
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("Lottary");
         add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 167, 20));
 
-        jTextField19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField19.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField19.setText("0");
-        add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, 96, 20));
+        oyster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        oyster.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        oyster.setText("0");
+        add(oyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, 96, 20));
 
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setText("Oyster");
         add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, 167, 20));
 
-        jTextField20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField20.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField20.setText("0");
-        add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 350, 96, 20));
+        payPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        payPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        payPoint.setText("0");
+        add(payPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 350, 96, 20));
 
         jLabel23.setBackground(new java.awt.Color(255, 255, 255));
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText("Pay Point");
         add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 167, 20));
 
-        jTextField21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField21.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField21.setText("0");
-        add(jTextField21, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 380, 96, 20));
+        payZone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        payZone.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        payZone.setText("0");
+        add(payZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 380, 96, 20));
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -326,39 +331,103 @@ public class Till extends javax.swing.JPanel {
         });
         add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 90, 30));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 102));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 90, 30));
+        saveButton.setBackground(new java.awt.Color(0, 0, 102));
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 90, 30));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, 230, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
-        jTextField1.setText("0");
-        jTextField10.setText("0");
-        jTextField11.setText("0");
-        jTextField12.setText("0");
-        jTextField13.setText("0");
-        jTextField14.setText("0");
-        jTextField15.setText("0");
-        jTextField16.setText("0");
-        jTextField17.setText("0");
-        jTextField18.setText("0");
-        jTextField19.setText("0");
-        jTextField2.setText("0");
-        jTextField20.setText("0");
-        jTextField21.setText("0");
-        jTextField3.setText("0");
-        jTextField4.setText("0");
-        jTextField5.setText("0");
-        jTextField6.setText("0");
-        jTextField7.setText("0");
-        jTextField8.setText("0");
-        jTextField9.setText("0");
+        yesterdayTillCount.setText("0");
+        expenditure.setText("0");
+        accPay.setText("0");
+        refundGoods.setText("0");
+        refundServices.setText("0");
+        cashBack.setText("0");
+        instantPayOut.setText("0");
+        lottaryPayOut.setText("0");
+        insLottary.setText("0");
+        lottary.setText("0");
+        oyster.setText("0");
+        todayTillCount.setText("0");
+        payPoint.setText("0");
+        payZone.setText("0");
+        cash.setText("0");
+        coin.setText("0");
+        card.setText("0");
+        voucherMilk.setText("0");
+        voucherPayPoint.setText("0");
+        refundAccountCredit.setText("0");
+        purchase.setText("0");
     }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        warningLabel.setText("");
+        if (jDateChooser1.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.print((String)jComboBox1.getSelectedItem());
+            if (!db.isDateExist(shopName, (String)jComboBox1.getSelectedItem(), sdf.format(jDateChooser1.getDate()))) {
+                try {
+                    HashMap<String, Float> tillValues = new HashMap();
+                    tillValues.put("YesterdayTillCount", Float.parseFloat(yesterdayTillCount.getText()));
+                    tillValues.put("TodayTillCount", Float.parseFloat(todayTillCount.getText()));
+                    tillValues.put("Cash", Float.parseFloat(cash.getText()));
+                    tillValues.put("Coin", Float.parseFloat(coin.getText()));
+                    tillValues.put("Card", Float.parseFloat(card.getText()));
+                    tillValues.put("VoucherMilk", Float.parseFloat(voucherMilk.getText()));
+                    tillValues.put("VoucherPayPoint", Float.parseFloat(voucherPayPoint.getText()));
+                    tillValues.put("RefundGoods", Float.parseFloat(refundGoods.getText()));
+                    tillValues.put("RefundServices", Float.parseFloat(refundServices.getText()));
+                    tillValues.put("RefundAccountCredit", Float.parseFloat(refundAccountCredit.getText()));
+                    tillValues.put("Purchase", Float.parseFloat(purchase.getText()));
+                    tillValues.put("Expenditure", Float.parseFloat(expenditure.getText()));
+                    tillValues.put("AccPay", Float.parseFloat(accPay.getText()));
+                    tillValues.put("CashBack", Float.parseFloat(cashBack.getText()));
+                    tillValues.put("InstantPayOut", Float.parseFloat(instantPayOut.getText()));
+                    tillValues.put("LottaryPayOut", Float.parseFloat(lottaryPayOut.getText()));
+                    tillValues.put("InsLottary", Float.parseFloat(insLottary.getText()));
+                    tillValues.put("Lottary", Float.parseFloat(lottary.getText()));
+                    tillValues.put("Oyster", Float.parseFloat(oyster.getText()));
+                    tillValues.put("PayPoint", Float.parseFloat(payPoint.getText()));
+                    tillValues.put("PayZone", Float.parseFloat(payZone.getText()));
+
+                    if (jComboBox1.getSelectedItem().equals("From Report")) {
+                        db.insertValuesTabTable(shopName, "TillReport", sdf.format(jDateChooser1.getDate()), tillValues);
+                    } else if (jComboBox1.getSelectedItem().equals("From BackOffice")) {
+                        db.insertValuesTabTable(shopName, "TillBackOffice", sdf.format(jDateChooser1.getDate()), tillValues);
+                    }
+                    warningLabel.setText("Expenditure added successfully..");
+                    warningLabel.setForeground(Color.green);
+                    resetButtonActionPerformed(evt);
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**Values should be decimal");
+                }
+            }else{
+                warningLabel.setText("**Date already exist");
+            }
+        } else {
+            warningLabel.setText("**Date should be selected");
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField accPay;
+    private javax.swing.JTextField card;
+    private javax.swing.JTextField cash;
+    private javax.swing.JTextField cashBack;
+    private javax.swing.JTextField coin;
+    private javax.swing.JTextField expenditure;
+    private javax.swing.JTextField insLottary;
+    private javax.swing.JTextField instantPayOut;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -385,27 +454,21 @@ public class Till extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField lottary;
+    private javax.swing.JTextField lottaryPayOut;
+    private javax.swing.JTextField oyster;
+    private javax.swing.JTextField payPoint;
+    private javax.swing.JTextField payZone;
+    private javax.swing.JTextField purchase;
+    private javax.swing.JTextField refundAccountCredit;
+    private javax.swing.JTextField refundGoods;
+    private javax.swing.JTextField refundServices;
     private javax.swing.JButton resetButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JTextField todayTillCount;
+    private javax.swing.JTextField voucherMilk;
+    private javax.swing.JTextField voucherPayPoint;
+    private javax.swing.JLabel warningLabel;
+    private javax.swing.JTextField yesterdayTillCount;
     // End of variables declaration//GEN-END:variables
 }

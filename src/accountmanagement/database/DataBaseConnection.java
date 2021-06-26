@@ -70,7 +70,7 @@ public class DataBaseConnection {
         ResultSet res = state.executeQuery("select * from user where username='" + username + "'");
         return res;
     }
-    
+
     public ResultSet addStaff(String shopName, String staffName, float salaryPercentage, Boolean till, Boolean floor, Boolean cashCarry, Boolean management) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -262,18 +262,44 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
-    public Boolean isColumnExist( String shopName, String tabName, String columnName) {
+
+    public Boolean isColumnExist(String shopName, String tabName, String columnName) {
         ResultSetMetaData metadata = getTabColumns(shopName, tabName);
         Boolean isExist = false;
         try {
             for (int i = 3; i <= metadata.getColumnCount(); i++) {
                 String colName = metadata.getColumnName(i);
-                if(colName.equalsIgnoreCase(columnName)){
+                if (colName.equalsIgnoreCase(columnName)) {
                     isExist = true;
                 }
             }
             return isExist;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public Boolean isDateExist(String shopName, String tabName, String date) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            
+            if(tabName.equals("From Report")){
+                tabName="TillReport";
+            }else if(tabName.equals("From BackOffice")){
+                tabName="TillBackOffice";
+            }
+            System.out.println(tabName);
+            Boolean isExist = false;
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM " + tabName + " WHERE Date='" + date + "'");
+            if (res.next()) {
+                isExist=true;
+            }
+            return isExist;
+
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -303,7 +329,7 @@ public class DataBaseConnection {
 
     }
 
-    public ResultSet getValuesTabTable(String shopName, String tabName, String dateFrom ,String dateTo) {
+    public ResultSet getValuesTabTable(String shopName, String tabName, String dateFrom, String dateTo) {
 
         try {
             if (con == null || !connectedShop.equals(shopName)) {
@@ -356,7 +382,7 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Bank", "P_BestWay");
         alterTabTable(shopName, "Bank", "PB_BorrowMoney");
     }
-    
+
 //    public void createDefaultPetty(String shopName) {
 //        if (con == null || !connectedShop.equals(shopName)) {
 //            getConnection(shopName);
@@ -388,13 +414,31 @@ public class DataBaseConnection {
 //        alterTabTable(shopName, "Petty", "");
 //        
 //    }
-    
-    public void createDefaultTill(String shopName) {
+    public void createDefaultTill(String shopName, String tableType) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        alterTabTable(shopName, "TillReport", "Expenditure");
-        alterTabTable(shopName, "TillReport", "Purchase");
+        alterTabTable(shopName, tableType, "YesterdayTillCount");
+        alterTabTable(shopName, tableType, "TodayTillCount");
+        alterTabTable(shopName, tableType, "Cash");
+        alterTabTable(shopName, tableType, "Coin");
+        alterTabTable(shopName, tableType, "Card");
+        alterTabTable(shopName, tableType, "VoucherMilk");
+        alterTabTable(shopName, tableType, "VoucherPayPoint");
+        alterTabTable(shopName, tableType, "RefundGoods");
+        alterTabTable(shopName, tableType, "RefundServices");
+        alterTabTable(shopName, tableType, "RefundAccountCredit");
+        alterTabTable(shopName, tableType, "Purchase");
+        alterTabTable(shopName, tableType, "Expenditure");
+        alterTabTable(shopName, tableType, "AccPay");
+        alterTabTable(shopName, tableType, "CashBack");
+        alterTabTable(shopName, tableType, "InstantPayOut");
+        alterTabTable(shopName, tableType, "LottaryPayOut");
+        alterTabTable(shopName, tableType, "InsLottary");
+        alterTabTable(shopName, tableType, "Lottary");
+        alterTabTable(shopName, tableType, "Oyster");
+        alterTabTable(shopName, tableType, "PayPoint");
+        alterTabTable(shopName, tableType, "PayZone");
     }
 
     public void createShop(String shopName) throws ClassNotFoundException, SQLException {
@@ -424,7 +468,9 @@ public class DataBaseConnection {
         createTabTable(shopName, "Expenditure");
         createTabTable(shopName, "Purcharse");
         createTabTable(shopName, "TillReport");
+        createDefaultTill(shopName, "TillReport");
         createTabTable(shopName, "TillBackOffice");
+        createDefaultTill(shopName, "TillBackOffice");
         createTabTable(shopName, "Bank");
         createDefaultBank(shopName);
         createTabTable(shopName, "Petty");
@@ -460,8 +506,8 @@ public class DataBaseConnection {
             while (res.next()) {
                 role = res.getString("role");
             }
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
         return role;
     }
