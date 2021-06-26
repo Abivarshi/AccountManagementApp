@@ -6,6 +6,9 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 /**
  *
@@ -15,6 +18,7 @@ public class Sheet2 extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+
     /**
      * Creates new form Till
      */
@@ -34,20 +38,21 @@ public class Sheet2 extends javax.swing.JPanel {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        cPayPoint = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        cLottary = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        sCPayPoint = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        sCLottary = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField22 = new javax.swing.JTextField();
+        resetButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        cOyster = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,20 +65,20 @@ public class Sheet2 extends javax.swing.JPanel {
         jLabel2.setText("Date");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 38, 167, 20));
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField6.setText("0");
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 96, -1));
+        cPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cPayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        cPayPoint.setText("0");
+        add(cPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 96, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Commision");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 167, 20));
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField7.setText("0");
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 96, -1));
+        cLottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cLottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        cLottary.setText("0");
+        add(cLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 96, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -85,68 +90,104 @@ public class Sheet2 extends javax.swing.JPanel {
         jLabel13.setText("Pay Point");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 130, 20));
 
-        jTextField12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField12.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField12.setText("0");
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 96, -1));
+        sCPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        sCPayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        sCPayPoint.setText("0");
+        add(sCPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 96, -1));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel14.setText("Service Charge");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 167, 20));
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 167, 20));
 
-        jTextField13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField13.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField13.setText("0");
-        add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 96, -1));
+        sCLottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        sCLottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        sCLottary.setText("0");
+        add(sCLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 96, -1));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Lottary");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 120, 20));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 120, 20));
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Pay Point");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 130, 20));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 130, 20));
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setText("Reset");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        resetButton.setBackground(new java.awt.Color(255, 102, 102));
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 80, -1));
+        add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 80, -1));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 102));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 80, -1));
+        saveButton.setBackground(new java.awt.Color(0, 0, 102));
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 80, -1));
 
-        jTextField22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField22.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField22.setText("0");
-        add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 96, -1));
+        cOyster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cOyster.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        cOyster.setText("0");
+        add(cOyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 96, -1));
 
         jLabel25.setBackground(new java.awt.Color(255, 255, 255));
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel25.setText("Oyster");
         add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 120, 20));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 230, 20));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextField12.setText("0");
-        jTextField13.setText("0");
-        jTextField22.setText("0");
-        jTextField6.setText("0");
-        jTextField7.setText("0");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        sCPayPoint.setText("0");
+        sCLottary.setText("0");
+        cOyster.setText("0");
+        cPayPoint.setText("0");
+        cLottary.setText("0");
+    }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        warningLabel.setText("");
+        if (jDateChooser1.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (!db.isDateExist(shopName, "Sheet2" , sdf.format(jDateChooser1.getDate()))) {
+                try {
+                    HashMap<String, Float> sheet2Values = new HashMap();
+                    sheet2Values.put("CommisionPayPoint", Float.parseFloat(cPayPoint.getText()));
+                    sheet2Values.put("CommisionLottary", Float.parseFloat(cLottary.getText()));
+                    sheet2Values.put("CommisionOyster", Float.parseFloat(cOyster.getText()));
+                    sheet2Values.put("SC_PayPoint", Float.parseFloat(sCPayPoint.getText()));
+                    sheet2Values.put("SC_Lottary", Float.parseFloat(sCLottary.getText()));
+                    db.insertValuesTabTable(shopName, "Sheet2", sdf.format(jDateChooser1.getDate()), sheet2Values);
+                    warningLabel.setText("Expenditure added successfully..");
+                    warningLabel.setForeground(Color.green);
+                    resetButtonActionPerformed(evt);
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**Values should be decimal");
+                }
+            } else {
+                warningLabel.setText("**Date already exist");
+            }
+        } else {
+            warningLabel.setText("**Date should be selected");
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField cLottary;
+    private javax.swing.JTextField cOyster;
+    private javax.swing.JTextField cPayPoint;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -156,10 +197,10 @@ public class Sheet2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton resetButton;
+    private javax.swing.JTextField sCLottary;
+    private javax.swing.JTextField sCPayPoint;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

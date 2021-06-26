@@ -7,6 +7,16 @@ package accountmanagement.jframe.report;
 
 import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,17 +43,20 @@ public class Sheet2Report extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserFrom = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooserTo = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 161, -1));
+        jDateChooserFrom.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooserFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -53,23 +66,115 @@ public class Sheet2Report extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
-        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 161, -1));
+        jDateChooserTo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooserTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 161, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setText("To Date");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Date", "Commision PayPoint ", "Commision Lottary", "Commision Oyster", "Service Charge PayPoint", "Service Caharge Lottary"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 760, 440));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 248, 19));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
+        tbModel.setRowCount(0);
+        Date currentDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (jDateChooserFrom.getDate() == null) {
+            jDateChooserFrom.setDate(currentDate);
+        }
+        if (jDateChooserTo.getDate() == null) {
+            jDateChooserTo.setDate(currentDate);
+        }
+        String fromDate = sdf.format(jDateChooserFrom.getDate());
+        String toDate = sdf.format(jDateChooserTo.getDate());
+        if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
+            ResultSet res = db.getValuesTabTable(shopName, "Sheet2", sdf.format(jDateChooserFrom.getDate()), sdf.format(jDateChooserTo.getDate()));
+            ResultSetMetaData metadata = db.getTabColumns(shopName, "Sheet2");
+            try {
+                while (res.next()) {
+                    String dateCol = metadata.getColumnName(2);
+                    String date = res.getString(dateCol);
+                    List<String> values = new ArrayList();
+                    values.add(date);
+                    float subTotalExpenditure = 0;
+                    float subTotalPurcharse = 0;
+                    float balanceInBank = 0;
+                    for (int i = 3; i <= metadata.getColumnCount(); i++) {
+                        String columnName = metadata.getColumnName(i);
+                        Float value = res.getFloat(columnName);
+                        values.add(value.toString());
+                       
+                    }
+                    
+                    tbModel.addRow(values.toArray());
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    
+            } else {
+            warningLabel.setText("From Date should be earlier date");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserFrom;
+    private com.toedter.calendar.JDateChooser jDateChooserTo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

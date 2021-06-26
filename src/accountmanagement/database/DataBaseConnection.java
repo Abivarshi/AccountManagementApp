@@ -6,7 +6,6 @@
 package accountmanagement.database;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -444,6 +443,17 @@ public class DataBaseConnection {
         alterTabTable(shopName, tableType, "PayZone");
     }
 
+    public void createDefaultSheet2(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        alterTabTable(shopName, "Sheet2", "CommisionPayPoint");
+        alterTabTable(shopName, "Sheet2", "CommisionLottary");
+        alterTabTable(shopName, "Sheet2", "CommisionOyster");
+        alterTabTable(shopName, "Sheet2", "SC_PayPoint");
+        alterTabTable(shopName, "Sheet2", "SC_Lottary");
+    }
+    
     public void createShop(String shopName) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         // database path, if it's new database, it will be created in the project folder
@@ -476,6 +486,8 @@ public class DataBaseConnection {
         createDefaultTill(shopName, "TillBackOffice");
         createTabTable(shopName, "Bank");
         createDefaultBank(shopName);
+        createTabTable(shopName, "Sheet2");
+        createDefaultSheet2(shopName);
         createTabTable(shopName, "Petty");
     }
 

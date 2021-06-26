@@ -373,7 +373,6 @@ public class Till extends javax.swing.JPanel {
         warningLabel.setText("");
         if (jDateChooser1.getDate() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            System.out.print((String)jComboBox1.getSelectedItem());
             if (!db.isDateExist(shopName, (String)jComboBox1.getSelectedItem(), sdf.format(jDateChooser1.getDate()))) {
                 try {
                     HashMap<String, Float> tillValues = new HashMap();
