@@ -181,33 +181,16 @@ public class DataBaseConnection {
         }
     }
 
-    public void insertStaffTime(String shopName, String date, String staffName, String staffType, Float start, Float end) throws ClassNotFoundException, SQLException {
+    public void insertStaffTime(String shopName, String date, String staffName, String staffType, Float start, Float end, Float hours) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        System.out.println("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime) VALUES ("
-                + "'" + date + "', '" + staffName + ", '" + staffType + "', " + start + ", " + end + ");");
-        PreparedStatement prep = con.prepareStatement("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime) VALUES ("
-                + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end + ");");
+
+        PreparedStatement prep = con.prepareStatement("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime, Hours) VALUES ("
+                + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end +  ", " + hours + ");");
 
         prep.execute();
     }
-//
-//    public ResultSet getStaffTime(String shopName, String dateFrom, String dateTo) {
-//
-//        try {
-//            if (con == null || !connectedShop.equals(shopName)) {
-//                getConnection(shopName);
-//            }
-//
-//            Statement state = con.createStatement();
-//            ResultSet res = state.executeQuery("SELECT * FROM StaffTime WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'");
-//            return res;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-//            return null;
-//        }
-//    }
 
     public void createTabTable(String shopName, String tabName) {
         if (con == null || !connectedShop.equals(shopName)) {
@@ -241,6 +224,22 @@ public class DataBaseConnection {
             Statement state = con.createStatement();
             state.executeUpdate("ALTER TABLE " + tabName + " ADD " + item + " FLOAT NULL;");
             System.out.println("Alter the " + tabName + " table..." + item);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void dropTabColumnTable(String shopName, String tabName, String item) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        try {
+            Statement state = con.createStatement();
+            state.executeUpdate("ALTER TABLE " + tabName + " DROP " + item + ";");
+            System.out.println("Alter the " + tabName + " table to remove" + item);
 
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
