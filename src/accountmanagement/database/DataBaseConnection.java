@@ -177,6 +177,7 @@ public class DataBaseConnection {
                     + "Type VARCHAR(60),"
                     + "StartTime FLOAT,"
                     + "EndTime FLOAT,"
+                    + "Hours FLOAT,"
                     + "primary key (id));");
         }
     }

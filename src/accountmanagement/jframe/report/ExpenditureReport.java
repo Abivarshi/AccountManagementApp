@@ -6,20 +6,26 @@
 package accountmanagement.jframe.report;
 
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.util.LineWrapCellRenderer;
-import java.awt.Color;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.Border;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -54,8 +60,9 @@ public class ExpenditureReport extends javax.swing.JPanel {
         searchButton = new javax.swing.JButton();
         jDateChooserTo = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        warningLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,87 +93,76 @@ public class ExpenditureReport extends javax.swing.JPanel {
         jLabel3.setText("To Date");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
 
+        warningLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 230, 10));
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(960, 800));
+        jPanel1.setLayout(new java.awt.CardLayout());
+        jScrollPane1.setViewportView(jPanel1);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
-        );
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 530));
-
-        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 240, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if (jDateChooserFrom.getDate() == null) {
-            jDateChooserFrom.setDate(currentDate);
-        }
-        if (jDateChooserTo.getDate() == null) {
-            jDateChooserTo.setDate(currentDate);
-        }
-        String fromDate = sdf.format(jDateChooserFrom.getDate());
-        String toDate = sdf.format(jDateChooserTo.getDate());
+        //        if (jDateChooserFrom.getDate() == null) {
+            //            jDateChooserFrom.setDate(currentDate);
+            //        }
+        //        if (jDateChooserTo.getDate() == null) {
+            //            jDateChooserTo.setDate(currentDate);
+            //        }
+        //        String fromDate = sdf.format(jDateChooserFrom.getDate());
+        //        String toDate = sdf.format(jDateChooserTo.getDate());
+        String fromDate = "2021-06-01";
+        String toDate = "2021-07-30";
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
-            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooserFrom.getDate()), sdf.format(jDateChooserTo.getDate()));
+            //            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooserFrom.getDate()), sdf.format(jDateChooserTo.getDate()));
+            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
+
             ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
             try {
-                List<String[]> data = new ArrayList();
-                List<String> column = new ArrayList();
-                column.add("Date");
-                boolean firstEntry = true;
+                List<Map<String, String>> data = new ArrayList();
                 while (res.next()) {
-                    String dateCol = metadata.getColumnName(2);
-                    String date = res.getString(dateCol);
-                    List<String> values = new ArrayList();
-                    values.add(date);
+                    Map<String, String> dataValue = new HashMap();
+                    dataValue.put("Date", res.getString(metadata.getColumnName(2)));
                     float expenditure = 10;
                     float totalExpenditure = 0;
                     for (int i = 3; i <= metadata.getColumnCount(); i++) {
                         String columnName = metadata.getColumnName(i);
                         Float value = res.getFloat(columnName);
-                        values.add(value.toString());
+                        dataValue.put(columnName, value.toString());
                         totalExpenditure = totalExpenditure + value;
-                        if (firstEntry) {
-                            column.add(columnName);
-                        }
                     }
-                    values.add(String.valueOf(totalExpenditure));
-                    values.add(String.valueOf(expenditure));
-                    values.add(String.valueOf(expenditure - totalExpenditure));
-                    data.add(values.toArray(new String[0]));
-
-                    firstEntry = false;
+                    dataValue.put("TotalExpenditure", String.valueOf(totalExpenditure));
+                    dataValue.put("Expenditure", String.valueOf(expenditure));
+                    dataValue.put("Different", String.valueOf(expenditure - totalExpenditure));
+                    System.out.println(dataValue.toString());
+                    data.add(dataValue);
                 }
-                column.add("TotalExpenditure");
-                column.add("Expenditure");
-                column.add("Different");
 
-                JTable jt = new JTable(data.toArray(new String[0][0]), column.toArray());
-                jt.setBounds(30, 40, 1500, 300);
-                jt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                jt.setPreferredSize(new java.awt.Dimension(800, 64));
-                jt.setDefaultRenderer(String.class, new LineWrapCellRenderer());
+                JRDataSource dataSource = new JRBeanCollectionDataSource(data);
+                String sourceName = new File("").getAbsolutePath()+ "/src/accountmanagement/jframe/report/ExpenditureReport.jrxml";
 
-                JScrollPane sp = new JScrollPane(jt);
-                sp.setBounds(10, 20, 775, 500);
-                sp.setBackground(Color.white);
-                jPanel1.add(sp);
+                JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+
+                JRViewer viewer =new JRViewer(jasperPrint);
+                viewer.setBounds(20, 20, 800, 1200);
+                jPanel1.add(viewer);
 
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JRException ex) {
+                Logger.getLogger(ExpenditureReport.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            warningLabel.setText("From Date should be earlier date");
+            warningLabel1.setText("From Date should be earlier date");
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -177,7 +173,8 @@ public class ExpenditureReport extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton searchButton;
-    private javax.swing.JLabel warningLabel;
+    private javax.swing.JLabel warningLabel1;
     // End of variables declaration//GEN-END:variables
 }

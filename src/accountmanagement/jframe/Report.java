@@ -6,10 +6,6 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.administrator.AdminExpenditure;
-import accountmanagement.jframe.administrator.AdminPurcharse;
-import accountmanagement.jframe.administrator.Staff;
-import accountmanagement.jframe.administrator.User;
 import accountmanagement.jframe.report.BankReport;
 import accountmanagement.jframe.report.DifferenceReport;
 import accountmanagement.jframe.report.ExpenditureReport;
@@ -21,15 +17,6 @@ import accountmanagement.jframe.report.StaffReport;
 import accountmanagement.jframe.report.TillReport;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 
 /**
  *
@@ -70,6 +57,7 @@ public class Report extends javax.swing.JPanel {
         bankButton = new javax.swing.JButton();
         staffButton = new javax.swing.JButton();
         salesButton = new javax.swing.JButton();
+        finalButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -80,7 +68,7 @@ public class Report extends javax.swing.JPanel {
 
         sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
         sheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        sheet2Button.setText("Sheet2");
+        sheet2Button.setText("Summary/DP Till");
         sheet2Button.setBorder(null);
         sheet2Button.setBorderPainted(false);
         sheet2Button.setContentAreaFilled(false);
@@ -99,7 +87,7 @@ public class Report extends javax.swing.JPanel {
                 sheet2ButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(sheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 67, 130, 33));
+        jPanel2.add(sheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 33));
 
         tillButton.setBackground(new java.awt.Color(0, 0, 51));
         tillButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -122,7 +110,7 @@ public class Report extends javax.swing.JPanel {
                 tillButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(tillButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 130, 31));
+        jPanel2.add(tillButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 130, 31));
 
         expenditureButton.setBackground(new java.awt.Color(0, 0, 51));
         expenditureButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -145,7 +133,7 @@ public class Report extends javax.swing.JPanel {
                 expenditureButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(expenditureButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 162, 130, 33));
+        jPanel2.add(expenditureButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 130, 33));
 
         purcharseButton.setBackground(new java.awt.Color(0, 0, 51));
         purcharseButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -168,7 +156,7 @@ public class Report extends javax.swing.JPanel {
                 purcharseButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(purcharseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 111, 130, 33));
+        jPanel2.add(purcharseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, 33));
 
         differenceButton.setBackground(new java.awt.Color(0, 0, 51));
         differenceButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -191,7 +179,7 @@ public class Report extends javax.swing.JPanel {
                 differenceButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(differenceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 406, 130, 33));
+        jPanel2.add(differenceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 130, 33));
 
         pettyButton.setBackground(new java.awt.Color(0, 0, 51));
         pettyButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -214,7 +202,7 @@ public class Report extends javax.swing.JPanel {
                 pettyButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(pettyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 211, 130, 33));
+        jPanel2.add(pettyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 130, 33));
 
         bankButton.setBackground(new java.awt.Color(0, 0, 51));
         bankButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -237,7 +225,7 @@ public class Report extends javax.swing.JPanel {
                 bankButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(bankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 256, 130, 33));
+        jPanel2.add(bankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 130, 33));
 
         staffButton.setBackground(new java.awt.Color(0, 0, 51));
         staffButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -260,11 +248,11 @@ public class Report extends javax.swing.JPanel {
                 staffButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(staffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 307, 130, 33));
+        jPanel2.add(staffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 130, 33));
 
         salesButton.setBackground(new java.awt.Color(0, 0, 51));
         salesButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        salesButton.setText("Sales");
+        salesButton.setText("Final");
         salesButton.setBorder(null);
         salesButton.setBorderPainted(false);
         salesButton.setContentAreaFilled(false);
@@ -283,7 +271,30 @@ public class Report extends javax.swing.JPanel {
                 salesButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(salesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 355, 130, 33));
+        jPanel2.add(salesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 130, 33));
+
+        finalButton.setBackground(new java.awt.Color(0, 0, 51));
+        finalButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        finalButton.setText("Sales");
+        finalButton.setBorder(null);
+        finalButton.setBorderPainted(false);
+        finalButton.setContentAreaFilled(false);
+        finalButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        finalButton.setFocusPainted(false);
+        finalButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                finalButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                finalButtonMouseHoverOut(evt);
+            }
+        });
+        finalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(finalButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 130, 33));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -292,7 +303,7 @@ public class Report extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -428,10 +439,23 @@ public class Report extends javax.swing.JPanel {
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButtonActionPerformed
 
+    private void finalButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButtonMouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_finalButtonMouseHover
+
+    private void finalButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButtonMouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_finalButtonMouseHoverOut
+
+    private void finalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_finalButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bankButton;
     private javax.swing.JButton differenceButton;
     private javax.swing.JButton expenditureButton;
+    private javax.swing.JButton finalButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

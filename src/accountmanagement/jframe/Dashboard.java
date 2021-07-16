@@ -293,7 +293,7 @@ public class Dashboard extends javax.swing.JFrame {
         sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
         sheet2Button.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         sheet2Button.setForeground(new java.awt.Color(255, 255, 255));
-        sheet2Button.setText("Sheet 2");
+        sheet2Button.setText("Commision & Service Charge");
         sheet2Button.setBorder(null);
         sheet2Button.setBorderPainted(false);
         sheet2Button.setContentAreaFilled(false);
@@ -477,7 +477,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         rightPanel.setBackground(new java.awt.Color(255, 255, 255));
         rightPanel.setMaximumSize(new java.awt.Dimension(3000, 9000));
-        rightPanel.setPreferredSize(new java.awt.Dimension(1500, 960));
+        rightPanel.setPreferredSize(new java.awt.Dimension(1000, 860));
         rightPanel.setLayout(new java.awt.CardLayout());
         jScrollPane2.setViewportView(rightPanel);
 
@@ -504,7 +504,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2)))
         );
 
         pack();
