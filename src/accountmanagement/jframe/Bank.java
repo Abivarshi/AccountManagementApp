@@ -130,7 +130,7 @@ public class Bank extends javax.swing.JPanel {
                 }
                 System.out.println(bankValues.toString());
                 db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
-                warningLabel.setText("Expenditure added successfully..");
+                warningLabel.setText("Bank added successfully..");
                 warningLabel.setForeground(Color.green);
                 resetText();
             } catch (java.lang.NumberFormatException e) {

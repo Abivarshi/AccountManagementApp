@@ -175,7 +175,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    public void runReport(List<String> columnHeaders, List<List<String>> rows) throws JRException, FileNotFoundException {
+    private void runReport(List<String> columnHeaders, List<List<String>> rows) throws JRException, FileNotFoundException {
 
         InputStream is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/ExpenditureReport.jrxml");
         JasperDesign jasperReportDesign = JRXmlLoader.load(is);

@@ -445,37 +445,43 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Bank", "PB_BorrowMoney");
     }
 
-//    public void createDefaultPetty(String shopName) {
-//        if (con == null || !connectedShop.equals(shopName)) {
-//            getConnection(shopName);
-//        }
-//        alterTabTable(shopName, "Petty", "Cash");
-//        alterTabTable(shopName, "Petty", "Coin");
-//        alterTabTable(shopName, "Petty", "BE_IOU_Paid");
-//        alterTabTable(shopName, "Petty", "CC_Ambiant");
-//        alterTabTable(shopName, "Petty", "CC_Chilled");
-//        alterTabTable(shopName, "Petty", "CC_Frozen");
-//        alterTabTable(shopName, "Petty", "CB_Payback");
-//        alterTabTable(shopName, "Petty", "CCard_Barrow");
-//        alterTabTable(shopName, "Petty", "CCB_Payback");
-//        alterTabTable(shopName, "Petty", "IOU_Payback");
-//        alterTabTable(shopName, "Petty", "P_CostCutter");
-//        alterTabTable(shopName, "Petty", "P_Dhamecha");
-//        alterTabTable(shopName, "Petty", "P_BeerShop");
-//        alterTabTable(shopName, "Petty", "P_Vegetable");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        alterTabTable(shopName, "Petty", "");
-//        
-//    }
+    public void createDefaultPetty(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        alterTabTable(shopName, "Petty", "C_Cash");
+        alterTabTable(shopName, "Petty", "C_Coin");
+        alterTabTable(shopName, "Petty", "CC_BE_IOU_Paid");
+        alterTabTable(shopName, "Petty", "CC_BE_IOU");
+        alterTabTable(shopName, "Petty", "CC_Ambiant");
+        alterTabTable(shopName, "Petty", "CC_Chilled");
+        alterTabTable(shopName, "Petty", "CC_Frozen");
+        alterTabTable(shopName, "Petty", "CB_Borrow");
+        alterTabTable(shopName, "Petty", "CB_Payback");
+        alterTabTable(shopName, "Petty", "CCard_Barrow");
+        alterTabTable(shopName, "Petty", "CCard_Payback");
+        alterTabTable(shopName, "Petty", "IOU_Borrow");
+        alterTabTable(shopName, "Petty", "IOU_Payback");
+        alterTabTable(shopName, "Petty", "P_CostCutter");
+        alterTabTable(shopName, "Petty", "P_Dhamecha");
+        alterTabTable(shopName, "Petty", "P_BeerShop");
+        alterTabTable(shopName, "Petty", "P_Vegetable");
+        alterTabTable(shopName, "Petty", "P_Wannis");
+        alterTabTable(shopName, "Petty", "P_Bookers");
+        alterTabTable(shopName, "Petty", "P_BestWay");
+        alterTabTable(shopName, "Petty", "P_Beer");
+        alterTabTable(shopName, "Petty", "P_DPR");
+        alterTabTable(shopName, "Petty", "E_CapitalGains");
+        alterTabTable(shopName, "Petty", "E_Diesel");
+        alterTabTable(shopName, "Petty", "E_Shelf");
+        alterTabTable(shopName, "Petty", "B_NATWEST");
+        alterTabTable(shopName, "Petty", "B_CashPlus");
+        alterTabTable(shopName, "Petty", "SubPurchase");
+        alterTabTable(shopName, "Petty", "SubExpnditure");
+        alterTabTable(shopName, "Petty", "Balance");
+        
+    }
+    
     public void createDefaultTill(String shopName, String tableType) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -595,7 +601,36 @@ public class DataBaseConnection {
             getConnection(shopName);
         }
         
-        insertDetailTable(shopName, "", "", "", "PettyDetail");
+        insertDetailTable(shopName, "Cash", "C_Cash", "Common", "PettyDetail");
+        insertDetailTable(shopName, "Coin", "C_Coin", "Common", "PettyDetail");
+        insertDetailTable(shopName, "BE IOU Paid", "CC_BE_IOU_Paid", "Cost Cutter", "PettyDetail");
+        insertDetailTable(shopName, "BE IOU", "CC_BE_IOU", "Cost Cutter", "PettyDetail");
+        insertDetailTable(shopName, "Ambiant", "CC_Ambiant", "Cost Cutter", "PettyDetail");
+        insertDetailTable(shopName, "Chilled", "CC_Chilled", "Cost Cutter", "PettyDetail");
+        insertDetailTable(shopName, "Frozen", "CC_Frozen", "Cost Cutter", "PettyDetail");
+        insertDetailTable(shopName, "Borrow", "CB_Borrow", "Cash Borrow", "PettyDetail");
+        insertDetailTable(shopName, "Pay Back", "CB_Payback", "Cash Borrow", "PettyDetail");
+        insertDetailTable(shopName, "Borrow", "CCard_Barrow", "C/Card", "PettyDetail");
+        insertDetailTable(shopName, "Pay Back", "CCard_Payback", "C/Card", "PettyDetail");
+        insertDetailTable(shopName, "IOU", "IOU_Borrow", "IOU", "PettyDetail");
+        insertDetailTable(shopName, "Pay Back", "IOU_Payback", "IOU", "PettyDetail");
+        insertDetailTable(shopName, "Cost Cutter", "P_CostCutter", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "Dhamecha", "P_Dhamecha", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "Beer Shop", "P_BeerShop", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "Vegetable", "P_Vegetable", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "Wannis", "P_Wannis", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "Bookers", "P_Bookers", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "BestWay", "P_BestWay", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "Beer", "P_Beer", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "DPR", "P_DPR", "Purchase", "PettyDetail");
+        insertDetailTable(shopName, "Capital Gains", "E_CapitalGains", "Expenditure", "PettyDetail");
+        insertDetailTable(shopName, "Diesel", "E_Diesel", "Expenditure", "PettyDetail");
+        insertDetailTable(shopName, "Shelf", "E_Shelf", "Expenditure", "PettyDetail");
+        insertDetailTable(shopName, "NATWEST", "B_NATWEST", "Banking", "PettyDetail");
+        insertDetailTable(shopName, "Cash Plus", "B_CashPlus", "Banking", "PettyDetail");
+        insertDetailTable(shopName, "SubTotal Purchase", "SubPurchase", "Summary", "PettyDetail");
+        insertDetailTable(shopName, "SubTotal Expenditure", "SubExpnditure", "Summary", "PettyDetail");
+        insertDetailTable(shopName, "Petty Balance", "Balance", "Summary", "PettyDetail");
     }
     
     public void insertDefaultSheet2Detail(String shopName) {
@@ -644,8 +679,8 @@ public class DataBaseConnection {
         createTabTable(shopName, "Petty");
         createDetailTable(shopName, "BankDetail");
         insertDefaultBankDetail(shopName);
-//        createDetailTable(shopName, "PettyDetail");
-//        insertDefaultPettyDetail(shopName);
+        createDetailTable(shopName, "PettyDetail");
+        insertDefaultPettyDetail(shopName);
         createDetailTable(shopName, "Sheet2Detail");
         insertDefaultSheet2Detail(shopName);
     }
