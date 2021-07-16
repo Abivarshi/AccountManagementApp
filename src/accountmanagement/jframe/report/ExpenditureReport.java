@@ -7,6 +7,9 @@ package accountmanagement.jframe.report;
 
 import accountmanagement.database.DataBaseConnection;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -21,10 +24,13 @@ import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.swing.JRViewer;
 
 /**
@@ -100,7 +106,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(960, 800));
+        jPanel1.setPreferredSize(getSize());
         jPanel1.setLayout(new java.awt.CardLayout());
         jScrollPane1.setViewportView(jPanel1);
 
@@ -112,53 +118,64 @@ public class ExpenditureReport extends javax.swing.JPanel {
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         //        if (jDateChooserFrom.getDate() == null) {
-            //            jDateChooserFrom.setDate(currentDate);
-            //        }
+        //            jDateChooserFrom.setDate(currentDate);
+        //        }
         //        if (jDateChooserTo.getDate() == null) {
-            //            jDateChooserTo.setDate(currentDate);
-            //        }
+        //            jDateChooserTo.setDate(currentDate);
+        //        }
         //        String fromDate = sdf.format(jDateChooserFrom.getDate());
         //        String toDate = sdf.format(jDateChooserTo.getDate());
         String fromDate = "2021-06-01";
         String toDate = "2021-07-30";
+
+        List<String> column = new ArrayList();
+        column.add("Date");
+        boolean firstEntry = true;
+        List<List<String>> valueRow = new ArrayList();
+
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             //            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooserFrom.getDate()), sdf.format(jDateChooserTo.getDate()));
             ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
 
             ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
             try {
-                List<Map<String, String>> data = new ArrayList();
                 while (res.next()) {
-                    Map<String, String> dataValue = new HashMap();
-                    dataValue.put("Date", res.getString(metadata.getColumnName(2)));
+                    String dateCol = metadata.getColumnName(2);
+                    String date = res.getString(dateCol);
+                    List<String> values = new ArrayList();
+                    values.add(date);
+
                     float expenditure = 10;
                     float totalExpenditure = 0;
                     for (int i = 3; i <= metadata.getColumnCount(); i++) {
                         String columnName = metadata.getColumnName(i);
                         Float value = res.getFloat(columnName);
-                        dataValue.put(columnName, value.toString());
+                        values.add(value.toString());
                         totalExpenditure = totalExpenditure + value;
+                        if (firstEntry) {
+                            column.add(columnName);
+                        }
                     }
-                    dataValue.put("TotalExpenditure", String.valueOf(totalExpenditure));
-                    dataValue.put("Expenditure", String.valueOf(expenditure));
-                    dataValue.put("Different", String.valueOf(expenditure - totalExpenditure));
-                    System.out.println(dataValue.toString());
-                    data.add(dataValue);
+                    if (firstEntry) {
+                        column.add("TotalExpenditure");
+                        column.add("Expenditure");
+                        column.add("Different");
+
+                        valueRow.add(column);
+                        firstEntry = false;
+                    }
+                    values.add(String.valueOf(totalExpenditure));
+                    values.add(String.valueOf(expenditure));
+                    values.add(String.valueOf(expenditure - totalExpenditure));
+                    System.out.println(values.toString());
+                    valueRow.add(values);
                 }
 
-                JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                String sourceName = new File("").getAbsolutePath()+ "/src/accountmanagement/jframe/report/ExpenditureReport.jrxml";
-
-                JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-
-                JRViewer viewer =new JRViewer(jasperPrint);
-                viewer.setBounds(20, 20, 800, 1200);
-                jPanel1.add(viewer);
+                runReport(column, valueRow);
 
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JRException ex) {
+            } catch (JRException | FileNotFoundException ex) {
                 Logger.getLogger(ExpenditureReport.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
@@ -166,6 +183,21 @@ public class ExpenditureReport extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    public void runReport(List<String> columnHeaders, List<List<String>> rows) throws JRException, FileNotFoundException {
+
+        InputStream is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/ExpenditureReport.jrxml");
+        JasperDesign jasperReportDesign = JRXmlLoader.load(is);
+
+        DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
+        reportBuilder.addDynamicColumns();
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperReportDesign);
+        DynamicColumnDataSource dataSource = new DynamicColumnDataSource(columnHeaders, rows);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+
+        JRViewer viewer = new JRViewer(jasperPrint);
+        jPanel1.add(viewer);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooserFrom;
