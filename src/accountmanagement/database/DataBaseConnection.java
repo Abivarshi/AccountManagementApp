@@ -398,7 +398,9 @@ public class DataBaseConnection {
             ResultSet res = state.executeQuery("SELECT * FROM " + tabName + 
                     " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'" +
                     " ORDER BY Date ASC");
+            
             return res;
+            
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -518,9 +520,9 @@ public class DataBaseConnection {
         alterTabTable(shopName, tableType, "BO_CashBack");
         alterTabTable(shopName, tableType, "BO_VoucherMilk");
         alterTabTable(shopName, tableType, "BO_VoucherPayPoint");
-
-        alterTabTable(shopName, tableType, "BO_InsLottary");
-        alterTabTable(shopName, tableType, "BO_Lottary");
+        
+        alterTabTable(shopName, tableType, "SO_InsLottary");
+        alterTabTable(shopName, tableType, "SO_Lottary");
         alterTabTable(shopName, tableType, "SO_Oyster");
         alterTabTable(shopName, tableType, "SO_PayPoint");
         alterTabTable(shopName, tableType, "SO_PayZone");
