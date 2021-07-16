@@ -7,8 +7,18 @@ package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
 import java.awt.Color;
+import java.awt.Font;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,6 +28,7 @@ public class Bank extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+    private static final HashMap<List<String>, JTextField> listOfTextFields = new HashMap<>();
 
     /**
      * Creates new form Till
@@ -27,6 +38,7 @@ public class Bank extends javax.swing.JPanel {
     public Bank(String shopName) {
         this.shopName = shopName;
         initComponents();
+        populateBank();
     }
 
     /**
@@ -40,644 +52,176 @@ public class Bank extends javax.swing.JPanel {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        FB_NETWEST = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        FB_CashPlus = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        MI_PayZone = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        MI_NoteMachine = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        resetButton = new javax.swing.JButton();
-        saveBankButton = new javax.swing.JButton();
-        FB_ElevenCard = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        FB_MilkVouture = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
-        SMO_PayPoint = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
-        SMO_PayZone = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        SMO_Oyster = new javax.swing.JTextField();
-        jLabel30 = new javax.swing.JLabel();
-        SMO_Camlot = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
-        EM_CapitalGains = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
-        EM_BT = new javax.swing.JTextField();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        EM_Nest = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
-        EM_Rent = new javax.swing.JTextField();
-        jLabel36 = new javax.swing.JLabel();
-        EM_Water = new javax.swing.JTextField();
-        EM_Alarm = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        EM_Electric = new javax.swing.JTextField();
-        jLabel39 = new javax.swing.JLabel();
-        EM_ToiletBlock = new javax.swing.JTextField();
-        jLabel40 = new javax.swing.JLabel();
-        EM_SalarayMike = new javax.swing.JTextField();
-        jLabel41 = new javax.swing.JLabel();
-        EM_SalarySathees = new javax.swing.JTextField();
-        jLabel42 = new javax.swing.JLabel();
-        EY_ShopInsurance = new javax.swing.JTextField();
-        jLabel43 = new javax.swing.JLabel();
-        EY_BIFFA = new javax.swing.JTextField();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        EY_Buil = new javax.swing.JTextField();
-        jLabel46 = new javax.swing.JLabel();
-        EY_OffFee = new javax.swing.JTextField();
-        jLabel47 = new javax.swing.JLabel();
-        EB_BankCharge = new javax.swing.JTextField();
-        EB_PayZoneRental = new javax.swing.JTextField();
-        jLabel48 = new javax.swing.JLabel();
-        EB_CardMachine = new javax.swing.JTextField();
-        EB_ElevenCharge = new javax.swing.JTextField();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        P_CostCutter = new javax.swing.JTextField();
-        jLabel53 = new javax.swing.JLabel();
-        P_NI = new javax.swing.JTextField();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
-        P_BestWay = new javax.swing.JTextField();
-        jLabel56 = new javax.swing.JLabel();
-        PB_BorrowMoney = new javax.swing.JTextField();
-        jLabel57 = new javax.swing.JLabel();
-        jLabel58 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(746, 960));
+        setPreferredSize(new java.awt.Dimension(1000, 860));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 161, 20));
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("Date");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 110, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 38, 167, 20));
 
-        FB_NETWEST.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        FB_NETWEST.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        FB_NETWEST.setText("0");
-        add(FB_NETWEST, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 96, 20));
-
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel7.setText("From Bank");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 167, 20));
-
-        FB_CashPlus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        FB_CashPlus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        FB_CashPlus.setText("0");
-        add(FB_CashPlus, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 96, 20));
-
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setText("Cash Plus");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 120, 20));
-
-        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel13.setText("NATWEST");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 130, 20));
-
-        MI_PayZone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MI_PayZone.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        MI_PayZone.setText("0");
-        add(MI_PayZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 96, 20));
-
-        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel14.setText("Money In");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 167, 20));
-
-        MI_NoteMachine.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        MI_NoteMachine.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        MI_NoteMachine.setText("0");
-        add(MI_NoteMachine, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 96, 20));
-
-        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel15.setText("Note Machine");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 120, 20));
-
-        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel16.setText("Pay Zone");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 130, 20));
-
-        resetButton.setBackground(new java.awt.Color(255, 102, 102));
-        resetButton.setText("Reset");
-        resetButton.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(255, 102, 102));
+        jButton1.setText("Reset");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetButtonActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 90, 30));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 90, 30));
 
-        saveBankButton.setBackground(new java.awt.Color(0, 0, 102));
-        saveBankButton.setForeground(new java.awt.Color(255, 255, 255));
-        saveBankButton.setText("Save");
-        saveBankButton.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(0, 0, 102));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveBankButtonActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        add(saveBankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 90, 30));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
-        FB_ElevenCard.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        FB_ElevenCard.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        FB_ElevenCard.setText("0");
-        add(FB_ElevenCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 96, 20));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
 
-        jLabel25.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel25.setText("Eleven Card");
-        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 120, 20));
-
-        FB_MilkVouture.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        FB_MilkVouture.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        FB_MilkVouture.setText("0");
-        add(FB_MilkVouture, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 96, 20));
-
-        jLabel26.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel26.setText("Milk Vouture");
-        add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 120, 20));
-
-        SMO_PayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        SMO_PayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        SMO_PayPoint.setText("0");
-        add(SMO_PayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 96, 20));
-
-        jLabel27.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel27.setText("Services Money Out");
-        add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 167, 20));
-
-        SMO_PayZone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        SMO_PayZone.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        SMO_PayZone.setText("0");
-        add(SMO_PayZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 96, 20));
-
-        jLabel28.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel28.setText("Pay Zone");
-        add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 120, 20));
-
-        jLabel29.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel29.setText("Pay Point");
-        add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 130, 20));
-
-        SMO_Oyster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        SMO_Oyster.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        SMO_Oyster.setText("0");
-        add(SMO_Oyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 96, 20));
-
-        jLabel30.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel30.setText("Oyster");
-        add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 120, 20));
-
-        SMO_Camlot.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        SMO_Camlot.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        SMO_Camlot.setText("0");
-        add(SMO_Camlot, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 96, 20));
-
-        jLabel31.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel31.setText("Camlot");
-        add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 120, 20));
-
-        EM_CapitalGains.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_CapitalGains.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_CapitalGains.setText("0");
-        add(EM_CapitalGains, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 96, 20));
-
-        jLabel32.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel32.setText("Expenditure Money Out (Monthly)");
-        add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 290, 20));
-
-        EM_BT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_BT.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_BT.setText("0");
-        add(EM_BT, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 96, 20));
-
-        jLabel33.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel33.setText("BT");
-        add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 120, 20));
-
-        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel34.setText("Capital Gains");
-        add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 130, 20));
-
-        EM_Nest.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_Nest.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_Nest.setText("0");
-        add(EM_Nest, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 96, 20));
-
-        jLabel35.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel35.setText("NEST");
-        add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 120, 20));
-
-        EM_Rent.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_Rent.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_Rent.setText("0");
-        add(EM_Rent, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 180, 96, 20));
-
-        jLabel36.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel36.setText("Rent");
-        add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 120, 20));
-
-        EM_Water.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_Water.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_Water.setText("0");
-        add(EM_Water, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 96, 20));
-
-        EM_Alarm.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_Alarm.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_Alarm.setText("0");
-        add(EM_Alarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 96, 20));
-
-        jLabel37.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel37.setText("Alarm");
-        add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 120, 20));
-
-        jLabel38.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel38.setText("Water");
-        add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 130, 20));
-
-        EM_Electric.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_Electric.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_Electric.setText("0");
-        add(EM_Electric, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 96, 20));
-
-        jLabel39.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel39.setText("Electric");
-        add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 120, 20));
-
-        EM_ToiletBlock.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_ToiletBlock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_ToiletBlock.setText("0");
-        add(EM_ToiletBlock, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 300, 96, 20));
-
-        jLabel40.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel40.setText("Toilet Block");
-        add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 120, 20));
-
-        EM_SalarayMike.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_SalarayMike.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_SalarayMike.setText("0");
-        add(EM_SalarayMike, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, 96, 20));
-
-        jLabel41.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel41.setText("Salary Mike");
-        add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 120, 20));
-
-        EM_SalarySathees.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EM_SalarySathees.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EM_SalarySathees.setText("0");
-        add(EM_SalarySathees, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 360, 96, 20));
-
-        jLabel42.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel42.setText("Salary Sathees");
-        add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, 120, 20));
-
-        EY_ShopInsurance.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EY_ShopInsurance.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EY_ShopInsurance.setText("0");
-        add(EY_ShopInsurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 420, 96, 20));
-
-        jLabel43.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel43.setText("Expenditure Money Out (Yearly)");
-        add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 290, 20));
-
-        EY_BIFFA.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EY_BIFFA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EY_BIFFA.setText("0");
-        add(EY_BIFFA, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 450, 96, 20));
-
-        jLabel44.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel44.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel44.setText("BIFFA");
-        add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, 120, 20));
-
-        jLabel45.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel45.setText("Shop Insurance");
-        add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, 130, 20));
-
-        EY_Buil.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EY_Buil.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EY_Buil.setText("0");
-        add(EY_Buil, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 96, 20));
-
-        jLabel46.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel46.setText("BUIL / INSU");
-        add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 120, 20));
-
-        EY_OffFee.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EY_OffFee.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EY_OffFee.setText("0");
-        add(EY_OffFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, 96, 20));
-
-        jLabel47.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel47.setText("Off / Fee");
-        add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 510, 120, 20));
-
-        EB_BankCharge.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EB_BankCharge.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EB_BankCharge.setText("0");
-        add(EB_BankCharge, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 630, 96, 20));
-
-        EB_PayZoneRental.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EB_PayZoneRental.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EB_PayZoneRental.setText("0");
-        add(EB_PayZoneRental, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 660, 96, 20));
-
-        jLabel48.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel48.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel48.setText("Expenditure / Bank charge");
-        add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 540, 290, 20));
-
-        EB_CardMachine.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EB_CardMachine.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EB_CardMachine.setText("0");
-        add(EB_CardMachine, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 600, 96, 20));
-
-        EB_ElevenCharge.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EB_ElevenCharge.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        EB_ElevenCharge.setText("0");
-        add(EB_ElevenCharge, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 96, 20));
-
-        jLabel49.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel49.setText("Bank Charge");
-        add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 120, 20));
-
-        jLabel50.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel50.setText("Eleven Charge");
-        add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, 130, 20));
-
-        jLabel51.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel51.setText("Card Machine");
-        add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 120, 20));
-
-        jLabel52.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel52.setText("PayZone Rental");
-        add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 660, 120, 20));
-
-        P_CostCutter.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        P_CostCutter.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        P_CostCutter.setText("0");
-        add(P_CostCutter, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, 96, 20));
-
-        jLabel53.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel53.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel53.setText("Purchase");
-        add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 167, 20));
-
-        P_NI.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        P_NI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        P_NI.setText("0");
-        add(P_NI, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, 96, 20));
-
-        jLabel54.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel54.setText("NI");
-        add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 120, 20));
-
-        jLabel55.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel55.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel55.setText("Cost Cutter");
-        add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, 130, 20));
-
-        P_BestWay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        P_BestWay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        P_BestWay.setText("0");
-        add(P_BestWay, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 570, 96, 20));
-
-        jLabel56.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel56.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel56.setText("BestWay");
-        add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 120, 20));
-
-        PB_BorrowMoney.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        PB_BorrowMoney.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        PB_BorrowMoney.setText("0");
-        add(PB_BorrowMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 640, 96, 20));
-
-        jLabel57.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel57.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel57.setText("Pay Back");
-        add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 167, 20));
-
-        jLabel58.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel58.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel58.setText("Borrow Money");
-        add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 130, 20));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 1200));
 
         warningLabel.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 230, 20));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(558, Short.MAX_VALUE)
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1187, Short.MAX_VALUE))
+        );
+
+        jScrollPane1.setViewportView(jPanel1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void saveBankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBankButtonActionPerformed
-        warningLabel.setText("");
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        warningLabel.setForeground(Color.red);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            HashMap<String, Float> bankValues = new HashMap();
             try {
-                bankValues.put("FB_NETWEST", Float.parseFloat(FB_NETWEST.getText()));
-                bankValues.put("FB_CashPlus", Float.parseFloat(FB_CashPlus.getText()));
-                bankValues.put("FB_ElevenCard", Float.parseFloat(FB_ElevenCard.getText()));
-                bankValues.put("FB_MilkVouture", Float.parseFloat(FB_MilkVouture.getText()));
-                bankValues.put("MI_PayZone", Float.parseFloat(MI_PayZone.getText()));
-                bankValues.put("MI_NoteMachine", Float.parseFloat(MI_NoteMachine.getText()));
-                bankValues.put("SMO_PayPoint", Float.parseFloat(SMO_PayPoint.getText()));
-                bankValues.put("SMO_PayZone", Float.parseFloat(SMO_PayZone.getText()));
-                bankValues.put("SMO_Oyster", Float.parseFloat(SMO_Oyster.getText()));
-                bankValues.put("SMO_Camlot", Float.parseFloat(SMO_Camlot.getText()));
-                bankValues.put("EM_SalarayMike", Float.parseFloat(EM_SalarayMike.getText()));
-                bankValues.put("EM_SalarySathees", Float.parseFloat(EM_SalarySathees.getText()));
-                bankValues.put("EM_CapitalGains", Float.parseFloat(EM_CapitalGains.getText()));
-                bankValues.put("EM_BT", Float.parseFloat(EM_BT.getText()));
-                bankValues.put("EM_Nest", Float.parseFloat(EM_Nest.getText()));
-                bankValues.put("EM_Rent", Float.parseFloat(EM_Rent.getText()));
-                bankValues.put("EM_Water", Float.parseFloat(EM_Water.getText()));
-                bankValues.put("EM_Alarm", Float.parseFloat(EM_Alarm.getText()));
-                bankValues.put("EM_Electric", Float.parseFloat(EM_Electric.getText()));
-                bankValues.put("EM_ToiletBlock", Float.parseFloat(EM_ToiletBlock.getText()));
-                bankValues.put("EY_ShopInsurance", Float.parseFloat(EY_ShopInsurance.getText()));
-                bankValues.put("EY_BIFFA", Float.parseFloat(EY_BIFFA.getText()));
-                bankValues.put("EY_Buil", Float.parseFloat(EY_Buil.getText()));
-                bankValues.put("EY_OffFee", Float.parseFloat(EY_OffFee.getText()));
-                bankValues.put("EB_ElevenCharge", Float.parseFloat(EB_ElevenCharge.getText()));
-                bankValues.put("EB_CardMachine", Float.parseFloat(EB_CardMachine.getText()));
-                bankValues.put("EB_BankCharge", Float.parseFloat(EB_BankCharge.getText()));
-                bankValues.put("EB_PayZoneRental", Float.parseFloat(EB_PayZoneRental.getText()));
-                bankValues.put("P_CostCutter", Float.parseFloat(P_CostCutter.getText()));
-                bankValues.put("P_NI", Float.parseFloat(P_NI.getText()));
-                bankValues.put("P_BestWay", Float.parseFloat(P_BestWay.getText()));
-                bankValues.put("PB_BorrowMoney", Float.parseFloat(PB_BorrowMoney.getText()));
-
+                HashMap<String, Float> bankValues = new HashMap();
+                for (List<String> list : listOfTextFields.keySet()) {
+                    JTextField text = listOfTextFields.get(list);
+                    bankValues.put(list.get(1), Float.parseFloat(text.getText()));
+                }
+                System.out.println(bankValues.toString());
                 db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
                 warningLabel.setText("Expenditure added successfully..");
                 warningLabel.setForeground(Color.green);
-                resetButtonActionPerformed(evt);
-                
+                resetText();
             } catch (java.lang.NumberFormatException e) {
                 warningLabel.setText("**Values should be decimal");
             }
-
         } else {
             warningLabel.setText("**Date should be selected");
         }
-    }//GEN-LAST:event_saveBankButtonActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
-        EB_BankCharge.setText("0");
-        EB_CardMachine.setText("0");
-        EB_ElevenCharge.setText("0");
-        EB_PayZoneRental.setText("0");
-        EM_Alarm.setText("0");
-        EM_BT.setText("0");
-        EM_CapitalGains.setText("0");
-        EM_Electric.setText("0");
-        EM_Nest.setText("0");
-        EM_Rent.setText("0");
-        EM_SalarayMike.setText("0");
-        EM_SalarySathees.setText("0");
-        EM_ToiletBlock.setText("0");
-        EM_Water.setText("0");
-        EY_BIFFA.setText("0");
-        EY_Buil.setText("0");
-        EY_OffFee.setText("0");
-        EY_ShopInsurance.setText("0");
-        FB_CashPlus.setText("0");
-        FB_ElevenCard.setText("0");
-        FB_MilkVouture.setText("0");
-        FB_NETWEST.setText("0");
-        MI_NoteMachine.setText("0");
-        MI_PayZone.setText("0");
-        PB_BorrowMoney.setText("0");
-        P_BestWay.setText("0");
-        P_CostCutter.setText("0");
-        P_NI.setText("0");
-        SMO_Camlot.setText("0");
-        SMO_Oyster.setText("0");
-        SMO_PayPoint.setText("0");
-        SMO_PayZone.setText("0");
-    }//GEN-LAST:event_resetButtonActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        resetText();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void resetText() {
+        for (List<String> list : listOfTextFields.keySet()) {
+            JTextField text = listOfTextFields.get(list);
+            text.setText("0");
+        }
+    }
+
+    private void populateBank() {
+
+        ResultSet res = db.getDeatilTableValue(shopName, "BankDetail");
+        List<List<String>> bankIn = new ArrayList();
+
+        try {
+            while (res.next()) {
+                String item = res.getString("Item");
+                String name = res.getString("Name");
+                String type = res.getString("Type");
+                List<String> bankVal = new ArrayList();
+                bankVal.add(item);
+                bankVal.add(name);
+                bankVal.add(type);
+                bankIn.add(bankVal);
+            }
+
+            int i = 1;
+            int j = 0;
+
+            for (String type : Arrays.asList("From Bank", "Money In (Commission)", "Service Money Out", "Purchase", "Pay Back",
+                    "Expenditure Money Out (Monthly)", "Expenditure Money Out (Yearly)", "Expenditure/ Bank Charge")) {
+
+                if ("Expenditure Money Out (Monthly)".equals(type)) {
+                    j = 420;
+                    i = 1;
+                }
+
+                JLabel label = new JLabel(type);
+                label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+                label.setBounds(20 + j, 30 * i, 300, 20);
+                jPanel1.add(label);
+                i = i + 1;
+                for (List<String> val : bankIn) {
+
+                    if (type.equals(val.get(2))) {
+
+                        JLabel jLabel = new JLabel(val.get(0));
+                        jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
+                        jLabel.setBounds(60 + j, 30 * i, 130, 20);
+
+                        JTextField jText = new JTextField();
+                        jText.setFont(new java.awt.Font("Tahoma", 0, 12));
+                        jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+                        jText.setText("0");
+                        jText.setBounds(220 + j, 30 * i, 96, 25);
+                        i = i + 1;
+
+                        listOfTextFields.put(val, jText);
+
+                        jPanel1.add(jLabel);
+                        jPanel1.add(jText);
+                    }
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Purcharse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EB_BankCharge;
-    private javax.swing.JTextField EB_CardMachine;
-    private javax.swing.JTextField EB_ElevenCharge;
-    private javax.swing.JTextField EB_PayZoneRental;
-    private javax.swing.JTextField EM_Alarm;
-    private javax.swing.JTextField EM_BT;
-    private javax.swing.JTextField EM_CapitalGains;
-    private javax.swing.JTextField EM_Electric;
-    private javax.swing.JTextField EM_Nest;
-    private javax.swing.JTextField EM_Rent;
-    private javax.swing.JTextField EM_SalarayMike;
-    private javax.swing.JTextField EM_SalarySathees;
-    private javax.swing.JTextField EM_ToiletBlock;
-    private javax.swing.JTextField EM_Water;
-    private javax.swing.JTextField EY_BIFFA;
-    private javax.swing.JTextField EY_Buil;
-    private javax.swing.JTextField EY_OffFee;
-    private javax.swing.JTextField EY_ShopInsurance;
-    private javax.swing.JTextField FB_CashPlus;
-    private javax.swing.JTextField FB_ElevenCard;
-    private javax.swing.JTextField FB_MilkVouture;
-    private javax.swing.JTextField FB_NETWEST;
-    private javax.swing.JTextField MI_NoteMachine;
-    private javax.swing.JTextField MI_PayZone;
-    private javax.swing.JTextField PB_BorrowMoney;
-    private javax.swing.JTextField P_BestWay;
-    private javax.swing.JTextField P_CostCutter;
-    private javax.swing.JTextField P_NI;
-    private javax.swing.JTextField SMO_Camlot;
-    private javax.swing.JTextField SMO_Oyster;
-    private javax.swing.JTextField SMO_PayPoint;
-    private javax.swing.JTextField SMO_PayZone;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JButton resetButton;
-    private javax.swing.JButton saveBankButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

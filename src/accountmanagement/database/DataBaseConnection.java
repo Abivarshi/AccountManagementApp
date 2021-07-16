@@ -645,7 +645,7 @@ public class DataBaseConnection {
         createDetailTable(shopName, "BankDetail");
         insertDefaultBankDetail(shopName);
 //        createDetailTable(shopName, "PettyDetail");
-        insertDefaultPettyDetail(shopName);
+//        insertDefaultPettyDetail(shopName);
         createDetailTable(shopName, "Sheet2Detail");
         insertDefaultSheet2Detail(shopName);
     }
