@@ -14,7 +14,7 @@ import accountmanagement.jframe.report.PurcharseReport;
 import accountmanagement.jframe.report.SalesReport;
 import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.StaffReport;
-import accountmanagement.jframe.report.TillReport;
+import accountmanagement.jframe.report.tillReport.TillReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 
@@ -60,10 +60,11 @@ public class Report extends javax.swing.JPanel {
         finalButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(getSize());
         jPanel1.setLayout(new java.awt.CardLayout());
         jPanel1.add(jScrollPane1, "card2");
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
@@ -303,7 +304,7 @@ public class Report extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

@@ -48,7 +48,7 @@ public class DataBaseConnection {
             System.out.println("Building the User table...");
 
             Statement state2 = con.createStatement();
-            state2.executeUpdate("create table user(id integer,"
+            state2.executeUpdate("CREATE TABLE user(id integer,"
                     + "username varchar(60)," + "password varchar(60)," + "role varchar(60),"
                     + "primary key (id));");
 
@@ -59,14 +59,14 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        PreparedStatement prep = con.prepareStatement("insert into user values(?,?,?,?);");
+        PreparedStatement prep = con.prepareStatement("INSERT INTO user VALUES(?,?,?,?);");
         prep.setString(2, username);
         prep.setString(3, password);
         prep.setString(4, role);
         prep.execute();
 
         Statement state = con.createStatement();
-        ResultSet res = state.executeQuery("select * from user where username='" + username + "'");
+        ResultSet res = state.executeQuery("SELECT * FROM user WHERE username='" + username + "'");
         return res;
     }
 
@@ -74,7 +74,7 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        PreparedStatement prep = con.prepareStatement("insert into Staff values(?,?,?,?,?,?,?);");
+        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff VALUES(?,?,?,?,?,?,?);");
         prep.setString(2, staffName);
         prep.setFloat(3, salaryPercentage);
         prep.setBoolean(4, till);
@@ -84,7 +84,7 @@ public class DataBaseConnection {
         prep.execute();
 
         Statement state = con.createStatement();
-        ResultSet res = state.executeQuery("select * from Staff where staffName='" + staffName + "'");
+        ResultSet res = state.executeQuery("SELECT * FROM Staff WHERE staffName='" + staffName + "'");
         return res;
     }
 
@@ -95,7 +95,7 @@ public class DataBaseConnection {
                 getConnection(shopName);
             }
             Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("select * from user where username='" + username + "'");
+            ResultSet res = state.executeQuery("SELECT * FROM user WHERE username='" + username + "'");
             while (res.next()) {
                 if (res.getString("password").equals(password)) {
                     return true;
@@ -134,7 +134,7 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff values(?,?,?,?,?,?,?);");
+        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff VALUES(?,?,?,?,?,?,?);");
         prep.setString(2, staffName);
         prep.setFloat(3, salaryPercentage);
         prep.setBoolean(4, type.get("Till"));
@@ -188,7 +188,7 @@ public class DataBaseConnection {
         }
 
         PreparedStatement prep = con.prepareStatement("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime, Hours) VALUES ("
-                + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end +  ", " + hours + ");");
+                + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end + ", " + hours + ");");
 
         prep.execute();
     }
@@ -246,6 +246,62 @@ public class DataBaseConnection {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void createDetailTable(String shopName, String name) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        ResultSet res;
+        try {
+            Statement state = con.createStatement();
+            res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='" + name + "'");
+            if (!res.next()) {
+                System.out.println("Building the " + name + " table...");
+
+                Statement state2 = con.createStatement();
+                state2.executeUpdate("create table " + name + "(id integer,"
+                        + "Item VARCHAR(255),"
+                        + "Name VARCHAR(255),"
+                        + "Type VARCHAR(255),"
+                        + "primary key (id));");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void insertDetailTable(String shopName, String item, String name, String type, String table){
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            
+            PreparedStatement prep = con.prepareStatement("INSERT INTO " + table + " (Item, Name, Type) VALUES ("
+                    + "'" + item + "', '" + name + "', '" + type + "');");
+            
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ResultSet getDeatilTableValue(String shopName, String tableName) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM " + tableName);
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     public ResultSetMetaData getTabColumns(String shopName, String tabName) {
@@ -313,7 +369,7 @@ public class DataBaseConnection {
             getConnection(shopName);
         }
 
-        String fun = "INSERT INTO " + tabName + "( date, ";
+        String fun = "INSERT INTO " + tabName + "( Date, ";
         String value = "('" + date + "',";
         for (String i : values.keySet()) {
             fun = fun + i + ",";
@@ -351,7 +407,7 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        alterTabTable(shopName, "Bank", "FB_NETWEST");
+        alterTabTable(shopName, "Bank", "FB_NATWEST");
         alterTabTable(shopName, "Bank", "FB_CashPlus");
         alterTabTable(shopName, "Bank", "FB_ElevenCard");
         alterTabTable(shopName, "Bank", "FB_MilkVouture");
@@ -420,27 +476,64 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        alterTabTable(shopName, tableType, "YesterdayTillCount");
-        alterTabTable(shopName, tableType, "TodayTillCount");
-        alterTabTable(shopName, tableType, "Cash");
-        alterTabTable(shopName, tableType, "Coin");
-        alterTabTable(shopName, tableType, "Card");
-        alterTabTable(shopName, tableType, "VoucherMilk");
-        alterTabTable(shopName, tableType, "VoucherPayPoint");
-        alterTabTable(shopName, tableType, "RefundGoods");
-        alterTabTable(shopName, tableType, "RefundServices");
-        alterTabTable(shopName, tableType, "RefundAccountCredit");
-        alterTabTable(shopName, tableType, "Purchase");
-        alterTabTable(shopName, tableType, "Expenditure");
-        alterTabTable(shopName, tableType, "AccPay");
-        alterTabTable(shopName, tableType, "CashBack");
-        alterTabTable(shopName, tableType, "InstantPayOut");
-        alterTabTable(shopName, tableType, "LottaryPayOut");
-        alterTabTable(shopName, tableType, "InsLottary");
-        alterTabTable(shopName, tableType, "Lottary");
-        alterTabTable(shopName, tableType, "Oyster");
-        alterTabTable(shopName, tableType, "PayPoint");
-        alterTabTable(shopName, tableType, "PayZone");
+        alterTabTable(shopName, tableType, "R_YesterdayTillCount");
+        alterTabTable(shopName, tableType, "R_TodayTillCount");
+        alterTabTable(shopName, tableType, "R_Cash");
+        alterTabTable(shopName, tableType, "R_Coin");
+        alterTabTable(shopName, tableType, "R_Card");
+        alterTabTable(shopName, tableType, "R_VoucherMilk");
+        alterTabTable(shopName, tableType, "R_VoucherPayPoint");
+        alterTabTable(shopName, tableType, "R_RefundGoods");
+        alterTabTable(shopName, tableType, "R_RefundServices");
+        alterTabTable(shopName, tableType, "R_AccountCredit");
+        alterTabTable(shopName, tableType, "R_Purchase");
+        alterTabTable(shopName, tableType, "R_Expenditure");
+        alterTabTable(shopName, tableType, "R_AccPay");
+        alterTabTable(shopName, tableType, "R_CashBack");
+        alterTabTable(shopName, tableType, "R_InstantPayOut");
+        alterTabTable(shopName, tableType, "R_LottaryPayOut");
+        alterTabTable(shopName, tableType, "R_InsLottary");
+        alterTabTable(shopName, tableType, "R_Lottary");
+        alterTabTable(shopName, tableType, "R_Oyster");
+        alterTabTable(shopName, tableType, "R_PayPoint");
+        alterTabTable(shopName, tableType, "R_PayZone");
+
+        alterTabTable(shopName, tableType, "Alcohol");
+        alterTabTable(shopName, tableType, "Groceries");
+        alterTabTable(shopName, tableType, "Tobacco");
+
+        alterTabTable(shopName, tableType, "BO_InsLottary");
+        alterTabTable(shopName, tableType, "BO_Lottary");
+        alterTabTable(shopName, tableType, "BO_Oyster");
+        alterTabTable(shopName, tableType, "BO_PayPoint");
+        alterTabTable(shopName, tableType, "BO_PayZone");
+        alterTabTable(shopName, tableType, "BO_AccPay");
+        alterTabTable(shopName, tableType, "BO_InstantPayOut");
+        alterTabTable(shopName, tableType, "BO_LottaryPayOut");
+        alterTabTable(shopName, tableType, "BO_Cash");
+        alterTabTable(shopName, tableType, "BO_Card");
+        alterTabTable(shopName, tableType, "BO_AccountCredit");
+        alterTabTable(shopName, tableType, "BO_CashBack");
+        alterTabTable(shopName, tableType, "BO_VoucherMilk");
+        alterTabTable(shopName, tableType, "BO_VoucherPayPoint");
+
+        alterTabTable(shopName, tableType, "BO_InsLottary");
+        alterTabTable(shopName, tableType, "BO_Lottary");
+        alterTabTable(shopName, tableType, "SO_Oyster");
+        alterTabTable(shopName, tableType, "SO_PayPoint");
+        alterTabTable(shopName, tableType, "SO_PayZone");
+        alterTabTable(shopName, tableType, "SO_AccPay");
+        alterTabTable(shopName, tableType, "SO_InstantPayOut");
+        alterTabTable(shopName, tableType, "SO_LottaryPayOut");
+        alterTabTable(shopName, tableType, "SO_Cash");
+        alterTabTable(shopName, tableType, "SO_Card");
+        alterTabTable(shopName, tableType, "SO_CashBack");
+        alterTabTable(shopName, tableType, "SO_VoucherMilk");
+        alterTabTable(shopName, tableType, "SO_VoucherPayPoint");
+        alterTabTable(shopName, tableType, "SO_AccountCredit");
+        alterTabTable(shopName, tableType, "SO_Till");
+        alterTabTable(shopName, tableType, "SO_Pay");
+
     }
 
     public void createDefaultSheet2(String shopName) {
@@ -452,6 +545,64 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Sheet2", "CommisionOyster");
         alterTabTable(shopName, "Sheet2", "SC_PayPoint");
         alterTabTable(shopName, "Sheet2", "SC_Lottary");
+    }
+    
+    public void insertDefaultBankDetail(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        
+        insertDetailTable(shopName, "NATWEST", "FB_NETWEST", "From Bank", "BankDetail");
+        insertDetailTable(shopName, "Cash Plus", "FB_CashPlus", "From Bank", "BankDetail");
+        insertDetailTable(shopName, "Eleven Card", "FB_ElevenCard", "From Bank", "BankDetail");
+        insertDetailTable(shopName, "Milk Vouture", "FB_MilkVouture", "From Bank", "BankDetail");
+        insertDetailTable(shopName, "Pay Zone", "MI_PayZone", "Money In (Commission)", "BankDetail");
+        insertDetailTable(shopName, "Note Machine", "MI_NoteMachine", "Money In (Commission)", "BankDetail");
+        insertDetailTable(shopName, "Pay Point", "SMO_PayPoint", "Service Money Out", "BankDetail");
+        insertDetailTable(shopName, "Pay Zone", "SMO_PayZone", "Service Money Out", "BankDetail");
+        insertDetailTable(shopName, "Oyster", "SMO_Oyster", "Service Money Out", "BankDetail");
+        insertDetailTable(shopName, "Camlot", "SMO_Camlot", "Service Money Out", "BankDetail");
+        insertDetailTable(shopName, "Salary Mike", "EM_SalarayMike", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Salary Sathees", "EM_SalarySathees", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Capital Gains", "EM_CapitalGains", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "BT", "EM_BT", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Nest", "EM_Nest", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Rent", "EM_Rent", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Water", "EM_Water", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Alarm", "EM_Alarm", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Electric", "EM_Electric", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Toilet Block", "EM_ToiletBlock", "Expenditure Money Out (Monthly)", "BankDetail");
+        insertDetailTable(shopName, "Shop Insurance", "EY_ShopInsurance", "Expenditure Money Out (Yearly)", "BankDetail");
+        insertDetailTable(shopName, "BIFFA", "EY_BIFFA", "Expenditure Money Out (Yearly)", "BankDetail");
+        insertDetailTable(shopName, "BUIL/Insu", "EY_Buil", "Expenditure Money Out (Yearly)", "BankDetail");
+        insertDetailTable(shopName, "Off/Fee", "EY_OffFee", "Expenditure Money Out (Yearly)", "BankDetail");
+        insertDetailTable(shopName, "Eleven Charge", "EB_ElevenCharge", "Expenditure/ Bank Charge", "BankDetail");
+        insertDetailTable(shopName, "Card Mechain", "EB_CardMachine", "Expenditure/ Bank Charge", "BankDetail");
+        insertDetailTable(shopName, "Bank Charge", "EB_BankCharge", "Expenditure/ Bank Charge", "BankDetail");
+        insertDetailTable(shopName, "PayZone Rental", "EB_PayZoneRental", "Expenditure/ Bank Charge", "BankDetail");
+        insertDetailTable(shopName, "Costcutter", "P_CostCutter", "Purchase", "BankDetail");
+        insertDetailTable(shopName, "NI", "P_NI", "Purchase", "BankDetail");
+        insertDetailTable(shopName, "BestWay", "P_BestWay", "Purchase", "BankDetail");
+        insertDetailTable(shopName, "Borrow Money", "PB_BorrowMoney", "Pay Back", "BankDetail");
+    }
+     
+    public void insertDefaultPettyDetail(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        
+        insertDetailTable(shopName, "", "", "", "PettyDetail");
+    }
+    
+    public void insertDefaultSheet2Detail(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        insertDetailTable(shopName, "Pay Point", "CommisionPayPoint", "Commision", "Sheet2Detail");
+        insertDetailTable(shopName, "Lottary", "CommisionLottary", "Commision", "Sheet2Detail");
+        insertDetailTable(shopName, "Oyster", "CommisionOyster", "Commision", "Sheet2Detail");
+        insertDetailTable(shopName, "Pay Point", "SC_PayPoint", "Service Charge", "Sheet2Detail");
+        insertDetailTable(shopName, "Lottary", "SC_Lottary", "Service Charge", "Sheet2Detail");
     }
     
     public void createShop(String shopName) throws ClassNotFoundException, SQLException {
@@ -480,15 +631,19 @@ public class DataBaseConnection {
         createStaffTime(shopName);
         createTabTable(shopName, "Expenditure");
         createTabTable(shopName, "Purcharse");
-        createTabTable(shopName, "TillReport");
-        createDefaultTill(shopName, "TillReport");
-        createTabTable(shopName, "TillBackOffice");
-        createDefaultTill(shopName, "TillBackOffice");
+        createTabTable(shopName, "Till");
+        createDefaultTill(shopName, "Till");
         createTabTable(shopName, "Bank");
         createDefaultBank(shopName);
         createTabTable(shopName, "Sheet2");
         createDefaultSheet2(shopName);
         createTabTable(shopName, "Petty");
+        createDetailTable(shopName, "BankDetail");
+        insertDefaultBankDetail(shopName);
+//        createDetailTable(shopName, "PettyDetail");
+        insertDefaultPettyDetail(shopName);
+        createDetailTable(shopName, "Sheet2Detail");
+        insertDefaultSheet2Detail(shopName);
     }
 
     public ResultSet getShopList() {
@@ -521,8 +676,8 @@ public class DataBaseConnection {
             while (res.next()) {
                 role = res.getString("role");
             }
-        } catch (Exception e) {
-
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return role;
     }

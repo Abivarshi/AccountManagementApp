@@ -6,12 +6,13 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,9 +53,12 @@ public class StaffTime extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1000, 860));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -84,39 +88,60 @@ public class StaffTime extends javax.swing.JPanel {
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 1200));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(558, Short.MAX_VALUE)
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1187, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 800, 530));
+        jScrollPane1.setViewportView(jPanel1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-
             try {
                 for (List list : listOfTextFields){
                     
                     JTextField startText = (JTextField) list.get(2);
                     JTextField endText = (JTextField) list.get(3);
+                    Float startTime = Float.parseFloat(startText.getText());
+                    Float endTime = Float.parseFloat(endText.getText());
+                    Float hours = endTime - startTime;
+                    
                     db.insertStaffTime(shopName, sdf.format(jDateChooser1.getDate()), list.get(0).toString(), list.get(1).toString(),
-                            Float.parseFloat(startText.getText()), Float.parseFloat(endText.getText()));
+                           startTime , endTime, hours);
                 }
-                
+                warningLabel.setForeground(Color.green);
+                warningLabel.setText("**Staff time saved successfully..");
+            } catch (java.lang.NumberFormatException e) {
+                warningLabel.setText("**Values should be decimal");
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            warningLabel.setText("**Date should be selected");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -147,7 +172,7 @@ public class StaffTime extends javax.swing.JPanel {
                 while (res.next()) {
                     String staffName = res.getString("StaffName");
                     JLabel label = new JLabel(staffName);
-                    label.setFont(new java.awt.Font("Tahoma", 0, 12));
+                    label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
                     label.setBounds(20, 30 * i, 130, 20);
                     i = i + 1;
                     
@@ -165,8 +190,6 @@ public class StaffTime extends javax.swing.JPanel {
                     }
                     
                     jPanel1.add(label);
-                    
-                    System.out.println(listOfTextFields.toString());
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Purcharse.class.getName()).log(Level.SEVERE, null, ex);
@@ -227,5 +250,7 @@ public class StaffTime extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

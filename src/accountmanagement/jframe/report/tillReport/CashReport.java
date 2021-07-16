@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accountmanagement.jframe.report;
+package accountmanagement.jframe.report.tillReport;
 
+import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +33,7 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class ExpenditureReport extends javax.swing.JPanel {
+public class CashReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
@@ -42,7 +43,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
      *
      * @param shopName
      */
-    public ExpenditureReport(String shopName) {
+    public CashReport(String shopName) {
         this.shopName = shopName;
         initComponents();
     }
@@ -112,53 +113,35 @@ public class ExpenditureReport extends javax.swing.JPanel {
 
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if (jDateChooserFrom.getDate() == null) {
-            jDateChooserFrom.setDate(currentDate);
-        }
-        if (jDateChooserTo.getDate() == null) {
-            jDateChooserTo.setDate(currentDate);
-        }
-        String fromDate = sdf.format(jDateChooserFrom.getDate());
-        String toDate = sdf.format(jDateChooserTo.getDate());
+        //        if (jDateChooserFrom.getDate() == null) {
+        //            jDateChooserFrom.setDate(currentDate);
+        //        }
+        //        if (jDateChooserTo.getDate() == null) {
+        //            jDateChooserTo.setDate(currentDate);
+        //        }
+        //        String fromDate = sdf.format(jDateChooserFrom.getDate());
+        //        String toDate = sdf.format(jDateChooserTo.getDate());
+        String fromDate = "2021-06-01";
+        String toDate = "2021-07-30";
 
         List<String> column = new ArrayList();
         column.add("Date");
-        boolean firstEntry = true;
+        column.add("From Report");
+        column.add("From Back office");
+        column.add("Short/Over");
         List<List<String>> valueRow = new ArrayList();
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
-            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
+            ResultSet res = db.getValuesTabTable(shopName, "Till", fromDate, toDate);
 
-            ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
             try {
                 while (res.next()) {
-                    String dateCol = metadata.getColumnName(2);
-                    String date = res.getString(dateCol);
                     List<String> values = new ArrayList();
-                    values.add(date);
+                    values.add(res.getString("Date"));
+                    values.add(res.getString("R_Cash"));
+                    values.add(res.getString("BO_Cash"));
+                    values.add(res.getString("SO_Cash"));
 
-                    float expenditure = 10;
-                    float totalExpenditure = 0;
-                    for (int i = 3; i <= metadata.getColumnCount(); i++) {
-                        String columnName = metadata.getColumnName(i);
-                        Float value = res.getFloat(columnName);
-                        values.add(value.toString());
-                        totalExpenditure = totalExpenditure + value;
-                        if (firstEntry) {
-                            column.add(columnName);
-                        }
-                    }
-                    if (firstEntry) {
-                        column.add("TotalExpenditure");
-                        column.add("Expenditure");
-                        column.add("Different");
-
-                        valueRow.add(column);
-                        firstEntry = false;
-                    }
-                    values.add(String.valueOf(totalExpenditure));
-                    values.add(String.valueOf(expenditure));
-                    values.add(String.valueOf(expenditure - totalExpenditure));
                     System.out.println(values.toString());
                     valueRow.add(values);
                 }
@@ -168,7 +151,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException | FileNotFoundException ex) {
-                Logger.getLogger(ExpenditureReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CashReport.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             warningLabel1.setText("From Date should be earlier date");
@@ -177,7 +160,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
 
     public void runReport(List<String> columnHeaders, List<List<String>> rows) throws JRException, FileNotFoundException {
 
-        InputStream is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/ExpenditureReport.jrxml");
+        InputStream is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/CashReport.jrxml");
         JasperDesign jasperReportDesign = JRXmlLoader.load(is);
 
         DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
