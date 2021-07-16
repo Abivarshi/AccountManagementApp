@@ -395,7 +395,9 @@ public class DataBaseConnection {
             }
 
             Statement state = con.createStatement();
-            ResultSet res = state.executeQuery("SELECT * FROM " + tabName + " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'");
+            ResultSet res = state.executeQuery("SELECT * FROM " + tabName + 
+                    " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'" +
+                    " ORDER BY Date ASC");
             return res;
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
