@@ -6,15 +6,16 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.Purcharse;
+import java.awt.Font;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 
 /**
  *
@@ -30,7 +31,7 @@ public class AdminBank extends javax.swing.JPanel {
      */
     public AdminBank(String shopName) {
         this.shopName = shopName;
-        getBankList();
+        populateBank();
         initComponents();
     }
 
@@ -50,13 +51,11 @@ public class AdminBank extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         successLabel = new javax.swing.JLabel();
         warningLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FROM BANK", "MONEY IN(COMMISSION)", "SERVICES MONEY OUT", "EXPENDITURE MONEY OUT/ MONTHLY", "EXPENDITURE MONEY OUT/ YEARLY", "EXPENDITURE/BANK CHARGE", "PURCHASE", "PAY BACK", " " }));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "From Bank", "Money In (Commission)", "Service Money Out", "Expenditure Money Out (Monthly)", "Expenditure Money Out (Yearly)", "Expenditure/ Bank Charge", "Purchase", "Pay Back" }));
         typeCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 typeComboActionPerformed(evt);
@@ -88,10 +87,6 @@ public class AdminBank extends javax.swing.JPanel {
 
         warningLabel.setForeground(new java.awt.Color(204, 0, 0));
         add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 270, 20));
-
-        jScrollPane1.setViewportView(jList1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 120, 190));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -99,48 +94,48 @@ public class AdminBank extends javax.swing.JPanel {
         warningLabel.setText("");
 
         String type = typeCombo.getSelectedItem().toString();
-        
+
         String value = valueTextField.getText();
-        String valueEdited=null;
-        
+        String valueEdited = null;
+
         switch (type) {
-            case "FROM BANK":
+            case "From Bank":
                 valueEdited = "FB_" + value;
                 break;
-            case "MONEY IN(COMMISSION)":
+            case "Money In (Commission)":
                 valueEdited = "MI_" + value;
                 break;
-            case "SERVICES MONEY OUT":
+            case "Service Money Out":
                 valueEdited = "SMO_" + value;
                 break;
-            case "EXPENDITURE MONEY OUT/ MONTHLY":
+            case "Expenditure Money Out (Monthly)":
                 valueEdited = "EM_" + value;
                 break;
-            case "EXPENDITURE MONEY OUT/ YEARLY":
+            case "Expenditure Money Out (Yearly)":
                 valueEdited = "EY_" + value;
                 break;
-            case "EXPENDITURE/BANK CHARGE":
+            case "Expenditure/ Bank Charge":
                 valueEdited = "EB_" + value;
                 break;
-            case "PURCHASE":
+            case "Purchase":
                 valueEdited = "P_" + value;
                 break;
-            case "PAY BACK":
+            case "Pay Back":
                 valueEdited = "PB_" + value;
                 break;
             default:
                 System.out.println("no match");
         }
+        valueEdited = valueEdited.replaceAll("\\s+", "");
 
         if (!db.isColumnExist(shopName, "Bank", value)) {
             db.alterTabTable(shopName, "Bank", valueEdited);
             db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "BankDetail");
-            getBankList();
             valueTextField.setText("");
-            successLabel.setText("Expenditure added Successfully..");
+            successLabel.setText("Bank added Successfully..");
         } else {
             valueTextField.setText("");
-            warningLabel.setText("**Expenditure already exist.");
+            warningLabel.setText("**Bank already exist.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -148,26 +143,61 @@ public class AdminBank extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_typeComboActionPerformed
 
-    private void getBankList() {
-//        ResultSet res = db.getDeatilTableValue(shopName, "BankDetail");
-//        try {
-//            while (res.next()) {
-//                String item = res.getString("Item");
-//                String type = res.getString("Type");
-//                List<String> bankVal = new ArrayList();
-//                bankVal.add(item);
-//                bankVal.add(type);
-//                bankIn.add(bankVal);
-//            }
-//        } catch (Exception e) {
-//
-//        }
+    private void populateBank() {
+
+        ResultSet res = db.getDeatilTableValue(shopName, "BankDetail");
+        List<List<String>> bankIn = new ArrayList();
+
+        try {
+            while (res.next()) {
+                String item = res.getString("Item");
+                String name = res.getString("Name");
+                String type = res.getString("Type");
+                List<String> bankVal = new ArrayList();
+                bankVal.add(item);
+                bankVal.add(name);
+                bankVal.add(type);
+                bankIn.add(bankVal);
+            }
+
+            int i = 1;
+            int j = 0;
+
+            for (String type : Arrays.asList("From Bank", "Money In (Commission)", "Service Money Out", "Purchase", "Pay Back",
+                    "Expenditure Money Out (Monthly)", "Expenditure Money Out (Yearly)", "Expenditure/ Bank Charge")) {
+
+                if ("Expenditure Money Out (Monthly)".equals(type)) {
+                    j = 420;
+                    i = 1;
+                }
+
+                JLabel label = new JLabel(type);
+                label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+                label.setBounds(20 + j, 200 + 30 * i, 300, 20);
+                add(label);
+                i = i + 1;
+                for (List<String> val : bankIn) {
+
+                    if (type.equals(val.get(2))) {
+
+                        JLabel jLabel = new JLabel(val.get(0));
+                        jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
+                        jLabel.setBounds(60 + j, 200 + 30 * i, 130, 20);
+                        i = i + 1;
+                        add(jLabel);
+                    }
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Purcharse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel successLabel;
     private javax.swing.JComboBox typeCombo;
     private javax.swing.JLabel userType;

@@ -38,7 +38,7 @@ public class Petty extends javax.swing.JPanel {
     public Petty(String shopName) {
         this.shopName = shopName;
         initComponents();
-        populateBank();
+        populatePetty();
     }
 
     /**
@@ -152,7 +152,7 @@ public class Petty extends javax.swing.JPanel {
         }
     }
 
-    private void populateBank() {
+    private void populatePetty() {
 
         ResultSet res = db.getDeatilTableValue(shopName, "PettyDetail");
         List<List<String>> bankIn = new ArrayList();

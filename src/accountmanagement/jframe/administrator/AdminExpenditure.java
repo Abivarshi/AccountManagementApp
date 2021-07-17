@@ -6,7 +6,6 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.TillJframe;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;

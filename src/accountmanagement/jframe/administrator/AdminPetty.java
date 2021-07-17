@@ -6,11 +6,19 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.Purcharse;
+import java.awt.Font;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -53,7 +61,7 @@ public class AdminPetty extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Common", "Cost Cutter", "Cash Borrow", "C/Card", "IOU", "Purchase", "Expenditure", "Banking", "Summary" }));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cost Cutter", "Purchase", "Expenditure", "Banking" }));
         add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, -1));
 
         userType.setText("Value");
@@ -90,9 +98,6 @@ public class AdminPetty extends javax.swing.JPanel {
         String valueEdited = null;
         
         switch (type) {
-            case "Common":
-                valueEdited = "C_" + value;
-                break;
             case "Cost Cutter":
                 valueEdited = "CC_" + value;
                 break;
@@ -114,9 +119,6 @@ public class AdminPetty extends javax.swing.JPanel {
             case "Banking":
                 valueEdited = "B_" + value;
                 break;
-            case "Summary":
-                valueEdited = value;
-                break;
             default:
                 System.out.println("no match");
         }
@@ -124,7 +126,6 @@ public class AdminPetty extends javax.swing.JPanel {
         if (!db.isColumnExist(shopName, "Petty", valueEdited)) {
             db.alterTabTable(shopName, "Petty", valueEdited);
             db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "PettyDetail");
-            getPettyList();
             valueTextField.setText("");
             successLabel.setText("Petty added Successfully..");
         } else {
@@ -134,6 +135,57 @@ public class AdminPetty extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getPettyList() {
+
+        ResultSet res = db.getDeatilTableValue(shopName, "PettyDetail");
+        List<List<String>> bankIn = new ArrayList();
+
+        try {
+            while (res.next()) {
+                String item = res.getString("Item");
+                String name = res.getString("Name");
+                String type = res.getString("Type");
+                List<String> bankVal = new ArrayList();
+                bankVal.add(item);
+                bankVal.add(name);
+                bankVal.add(type);
+                bankIn.add(bankVal);
+            }
+
+            int i = 1;
+            int j = 0;
+
+            for (String type : Arrays.asList("Common", "Cost Cutter", "Cash Borrow", "C/Card", "IOU",
+                    "Purchase", "Expenditure", "Banking")) {
+
+                if ("Purchase".equals(type)) {
+                    j = 420;
+                    i = 1;
+                }
+
+                if (!"Common".equals(type)) {
+                    JLabel label = new JLabel(type);
+                    label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+                    label.setBounds(20 + j, 200+ 30 * i, 300, 20);
+                    add(label);
+                    i = i + 1;
+                }
+
+                for (List<String> val : bankIn) {
+                    if (type.equals(val.get(2))) {
+
+                        JLabel jLabel = new JLabel(val.get(0));
+                        jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
+                        jLabel.setBounds(60 + j, 200+ 30 * i, 130, 20);
+                        i = i + 1;
+                        add(jLabel);
+                    }
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Purcharse.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

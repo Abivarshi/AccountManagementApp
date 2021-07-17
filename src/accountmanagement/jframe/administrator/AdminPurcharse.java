@@ -6,7 +6,6 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.TillJframe;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class AdminPurcharse extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getPurcharseList() {
-        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
+        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purchase");
         try {
             List<String> items = new ArrayList();
             for (int i = 3; i <= metadata.getColumnCount(); i++) {
@@ -105,7 +104,7 @@ public class AdminPurcharse extends javax.swing.JPanel {
             }
             jList1.setListData(items.toArray());
         } catch (SQLException ex) {
-            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminPurcharse.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
