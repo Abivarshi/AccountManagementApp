@@ -538,6 +538,11 @@ public class Till extends javax.swing.JPanel {
         boMilk.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boMilk.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         boMilk.setText("0");
+        boMilk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boMilkActionPerformed(evt);
+            }
+        });
         add(boMilk, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 650, 96, 20));
 
         boVaucherPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -586,64 +591,131 @@ public class Till extends javax.swing.JPanel {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             if (!db.isDateExist(shopName, "Till", sdf.format(jDateChooser1.getDate()))) {
                 try {
-                    HashMap<String, Float> tillValues = new HashMap();
-                    tillValues.put("R_YesterdayTillCount", Float.parseFloat(yesterdayTillCount.getText()));
-                    tillValues.put("R_TodayTillCount", Float.parseFloat(todayTillCount.getText()));
-                    tillValues.put("R_Cash", Float.parseFloat(cash.getText()));
-                    tillValues.put("R_Coin", Float.parseFloat(coin.getText()));
-                    tillValues.put("R_Card", Float.parseFloat(card.getText()));
-                    tillValues.put("R_VoucherMilk", Float.parseFloat(voucherMilk.getText()));
-                    tillValues.put("R_VoucherPayPoint", Float.parseFloat(voucherPayPoint.getText()));
-                    tillValues.put("R_RefundGoods", Float.parseFloat(refundGoods.getText()));
-                    tillValues.put("R_RefundServices", Float.parseFloat(refundServices.getText()));
-                    tillValues.put("R_RefundAccountCredit", Float.parseFloat(refundAccountCredit.getText()));
-                    tillValues.put("R_Purchase", Float.parseFloat(purchase.getText()));
-                    tillValues.put("R_Expenditure", Float.parseFloat(expenditure.getText()));
-                    tillValues.put("R_AccPay", Float.parseFloat(accPay.getText()));
-                    tillValues.put("R_CashBack", Float.parseFloat(cashBack.getText()));
-                    tillValues.put("R_InstantPayOut", Float.parseFloat(instantPayOut.getText()));
-                    tillValues.put("R_LottaryPayOut", Float.parseFloat(lottaryPayOut.getText()));
-                    tillValues.put("R_InsLottary", Float.parseFloat(insLottary.getText()));
-                    tillValues.put("R_Lottary", Float.parseFloat(lottary.getText()));
-                    tillValues.put("R_Oyster", Float.parseFloat(oyster.getText()));
-                    tillValues.put("R_PayPoint", Float.parseFloat(payPoint.getText()));
-                    tillValues.put("R_PayZone", Float.parseFloat(payZone.getText()));
+                    float cardReport = Float.parseFloat(card.getText());
+                    float cardBO = Float.parseFloat(boCard.getText());
+                    float SOCard = cardReport - cardBO;
+
+                    float voucherMilkReport = Float.parseFloat(voucherMilk.getText());
+                    float voucherMilkBO = Float.parseFloat(boMilk.getText());
+                    float SOVoucherMilk = voucherMilkReport - voucherMilkBO;
+
+                    float voucherPayPointReport = Float.parseFloat(voucherPayPoint.getText());
+                    float voucherPayPointBO = Float.parseFloat(boVaucherPayPoint.getText());
+                    float SOVoucherPayPoint = voucherPayPointReport - voucherPayPointBO;
+
+                    float refundAccountCreditReport = Float.parseFloat(refundAccountCredit.getText());
+                    float refundAccountCreditBO = Float.parseFloat(boAccount.getText());
+                    float SORefundAccountCredit = refundAccountCreditReport - refundAccountCreditBO;
+
+                    float accPayReport = Float.parseFloat(accPay.getText());
+                    float accPayBO = Float.parseFloat(boAccPay.getText());
+                    float SOAccPay = accPayReport - accPayBO;
+
+                    float cashBackReport = Float.parseFloat(cashBack.getText());
+                    float cashBackBO = Float.parseFloat(boCashBack.getText());
+                    float SOCashBack = cashBackReport - cashBackBO;
                     
+                    float instantPayOutReport = Float.parseFloat(instantPayOut.getText());
+                    float instantPayOutBO = Float.parseFloat(boInstPO.getText());
+                    float SOInstantPayOut = instantPayOutReport - instantPayOutBO;
+                    
+                    float lottaryPayOutReport = Float.parseFloat(lottaryPayOut.getText());
+                    float lottaryPayOutBO = Float.parseFloat(boLottaryPO.getText());
+                    float SOLottaryPayOut = lottaryPayOutReport - lottaryPayOutBO;
+                    
+                    float lottaryReport = Float.parseFloat(lottary.getText());
+                    float lottaryBO = Float.parseFloat(boLottary.getText());
+                    float SOLottary = lottaryBO-lottaryReport;
+                    
+                    float oysterReport = Float.parseFloat(oyster.getText());
+                    float oysterBO = Float.parseFloat(boOyster.getText());
+                    float SOOyster = oysterBO-oysterReport;
+                    
+                    float payPointReport = Float.parseFloat(payPoint.getText());
+                    float payPointBO = Float.parseFloat(boPayPoint.getText());
+                    float SOPayPoint = payPointBO-payPointReport;
+                    
+                    float payZoneReport = Float.parseFloat(payZone.getText());
+                    float payZoneBO = Float.parseFloat(boPayZone.getText());
+                    float SOPayZone = payZoneBO-payZoneReport;
+                    
+                    float insLottaryReport = Float.parseFloat(insLottary.getText());
+                    float insLottaryBO = Float.parseFloat(boInstLottary.getText());
+                    float SOInsLottary = insLottaryReport-insLottaryBO;
+                    
+                    float cashReport = Float.parseFloat(cash.getText());
+                    float cashBO = Float.parseFloat(boCash.getText());
+                    float todayTillCountReport = Float.parseFloat(todayTillCount.getText());
+                    float yesterdayTillCountReport = Float.parseFloat(yesterdayTillCount.getText());
+                    float coinsReport = Float.parseFloat(coin.getText());
+                    float purchaseReport = Float.parseFloat(purchase.getText());
+                    float expenditureReport = Float.parseFloat(expenditure.getText());
+                    float refundGoodsReport = Float.parseFloat(refundGoods.getText());
+                    float refundServicesReport = Float.parseFloat(refundServices.getText());
+                    float SOCash = cashReport+todayTillCountReport-yesterdayTillCountReport-cashBO+coinsReport+purchaseReport+expenditureReport+refundGoodsReport+refundServicesReport;
+                    
+                    float SOTill = SOCash+coinsReport+SOCard+SOVoucherMilk+SOInstantPayOut+SOLottaryPayOut;
+                            
+                    float SOPay =SOInsLottary+SOLottary+SOOyster+SOPayPoint+SOPayZone ;
+                    
+                    HashMap<String, Float> tillValues = new HashMap();
+                    tillValues.put("R_YesterdayTillCount", yesterdayTillCountReport);
+                    tillValues.put("R_TodayTillCount", todayTillCountReport);
+                    tillValues.put("R_Cash", cashReport);
+                    tillValues.put("R_Coin",coinsReport );
+                    tillValues.put("R_Card", cardReport);
+                    tillValues.put("R_VoucherMilk", voucherMilkReport);
+                    tillValues.put("R_VoucherPayPoint", voucherPayPointReport);
+                    tillValues.put("R_RefundGoods",refundGoodsReport );
+                    tillValues.put("R_RefundServices",refundServicesReport );
+                    tillValues.put("R_RefundAccountCredit", refundAccountCreditReport);
+                    tillValues.put("R_Purchase", purchaseReport);
+                    tillValues.put("R_Expenditure",expenditureReport );
+                    tillValues.put("R_AccPay", accPayReport);
+                    tillValues.put("R_CashBack", cashBackReport);
+                    tillValues.put("R_InstantPayOut", instantPayOutReport);
+                    tillValues.put("R_LottaryPayOut",lottaryPayOutReport );
+                    tillValues.put("R_InsLottary",insLottaryReport );
+                    tillValues.put("R_Lottary",lottaryReport );
+                    tillValues.put("R_Oyster",oysterReport );
+                    tillValues.put("R_PayPoint",payPointReport );
+                    tillValues.put("R_PayZone", payZoneReport);
+
                     tillValues.put("Alcohol", Float.parseFloat(alcohol.getText()));
                     tillValues.put("Groceries", Float.parseFloat(groceries.getText()));
                     tillValues.put("Tobacco", Float.parseFloat(tabacco.getText()));
-                    tillValues.put("BO_InsLottary", Float.parseFloat(boInstLottary.getText()));
-                    tillValues.put("BO_Lottary", Float.parseFloat(boLottary.getText()));
-                    tillValues.put("BO_Oyster", Float.parseFloat(boOyster.getText()));
-                    tillValues.put("BO_PayPoint", Float.parseFloat(boPayPoint.getText()));
-                    tillValues.put("BO_PayZone", Float.parseFloat(boPayZone.getText()));
-                    tillValues.put("BO_AccPay", Float.parseFloat(boAccPay.getText()));
-                    tillValues.put("BO_InstantPayOut", Float.parseFloat(boInstPO.getText()));
-                    tillValues.put("BO_LottaryPayOut", Float.parseFloat(boLottaryPO.getText()));
-                    tillValues.put("BO_Cash", Float.parseFloat(boCash.getText()));
-                    tillValues.put("BO_Card", Float.parseFloat(boCard.getText()));
-                    tillValues.put("BO_AccountCredit", Float.parseFloat(boAccount.getText()));
-                    tillValues.put("BO_CashBack", Float.parseFloat(boCashBack.getText()));
-                    tillValues.put("BO_VoucherMilk", Float.parseFloat(boMilk.getText()));
-                    tillValues.put("BO_VoucherPayPoint", Float.parseFloat(boVaucherPayPoint.getText()));
-    
-//                    tillValues.put("SO_InsLottary", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_Lottary", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_Oyster", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_PayPoint", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_PayZone", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_AccPay", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_InstantPayOut", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_LottaryPayOut", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_Cash", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_Card", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_CashBack", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_VoucherMilk", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_VoucherPayPoint", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_AccountCredit", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_Till", Float.parseFloat(payZone.getText()));
-//                    tillValues.put("SO_Pay", Float.parseFloat(payZone.getText()));
-                    
+                    tillValues.put("BO_InsLottary", insLottaryBO);
+                    tillValues.put("BO_Lottary",lottaryBO );
+                    tillValues.put("BO_Oyster",oysterBO );
+                    tillValues.put("BO_PayPoint", voucherPayPointBO);
+                    tillValues.put("BO_PayZone", payZoneBO);
+                    tillValues.put("BO_AccPay", accPayBO);
+                    tillValues.put("BO_InstantPayOut", instantPayOutBO);
+                    tillValues.put("BO_LottaryPayOut", lottaryPayOutBO);
+                    tillValues.put("BO_Cash",cashBO );
+                    tillValues.put("BO_Card", cardBO);
+                    tillValues.put("BO_AccountCredit", refundAccountCreditBO);
+                    tillValues.put("BO_CashBack", cashBackBO);
+                    tillValues.put("BO_VoucherMilk", voucherMilkBO);
+                    tillValues.put("BO_VoucherPayPoint",payPointBO );
+
+                    tillValues.put("SO_Cash",SOCash );
+                    tillValues.put("SO_Card", SOCard);
+                    tillValues.put("SO_VoucherMilk", SOVoucherMilk);
+                    tillValues.put("SO_VoucherPayPoint", SOVoucherPayPoint);
+                    tillValues.put("SO_AccountCredit", SORefundAccountCredit);
+                    tillValues.put("SO_AccPay", SOAccPay);
+                    tillValues.put("SO_CashBack", SOCashBack);
+                    tillValues.put("SO_InstantPayOut",SOInstantPayOut);
+                    tillValues.put("SO_LottaryPayOut",SOLottaryPayOut );
+                    tillValues.put("SO_Lottary",SOLottary );
+                    tillValues.put("SO_Oyster",SOOyster );
+                    tillValues.put("SO_PayPoint", SOPayPoint);
+                    tillValues.put("SO_PayZone", SOPayZone);
+                    tillValues.put("SO_InsLottary", SOInsLottary);
+                    tillValues.put("SO_Till", SOTill);
+                    tillValues.put("SO_Pay", SOPay);
+
                     db.insertValuesTabTable(shopName, "Till", sdf.format(jDateChooser1.getDate()), tillValues);
 
                     warningLabel.setText("Expenditure added successfully..");
@@ -659,6 +731,10 @@ public class Till extends javax.swing.JPanel {
             warningLabel.setText("**Date should be selected");
         }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void boMilkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boMilkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boMilkActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -128,7 +128,7 @@ public class AdminBank extends javax.swing.JPanel {
         }
         valueEdited = valueEdited.replaceAll("\\s+", "");
 
-        if (!db.isColumnExist(shopName, "Bank", value)) {
+        if (!db.isColumnExist(shopName, "Bank", valueEdited)) {
             db.alterTabTable(shopName, "Bank", valueEdited);
             db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "BankDetail");
             valueTextField.setText("");
