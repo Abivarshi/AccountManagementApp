@@ -514,6 +514,7 @@ public class DataBaseConnection {
         alterTabTable(shopName, tableType, "Alcohol");
         alterTabTable(shopName, tableType, "Groceries");
         alterTabTable(shopName, tableType, "Tobacco");
+        alterTabTable(shopName, tableType, "CallingCard");
 
         alterTabTable(shopName, tableType, "BO_InsLottary");
         alterTabTable(shopName, tableType, "BO_Lottary");
