@@ -579,7 +579,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_salesButtonMouseHover
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        rightPanel.add("Sheet2", new Sheet2(shopName));
+        rightPanel.add("CommissionAndService", new CommissionAndService(shopName));
         CardLayout layout = (CardLayout) rightPanel.getLayout();
         layout.next(rightPanel);
     }//GEN-LAST:event_sheet2ButtonActionPerformed

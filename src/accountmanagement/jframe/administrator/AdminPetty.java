@@ -96,7 +96,7 @@ public class AdminPetty extends javax.swing.JPanel {
         String type = typeCombo.getSelectedItem().toString();
         String value = valueTextField.getText();
         String valueEdited = null;
-        
+
         switch (type) {
             case "Cost Cutter":
                 valueEdited = "CC_" + value;
@@ -122,6 +122,7 @@ public class AdminPetty extends javax.swing.JPanel {
             default:
                 System.out.println("no match");
         }
+        valueEdited = valueEdited.replaceAll("\\s+", "");
 
         if (!db.isColumnExist(shopName, "Petty", valueEdited)) {
             db.alterTabTable(shopName, "Petty", valueEdited);
@@ -165,7 +166,7 @@ public class AdminPetty extends javax.swing.JPanel {
                 if (!"Common".equals(type)) {
                     JLabel label = new JLabel(type);
                     label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                    label.setBounds(20 + j, 200+ 30 * i, 300, 20);
+                    label.setBounds(20 + j, 200 + 30 * i, 300, 20);
                     add(label);
                     i = i + 1;
                 }
@@ -175,7 +176,7 @@ public class AdminPetty extends javax.swing.JPanel {
 
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(60 + j, 200+ 30 * i, 130, 20);
+                        jLabel.setBounds(60 + j, 200 + 30 * i, 130, 20);
                         i = i + 1;
                         add(jLabel);
                     }

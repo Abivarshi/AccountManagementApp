@@ -99,7 +99,9 @@ public class CommissionAndService extends javax.swing.JPanel {
             default:
                 System.out.println("no match");
         }
-
+        
+        valueEdited = valueEdited.replaceAll("\\s+", "");
+        
         if (!db.isColumnExist(shopName, "Sheet2", valueEdited)) {
             db.alterTabTable(shopName, "Sheet2", valueEdited);
             db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "Sheet2Detail");

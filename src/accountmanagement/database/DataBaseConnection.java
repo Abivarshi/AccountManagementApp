@@ -555,6 +555,12 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Sheet2", "CommisionOyster");
         alterTabTable(shopName, "Sheet2", "SC_PayPoint");
         alterTabTable(shopName, "Sheet2", "SC_Lottary");
+        alterTabTable(shopName, "Sheet2", "ComTotal");
+        alterTabTable(shopName, "Sheet2", "ServiceTotal");
+//        alterTabTable(shopName, "Sheet2", "OysterDD");
+//        alterTabTable(shopName, "Sheet2", "PaypointDD");
+//        alterTabTable(shopName, "Sheet2", "LotteryDD");
+       
     }
     
     public void insertDefaultBankDetail(String shopName) {
@@ -642,6 +648,11 @@ public class DataBaseConnection {
         insertDetailTable(shopName, "Oyster", "CommisionOyster", "Commision", "Sheet2Detail");
         insertDetailTable(shopName, "Pay Point", "SC_PayPoint", "Service Charge", "Sheet2Detail");
         insertDetailTable(shopName, "Lottary", "SC_Lottary", "Service Charge", "Sheet2Detail");
+        insertDetailTable(shopName, "Commission Total", "ComTotal", "Summary", "Sheet2Detail");
+        insertDetailTable(shopName, "Service Charge Total", "ServiceTotal", "Summary", "Sheet2Detail");
+//        insertDetailTable(shopName, "Oyster DD", "OysterDD", "Summary", "Sheet2Detail");
+//        insertDetailTable(shopName, "Paypoint DD", "PaypointDD", "Summary", "Sheet2Detail");
+//        insertDetailTable(shopName, "Lottery DD", "LotteryDD", "Summary", "Sheet2Detail");
     }
     
     public void createShop(String shopName) throws ClassNotFoundException, SQLException {
