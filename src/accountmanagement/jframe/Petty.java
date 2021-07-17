@@ -124,10 +124,31 @@ public class Petty extends javax.swing.JPanel {
         if (jDateChooser1.getDate() != null) {
             try {
                 HashMap<String, Float> bankValues = new HashMap();
+                float expTotal = 0;
+                float purTotal = 0;
+                float balance = 0;
                 for (List<String> list : listOfTextFields.keySet()) {
+                    if (list.get(2).equalsIgnoreCase("Expenditure")) {
+                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Purchase")) {
+                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Banking")) {
+                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Common")) {
+                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if(list.get(0).equalsIgnoreCase("Borrow")){
+                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if(list.get(0).equalsIgnoreCase("Pay Back")){
+                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                    }
                     JTextField text = listOfTextFields.get(list);
                     bankValues.put(list.get(1), Float.parseFloat(text.getText()));
                 }
+                balance = balance - expTotal - purTotal;
+                bankValues.put("SubPurchase", expTotal);
+                bankValues.put("SubExpenditure", purTotal);
+                bankValues.put("Balance", balance);
+                
                 System.out.println(bankValues.toString());
                 db.insertValuesTabTable(shopName, "Petty", sdf.format(jDateChooser1.getDate()), bankValues);
                 warningLabel.setText("Petty added successfully..");

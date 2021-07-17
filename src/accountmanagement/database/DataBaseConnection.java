@@ -443,6 +443,9 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Bank", "P_NI");
         alterTabTable(shopName, "Bank", "P_BestWay");
         alterTabTable(shopName, "Bank", "PB_BorrowMoney");
+        alterTabTable(shopName, "Bank", "SubPurchase");
+        alterTabTable(shopName, "Bank", "SubExpenditure");
+        alterTabTable(shopName, "Bank", "Balance");
     }
 
     public void createDefaultPetty(String shopName) {
@@ -477,7 +480,7 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Petty", "B_NATWEST");
         alterTabTable(shopName, "Petty", "B_CashPlus");
         alterTabTable(shopName, "Petty", "SubPurchase");
-        alterTabTable(shopName, "Petty", "SubExpnditure");
+        alterTabTable(shopName, "Petty", "SubExpenditure");
         alterTabTable(shopName, "Petty", "Balance");
         
     }
@@ -600,6 +603,9 @@ public class DataBaseConnection {
         insertDetailTable(shopName, "NI", "P_NI", "Purchase", "BankDetail");
         insertDetailTable(shopName, "BestWay", "P_BestWay", "Purchase", "BankDetail");
         insertDetailTable(shopName, "Borrow Money", "PB_BorrowMoney", "Pay Back", "BankDetail");
+        insertDetailTable(shopName, "SubTotal Purchase", "SubPurchase", "Summary", "BankDetail");
+        insertDetailTable(shopName, "SubTotal Expenditure", "SubExpenditure", "Summary", "BankDetail");
+        insertDetailTable(shopName, "Balance", "Balance", "Summary", "BankDetail");
     }
      
     public void insertDefaultPettyDetail(String shopName) {
@@ -610,15 +616,15 @@ public class DataBaseConnection {
         insertDetailTable(shopName, "Cash", "C_Cash", "Common", "PettyDetail");
         insertDetailTable(shopName, "Coin", "C_Coin", "Common", "PettyDetail");
         insertDetailTable(shopName, "BE IOU Paid", "CC_BE_IOU_Paid", "Cost Cutter", "PettyDetail");
-        insertDetailTable(shopName, "BE IOU", "CC_BE_IOU", "Cost Cutter", "PettyDetail");
+        insertDetailTable(shopName, "BE IOU", "CC_BE_IOU", "Summary", "PettyDetail");
         insertDetailTable(shopName, "Ambiant", "CC_Ambiant", "Cost Cutter", "PettyDetail");
         insertDetailTable(shopName, "Chilled", "CC_Chilled", "Cost Cutter", "PettyDetail");
         insertDetailTable(shopName, "Frozen", "CC_Frozen", "Cost Cutter", "PettyDetail");
-        insertDetailTable(shopName, "Borrow", "CB_Borrow", "Cash Borrow", "PettyDetail");
-        insertDetailTable(shopName, "Pay Back", "CB_Payback", "Cash Borrow", "PettyDetail");
+        insertDetailTable(shopName, "Borrow", "CB_Borrow", "Cash", "PettyDetail");
+        insertDetailTable(shopName, "Pay Back", "CB_Payback", "Cash", "PettyDetail");
         insertDetailTable(shopName, "Borrow", "CCard_Barrow", "C/Card", "PettyDetail");
         insertDetailTable(shopName, "Pay Back", "CCard_Payback", "C/Card", "PettyDetail");
-        insertDetailTable(shopName, "IOU", "IOU_Borrow", "IOU", "PettyDetail");
+        insertDetailTable(shopName, "Borrow", "IOU_Borrow", "IOU", "PettyDetail");
         insertDetailTable(shopName, "Pay Back", "IOU_Payback", "IOU", "PettyDetail");
         insertDetailTable(shopName, "Cost Cutter", "P_CostCutter", "Purchase", "PettyDetail");
         insertDetailTable(shopName, "Dhamecha", "P_Dhamecha", "Purchase", "PettyDetail");
@@ -635,7 +641,7 @@ public class DataBaseConnection {
         insertDetailTable(shopName, "NATWEST", "B_NATWEST", "Banking", "PettyDetail");
         insertDetailTable(shopName, "Cash Plus", "B_CashPlus", "Banking", "PettyDetail");
         insertDetailTable(shopName, "SubTotal Purchase", "SubPurchase", "Summary", "PettyDetail");
-        insertDetailTable(shopName, "SubTotal Expenditure", "SubExpnditure", "Summary", "PettyDetail");
+        insertDetailTable(shopName, "SubTotal Expenditure", "SubExpenditure", "Summary", "PettyDetail");
         insertDetailTable(shopName, "Petty Balance", "Balance", "Summary", "PettyDetail");
     }
     

@@ -123,13 +123,32 @@ public class Bank extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
             try {
+                float expTotal = 0;
+                float purTotal = 0;
+                float balance = 0;
                 HashMap<String, Float> bankValues = new HashMap();
                 for (List<String> list : listOfTextFields.keySet()) {
+                    if (list.get(2).equalsIgnoreCase("Expenditure Money Out (Monthly)") || list.get(2).equalsIgnoreCase("Expenditure Money Out (Yearly)")
+                            || list.get(2).equalsIgnoreCase("Expenditure/ Bank Charge")) {
+                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Purchase")) {
+                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("From Bank") || list.get(2).equalsIgnoreCase("Money In (Commission)")) {
+                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Service Money Out") || list.get(2).equalsIgnoreCase("Pay Back")) {
+                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                    }
                     JTextField text = listOfTextFields.get(list);
                     bankValues.put(list.get(1), Float.parseFloat(text.getText()));
                 }
+                balance = balance - expTotal - purTotal;
+                bankValues.put("SubPurchase", expTotal);
+                bankValues.put("SubExpenditure", purTotal);
+                bankValues.put("Balance", balance);
+                
                 System.out.println(bankValues.toString());
                 db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
+                
                 warningLabel.setText("Bank added successfully..");
                 warningLabel.setForeground(Color.green);
                 resetText();
@@ -206,7 +225,6 @@ public class Bank extends javax.swing.JPanel {
                         jPanel1.add(jText);
                     }
                 }
-
             }
 
         } catch (SQLException ex) {
