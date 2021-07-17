@@ -680,7 +680,7 @@ public class Till extends javax.swing.JPanel {
                     tillValues.put("R_VoucherPayPoint", voucherPayPointReport);
                     tillValues.put("R_RefundGoods",refundGoodsReport );
                     tillValues.put("R_RefundServices",refundServicesReport );
-                    tillValues.put("R_RefundAccountCredit", refundAccountCreditReport);
+                    tillValues.put("R_AccountCredit", refundAccountCreditReport);
                     tillValues.put("R_Purchase", purchaseReport);
                     tillValues.put("R_Expenditure",expenditureReport );
                     tillValues.put("R_AccPay", accPayReport);

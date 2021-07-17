@@ -6,6 +6,7 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class AdminPurcharse extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Purcharse Type");
+        jLabel1.setText("Purchase Type");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 31, 113, 22));
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 114, -1));
 
@@ -71,7 +72,7 @@ public class AdminPurcharse extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(jList1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 270));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 530));
 
         warningLabel.setForeground(new java.awt.Color(204, 0, 0));
         add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 220, 20));
@@ -83,24 +84,31 @@ public class AdminPurcharse extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         successLabel.setText("");
         warningLabel.setText("");
-        if (!db.isColumnExist(shopName, "Purcharse", jTextField1.getText())) {
-            db.alterTabTable(shopName, "Purcharse", jTextField1.getText());
+        
+        String value = jTextField1.getText();
+        String valueEdited = value.replaceAll("\\s+", "");
+        
+        if (!db.isColumnExist(shopName, "Purchase", valueEdited)) {
+            db.alterTabTable(shopName, "Purchase", valueEdited);
+            db.insertEPDetailTable(shopName, value, valueEdited, "PurchaseDetail");
             getPurcharseList();
             jTextField1.setText("");
-            successLabel.setText("Purcharse added Successfully..");
+            successLabel.setText("Purchase added Successfully..");
         }else{
             jTextField1.setText("");
-            warningLabel.setText("**Purcharse already exist.");
+            warningLabel.setText("**Purchase already exist.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getPurcharseList() {
-        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
-        try {
+        ResultSet res = db.getDeatilTableValue(shopName, "PurchaseDetail");
             List<String> items = new ArrayList();
-            for (int i = 4; i <= metadata.getColumnCount(); i++) {
-                String columnName = metadata.getColumnName(i);
-                items.add(columnName);
+
+        try {
+            while (res.next()) {
+                String item = res.getString("Item");
+                if(!item.equalsIgnoreCase("Total"))
+                    items.add(item);
             }
             jList1.setListData(items.toArray());
         } catch (SQLException ex) {

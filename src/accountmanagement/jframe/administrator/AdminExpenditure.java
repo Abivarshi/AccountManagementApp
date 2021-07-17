@@ -6,6 +6,7 @@
 package accountmanagement.jframe.administrator;
 
 import accountmanagement.database.DataBaseConnection;
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class AdminExpenditure extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(jList1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 270));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 590));
 
         successLabel.setForeground(new java.awt.Color(51, 153, 0));
         add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 220, 20));
@@ -83,8 +84,13 @@ public class AdminExpenditure extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         successLabel.setText("");
         warningLabel.setText("");
-        if (!db.isColumnExist(shopName, "Expenditure", expenditureTypeTextField.getText())) {
-            db.alterTabTable(shopName, "Expenditure", expenditureTypeTextField.getText());
+             
+        String value = expenditureTypeTextField.getText();
+        String valueEdited = value.replaceAll("\\s+", "");
+        
+        if (!db.isColumnExist(shopName, "Expenditure", valueEdited)) {
+            db.alterTabTable(shopName, "Expenditure", valueEdited);
+            db.insertEPDetailTable(shopName, value, valueEdited, "ExpenditureDetail");
             getExpenditureList();
             expenditureTypeTextField.setText("");
             successLabel.setText("Expenditure added Successfully..");
@@ -95,16 +101,18 @@ public class AdminExpenditure extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getExpenditureList() {
-        ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
-        try {
+        ResultSet res = db.getDeatilTableValue(shopName, "ExpenditureDetail");
             List<String> items = new ArrayList();
-            for (int i = 4; i <= metadata.getColumnCount(); i++) {
-                String columnName = metadata.getColumnName(i);
-                items.add(columnName);
+
+        try {
+            while (res.next()) {
+                String item = res.getString("Item");
+                if(!item.equalsIgnoreCase("Total"))
+                    items.add(item);
             }
             jList1.setListData(items.toArray());
         } catch (SQLException ex) {
-            Logger.getLogger(AdminExpenditure.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminPurcharse.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

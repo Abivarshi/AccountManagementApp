@@ -261,7 +261,13 @@ public class DataBaseConnection {
                 System.out.println("Building the " + name + " table...");
 
                 Statement state2 = con.createStatement();
-                state2.executeUpdate("create table " + name + "(id integer,"
+                if(name.equalsIgnoreCase("ExpenditureDetail") || name.equalsIgnoreCase("PurchaseDetail"))
+                    state2.executeUpdate("CREATE TABLE " + name + "(id integer,"
+                        + "Item VARCHAR(255),"
+                        + "Name VARCHAR(255),"
+                        + "primary key (id));");
+                else
+                    state2.executeUpdate("CREATE TABLE " + name + "(id integer,"
                         + "Item VARCHAR(255),"
                         + "Name VARCHAR(255),"
                         + "Type VARCHAR(255),"
@@ -281,6 +287,21 @@ public class DataBaseConnection {
             
             PreparedStatement prep = con.prepareStatement("INSERT INTO " + table + " (Item, Name, Type) VALUES ("
                     + "'" + item + "', '" + name + "', '" + type + "');");
+            
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void insertEPDetailTable(String shopName, String item, String name, String table){
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            
+            PreparedStatement prep = con.prepareStatement("INSERT INTO " + table + " (Item, Name) VALUES ("
+                    + "'" + item + "', '" + name + "');");
             
             prep.execute();
         } catch (SQLException ex) {
@@ -406,6 +427,25 @@ public class DataBaseConnection {
             return null;
         }
     }
+    
+    public ResultSet getOneColValueTabTable(String shopName, String tableName, String colName, String dateFrom, String dateTo) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT " + colName + ", Date FROM " + tableName + 
+                    " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'" +
+                    " ORDER BY Date ASC");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
 
     public void createDefaultBank(String shopName) {
         if (con == null || !connectedShop.equals(shopName)) {
@@ -550,6 +590,59 @@ public class DataBaseConnection {
 
     }
 
+    public void createDefaultExpenditure(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        alterTabTable(shopName, "Expenditure", "Staff1");
+        alterTabTable(shopName, "Expenditure", "Staff2");
+        alterTabTable(shopName, "Expenditure", "Staff3");
+        alterTabTable(shopName, "Expenditure", "Staff4");
+        alterTabTable(shopName, "Expenditure", "Staff5");
+        alterTabTable(shopName, "Expenditure", "Staff6");
+        alterTabTable(shopName, "Expenditure", "Staff7");
+        alterTabTable(shopName, "Expenditure", "Staff8");
+        alterTabTable(shopName, "Expenditure", "CapitalGains");
+        alterTabTable(shopName, "Expenditure", "Van");
+        alterTabTable(shopName, "Expenditure", "Diesel");
+        alterTabTable(shopName, "Expenditure", "VanRepair");
+        alterTabTable(shopName, "Expenditure", "FridgeRepair");
+        alterTabTable(shopName, "Expenditure", "ShudderRepair");
+        alterTabTable(shopName, "Expenditure", "ElectricRepair");
+        alterTabTable(shopName, "Expenditure", "Total");
+    }
+
+    public void createDefaultPurchase(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        alterTabTable(shopName, "Purchase", "Sanwich");
+        alterTabTable(shopName, "Purchase", "Milk");
+        alterTabTable(shopName, "Purchase", "TeastyBread");
+        alterTabTable(shopName, "Purchase", "Camlot");
+        alterTabTable(shopName, "Purchase", "Cake");
+        alterTabTable(shopName, "Purchase", "Damecha");
+        alterTabTable(shopName, "Purchase", "Vegetable");
+        alterTabTable(shopName, "Purchase", "Eggs");
+        alterTabTable(shopName, "Purchase", "Beer");
+        alterTabTable(shopName, "Purchase", "Rizzla");
+        alterTabTable(shopName, "Purchase", "Tesco");
+        alterTabTable(shopName, "Purchase", "CallingCard");
+        alterTabTable(shopName, "Purchase", "BasicNeeds");
+        alterTabTable(shopName, "Purchase", "Phonixx");
+        alterTabTable(shopName, "Purchase", "NBC");
+        alterTabTable(shopName, "Purchase", "Thief");
+        alterTabTable(shopName, "Purchase", "AmericanFanyta");
+        alterTabTable(shopName, "Purchase", "VnSales");
+        alterTabTable(shopName, "Purchase", "Ice");
+        alterTabTable(shopName, "Purchase", "Buzz");
+        alterTabTable(shopName, "Purchase", "CardConnection");
+        alterTabTable(shopName, "Purchase", "AmericanSweets");
+        alterTabTable(shopName, "Purchase", "MilkVouture");
+        alterTabTable(shopName, "Purchase", "PhoneCharger");
+        alterTabTable(shopName, "Purchase", "Total");
+    }
+    
     public void createDefaultSheet2(String shopName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -661,6 +754,59 @@ public class DataBaseConnection {
 //        insertDetailTable(shopName, "Paypoint DD", "PaypointDD", "Summary", "Sheet2Detail");
 //        insertDetailTable(shopName, "Lottery DD", "LotteryDD", "Summary", "Sheet2Detail");
     }
+
+    public void insertDefaultExpenditureDetail(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        insertEPDetailTable(shopName, "Staff 1", "Staff1", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Staff 2", "Staff2", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Staff 3", "Staff3", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Staff 4", "Staff4", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Staff 5", "Staff5", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Staff 6", "Staff6", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Staff 7", "Staff7", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Staff 8", "Staff8", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Capital Gains", "CapitalGains", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Van", "Van", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Diesel", "Diesel", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Van Repair", "VanRepair", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Fridge Repair", "FridgeRepair", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Shudder Repair", "ShudderRepair", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Electric Repair", "ElectricRepair", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Total", "Total", "ExpenditureDetail");
+    }
+
+    public void insertDefaultPurchaseDetail(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        insertEPDetailTable(shopName, "Sanwich", "Sanwich", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Milk", "Milk", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Teasty Bread", "TeastyBread", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Camlot", "Camlot", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Cake", "Cake", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Damecha", "Damecha", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Vegetable", "Vegetable", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Eggs", "Eggs", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Beer", "Beer", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Rizzla", "Rizzla", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Tesco", "Tesco", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Calling Card", "CallingCard", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Basic Needs", "BasicNeeds", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Phonixx", "Phonixx", "PurchaseDetail");
+        insertEPDetailTable(shopName, "NBC", "NBC", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Thief", "Thief", "PurchaseDetail");
+        insertEPDetailTable(shopName, "American Fanyta", "AmericanFanyta", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Vn Sales", "VnSales", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Ice", "Ice", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Buzz", "Buzz", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Card Connection", "CardConnection", "PurchaseDetail");
+        insertEPDetailTable(shopName, "American Sweets", "AmericanSweets", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Milk Vouture", "MilkVouture", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Phone Charger", "PhoneCharger", "PurchaseDetail");
+        insertEPDetailTable(shopName, "Total", "Total", "PurchaseDetail");
+    }
     
     public void createShop(String shopName) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
@@ -687,9 +833,9 @@ public class DataBaseConnection {
         createStaff(shopName);
         createStaffTime(shopName);
         createTabTable(shopName, "Expenditure");
-        alterTabTable(shopName, "Expenditure", "Total");
-        createTabTable(shopName, "Purcharse");
-        alterTabTable(shopName, "Purcharse", "Total");
+        createDefaultExpenditure(shopName);
+        createTabTable(shopName, "Purchase");
+        createDefaultPurchase(shopName);
         createTabTable(shopName, "Till");
         createDefaultTill(shopName, "Till");
         createTabTable(shopName, "Bank");
@@ -704,6 +850,10 @@ public class DataBaseConnection {
         insertDefaultPettyDetail(shopName);
         createDetailTable(shopName, "Sheet2Detail");
         insertDefaultSheet2Detail(shopName);
+        createDetailTable(shopName, "ExpenditureDetail");
+        insertDefaultExpenditureDetail(shopName);
+        createDetailTable(shopName, "PurchaseDetail");
+        insertDefaultPurchaseDetail(shopName);
     }
 
     public ResultSet getShopList() {

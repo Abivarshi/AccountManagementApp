@@ -18,7 +18,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -124,39 +126,47 @@ public class ExpenditureReport extends javax.swing.JPanel {
         String toDate = sdf.format(jDateChooserTo.getDate());
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
+            List<String> colDBName = new ArrayList();
+            Map<String, Float> tillExp = new HashMap();
+
             List<String> column = new ArrayList();
             column.add("Date");
-            boolean firstEntry = true;
-            List<List<String>> valueRow = new ArrayList();
-            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
 
-            ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
+            List<List<String>> valueRow = new ArrayList();
+            ResultSet resCol = db.getDeatilTableValue(shopName, "ExpenditureDetail");
+            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
+            ResultSet resTill = db.getOneColValueTabTable(shopName, "Till", "R_Expenditure", fromDate, toDate);
+
             try {
+                while (resCol.next()) {
+                    colDBName.add(resCol.getString("Name"));
+                    column.add(resCol.getString("Item"));
+                }
+                column.add("Expenditure");
+                column.add("Different");
+                valueRow.add(column);
+
+                while (resTill.next()) {
+                    System.out.println(resTill.getString("Date"));
+                    tillExp.put(resTill.getString("Date"), resTill.getFloat("R_Expenditure"));
+                }
+
                 while (res.next()) {
-                    String dateCol = metadata.getColumnName(2);
-                    String date = res.getString(dateCol);
                     List<String> values = new ArrayList();
+                    String date = res.getString("Date");
                     values.add(date);
 
-                    float expenditure = 10;
+                    float expenditure = 0;
                     float totalExpenditure = 0;
-                    for (int i = 3; i <= metadata.getColumnCount(); i++) {
-                        String columnName = metadata.getColumnName(i);
-                        Float value = res.getFloat(columnName);
+                    if (tillExp.containsKey(date)) {
+                        expenditure = tillExp.get(date);
+                    }
+                    for (String col : colDBName) {
+                        Float value = res.getFloat(col);
                         values.add(value.toString());
-                        if (columnName.equals("Total")) {
+                        if (col.equals("Total")) {
                             totalExpenditure = value;
                         }
-                        if (firstEntry) {
-                            column.add(columnName);
-                        }
-                    }
-                    if (firstEntry) {
-                        column.add("Expenditure");
-                        column.add("Different");
-
-                        valueRow.add(column);
-                        firstEntry = false;
                     }
                     values.add(String.valueOf(expenditure));
                     values.add(String.valueOf(expenditure - totalExpenditure));

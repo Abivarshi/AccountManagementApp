@@ -130,7 +130,7 @@ public class AdminBank extends javax.swing.JPanel {
 
         if (!db.isColumnExist(shopName, "Bank", valueEdited)) {
             db.alterTabTable(shopName, "Bank", valueEdited);
-            db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "BankDetail");
+            db.insertDetailTable(shopName, value, valueEdited, type, "BankDetail");
             valueTextField.setText("");
             successLabel.setText("Bank added Successfully..");
         } else {

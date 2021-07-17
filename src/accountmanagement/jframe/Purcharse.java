@@ -7,7 +7,7 @@ package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
 import java.awt.Color;
-import java.sql.ResultSetMetaData;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -128,7 +128,7 @@ public class Purcharse extends javax.swing.JPanel {
                 listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
                 try {
                     purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
-                    total=total+Float.parseFloat(listOfTextFields.get(name).getText());
+                    total = total + Float.parseFloat(listOfTextFields.get(name).getText());
                 } catch (java.lang.NumberFormatException e) {
                     warningLabel.setText("**Values should be decimal");
                     listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
@@ -137,10 +137,10 @@ public class Purcharse extends javax.swing.JPanel {
                 }
             }
             purchaseValues.put("Total", total);
-            System.out.println("Total"+total);
+            System.out.println("Total" + total);
             if (canSave) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                db.insertValuesTabTable(shopName, "Purcharse", sdf.format(jDateChooser1.getDate()), purchaseValues);
+                db.insertValuesTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()), purchaseValues);
                 successLabel.setText("Purcharse added successfully..");
                 resetText();
             }
@@ -158,25 +158,30 @@ public class Purcharse extends javax.swing.JPanel {
             listOfTextFields.get(name).setText("0");
         }
     }
-    
+
     private void populatePurchase() {
-        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
+        ResultSet res = db.getDeatilTableValue(shopName, "PurchaseDetail");
         try {
-            for (int i = 4; i <= metadata.getColumnCount(); i++) {
-                String columnName = metadata.getColumnName(i);
-                JLabel label = new JLabel(columnName);
-                label.setFont(new java.awt.Font("Tahoma", 0, 12));
-                label.setBounds(20, 30 * (i - 3), 130, 20);
+            int i = 1;
+            while (res.next()) {
+                String item = res.getString("Item");
+                String name = res.getString("Name");
+                if (!item.equalsIgnoreCase("Total")) {
+                    JLabel label = new JLabel(item);
+                    label.setFont(new java.awt.Font("Tahoma", 0, 12));
+                    label.setBounds(20, 30 * i, 130, 20);
 
-                JTextField textField = new JTextField();
-                textField.setFont(new java.awt.Font("Tahoma", 0, 12));
-                textField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-                textField.setText("0");
-                textField.setBounds(220, 30 * (i - 3), 96, 25);
+                    JTextField textField = new JTextField();
+                    textField.setFont(new java.awt.Font("Tahoma", 0, 12));
+                    textField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+                    textField.setText("0");
+                    textField.setBounds(220, 30 * i, 96, 25);
 
-                jPanel1.add(label);
-                jPanel1.add(textField);
-                listOfTextFields.put(columnName, textField);
+                    jPanel1.add(label);
+                    jPanel1.add(textField);
+                    listOfTextFields.put(name, textField);
+                    i = i + 1;
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Purcharse.class.getName()).log(Level.SEVERE, null, ex);
