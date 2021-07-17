@@ -105,7 +105,7 @@ public class AdminExpenditure extends javax.swing.JPanel {
             }
             jList1.setListData(items.toArray());
         } catch (SQLException ex) {
-            Logger.getLogger(TillJframe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminExpenditure.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

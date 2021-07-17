@@ -6,8 +6,11 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.administrator.AdminBank;
 import accountmanagement.jframe.administrator.AdminExpenditure;
+import accountmanagement.jframe.administrator.AdminPetty;
 import accountmanagement.jframe.administrator.AdminPurcharse;
+import accountmanagement.jframe.administrator.CommissionAndService;
 import accountmanagement.jframe.administrator.Staff;
 import accountmanagement.jframe.administrator.User;
 import java.awt.CardLayout;
@@ -55,6 +58,9 @@ public class Administrator extends javax.swing.JPanel {
         userButton = new javax.swing.JButton();
         expenditureButton = new javax.swing.JButton();
         purcharseButton = new javax.swing.JButton();
+        bankButton = new javax.swing.JButton();
+        commissionButton = new javax.swing.JButton();
+        pettyButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -149,6 +155,72 @@ public class Administrator extends javax.swing.JPanel {
             }
         });
 
+        bankButton.setBackground(new java.awt.Color(0, 0, 51));
+        bankButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        bankButton.setText("Bank");
+        bankButton.setBorder(null);
+        bankButton.setBorderPainted(false);
+        bankButton.setContentAreaFilled(false);
+        bankButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bankButton.setFocusPainted(false);
+        bankButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bankButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bankButtonMouseHoverOut(evt);
+            }
+        });
+        bankButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankButtonActionPerformed(evt);
+            }
+        });
+
+        commissionButton.setBackground(new java.awt.Color(0, 0, 51));
+        commissionButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        commissionButton.setText("Commission & Service");
+        commissionButton.setBorder(null);
+        commissionButton.setBorderPainted(false);
+        commissionButton.setContentAreaFilled(false);
+        commissionButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        commissionButton.setFocusPainted(false);
+        commissionButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                commissionButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                commissionButtonMouseHoverOut(evt);
+            }
+        });
+        commissionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commissionButtonActionPerformed(evt);
+            }
+        });
+
+        pettyButton.setBackground(new java.awt.Color(0, 0, 51));
+        pettyButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        pettyButton.setText("Petty");
+        pettyButton.setBorder(null);
+        pettyButton.setBorderPainted(false);
+        pettyButton.setContentAreaFilled(false);
+        pettyButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pettyButton.setFocusPainted(false);
+        pettyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pettyButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pettyButtonMouseHoverOut(evt);
+            }
+        });
+        pettyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pettyButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -157,9 +229,12 @@ public class Administrator extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(staffButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(expenditureButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(expenditureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(purcharseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(userButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(userButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bankButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(commissionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pettyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,7 +248,13 @@ public class Administrator extends javax.swing.JPanel {
                 .addComponent(purcharseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(expenditureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(bankButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pettyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(commissionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -183,7 +264,7 @@ public class Administrator extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -249,6 +330,48 @@ public class Administrator extends javax.swing.JPanel {
         layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed
 
+    private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankButtonMouseHover
+
+    private void bankButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankButtonMouseHoverOut
+
+    private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
+        jPanel1.add("AdminBank",new AdminBank(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_bankButtonActionPerformed
+
+    private void commissionButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_commissionButtonMouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_commissionButtonMouseHover
+
+    private void commissionButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_commissionButtonMouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_commissionButtonMouseHoverOut
+
+    private void commissionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commissionButtonActionPerformed
+        jPanel1.add("CommissionAndService",new CommissionAndService(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_commissionButtonActionPerformed
+
+    private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pettyButtonMouseHover
+
+    private void pettyButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pettyButtonMouseHoverOut
+
+    private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
+        jPanel1.add("AdminPetty",new AdminPetty(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_pettyButtonActionPerformed
+
    
     private ActionListener populateItems(String tabName) {
         return (ActionEvent e) -> {
@@ -260,9 +383,12 @@ public class Administrator extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bankButton;
+    private javax.swing.JButton commissionButton;
     private javax.swing.JButton expenditureButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton pettyButton;
     private javax.swing.JButton purcharseButton;
     private javax.swing.JButton staffButton;
     private javax.swing.JButton userButton;
