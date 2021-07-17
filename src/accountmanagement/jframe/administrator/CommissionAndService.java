@@ -26,6 +26,7 @@ public class CommissionAndService extends javax.swing.JPanel {
      */
     public CommissionAndService(String shopName) {
         this.shopName = shopName;
+        getCommissionAndServiceList();
         initComponents();
     }
 
@@ -52,7 +53,7 @@ public class CommissionAndService extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "COMMISSION\t\t", "SERVICE CHARGE\t", " " }));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Commision", "Service Charge" }));
         add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 160, -1));
 
         userType.setText("Value");
@@ -82,9 +83,38 @@ public class CommissionAndService extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        successLabel.setText("");
+        warningLabel.setText("");
+        String type = typeCombo.getSelectedItem().toString();
+        String value = valueTextField.getText();
+        String valueEdited = null;
+
+        switch (type) {
+            case "Commision":
+                valueEdited = "Commision" + value;
+                break;
+            case "Service Charge":
+                valueEdited = "SC_" + value;
+                break;
+            default:
+                System.out.println("no match");
+        }
+
+        if (!db.isColumnExist(shopName, "Sheet2", valueEdited)) {
+            db.alterTabTable(shopName, "Sheet2", valueEdited);
+            db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "Sheet2Detail");
+            getCommissionAndServiceList();
+            valueTextField.setText("");
+            successLabel.setText("Commission And Service Charge added Successfully..");
+        } else {
+            valueTextField.setText("");
+            warningLabel.setText("**Commission And Service Charge already exist.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void getCommissionAndServiceList() {
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

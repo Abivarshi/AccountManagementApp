@@ -26,6 +26,7 @@ public class AdminPetty extends javax.swing.JPanel {
      */
     public AdminPetty(String shopName) {
         this.shopName = shopName;
+        getPettyList();
         initComponents();
     }
 
@@ -52,7 +53,7 @@ public class AdminPetty extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "COSTCUTTER\t\t", "CASH BARROW", "C/CARD", "C/CARD  BARROW ", "IOU", "PURCHARSE\t\t\t\t\t\t\t\t", "EXPENTIURE\t\t\t", "BANKING\t", " " }));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Common", "Cost Cutter", "Cash Borrow", "C/Card", "IOU", "Purchase", "Expenditure", "Banking", "Summary" }));
         add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, -1));
 
         userType.setText("Value");
@@ -82,9 +83,59 @@ public class AdminPetty extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        successLabel.setText("");
+        warningLabel.setText("");
+        String type = typeCombo.getSelectedItem().toString();
+        String value = valueTextField.getText();
+        String valueEdited = null;
         
+        switch (type) {
+            case "Common":
+                valueEdited = "C_" + value;
+                break;
+            case "Cost Cutter":
+                valueEdited = "CC_" + value;
+                break;
+            case "Cash Borrow":
+                valueEdited = "CB_" + value;
+                break;
+            case "C/Card":
+                valueEdited = "CCard_" + value;
+                break;
+            case "IOU":
+                valueEdited = "IOU_" + value;
+                break;
+            case "Purchase":
+                valueEdited = "P_" + value;
+                break;
+            case "Expenditure":
+                valueEdited = "E_" + value;
+                break;
+            case "Banking":
+                valueEdited = "B_" + value;
+                break;
+            case "Summary":
+                valueEdited = value;
+                break;
+            default:
+                System.out.println("no match");
+        }
+
+        if (!db.isColumnExist(shopName, "Petty", valueEdited)) {
+            db.alterTabTable(shopName, "Petty", valueEdited);
+            db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "PettyDetail");
+            getPettyList();
+            valueTextField.setText("");
+            successLabel.setText("Petty added Successfully..");
+        } else {
+            valueTextField.setText("");
+            warningLabel.setText("**Petty already exist.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void getPettyList() {
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
