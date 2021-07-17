@@ -10,11 +10,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 
 /**
  *
@@ -31,8 +29,9 @@ public class Dashboard extends javax.swing.JFrame {
      *
      * @param shopName
      * @param role
+     * @param userName
      */
-    public Dashboard(String shopName, String role,String userName) {
+    public Dashboard(String shopName, String role, String userName) {
         this.shopName = shopName;
         this.role=role;
         this.userName=userName;
