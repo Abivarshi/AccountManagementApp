@@ -98,7 +98,7 @@ public class AdminExpenditure extends javax.swing.JPanel {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
         try {
             List<String> items = new ArrayList();
-            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+            for (int i = 4; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);
                 items.add(columnName);
             }

@@ -112,6 +112,7 @@ public class Expenditure extends javax.swing.JPanel {
         successLabel.setText("");
         warningLabel.setText("");
         boolean canSave = true;
+        float total = 0;
         if (jDateChooser.getDate() != null) {
             HashMap<String, Float> purchaseValues = new HashMap();
             for (String name : listOfTextFields.keySet()) {
@@ -119,6 +120,7 @@ public class Expenditure extends javax.swing.JPanel {
                 listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
                 try {
                     purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                    total=total+Float.parseFloat(listOfTextFields.get(name).getText());
                 } catch (java.lang.NumberFormatException e) {
                     warningLabel.setText("**Values should be decimal");
                     listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
@@ -126,6 +128,8 @@ public class Expenditure extends javax.swing.JPanel {
                     break;
                 }
             }
+            purchaseValues.put("Total", total);
+            System.out.println("Total"+total);
             if (canSave) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
@@ -150,7 +154,7 @@ public class Expenditure extends javax.swing.JPanel {
     private void populateExpenditure() {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Expenditure");
         try {
-            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+            for (int i = 4; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);
                 JLabel label = new JLabel(columnName);
                 label.setFont(new java.awt.Font("Tahoma", 0, 12));

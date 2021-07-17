@@ -95,10 +95,10 @@ public class AdminPurcharse extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getPurcharseList() {
-        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purchase");
+        ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
         try {
             List<String> items = new ArrayList();
-            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+            for (int i = 4; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);
                 items.add(columnName);
             }

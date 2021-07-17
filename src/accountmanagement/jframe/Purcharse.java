@@ -122,11 +122,13 @@ public class Purcharse extends javax.swing.JPanel {
         boolean canSave = true;
         if (jDateChooser1.getDate() != null) {
             HashMap<String, Float> purchaseValues = new HashMap();
+            float total = 0;
             for (String name : listOfTextFields.keySet()) {
                 System.out.println(name + ": " + listOfTextFields.get(name).getText());
                 listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
                 try {
                     purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                    total=total+Float.parseFloat(listOfTextFields.get(name).getText());
                 } catch (java.lang.NumberFormatException e) {
                     warningLabel.setText("**Values should be decimal");
                     listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
@@ -134,10 +136,12 @@ public class Purcharse extends javax.swing.JPanel {
                     break;
                 }
             }
+            purchaseValues.put("Total", total);
+            System.out.println("Total"+total);
             if (canSave) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 db.insertValuesTabTable(shopName, "Purcharse", sdf.format(jDateChooser1.getDate()), purchaseValues);
-                successLabel.setText("Expenditure added successfully..");
+                successLabel.setText("Purcharse added successfully..");
                 resetText();
             }
         } else {
@@ -158,7 +162,7 @@ public class Purcharse extends javax.swing.JPanel {
     private void populatePurchase() {
         ResultSetMetaData metadata = db.getTabColumns(shopName, "Purcharse");
         try {
-            for (int i = 3; i <= metadata.getColumnCount(); i++) {
+            for (int i = 4; i <= metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnName(i);
                 JLabel label = new JLabel(columnName);
                 label.setFont(new java.awt.Font("Tahoma", 0, 12));

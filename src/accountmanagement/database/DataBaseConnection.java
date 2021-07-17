@@ -686,7 +686,9 @@ public class DataBaseConnection {
         createStaff(shopName);
         createStaffTime(shopName);
         createTabTable(shopName, "Expenditure");
+        alterTabTable(shopName, "Expenditure", "Total");
         createTabTable(shopName, "Purcharse");
+        alterTabTable(shopName, "Purcharse", "Total");
         createTabTable(shopName, "Till");
         createDefaultTill(shopName, "Till");
         createTabTable(shopName, "Bank");
