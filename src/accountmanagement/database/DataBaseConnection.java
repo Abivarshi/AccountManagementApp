@@ -696,6 +696,7 @@ public class DataBaseConnection {
         createTabTable(shopName, "Sheet2");
         createDefaultSheet2(shopName);
         createTabTable(shopName, "Petty");
+        createDefaultPetty(shopName);
         createDetailTable(shopName, "BankDetail");
         insertDefaultBankDetail(shopName);
         createDetailTable(shopName, "PettyDetail");

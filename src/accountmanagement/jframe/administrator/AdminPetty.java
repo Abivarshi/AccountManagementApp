@@ -61,7 +61,7 @@ public class AdminPetty extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cost Cutter", "Purchase", "Expenditure", "Banking" }));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Common", "Cost Cutter", "Cash Borrow", "C/Card", "IOU", "Purchase", "Expenditure", "Banking", " " }));
         add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, -1));
 
         userType.setText("Value");
@@ -98,6 +98,9 @@ public class AdminPetty extends javax.swing.JPanel {
         String valueEdited = null;
 
         switch (type) {
+            case "Common":
+                valueEdited = "C_" + value;
+                break;
             case "Cost Cutter":
                 valueEdited = "CC_" + value;
                 break;
@@ -123,7 +126,6 @@ public class AdminPetty extends javax.swing.JPanel {
                 System.out.println("no match");
         }
         valueEdited = valueEdited.replaceAll("\\s+", "");
-
         if (!db.isColumnExist(shopName, "Petty", valueEdited)) {
             db.alterTabTable(shopName, "Petty", valueEdited);
             db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "PettyDetail");
