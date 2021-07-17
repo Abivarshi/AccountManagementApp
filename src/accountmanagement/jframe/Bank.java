@@ -210,7 +210,7 @@ public class Bank extends javax.swing.JPanel {
 
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(60 + j, 30 * i, 130, 20);
+                        jLabel.setBounds(40 + j, 30 * i, 130, 20);
 
                         JTextField jText = new JTextField();
                         jText.setFont(new java.awt.Font("Tahoma", 0, 12));

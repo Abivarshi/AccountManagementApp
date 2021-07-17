@@ -124,6 +124,7 @@ public class Petty extends javax.swing.JPanel {
         if (jDateChooser1.getDate() != null) {
             try {
                 HashMap<String, Float> bankValues = new HashMap();
+                float beIOU = 0;
                 float expTotal = 0;
                 float purTotal = 0;
                 float balance = 0;
@@ -132,23 +133,26 @@ public class Petty extends javax.swing.JPanel {
                         expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
                     } else if (list.get(2).equalsIgnoreCase("Purchase")) {
                         purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Cost Cutter")) {
+                        beIOU = beIOU + Float.parseFloat(listOfTextFields.get(list).getText());
                     } else if (list.get(2).equalsIgnoreCase("Banking")) {
                         balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Common")) {
+                    } else if (list.get(2).equalsIgnoreCase("Common") || list.get(2).equalsIgnoreCase("BE IOU")) {
                         balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if(list.get(0).equalsIgnoreCase("Borrow")){
+                    } else if (list.get(0).equalsIgnoreCase("Borrow")) {
                         balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if(list.get(0).equalsIgnoreCase("Pay Back")){
+                    } else if (list.get(0).equalsIgnoreCase("Pay Back")) {
                         balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
                     }
                     JTextField text = listOfTextFields.get(list);
                     bankValues.put(list.get(1), Float.parseFloat(text.getText()));
                 }
-                balance = balance - expTotal - purTotal;
+                balance = balance - expTotal - purTotal - beIOU;
+                bankValues.put("CC_BE_IOU", beIOU);
                 bankValues.put("SubPurchase", expTotal);
                 bankValues.put("SubExpenditure", purTotal);
                 bankValues.put("Balance", balance);
-                
+
                 System.out.println(bankValues.toString());
                 db.insertValuesTabTable(shopName, "Petty", sdf.format(jDateChooser1.getDate()), bankValues);
                 warningLabel.setText("Petty added successfully..");
@@ -193,30 +197,34 @@ public class Petty extends javax.swing.JPanel {
             int i = 1;
             int j = 0;
 
-            for (String type : Arrays.asList("Common", "Cost Cutter", "Cash Borrow", "C/Card", "IOU",
+            for (String type : Arrays.asList("Common", "Cost Cutter", "BE IOU", "Cash", "C/Card", "IOU",
                     "Purchase", "Expenditure", "Banking")) {
 
+                int k = 20;
                 if ("Purchase".equals(type)) {
                     j = 420;
                     i = 1;
                 }
 
                 if (!"Common".equals(type)) {
-                    JLabel label = new JLabel(type);
-                    label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                    label.setBounds(20 + j, 30 * i, 300, 20);
-                    jPanel1.add(label);
-                    i = i + 1;
+                    if (!"BE IOU".equals(type)) {
+                        JLabel label = new JLabel(type);
+                        label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+                        label.setBounds(20 + j, 30 * i, 300, 20);
+                        jPanel1.add(label);
+                        i = i + 1;
+                    }
+                } else {
+                    k = 0;
                 }
 
                 for (List<String> val : bankIn) {
-
-                System.out.println(type +" : "+val.toString());
                     if (type.equals(val.get(2))) {
 
+                        System.out.println(type + " : " + val.toString());
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(60 + j, 30 * i, 130, 20);
+                        jLabel.setBounds(20 + k + j, 30 * i, 130, 20);
 
                         JTextField jText = new JTextField();
                         jText.setFont(new java.awt.Font("Tahoma", 0, 12));

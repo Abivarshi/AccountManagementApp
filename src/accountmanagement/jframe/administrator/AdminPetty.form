@@ -40,16 +40,13 @@
     <Component class="javax.swing.JComboBox" name="typeCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="9">
+          <StringArray count="6">
             <StringItem index="0" value="Common"/>
             <StringItem index="1" value="Cost Cutter"/>
-            <StringItem index="2" value="Cash Borrow"/>
-            <StringItem index="3" value="C/Card"/>
-            <StringItem index="4" value="IOU"/>
-            <StringItem index="5" value="Purchase"/>
-            <StringItem index="6" value="Expenditure"/>
-            <StringItem index="7" value="Banking"/>
-            <StringItem index="8" value=" "/>
+            <StringItem index="2" value="Purchase"/>
+            <StringItem index="3" value="Expenditure"/>
+            <StringItem index="4" value="Banking"/>
+            <StringItem index="5" value=" "/>
           </StringArray>
         </Property>
       </Properties>

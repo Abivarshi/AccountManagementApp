@@ -15,10 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -61,7 +58,7 @@ public class AdminPetty extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Common", "Cost Cutter", "Cash Borrow", "C/Card", "IOU", "Purchase", "Expenditure", "Banking", " " }));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Common", "Cost Cutter", "Purchase", "Expenditure", "Banking", " " }));
         add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, -1));
 
         userType.setText("Value");
@@ -104,7 +101,7 @@ public class AdminPetty extends javax.swing.JPanel {
             case "Cost Cutter":
                 valueEdited = "CC_" + value;
                 break;
-            case "Cash Borrow":
+            case "Cash":
                 valueEdited = "CB_" + value;
                 break;
             case "C/Card":

@@ -616,7 +616,7 @@ public class DataBaseConnection {
         
         insertDetailTable(shopName, "Cash", "C_Cash", "Common", "PettyDetail");
         insertDetailTable(shopName, "Coin", "C_Coin", "Common", "PettyDetail");
-        insertDetailTable(shopName, "BE IOU Paid", "CC_BE_IOU_Paid", "Cost Cutter", "PettyDetail");
+        insertDetailTable(shopName, "BE IOU Paid", "CC_BE_IOU_Paid", "BE IOU", "PettyDetail");
         insertDetailTable(shopName, "BE IOU", "CC_BE_IOU", "Summary", "PettyDetail");
         insertDetailTable(shopName, "Ambiant", "CC_Ambiant", "Cost Cutter", "PettyDetail");
         insertDetailTable(shopName, "Chilled", "CC_Chilled", "Cost Cutter", "PettyDetail");
