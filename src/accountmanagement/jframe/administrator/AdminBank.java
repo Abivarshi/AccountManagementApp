@@ -86,7 +86,7 @@ public class AdminBank extends javax.swing.JPanel {
         add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 270, 20));
 
         warningLabel.setForeground(new java.awt.Color(204, 0, 0));
-        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 270, 20));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 450, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -176,13 +176,12 @@ public class AdminBank extends javax.swing.JPanel {
                 label.setBounds(20 + j, 200 + 30 * i, 300, 20);
                 add(label);
                 i = i + 1;
+                
                 for (List<String> val : bankIn) {
-
                     if (type.equals(val.get(2))) {
-
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(60 + j, 200 + 30 * i, 130, 20);
+                        jLabel.setBounds(40 + j, 200 + 30 * i, 130, 20);
                         i = i + 1;
                         add(jLabel);
                     }

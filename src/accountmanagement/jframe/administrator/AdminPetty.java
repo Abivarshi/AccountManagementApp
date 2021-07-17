@@ -142,11 +142,9 @@ public class AdminPetty extends javax.swing.JPanel {
         try {
             while (res.next()) {
                 String item = res.getString("Item");
-                String name = res.getString("Name");
                 String type = res.getString("Type");
                 List<String> bankVal = new ArrayList();
                 bankVal.add(item);
-                bankVal.add(name);
                 bankVal.add(type);
                 bankIn.add(bankVal);
             }
@@ -154,28 +152,33 @@ public class AdminPetty extends javax.swing.JPanel {
             int i = 1;
             int j = 0;
 
-            for (String type : Arrays.asList("Common", "Cost Cutter", "Cash Borrow", "C/Card", "IOU",
+            for (String type : Arrays.asList("Common", "Cost Cutter", "BE IOU", "Cash", "C/Card", "IOU",
                     "Purchase", "Expenditure", "Banking")) {
 
+                int k = 20;
                 if ("Purchase".equals(type)) {
                     j = 420;
                     i = 1;
                 }
 
                 if (!"Common".equals(type)) {
-                    JLabel label = new JLabel(type);
-                    label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                    label.setBounds(20 + j, 200 + 30 * i, 300, 20);
-                    add(label);
-                    i = i + 1;
+                    if (!"BE IOU".equals(type)) {
+                        JLabel label = new JLabel(type);
+                        label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+                        label.setBounds(20 + j, 200 + 30 * i, 300, 20);
+                        add(label);
+                        i = i + 1;
+                    }
+                } else {
+                    k = 0;
                 }
 
                 for (List<String> val : bankIn) {
-                    if (type.equals(val.get(2))) {
+                    if (type.equals(val.get(1))) {
 
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(60 + j, 200 + 30 * i, 130, 20);
+                        jLabel.setBounds(20 + k + j, 200 + 30 * i, 130, 20);
                         i = i + 1;
                         add(jLabel);
                     }
