@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accountmanagement.jframe.report.tillReport;
+package accountmanagement.jframe.report.till;
 
-import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.BankReport;
 import accountmanagement.jframe.report.DifferenceReport;
-import accountmanagement.jframe.report.ExpenditureReport;
 import accountmanagement.jframe.report.PettyReport;
 import accountmanagement.jframe.report.PurcharseReport;
 import accountmanagement.jframe.report.SalesReport;
@@ -74,9 +72,13 @@ public class TillReport extends javax.swing.JPanel {
         salesButton6 = new javax.swing.JButton();
         salesButton7 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(getSize());
         jPanel1.setLayout(new java.awt.CardLayout());
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.add(jScrollPane1, "card2");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -544,7 +546,7 @@ public class TillReport extends javax.swing.JPanel {
 
         salesButton3.setBackground(new java.awt.Color(0, 0, 51));
         salesButton3.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        salesButton3.setText("<html><center>Total Commission</br>Sales</center></html>");
+        salesButton3.setText("<html><center>Total Commission Sales</center></html>");
         salesButton3.setBorder(null);
         salesButton3.setBorderPainted(false);
         salesButton3.setContentAreaFilled(false);
@@ -711,9 +713,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-        jPanel1.add("ExpenditureReport",new ExpenditureReport(shopName));
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
+
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void purcharseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHover

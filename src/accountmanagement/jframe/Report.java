@@ -8,13 +8,13 @@ package accountmanagement.jframe;
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.BankReport;
 import accountmanagement.jframe.report.DifferenceReport;
-import accountmanagement.jframe.report.ExpenditureReport;
 import accountmanagement.jframe.report.PettyReport;
 import accountmanagement.jframe.report.PurcharseReport;
 import accountmanagement.jframe.report.SalesReport;
 import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.StaffReport;
-import accountmanagement.jframe.report.tillReport.TillReport;
+import accountmanagement.jframe.report.expenditure.ExpenditureReport;
+import accountmanagement.jframe.report.till.TillReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 

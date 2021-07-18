@@ -3,21 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accountmanagement.jframe.report.tillReport;
+package accountmanagement.jframe.report.expenditure;
 
-import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.report.DynamicColumnDataSource;
+import accountmanagement.jframe.report.DynamicReportBuilder;
+import java.awt.CardLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -33,7 +37,7 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class CashReport extends javax.swing.JPanel {
+public class Detail extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
@@ -43,7 +47,7 @@ public class CashReport extends javax.swing.JPanel {
      *
      * @param shopName
      */
-    public CashReport(String shopName) {
+    public Detail(String shopName) {
         this.shopName = shopName;
         initComponents();
     }
@@ -113,35 +117,60 @@ public class CashReport extends javax.swing.JPanel {
 
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //        if (jDateChooserFrom.getDate() == null) {
-        //            jDateChooserFrom.setDate(currentDate);
-        //        }
-        //        if (jDateChooserTo.getDate() == null) {
-        //            jDateChooserTo.setDate(currentDate);
-        //        }
-        //        String fromDate = sdf.format(jDateChooserFrom.getDate());
-        //        String toDate = sdf.format(jDateChooserTo.getDate());
-        String fromDate = "2021-06-01";
-        String toDate = "2021-07-30";
-
-        List<String> column = new ArrayList();
-        column.add("Date");
-        column.add("From Report");
-        column.add("From Back office");
-        column.add("Short/Over");
-        List<List<String>> valueRow = new ArrayList();
+        if (jDateChooserFrom.getDate() == null) {
+            jDateChooserFrom.setDate(currentDate);
+        }
+        if (jDateChooserTo.getDate() == null) {
+            jDateChooserTo.setDate(currentDate);
+        }
+        String fromDate = sdf.format(jDateChooserFrom.getDate());
+        String toDate = sdf.format(jDateChooserTo.getDate());
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
-            ResultSet res = db.getValuesTabTable(shopName, "Till", fromDate, toDate);
+            List<String> colDBName = new ArrayList();
+            Map<String, Float> tillExp = new HashMap();
+
+            List<String> column = new ArrayList();
+            column.add("Date");
+
+            List<List<String>> valueRow = new ArrayList();
+            ResultSet resCol = db.getDeatilTableValue(shopName, "ExpenditureDetail");
+            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
+            ResultSet resTill = db.getOneColValueTabTable(shopName, "Till", "R_Expenditure", fromDate, toDate);
 
             try {
+                while (resCol.next()) {
+                    colDBName.add(resCol.getString("Name"));
+                    column.add(resCol.getString("Item"));
+                }
+                column.add("Expenditure");
+                column.add("Different");
+                valueRow.add(column);
+
+                while (resTill.next()) {
+                    System.out.println(resTill.getString("Date"));
+                    tillExp.put(resTill.getString("Date"), resTill.getFloat("R_Expenditure"));
+                }
+
                 while (res.next()) {
                     List<String> values = new ArrayList();
-                    values.add(res.getString("Date"));
-                    values.add(res.getString("R_Cash"));
-                    values.add(res.getString("BO_Cash"));
-                    values.add(res.getString("SO_Cash"));
+                    String date = res.getString("Date");
+                    values.add(date);
 
+                    float expenditure = 0;
+                    float totalExpenditure = 0;
+                    if (tillExp.containsKey(date)) {
+                        expenditure = tillExp.get(date);
+                    }
+                    for (String col : colDBName) {
+                        Float value = res.getFloat(col);
+                        values.add(value.toString());
+                        if (col.equals("Total")) {
+                            totalExpenditure = value;
+                        }
+                    }
+                    values.add(String.valueOf(expenditure));
+                    values.add(String.valueOf(expenditure - totalExpenditure));
                     System.out.println(values.toString());
                     valueRow.add(values);
                 }
@@ -149,29 +178,37 @@ public class CashReport extends javax.swing.JPanel {
                 runReport(column, valueRow);
 
             } catch (SQLException ex) {
-                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JRException | FileNotFoundException ex) {
-                Logger.getLogger(CashReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             warningLabel1.setText("From Date should be earlier date");
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    public void runReport(List<String> columnHeaders, List<List<String>> rows) throws JRException, FileNotFoundException {
+    private void runReport(List<String> columnHeaders, List<List<String>> rows) {
 
-        InputStream is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/CashReport.jrxml");
-        JasperDesign jasperReportDesign = JRXmlLoader.load(is);
-
-        DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
-        reportBuilder.addDynamicColumns();
-
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperReportDesign);
-        DynamicColumnDataSource dataSource = new DynamicColumnDataSource(columnHeaders, rows);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-
-        JRViewer viewer = new JRViewer(jasperPrint);
-        jPanel1.add(viewer);
+        InputStream is = null;
+        try {
+            is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/expenditure/Detail.jrxml");
+            JasperDesign jasperReportDesign = JRXmlLoader.load(is);
+            DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
+            reportBuilder.addDynamicColumns();
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperReportDesign);
+            DynamicColumnDataSource dataSource = new DynamicColumnDataSource(columnHeaders, rows);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+            JRViewer viewer = new JRViewer(jasperPrint);
+            jPanel1.add(viewer);
+            CardLayout layout = (CardLayout) jPanel1.getLayout();
+            layout.next(jPanel1);
+        } catch (FileNotFoundException | JRException ex) {
+            Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                is.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

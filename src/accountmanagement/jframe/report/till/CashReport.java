@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accountmanagement.jframe.report;
+package accountmanagement.jframe.report.till;
 
+import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,11 +22,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.swing.JRViewer;
@@ -36,7 +37,7 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class ExpenditureReport extends javax.swing.JPanel {
+public class CashReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
@@ -46,7 +47,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
      *
      * @param shopName
      */
-    public ExpenditureReport(String shopName) {
+    public CashReport(String shopName) {
         this.shopName = shopName;
         initComponents();
     }
@@ -116,98 +117,70 @@ public class ExpenditureReport extends javax.swing.JPanel {
 
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if (jDateChooserFrom.getDate() == null) {
-            jDateChooserFrom.setDate(currentDate);
-        }
-        if (jDateChooserTo.getDate() == null) {
-            jDateChooserTo.setDate(currentDate);
-        }
-        String fromDate = sdf.format(jDateChooserFrom.getDate());
-        String toDate = sdf.format(jDateChooserTo.getDate());
+        //        if (jDateChooserFrom.getDate() == null) {
+        //            jDateChooserFrom.setDate(currentDate);
+        //        }
+        //        if (jDateChooserTo.getDate() == null) {
+        //            jDateChooserTo.setDate(currentDate);
+        //        }
+        //        String fromDate = sdf.format(jDateChooserFrom.getDate());
+        //        String toDate = sdf.format(jDateChooserTo.getDate());
+        String fromDate = "2021-06-01";
+        String toDate = "2021-07-30";
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
-            List<String> colDBName = new ArrayList();
-            Map<String, Float> tillExp = new HashMap();
-
-            List<String> column = new ArrayList();
-            column.add("Date");
-
-            List<List<String>> valueRow = new ArrayList();
-            ResultSet resCol = db.getDeatilTableValue(shopName, "ExpenditureDetail");
-            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
-            ResultSet resTill = db.getOneColValueTabTable(shopName, "Till", "R_Expenditure", fromDate, toDate);
-
+            List<Map<String, String>> data = new ArrayList();
+            ResultSet res = db.getValuesTabTable(shopName, "Till", fromDate, toDate);
+            String description = "Date: "+fromDate + " - "+toDate;
             try {
-                while (resCol.next()) {
-                    colDBName.add(resCol.getString("Name"));
-                    column.add(resCol.getString("Item"));
-                }
-                column.add("Expenditure");
-                column.add("Different");
-                valueRow.add(column);
-
-                while (resTill.next()) {
-                    System.out.println(resTill.getString("Date"));
-                    tillExp.put(resTill.getString("Date"), resTill.getFloat("R_Expenditure"));
-                }
-
                 while (res.next()) {
-                    List<String> values = new ArrayList();
-                    String date = res.getString("Date");
-                    values.add(date);
+                    Map<String, String> dataValue = new HashMap();
+                    dataValue.put("Date", res.getString("Date"));
+                    dataValue.put("From Report", res.getString("R_Cash"));
+                    dataValue.put("From Back Office", res.getString("BO_Cash"));
+                    dataValue.put("Short / Over", res.getString("SO_Cash"));
+                    dataValue.put("description", description);
 
-                    float expenditure = 0;
-                    float totalExpenditure = 0;
-                    if (tillExp.containsKey(date)) {
-                        expenditure = tillExp.get(date);
-                    }
-                    for (String col : colDBName) {
-                        Float value = res.getFloat(col);
-                        values.add(value.toString());
-                        if (col.equals("Total")) {
-                            totalExpenditure = value;
-                        }
-                    }
-                    values.add(String.valueOf(expenditure));
-                    values.add(String.valueOf(expenditure - totalExpenditure));
-                    System.out.println(values.toString());
-                    valueRow.add(values);
+                    System.out.println(dataValue.toString());
+                    data.add(dataValue);
                 }
+                JRDataSource dataSource = new JRBeanCollectionDataSource(data);
+                String sourceName = new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/till/CashReport.jrxml";
 
-                runReport(column, valueRow);
+                JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
+                JRViewer viewer = new JRViewer(jasperPrint);
+                jPanel1.add(viewer);
+                CardLayout layout = (CardLayout) jPanel1.getLayout();
+                layout.next(jPanel1);
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JRException ex) {
+                Logger.getLogger(CashReport.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         } else {
             warningLabel1.setText("From Date should be earlier date");
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void runReport(List<String> columnHeaders, List<List<String>> rows) {
+    public void runReport(List<String> columnHeaders, List<List<String>> rows) throws JRException, FileNotFoundException {
 
-        InputStream is = null;
-        try {
-            is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/ExpenditureReport.jrxml");
-            JasperDesign jasperReportDesign = JRXmlLoader.load(is);
-            DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
-            reportBuilder.addDynamicColumns();
-            JasperReport jasperReport = JasperCompileManager.compileReport(jasperReportDesign);
-            DynamicColumnDataSource dataSource = new DynamicColumnDataSource(columnHeaders, rows);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-            JRViewer viewer = new JRViewer(jasperPrint);
-            jPanel1.add(viewer);
-            CardLayout layout = (CardLayout) jPanel1.getLayout();
-            layout.next(jPanel1);
-        } catch (FileNotFoundException | JRException ex) {
-            Logger.getLogger(ExpenditureReport.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                is.close();
-            } catch (IOException ex) {
-                Logger.getLogger(ExpenditureReport.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        InputStream is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/till/CashReport.jrxml");
+        JasperDesign jasperReportDesign = JRXmlLoader.load(is);
+
+        DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
+        reportBuilder.addDynamicColumns();
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperReportDesign);
+        DynamicColumnDataSource dataSource = new DynamicColumnDataSource(columnHeaders, rows);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+
+        JRViewer viewer = new JRViewer(jasperPrint);
+        jPanel1.add(viewer);
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,4 +193,34 @@ public class ExpenditureReport extends javax.swing.JPanel {
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel warningLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private void dynamicReport(String fromDate, String toDate) {
+        List<String> column = new ArrayList();
+        column.add("Date");
+        column.add("From Report");
+        column.add("From Back office");
+        column.add("Short/Over");
+        List<List<String>> valueRow = new ArrayList();
+        ResultSet res = db.getValuesTabTable(shopName, "Till", fromDate, toDate);
+
+        try {
+            while (res.next()) {
+                List<String> values = new ArrayList();
+                values.add(res.getString("Date"));
+                values.add(res.getString("R_Cash"));
+                values.add(res.getString("BO_Cash"));
+                values.add(res.getString("SO_Cash"));
+
+                System.out.println(values.toString());
+                valueRow.add(values);
+            }
+
+            runReport(column, valueRow);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException | FileNotFoundException ex) {
+            Logger.getLogger(CashReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

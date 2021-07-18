@@ -61,7 +61,7 @@ public class AdminBank extends javax.swing.JPanel {
                 typeComboActionPerformed(evt);
             }
         });
-        add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 150, -1));
+        add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 210, -1));
 
         userType.setText("Value");
         userType.setToolTipText("");
@@ -70,7 +70,7 @@ public class AdminBank extends javax.swing.JPanel {
         userType1.setText("Type");
         userType1.setToolTipText("");
         add(userType1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 86, 20));
-        add(valueTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 150, -1));
+        add(valueTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 210, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,7 +80,7 @@ public class AdminBank extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 90, 30));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 90, 30));
 
         successLabel.setForeground(new java.awt.Color(51, 204, 0));
         add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 270, 20));

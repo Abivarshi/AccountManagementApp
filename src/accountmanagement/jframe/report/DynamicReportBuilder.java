@@ -19,7 +19,7 @@ public class DynamicReportBuilder {
     // The prefix used in defining the column header name that is later used by the JasperFillManager
     public static final String COL_HEADER_EXPR_PREFIX = "header";
     // The page width for a page in portrait mode with 10 pixel margins
-    private final static int TOTAL_PAGE_WIDTH = 545;
+    private final static int TOTAL_PAGE_WIDTH = 800;
     // The whitespace between columns in pixels
     private final static int SPACE_BETWEEN_COLS = 5;
     // The height in pixels of an element in a row and column
@@ -27,7 +27,7 @@ public class DynamicReportBuilder {
     // The total height of the column header or detail band
     private final static int BAND_HEIGHT = 15;
     // The left and right margin in pixels
-    private final static int MARGIN = 10;
+    private final static int MARGIN = 5;
     // The JasperDesign object is the internal representation of a report
     private JasperDesign jasperDesign;
     // The number of columns that are to be displayed
@@ -86,6 +86,13 @@ public class DynamicReportBuilder {
             expression.setText("$F{" + COL_EXPR_PREFIX + i + "}");
             textField.setExpression(expression);
             detailBand.addElement(textField);
+            if(i==0){
+            colHeaderField.setWidth(columnWidth+10);
+            textField.setWidth(columnWidth+10);
+            colHeaderField.setX(xPos-10);
+            textField.setX(xPos-10);
+                
+            }
             xPos = xPos + columnWidth + SPACE_BETWEEN_COLS;
         }
         jasperDesign.setColumnHeader(headerBand);

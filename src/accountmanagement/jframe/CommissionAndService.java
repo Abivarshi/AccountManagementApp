@@ -93,7 +93,7 @@ public class CommissionAndService extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 1200));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 700));
 
         warningLabel.setForeground(new java.awt.Color(153, 0, 0));
 
@@ -110,7 +110,7 @@ public class CommissionAndService extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1187, Short.MAX_VALUE))
+                .addGap(0, 687, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);

@@ -123,6 +123,10 @@ public class Till extends javax.swing.JPanel {
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         callingCard = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
+        yesterdayTillCount1 = new javax.swing.JTextField();
+        jLabel46 = new javax.swing.JLabel();
+        todayTillCount1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -132,7 +136,7 @@ public class Till extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Yesterday Till Count");
+        jLabel1.setText("Yesterday Till Count 1");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 167, 20));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -147,7 +151,7 @@ public class Till extends javax.swing.JPanel {
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Today Till Count");
+        jLabel3.setText("Today Till Count 1");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 167, 20));
 
         todayTillCount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -158,102 +162,102 @@ public class Till extends javax.swing.JPanel {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Cash");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 167, 20));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 167, 20));
 
         cash.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cash.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         cash.setText("0");
-        add(cash, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 96, 20));
+        add(cash, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 96, 20));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Coin");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 167, 20));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 167, 20));
 
         coin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         coin.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         coin.setText("0");
-        add(coin, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 96, 20));
+        add(coin, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 96, 20));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Card");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 167, 20));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 167, 20));
 
         card.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         card.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         card.setText("0");
-        add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 96, 20));
+        add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 96, 20));
 
         voucherMilk.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         voucherMilk.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         voucherMilk.setText("0");
-        add(voucherMilk, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 96, 20));
+        add(voucherMilk, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 96, 20));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Voucher");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 167, 20));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 167, 20));
 
         voucherPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         voucherPayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         voucherPayPoint.setText("0");
-        add(voucherPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 96, 20));
+        add(voucherPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 96, 20));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("PayPoint");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 120, 20));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 120, 20));
 
         refundAccountCredit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         refundAccountCredit.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         refundAccountCredit.setText("0");
-        add(refundAccountCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, 96, 20));
+        add(refundAccountCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, 96, 20));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Account Credit");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 167, 20));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 167, 20));
 
         purchase.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         purchase.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         purchase.setText("0");
-        add(purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 96, 20));
+        add(purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 570, 96, 20));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Purchase");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 167, 20));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 167, 20));
 
         expenditure.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         expenditure.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         expenditure.setText("0");
-        add(expenditure, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, 96, 20));
+        add(expenditure, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 600, 96, 20));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Expenditure");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 167, 20));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 167, 20));
 
         accPay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         accPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         accPay.setText("0");
-        add(accPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 96, 20));
+        add(accPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 630, 96, 20));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("Acc Pay");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 167, 20));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 167, 20));
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("Milk");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 130, 20));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 130, 20));
 
         refundGoods.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         refundGoods.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         refundGoods.setText("0");
-        add(refundGoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 96, 20));
+        add(refundGoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 96, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -263,97 +267,97 @@ public class Till extends javax.swing.JPanel {
         refundServices.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         refundServices.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         refundServices.setText("0");
-        add(refundServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 96, 20));
+        add(refundServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, 96, 20));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Services");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 120, 20));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, 120, 20));
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Goods");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 130, 20));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 130, 20));
 
         cashBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cashBack.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         cashBack.setText("0");
-        add(cashBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, 96, 20));
+        add(cashBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 660, 96, 20));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Cash Back");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 167, 20));
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 167, 20));
 
         instantPayOut.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         instantPayOut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         instantPayOut.setText("0");
-        add(instantPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 610, 96, 20));
+        add(instantPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 690, 96, 20));
 
         jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("Instant PayOut");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 167, 20));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 690, 167, 20));
 
         lottaryPayOut.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lottaryPayOut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         lottaryPayOut.setText("0");
-        add(lottaryPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 640, 96, 20));
+        add(lottaryPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 720, 96, 20));
 
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setText("Lottary PayOut");
-        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 640, 167, 20));
+        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 167, 20));
 
         insLottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         insLottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         insLottary.setText("0");
-        add(insLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 670, 96, 20));
+        add(insLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 750, 96, 20));
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel20.setText("Ins Lottary");
-        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 670, 167, 20));
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 750, 167, 20));
 
         lottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         lottary.setText("0");
-        add(lottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 700, 96, 20));
+        add(lottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 780, 96, 20));
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("Lottary");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 700, 167, 20));
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 780, 167, 20));
 
         oyster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         oyster.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         oyster.setText("0");
-        add(oyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 730, 96, 20));
+        add(oyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 810, 96, 20));
 
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setText("Oyster");
-        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, 167, 20));
+        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 810, 167, 20));
 
         payPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         payPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         payPoint.setText("0");
-        add(payPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 760, 96, 20));
+        add(payPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 840, 96, 20));
 
         jLabel23.setBackground(new java.awt.Color(255, 255, 255));
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText("Pay Point");
-        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 760, 167, 20));
+        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 840, 167, 20));
 
         payZone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         payZone.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         payZone.setText("0");
-        add(payZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 790, 96, 20));
+        add(payZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 870, 96, 20));
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setText("PayZone");
-        add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 790, 167, 20));
+        add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 870, 167, 20));
 
         resetButton.setBackground(new java.awt.Color(255, 102, 102));
         resetButton.setText("Reset");
@@ -380,7 +384,7 @@ public class Till extends javax.swing.JPanel {
         jLabel25.setBackground(new java.awt.Color(255, 255, 255));
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel25.setText("Refund");
-        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 167, 20));
+        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 167, 20));
 
         jLabel26.setBackground(new java.awt.Color(255, 255, 255));
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -571,6 +575,26 @@ public class Till extends javax.swing.JPanel {
         callingCard.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         callingCard.setText("0");
         add(callingCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, 96, 20));
+
+        jLabel45.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel45.setText("Yesterday Till Count 2");
+        add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 167, 20));
+
+        yesterdayTillCount1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        yesterdayTillCount1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        yesterdayTillCount1.setText("0");
+        add(yesterdayTillCount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 96, 20));
+
+        jLabel46.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel46.setText("Today Till Count 2");
+        add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 167, 20));
+
+        todayTillCount1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        todayTillCount1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        todayTillCount1.setText("0");
+        add(todayTillCount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 96, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
@@ -731,7 +755,7 @@ public class Till extends javax.swing.JPanel {
 
                     db.insertValuesTabTable(shopName, "Till", sdf.format(jDateChooser1.getDate()), tillValues);
 
-                    warningLabel.setText("Expenditure added successfully..");
+                    warningLabel.setText("Till added successfully..");
                     warningLabel.setForeground(Color.green);
                     resetButtonActionPerformed(evt);
                 } catch (java.lang.NumberFormatException e) {
@@ -816,6 +840,8 @@ public class Till extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -834,9 +860,11 @@ public class Till extends javax.swing.JPanel {
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField tabacco;
     private javax.swing.JTextField todayTillCount;
+    private javax.swing.JTextField todayTillCount1;
     private javax.swing.JTextField voucherMilk;
     private javax.swing.JTextField voucherPayPoint;
     private javax.swing.JLabel warningLabel;
     private javax.swing.JTextField yesterdayTillCount;
+    private javax.swing.JTextField yesterdayTillCount1;
     // End of variables declaration//GEN-END:variables
 }
