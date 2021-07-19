@@ -6,17 +6,18 @@
 package accountmanagement.jframe.report.expenditure;
 
 import accountmanagement.jframe.report.till.*;
-import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.report.BankReport;
-import accountmanagement.jframe.report.DifferenceReport;
-import accountmanagement.jframe.report.PettyReport;
-import accountmanagement.jframe.report.PurcharseReport;
-import accountmanagement.jframe.report.SalesReport;
-import accountmanagement.jframe.report.Sheet2Report;
-import accountmanagement.jframe.report.StaffReport;
+import accountmanagement.jframe.Expenditure;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -29,11 +30,13 @@ public class ExpenditureReport extends javax.swing.JPanel {
 
     /**
      * Creates new form Administrator
+     *
      * @param shopName
      */
     public ExpenditureReport(String shopName) {
         this.shopName = shopName;
         initComponents();
+        populateExpenditureReport();
     }
 
     /**
@@ -61,7 +64,6 @@ public class ExpenditureReport extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1, "card2");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
         sheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -84,7 +86,6 @@ public class ExpenditureReport extends javax.swing.JPanel {
                 sheet2ButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(sheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 20));
 
         tillButton.setBackground(new java.awt.Color(0, 0, 51));
         tillButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -107,7 +108,22 @@ public class ExpenditureReport extends javax.swing.JPanel {
                 tillButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(tillButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 130, 20));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(sheet2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(tillButton)
+                .addGap(10, 10, 10)
+                .addComponent(sheet2Button))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,7 +137,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -135,7 +151,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add("detail",new Detail(shopName));
+        jPanel1.add("detail", new Detail(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -153,6 +169,52 @@ public class ExpenditureReport extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
+
+    private void populateExpenditureReport() {
+        ResultSet res = db.getDeatilTableValue(shopName, "ExpenditureDetail");
+        try {
+            int i = 1;
+            while (res.next()) {
+                String item = res.getString("Item");
+                String name = res.getString("Name");
+                
+                String title = "EXPENDITURE - " + item.toUpperCase() + " REPORT";
+                
+                JButton button = new JButton();
+                button.setBackground(new java.awt.Color(0, 0, 51));
+                button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+                button.setText(item);
+                button.setBorder(null);
+                button.setBorderPainted(false);
+                button.setContentAreaFilled(false);
+                button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                button.setFocusPainted(false);
+                button.setBounds(0, 40 + i * 30, 130, 20);
+                button.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseEntered(java.awt.event.MouseEvent evt) {
+                        button.setForeground(Color.red);
+                    }
+
+                    public void mouseExited(java.awt.event.MouseEvent evt) {
+                        button.setForeground(Color.black);
+                    }
+                });
+                button.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jPanel1.add("report", new SingleReport(shopName, title, name, item));
+                        CardLayout layout = (CardLayout) jPanel1.getLayout();
+                        layout.next(jPanel1);
+                    }
+                });
+
+                jPanel2.add(button);
+                i = i + 1;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Expenditure.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

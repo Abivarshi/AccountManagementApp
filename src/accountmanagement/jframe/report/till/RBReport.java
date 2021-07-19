@@ -29,27 +29,30 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
  * @author acer
  */
-public class CashReport extends javax.swing.JPanel {
+public class RBReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-    private final static String title = "TILL - CASH REPORT";
+    private String title;
+    private List<String> colName;
 
     /**
      * Creates new form Till
      *
      * @param shopName
+     * @param title
+     * @param colName
      */
-    public CashReport(String shopName) {
+    public RBReport(String shopName, String title, List<String> colName) {
         this.shopName = shopName;
+        this.title = title;
+        this.colName = colName;
         initComponents();
     }
 
@@ -129,15 +132,15 @@ public class CashReport extends javax.swing.JPanel {
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             List<Map<String, String>> data = new ArrayList();
-            ResultSet res = db.getValuesTabTable(shopName, "Till", fromDate, toDate);
+            ResultSet res = db.getNColValueTabTable(shopName, "Till", colName, fromDate, toDate);
             String description = "Date: " + fromDate + " - " + toDate;
             try {
                 while (res.next()) {
                     Map<String, String> dataValue = new HashMap();
                     dataValue.put("Date", res.getString("Date"));
-                    dataValue.put("From Report", res.getString("R_Cash"));
-                    dataValue.put("From Back Office", res.getString("BO_Cash"));
-                    dataValue.put("Short / Over", res.getString("SO_Cash"));
+                    dataValue.put("From Report", res.getString(colName.get(0)));
+                    dataValue.put("From Back Office", res.getString(colName.get(1)));
+                    dataValue.put("Short / Over", res.getString(colName.get(2)));
                     dataValue.put("description", description);
                     dataValue.put("title", title);
 
@@ -157,7 +160,7 @@ public class CashReport extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {
-                Logger.getLogger(CashReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RBReport.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -165,23 +168,6 @@ public class CashReport extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    public void runReport(List<String> columnHeaders, List<List<String>> rows) throws JRException, FileNotFoundException {
-
-        InputStream is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/till/CashReport.jrxml");
-        JasperDesign jasperReportDesign = JRXmlLoader.load(is);
-
-        DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
-        reportBuilder.addDynamicColumns();
-
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperReportDesign);
-        DynamicColumnDataSource dataSource = new DynamicColumnDataSource(columnHeaders, rows);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-
-        JRViewer viewer = new JRViewer(jasperPrint);
-        jPanel1.add(viewer);
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooserFrom;
@@ -193,34 +179,4 @@ public class CashReport extends javax.swing.JPanel {
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel warningLabel1;
     // End of variables declaration//GEN-END:variables
-
-    private void dynamicReport(String fromDate, String toDate) {
-        List<String> column = new ArrayList();
-        column.add("Date");
-        column.add("From Report");
-        column.add("From Back office");
-        column.add("Short/Over");
-        List<List<String>> valueRow = new ArrayList();
-        ResultSet res = db.getValuesTabTable(shopName, "Till", fromDate, toDate);
-
-        try {
-            while (res.next()) {
-                List<String> values = new ArrayList();
-                values.add(res.getString("Date"));
-                values.add(res.getString("R_Cash"));
-                values.add(res.getString("BO_Cash"));
-                values.add(res.getString("SO_Cash"));
-
-                System.out.println(values.toString());
-                valueRow.add(values);
-            }
-
-            runReport(column, valueRow);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException | FileNotFoundException ex) {
-            Logger.getLogger(CashReport.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

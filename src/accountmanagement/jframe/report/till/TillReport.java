@@ -15,6 +15,7 @@ import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.StaffReport;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.Arrays;
 
 /**
  *
@@ -699,7 +700,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-        jPanel1.add(new CashReport(shopName));
+        jPanel1.add(new RBReport(shopName, "TILL - CASH REPORT", Arrays.asList("R_Cash", "BO_Cash", "SO_Cash")));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
@@ -725,7 +726,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
-        jPanel1.add("PurcharseReport",new PurcharseReport(shopName));
+        jPanel1.add(new RBReport(shopName, "TILL - CARD REPORT", Arrays.asList("R_Card", "BO_Card", "SO_Card")));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed

@@ -13,6 +13,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -439,6 +440,31 @@ public class DataBaseConnection {
             ResultSet res = state.executeQuery("SELECT " + colName + ", Date FROM " + tableName + 
                     " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'" +
                     " ORDER BY Date ASC");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public ResultSet getNColValueTabTable(String shopName, String tableName, List<String> colName, String dateFrom, String dateTo) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            
+            String queryString = "SELECT ";
+            
+            for (String col : colName)
+                queryString = queryString + col + ", ";
+            
+            queryString = queryString + "Date FROM " + tableName + 
+                    " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'" +
+                    " ORDER BY Date ASC";
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery(queryString);
             return res;
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);

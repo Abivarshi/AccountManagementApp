@@ -5,10 +5,9 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="Date" class="java.lang.String"/>
-	<field name="From Report" class="java.lang.String"/>
-	<field name="From Back Office" class="java.lang.String"/>
-	<field name="Short / Over" class="java.lang.String"/>
+	<field name="Amount" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
@@ -16,13 +15,13 @@
 		<band height="72">
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="a61a1633-f84f-4f59-9b2a-d8d19d21cd92"/>
-				<staticText>
+				<textField>
 					<reportElement x="20" y="20" width="555" height="43" forecolor="#FFFFFF" uuid="fe66fe08-b323-4483-91a4-e1312cf39e64"/>
 					<textElement>
-						<font size="34" isBold="true"/>
+						<font size="24" isBold="true"/>
 					</textElement>
-					<text><![CDATA[TILL - CASH REPORT]]></text>
-				</staticText>
+					<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+				</textField>
 				<textField>
 					<reportElement x="240" y="70" width="335" height="16" forecolor="#FFFCFC" uuid="9420ff11-8c45-45a0-a390-815e340828e6"/>
 					<textElement textAlignment="Right">
@@ -49,21 +48,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[From Report]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="260" y="0" width="100" height="30" uuid="649081f1-105e-4944-9050-d5639005e797">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c777f02-938d-4307-9106-2c0e1f7d84d2"/>
-				</reportElement>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[From Back Office]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="407" y="0" width="100" height="30" backcolor="#96BFEB" uuid="38ff8364-fbae-4ef1-8c11-aecdffcf7110">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
-				</reportElement>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Short / Over]]></text>
+				<text><![CDATA[Amount]]></text>
 			</staticText>
 			<line>
 				<reportElement x="-20" y="29" width="595" height="1" forecolor="#666666" uuid="263a6cf4-7063-49a2-be3c-e5048ccbecc5"/>
@@ -86,21 +71,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{From Report}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="260" y="1" width="100" height="30" uuid="abe912b3-ca69-492e-a36d-b0d8b5ba4e69">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c777f02-938d-4307-9106-2c0e1f7d84d2"/>
-				</reportElement>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{From Back Office}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement mode="Opaque" x="407" y="1" width="100" height="30" backcolor="#96BFEB" uuid="556bf277-ddb1-42dc-a785-5e6f8032d914">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
-				</reportElement>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{Short / Over}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Amount}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
