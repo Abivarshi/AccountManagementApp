@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StaffTimeReport" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5034c357-4ee9-417f-84f1-4a68c822c714">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Date" class="java.lang.String"/>
+	<field name="TillExpenditure" class="java.lang.String"/>
+	<field name="BankExpenditure" class="java.lang.String"/>
+	<field name="Total" class="java.lang.String"/>
+	<field name="PettyExpenditure" class="java.lang.String"/>
+	<field name="Title" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="a61a1633-f84f-4f59-9b2a-d8d19d21cd92"/>
+				<textField>
+					<reportElement x="240" y="70" width="335" height="16" forecolor="#FFFCFC" uuid="9420ff11-8c45-45a0-a390-815e340828e6"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="20" y="20" width="500" height="43" forecolor="#FFFFFF" uuid="b549f65e-8eea-4487-95ea-d62d6e7bb198"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Title}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="e7f4617b-a276-4a47-b3a3-076771d57ccf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="60" height="30" uuid="c4db0840-86bf-45e9-a614-0e160a8de5dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Till Expenditure]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="73" height="30" uuid="649081f1-105e-4944-9050-d5639005e797">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c777f02-938d-4307-9106-2c0e1f7d84d2"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Petty Expenditure]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="460" y="0" width="73" height="30" backcolor="#96BFEB" uuid="38ff8364-fbae-4ef1-8c11-aecdffcf7110">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="-1" width="70" height="30" uuid="a754253c-e33b-4013-8f5c-028a14c191cf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Bank Expenditure]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="30" width="595" height="1" forecolor="#666666" uuid="263a6cf4-7063-49a2-be3c-e5048ccbecc5"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="-2" y="33" width="555" height="1" uuid="3310c2ab-609b-4a91-95a9-e9a69629ba1f"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="1" width="100" height="30" uuid="b1480f9b-ad82-405b-ac0d-9f6852d8cdad">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="1" width="79" height="30" uuid="5aca28bd-6055-41db-8ead-93c48ef668fc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{TillExpenditure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="1" width="73" height="30" uuid="abe912b3-ca69-492e-a36d-b0d8b5ba4e69">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c777f02-938d-4307-9106-2c0e1f7d84d2"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PettyExpenditure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="460" y="1" width="73" height="30" backcolor="#96BFEB" uuid="556bf277-ddb1-42dc-a785-5e6f8032d914">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="79" height="30" uuid="a15b64dc-11cf-4c5e-b175-9094e5d7f180">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{BankExpenditure}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="49415a88-5835-47fb-9b20-b58224510e8d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="4f4dec61-b5ae-41f4-8425-c0d9daa80dae"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="81fe6ff4-04a4-4f3a-b49b-2718c21c34f1"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

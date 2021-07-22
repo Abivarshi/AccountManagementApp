@@ -5,6 +5,7 @@
  */
 package accountmanagement.jframe.report.expenditure;
 
+import accountmanagement.jframe.report.SingleReport;
 import accountmanagement.jframe.report.till.*;
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.Expenditure;

@@ -5,6 +5,7 @@
  */
 package accountmanagement.jframe.report.expenditure;
 
+import accountmanagement.jframe.report.SingleReport;
 import accountmanagement.jframe.report.till.*;
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.Expenditure;
@@ -165,9 +166,9 @@ public class ExpenditureReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-//        jPanel1.add(new CashReport(shopName));
-//        CardLayout layout = (CardLayout) jPanel1.getLayout();
-//        layout.next(jPanel1);
+        jPanel1.add(new Summary(shopName, "Expenditure", "Expenditure"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
 
     private void populateExpenditureReport() {

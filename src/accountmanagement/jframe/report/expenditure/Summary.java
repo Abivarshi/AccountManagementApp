@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -32,12 +33,11 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class SingleReport extends javax.swing.JPanel {
+public class Summary extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     private String title;
-    private String colName;
     private String tableName;
 
     /**
@@ -45,19 +45,13 @@ public class SingleReport extends javax.swing.JPanel {
      *
      * @param shopName
      * @param title
-     * @param colName
-     * @param name
+     * @param tableName
      */
-    public SingleReport(String shopName, String title, String colName, String name) {
+    public Summary(String shopName, String title, String tableName) {
         this.shopName = shopName;
         this.title = title;
-        this.colName = colName;
-        this.tableName = name;
+        this.tableName = tableName;
         initComponents();
-    }
-
-    SingleReport(String shopName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -108,11 +102,10 @@ public class SingleReport extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
 
         warningLabel1.setForeground(new java.awt.Color(153, 0, 0));
-        warningLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 340, 10));
+        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 230, 10));
 
         jScrollPane1.setBorder(null);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(800, 960));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(getSize());
@@ -123,7 +116,7 @@ public class SingleReport extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-
+        JLabel jLabel4 = loader();
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooserFrom.getDate() == null) {
@@ -137,37 +130,77 @@ public class SingleReport extends javax.swing.JPanel {
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             List<Map<String, String>> data = new ArrayList();
-            ResultSet res = db.getOneColValueTabTable(shopName, tableName, colName, fromDate, toDate);
+            List<Object[]> dataVal = new ArrayList();
+
             String description = "Date: " + fromDate + " - " + toDate;
+            ResultSet resExp = db.getOneColValueTabTable(shopName, "Till", "R_Expenditure", fromDate, toDate);
+            ResultSet resBank = db.getOneColValueTabTable(shopName, "Bank", "SubExpenditure", fromDate, toDate);
+            ResultSet resPetty = db.getOneColValueTabTable(shopName, "Petty", "SubExpenditure", fromDate, toDate);
             try {
-                while (res.next()) {
-                    Map<String, String> dataValue = new HashMap();
-                    dataValue.put("Date", res.getString("Date"));
-                    dataValue.put("Amount", res.getString(colName));
-                    dataValue.put("description", description);
-                    dataValue.put("title", title);
-
-                    System.out.println(dataValue.toString());
-                    data.add(dataValue);
+                while (resExp.next()) {
+                    dataVal.add(new Object[]{resExp.getString("Date"), resExp.getFloat("R_Expenditure"), 0, 0, resExp.getFloat("R_Expenditure")});
                 }
-                if (!data.isEmpty()) {
-                    JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    String sourceName = new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/expenditure/SingleReport.jrxml";
 
-                    JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
-                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-
-                    JRViewer viewer = new JRViewer(jasperPrint);
-                    jPanel1.add(viewer);
-                    CardLayout layout = (CardLayout) jPanel1.getLayout();
-                    layout.next(jPanel1);
-                } else{
-                    warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
+                while (resBank.next()) {
+                    Float value = resBank.getFloat("SubExpenditure");
+                    String date = resBank.getString("Date");
+                    boolean valueAdded = false;
+                    for (Object[] val : dataVal) {
+                        if (val[0].toString().equals(date)) {
+                            val[2] = value;
+                            val[4] = Float.parseFloat(val[4].toString()) + value;
+                            valueAdded = true;
+                            break;
+                        }
+                    }
+                    if (!valueAdded) {
+                        dataVal.add(new Object[]{date, 0, value, 0, value});
+                    }
                 }
+
+                while (resPetty.next()) {
+                    Float value = resPetty.getFloat("SubExpenditure");
+                    String date = resPetty.getString("Date");
+                    boolean valueAdded = false;
+                    for (Object[] val : dataVal) {
+                        if (val[0].toString().equals(date)) {
+                            val[3] = value;
+                            val[4] = Float.parseFloat(val[4].toString()) + value;
+                            valueAdded = true;
+                            break;
+                        }
+                    }
+                    if (!valueAdded) {
+                        dataVal.add(new Object[]{date, 0, 0, value, value});
+                    }
+                }
+
+                for (Object[] val : dataVal) {
+                    Map<String, String> map = new HashMap();
+                    map.put("Date", val[0].toString());
+                    map.put("TillExpenditure", val[1].toString());
+                    map.put("BankExpenditure", val[2].toString());
+                    map.put("PettyExpenditure", val[3].toString());
+                    map.put("Total", val[4].toString());
+                    map.put("Title", title);
+                    map.put("description", description);
+                    data.add(map);
+                }
+System.out.println(data);
+                JRDataSource dataSource = new JRBeanCollectionDataSource(data);
+                String sourceName = new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/expenditure/Summary.jrxml";
+
+                JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+
+                JRViewer viewer = new JRViewer(jasperPrint);
+                jPanel1.add(viewer);
+                CardLayout layout = (CardLayout) jPanel1.getLayout();
+                layout.next(jPanel1);
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {
-                Logger.getLogger(SingleReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Summary.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
@@ -186,4 +219,19 @@ public class SingleReport extends javax.swing.JPanel {
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel warningLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private JLabel loader() {
+        JLabel jLabel4 = new JLabel();
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accountmanagement/image/loading.gif"))); // NOI18N
+//        jLabel4.setMaximumSize(new java.awt.Dimension(300, 300));
+//        jLabel4.setMinimumSize(new java.awt.Dimension(300, 300));
+//        jLabel4.setPreferredSize(new java.awt.Dimension(300, 300));
+                jLabel4.setVisible(false);
+        jLabel4.setBounds(100, 100, 300, 300);
+        jPanel1.add(jLabel4);
+                CardLayout layout = (CardLayout) jPanel1.getLayout();
+                layout.next(jPanel1);
+        return jLabel4;
+    }
 }

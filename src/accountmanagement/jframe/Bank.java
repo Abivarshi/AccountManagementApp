@@ -128,8 +128,10 @@ public class Bank extends javax.swing.JPanel {
                 float balance = 0;
                 HashMap<String, Float> bankValues = new HashMap();
                 for (List<String> list : listOfTextFields.keySet()) {
+                    System.out.println(list+ listOfTextFields.get(list).getText());
                     if (list.get(2).equalsIgnoreCase("Expenditure Money Out (Monthly)") || list.get(2).equalsIgnoreCase("Expenditure Money Out (Yearly)")
                             || list.get(2).equalsIgnoreCase("Expenditure/ Bank Charge")) {
+                    System.out.println(list+ listOfTextFields.get(list).getText());
                         expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
                     } else if (list.get(2).equalsIgnoreCase("Purchase")) {
                         purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
@@ -142,8 +144,8 @@ public class Bank extends javax.swing.JPanel {
                     bankValues.put(list.get(1), Float.parseFloat(text.getText()));
                 }
                 balance = balance - expTotal - purTotal;
-                bankValues.put("SubPurchase", expTotal);
-                bankValues.put("SubExpenditure", purTotal);
+                bankValues.put("SubPurchase", purTotal);
+                bankValues.put("SubExpenditure", expTotal);
                 bankValues.put("Balance", balance);
                 
                 System.out.println(bankValues.toString());

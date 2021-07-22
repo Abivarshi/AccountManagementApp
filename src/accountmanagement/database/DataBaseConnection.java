@@ -700,7 +700,7 @@ public class DataBaseConnection {
             getConnection(shopName);
         }
         
-        insertDetailTable(shopName, "NATWEST", "FB_NETWEST", "From Bank", "BankDetail");
+        insertDetailTable(shopName, "NATWEST", "FB_NATWEST", "From Bank", "BankDetail");
         insertDetailTable(shopName, "Cash Plus", "FB_CashPlus", "From Bank", "BankDetail");
         insertDetailTable(shopName, "Eleven Card", "FB_ElevenCard", "From Bank", "BankDetail");
         insertDetailTable(shopName, "Milk Vouture", "FB_MilkVouture", "From Bank", "BankDetail");
