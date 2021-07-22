@@ -12,18 +12,15 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 /**
  *
  * @author acer
  */
-public class ExpenditureReport extends javax.swing.JPanel {
+public class PurchaseReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
@@ -33,7 +30,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
      *
      * @param shopName
      */
-    public ExpenditureReport(String shopName) {
+    public PurchaseReport(String shopName) {
         this.shopName = shopName;
         initComponents();
         populateExpenditureReport();
@@ -171,14 +168,14 @@ public class ExpenditureReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonActionPerformed
 
     private void populateExpenditureReport() {
-        ResultSet res = db.getDeatilTableValue(shopName, "ExpenditureDetail");
+        ResultSet res = db.getDeatilTableValue(shopName, "PurchaseDetail");
         try {
             int i = 1;
             while (res.next()) {
                 String item = res.getString("Item");
                 String name = res.getString("Name");
                 
-                String title = "EXPENDITURE - " + item.toUpperCase() + " REPORT";
+                String title = "PURCHASE - " + item.toUpperCase() + " REPORT";
                 
                 JButton button = new JButton();
                 button.setBackground(new java.awt.Color(0, 0, 51));
@@ -201,7 +198,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
                 });
                 button.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jPanel1.add("report", new SingleReport(shopName, title, name, "Expenditure"));
+                        jPanel1.add("report", new SingleReport(shopName, title, name, "Purchase"));
                         CardLayout layout = (CardLayout) jPanel1.getLayout();
                         layout.next(jPanel1);
                     }

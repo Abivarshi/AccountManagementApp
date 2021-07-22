@@ -482,7 +482,9 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void summaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summaryButtonActionPerformed
-        // TODO add your handling code here:
+        rightPanel.add("Sales", new Sales(shopName));
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.next(rightPanel);
     }//GEN-LAST:event_summaryButtonActionPerformed
 
     private void summaryButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_summaryButtonMouseHoverOut

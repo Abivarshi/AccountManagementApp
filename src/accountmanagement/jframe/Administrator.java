@@ -61,6 +61,7 @@ public class Administrator extends javax.swing.JPanel {
         bankButton = new javax.swing.JButton();
         commissionButton = new javax.swing.JButton();
         pettyButton = new javax.swing.JButton();
+        salesButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -221,6 +222,28 @@ public class Administrator extends javax.swing.JPanel {
             }
         });
 
+        salesButton1.setBackground(new java.awt.Color(0, 0, 51));
+        salesButton1.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        salesButton1.setText("Profit Percentage");
+        salesButton1.setBorder(null);
+        salesButton1.setBorderPainted(false);
+        salesButton1.setContentAreaFilled(false);
+        salesButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salesButton1.setFocusPainted(false);
+        salesButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                salesButton1MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salesButton1MouseHoverOut(evt);
+            }
+        });
+        salesButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -234,7 +257,8 @@ public class Administrator extends javax.swing.JPanel {
                     .addComponent(userButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bankButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(commissionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pettyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pettyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(salesButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -242,19 +266,21 @@ public class Administrator extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(userButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(staffButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(purcharseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(expenditureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bankButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pettyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(commissionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -372,15 +398,17 @@ public class Administrator extends javax.swing.JPanel {
         layout.next(jPanel1);
     }//GEN-LAST:event_pettyButtonActionPerformed
 
-   
-    private ActionListener populateItems(String tabName) {
-        return (ActionEvent e) -> {
-            jPanel1.add("Items", new Items(shopName, tabName));
-            CardLayout layout = (CardLayout) jPanel1.getLayout();
-            layout.next(jPanel1);
-        };
-    }
+    private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesButton1MouseHover
 
+    private void salesButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesButton1MouseHoverOut
+
+    private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
+
+    }//GEN-LAST:event_salesButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bankButton;
@@ -390,6 +418,7 @@ public class Administrator extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton pettyButton;
     private javax.swing.JButton purcharseButton;
+    private javax.swing.JButton salesButton1;
     private javax.swing.JButton staffButton;
     private javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables

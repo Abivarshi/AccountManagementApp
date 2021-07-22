@@ -9,7 +9,6 @@ import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.BankReport;
 import accountmanagement.jframe.report.DifferenceReport;
 import accountmanagement.jframe.report.PettyReport;
-import accountmanagement.jframe.report.PurcharseReport;
 import accountmanagement.jframe.report.SalesReport;
 import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.StaffReport;
@@ -714,7 +713,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-
+        jPanel1.add(new RBReport(shopName, "MILK - CARD REPORT", Arrays.asList("R_Milk", "BO_Milk", "SO_Milk")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void purcharseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHover

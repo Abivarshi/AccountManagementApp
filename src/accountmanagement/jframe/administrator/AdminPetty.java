@@ -58,8 +58,8 @@ public class AdminPetty extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Common", "Cost Cutter", "Purchase", "Expenditure", "Banking", " " }));
-        add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, -1));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cost Cutter", "Borrow & Pay Back", "Purchase", "Expenditure", "Banking", " " }));
+        add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 170, -1));
 
         userType.setText("Value");
         userType.setToolTipText("");
@@ -68,7 +68,7 @@ public class AdminPetty extends javax.swing.JPanel {
         userType1.setText("Type");
         userType1.setToolTipText("");
         add(userType1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 86, 20));
-        add(valueTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 130, -1));
+        add(valueTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 170, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -78,7 +78,7 @@ public class AdminPetty extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 90, 30));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 90, 30));
 
         successLabel.setForeground(new java.awt.Color(51, 204, 0));
         add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 270, 20));
@@ -93,6 +93,9 @@ public class AdminPetty extends javax.swing.JPanel {
         String type = typeCombo.getSelectedItem().toString();
         String value = valueTextField.getText();
         String valueEdited = null;
+        String valueEdited1 = null;
+
+        value = value.replaceAll("\\s+", "");
 
         switch (type) {
             case "Common":
@@ -101,14 +104,9 @@ public class AdminPetty extends javax.swing.JPanel {
             case "Cost Cutter":
                 valueEdited = "CC_" + value;
                 break;
-            case "Cash":
-                valueEdited = "CB_" + value;
-                break;
-            case "C/Card":
-                valueEdited = "CCard_" + value;
-                break;
-            case "IOU":
-                valueEdited = "IOU_" + value;
+            case "Borrow & Pay Back":
+                valueEdited = "BO_" + value;
+                valueEdited1 = "PB_" + value;
                 break;
             case "Purchase":
                 valueEdited = "P_" + value;
@@ -122,10 +120,16 @@ public class AdminPetty extends javax.swing.JPanel {
             default:
                 System.out.println("no match");
         }
-        valueEdited = valueEdited.replaceAll("\\s+", "");
         if (!db.isColumnExist(shopName, "Petty", valueEdited)) {
-            db.alterTabTable(shopName, "Petty", valueEdited);
-            db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "PettyDetail");
+            if (valueEdited1 != null) {
+                db.alterTabTable(shopName, "Petty", valueEdited1);
+                db.insertDetailTable(shopName, valueTextField.getText(), valueEdited1, "Pay Back", "PettyDetail");
+                db.alterTabTable(shopName, "Petty", valueEdited);
+                db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, "Borrow", "PettyDetail");
+            } else {
+                db.alterTabTable(shopName, "Petty", valueEdited);
+                db.insertDetailTable(shopName, valueTextField.getText(), valueEdited, type, "PettyDetail");
+            }
             valueTextField.setText("");
             successLabel.setText("Petty added Successfully..");
         } else {

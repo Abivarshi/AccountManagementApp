@@ -9,7 +9,7 @@ import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.BankReport;
 import accountmanagement.jframe.report.DifferenceReport;
 import accountmanagement.jframe.report.PettyReport;
-import accountmanagement.jframe.report.PurcharseReport;
+import accountmanagement.jframe.report.expenditure.PurchaseReport;
 import accountmanagement.jframe.report.SalesReport;
 import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.StaffReport;
@@ -365,7 +365,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
-        jPanel1.add("PurcharseReport",new PurcharseReport(shopName));
+        jPanel1.add("PurcharseReport",new PurchaseReport(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed

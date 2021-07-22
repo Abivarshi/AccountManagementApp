@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  *
  * @author acer
  */
-public class Petty extends javax.swing.JPanel {
+public class Sales extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
@@ -35,10 +35,10 @@ public class Petty extends javax.swing.JPanel {
      *
      * @param shopName
      */
-    public Petty(String shopName) {
+    public Sales(String shopName) {
         this.shopName = shopName;
         initComponents();
-        populatePetty();
+        populateSales();
     }
 
     /**
@@ -93,7 +93,7 @@ public class Petty extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 1200));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 700));
 
         warningLabel.setForeground(new java.awt.Color(153, 0, 0));
 
@@ -110,7 +110,7 @@ public class Petty extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1187, Short.MAX_VALUE))
+                .addGap(0, 687, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -123,39 +123,21 @@ public class Petty extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
             try {
-                HashMap<String, Float> bankValues = new HashMap();
-                float beIOU = 0;
-                float expTotal = 0;
-                float purTotal = 0;
-                float balance = 0;
+                float bookoutTotal = 0;
+
+                HashMap<String, Float> salesValues = new HashMap();
                 for (List<String> list : listOfTextFields.keySet()) {
-                    if (list.get(2).equalsIgnoreCase("Expenditure")) {
-                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Purchase")) {
-                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Cost Cutter")) {
-                        beIOU = beIOU + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Banking")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("BE IOU")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Borrow")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Pay Back")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                    if (!list.get(1).equalsIgnoreCase("CustomerCount")) {
+                        bookoutTotal = bookoutTotal + Float.parseFloat(listOfTextFields.get(list).getText());
                     }
                     JTextField text = listOfTextFields.get(list);
-                    bankValues.put(list.get(1), Float.parseFloat(text.getText()));
+                    salesValues.put(list.get(1), Float.parseFloat(text.getText()));
                 }
-                balance = balance - expTotal - purTotal - beIOU;
-                bankValues.put("CC_BE_IOU", beIOU);
-                bankValues.put("SubPurchase", expTotal);
-                bankValues.put("SubExpenditure", purTotal);
-                bankValues.put("PettyBalance", balance);
+                salesValues.put("Total", bookoutTotal);
 
-                System.out.println(bankValues.toString());
-                db.insertValuesTabTable(shopName, "Petty", sdf.format(jDateChooser1.getDate()), bankValues);
-                warningLabel.setText("Petty added successfully..");
+                System.out.println(salesValues.toString());
+                db.insertValuesTabTable(shopName, "Sales", sdf.format(jDateChooser1.getDate()), salesValues);
+                warningLabel.setText("Sales added successfully..");
                 warningLabel.setForeground(Color.green);
                 resetText();
             } catch (java.lang.NumberFormatException e) {
@@ -177,66 +159,59 @@ public class Petty extends javax.swing.JPanel {
         }
     }
 
-    private void populatePetty() {
+    private void populateSales() {
 
-        ResultSet res = db.getDeatilTableValue(shopName, "PettyDetail");
+        ResultSet res = db.getDeatilTableValue(shopName, "SalesDetail");
         List<List<String>> bankIn = new ArrayList();
 
         try {
             while (res.next()) {
                 String item = res.getString("Item");
                 String name = res.getString("Name");
-                String type = res.getString("Type");
                 List<String> bankVal = new ArrayList();
                 bankVal.add(item);
                 bankVal.add(name);
-                bankVal.add(type);
                 bankIn.add(bankVal);
             }
 
             int i = 1;
-            int j = 0;
 
-            for (String type : Arrays.asList("Cost Cutter", "BE IOU", "Borrow", "Pay Back",
-                    "Purchase", "Expenditure", "Banking")) {
+            JLabel labelCus = new JLabel("Customer Count Day");
+            labelCus.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+            labelCus.setBounds(30, 30 * i, 300, 20);
+            jPanel1.add(labelCus);
 
-                if ("Purchase".equals(type)) {
-                    j = 420;
-                    i = 1;
-                }
+            JTextField jTextCus = new JTextField();
+            jTextCus.setFont(new java.awt.Font("Tahoma", 0, 12));
+            jTextCus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+            jTextCus.setText("0");
+            jTextCus.setBounds(220, 30 * i, 96, 25);
+            jPanel1.add(jTextCus);
+            i = i + 1;
 
+            listOfTextFields.put(Arrays.asList("Customer Count Day", "CustomerCount"), jTextCus);
 
-                    if (!"BE IOU".equals(type)) {
-                        JLabel label = new JLabel(type);
-                        label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                        label.setBounds(20 + j, 30 * i, 300, 20);
-                        jPanel1.add(label);
-                        i = i + 1;
-                    }
+            JLabel label = new JLabel("Book Out List(As Purchase Price)");
+            label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+            label.setBounds(30, 20+30 * i, 300, 20);
+            jPanel1.add(label);
+            i = i + 1;
+            for (List<String> val : bankIn) {
+                JLabel jLabel = new JLabel(val.get(0));
+                jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
+                jLabel.setBounds(50, 20+30 * i, 130, 20);
 
+                JTextField jText = new JTextField();
+                jText.setFont(new java.awt.Font("Tahoma", 0, 12));
+                jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+                jText.setText("0");
+                jText.setBounds(220, 20+30 * i, 96, 25);
+                i = i + 1;
 
-                for (List<String> val : bankIn) {
-                    if (type.equals(val.get(2))) {
+                listOfTextFields.put(val, jText);
 
-                        System.out.println(type + " : " + val.toString());
-                        JLabel jLabel = new JLabel(val.get(0));
-                        jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(40 + j, 30 * i, 130, 20);
-
-                        JTextField jText = new JTextField();
-                        jText.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-                        jText.setText("0");
-                        jText.setBounds(220 + j, 30 * i, 96, 25);
-                        i = i + 1;
-
-                        listOfTextFields.put(val, jText);
-
-                        jPanel1.add(jLabel);
-                        jPanel1.add(jText);
-                    }
-                }
-
+                jPanel1.add(jLabel);
+                jPanel1.add(jText);
             }
 
         } catch (SQLException ex) {

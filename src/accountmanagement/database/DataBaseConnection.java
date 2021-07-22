@@ -518,19 +518,17 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        alterTabTable(shopName, "Petty", "C_Cash");
-        alterTabTable(shopName, "Petty", "C_Coin");
         alterTabTable(shopName, "Petty", "CC_BE_IOU_Paid");
         alterTabTable(shopName, "Petty", "CC_BE_IOU");
         alterTabTable(shopName, "Petty", "CC_Ambiant");
         alterTabTable(shopName, "Petty", "CC_Chilled");
         alterTabTable(shopName, "Petty", "CC_Frozen");
-        alterTabTable(shopName, "Petty", "CB_Borrow");
-        alterTabTable(shopName, "Petty", "CB_Payback");
-        alterTabTable(shopName, "Petty", "CCard_Barrow");
-        alterTabTable(shopName, "Petty", "CCard_Payback");
-        alterTabTable(shopName, "Petty", "IOU_Borrow");
-        alterTabTable(shopName, "Petty", "IOU_Payback");
+        alterTabTable(shopName, "Petty", "BO_Cash");
+        alterTabTable(shopName, "Petty", "PB_Cash");
+        alterTabTable(shopName, "Petty", "BO_CCard");
+        alterTabTable(shopName, "Petty", "PB_CCard");
+        alterTabTable(shopName, "Petty", "BO_IOU");
+        alterTabTable(shopName, "Petty", "PB_IOU");
         alterTabTable(shopName, "Petty", "P_CostCutter");
         alterTabTable(shopName, "Petty", "P_Dhamecha");
         alterTabTable(shopName, "Petty", "P_BeerShop");
@@ -547,7 +545,7 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Petty", "B_CashPlus");
         alterTabTable(shopName, "Petty", "SubPurchase");
         alterTabTable(shopName, "Petty", "SubExpenditure");
-        alterTabTable(shopName, "Petty", "Balance");
+        alterTabTable(shopName, "Petty", "PettyBalance");
         
     }
     
@@ -555,8 +553,10 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        alterTabTable(shopName, tableType, "R_YesterdayTillCount");
-        alterTabTable(shopName, tableType, "R_TodayTillCount");
+        alterTabTable(shopName, tableType, "R_YesterdayTillCount1");
+        alterTabTable(shopName, tableType, "R_TodayTillCount1");
+        alterTabTable(shopName, tableType, "R_YesterdayTillCount2");
+        alterTabTable(shopName, tableType, "R_TodayTillCount2");
         alterTabTable(shopName, tableType, "R_Cash");
         alterTabTable(shopName, tableType, "R_Coin");
         alterTabTable(shopName, tableType, "R_Card");
@@ -597,7 +597,6 @@ public class DataBaseConnection {
         alterTabTable(shopName, tableType, "BO_VoucherMilk");
         alterTabTable(shopName, tableType, "BO_VoucherPayPoint");
         
-        alterTabTable(shopName, tableType, "SO_InsLottary");
         alterTabTable(shopName, tableType, "SO_Lottary");
         alterTabTable(shopName, tableType, "SO_Oyster");
         alterTabTable(shopName, tableType, "SO_PayPoint");
@@ -669,6 +668,16 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Purchase", "Total");
     }
     
+        public void createDefaultSales(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        alterTabTable(shopName, "Sales", "Damaged");
+        alterTabTable(shopName, "Sales", "OutOfDate");
+        alterTabTable(shopName, "Sales", "ShopUse");
+        alterTabTable(shopName, "Sales", "Total");
+    }
+    
     public void createDefaultSheet2(String shopName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -733,19 +742,17 @@ public class DataBaseConnection {
             getConnection(shopName);
         }
         
-        insertDetailTable(shopName, "Cash", "C_Cash", "Common", "PettyDetail");
-        insertDetailTable(shopName, "Coin", "C_Coin", "Common", "PettyDetail");
         insertDetailTable(shopName, "BE IOU Paid", "CC_BE_IOU_Paid", "BE IOU", "PettyDetail");
         insertDetailTable(shopName, "BE IOU", "CC_BE_IOU", "Summary", "PettyDetail");
         insertDetailTable(shopName, "Ambiant", "CC_Ambiant", "Cost Cutter", "PettyDetail");
         insertDetailTable(shopName, "Chilled", "CC_Chilled", "Cost Cutter", "PettyDetail");
         insertDetailTable(shopName, "Frozen", "CC_Frozen", "Cost Cutter", "PettyDetail");
-        insertDetailTable(shopName, "Borrow", "CB_Borrow", "Cash", "PettyDetail");
-        insertDetailTable(shopName, "Pay Back", "CB_Payback", "Cash", "PettyDetail");
-        insertDetailTable(shopName, "Borrow", "CCard_Barrow", "C/Card", "PettyDetail");
-        insertDetailTable(shopName, "Pay Back", "CCard_Payback", "C/Card", "PettyDetail");
-        insertDetailTable(shopName, "Borrow", "IOU_Borrow", "IOU", "PettyDetail");
-        insertDetailTable(shopName, "Pay Back", "IOU_Payback", "IOU", "PettyDetail");
+        insertDetailTable(shopName, "Cash", "BO_Cash", "Borrow", "PettyDetail");
+        insertDetailTable(shopName, "Cash", "PB_Cash", "Pay Back", "PettyDetail");
+        insertDetailTable(shopName, "C/Card", "BO_CCard", "Borrow", "PettyDetail");
+        insertDetailTable(shopName, "C/Card", "PB_CCard", "Pay Back", "PettyDetail");
+        insertDetailTable(shopName, "IOU", "BO_IOU", "Borrow", "PettyDetail");
+        insertDetailTable(shopName, "IOU", "PB_IOU", "Pay Back", "PettyDetail");
         insertDetailTable(shopName, "Cost Cutter", "P_CostCutter", "Purchase", "PettyDetail");
         insertDetailTable(shopName, "Dhamecha", "P_Dhamecha", "Purchase", "PettyDetail");
         insertDetailTable(shopName, "Beer Shop", "P_BeerShop", "Purchase", "PettyDetail");
@@ -762,7 +769,7 @@ public class DataBaseConnection {
         insertDetailTable(shopName, "Cash Plus", "B_CashPlus", "Banking", "PettyDetail");
         insertDetailTable(shopName, "SubTotal Purchase", "SubPurchase", "Summary", "PettyDetail");
         insertDetailTable(shopName, "SubTotal Expenditure", "SubExpenditure", "Summary", "PettyDetail");
-        insertDetailTable(shopName, "Petty Balance", "Balance", "Summary", "PettyDetail");
+        insertDetailTable(shopName, "Petty Balance", "PettyBalance", "Summary", "PettyDetail");
     }
     
     public void insertDefaultSheet2Detail(String shopName) {
@@ -785,14 +792,14 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        insertEPDetailTable(shopName, "Staff 1", "Staff1", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Staff 2", "Staff2", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Staff 3", "Staff3", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Staff 4", "Staff4", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Staff 5", "Staff5", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Staff 6", "Staff6", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Staff 7", "Staff7", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Staff 8", "Staff8", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Mike", "Staff1", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Sathees", "Staff2", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Tharsan", "Staff3", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Karan", "Staff4", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Suri", "Staff5", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Basker", "Staff6", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Viji", "Staff7", "ExpenditureDetail");
+        insertEPDetailTable(shopName, "Sutha", "Staff8", "ExpenditureDetail");
         insertEPDetailTable(shopName, "Capital Gains", "CapitalGains", "ExpenditureDetail");
         insertEPDetailTable(shopName, "Van", "Van", "ExpenditureDetail");
         insertEPDetailTable(shopName, "Diesel", "Diesel", "ExpenditureDetail");
@@ -834,6 +841,15 @@ public class DataBaseConnection {
         insertEPDetailTable(shopName, "Total", "Total", "PurchaseDetail");
     }
     
+    public void insertDefaultSalesDetail(String shopName) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+        insertEPDetailTable(shopName, "Damaged", "Damaged", "SalesDetail");
+        insertEPDetailTable(shopName, "Out of Date", "OutOfDate", "SalesDetail");
+        insertEPDetailTable(shopName, "Shop Use", "ShopUse", "SalesDetail");
+    }
+    
     public void createShop(String shopName) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         // database path, if it's new database, it will be created in the project folder
@@ -870,6 +886,8 @@ public class DataBaseConnection {
         createDefaultSheet2(shopName);
         createTabTable(shopName, "Petty");
         createDefaultPetty(shopName);
+        createTabTable(shopName, "Sales");
+        createDefaultSales(shopName);
         createDetailTable(shopName, "BankDetail");
         insertDefaultBankDetail(shopName);
         createDetailTable(shopName, "PettyDetail");
@@ -880,6 +898,8 @@ public class DataBaseConnection {
         insertDefaultExpenditureDetail(shopName);
         createDetailTable(shopName, "PurchaseDetail");
         insertDefaultPurchaseDetail(shopName);
+        createDetailTable(shopName, "SalesDetail");
+        insertDefaultSalesDetail(shopName);
     }
 
     public ResultSet getShopList() {

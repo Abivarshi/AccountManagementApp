@@ -599,6 +599,8 @@ public class Till extends javax.swing.JPanel {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         yesterdayTillCount.setText("0");
+        yesterdayTillCount1.setText("0");
+        todayTillCount1.setText("0");
         expenditure.setText("0");
         accPay.setText("0");
         refundGoods.setText("0");
@@ -619,6 +621,24 @@ public class Till extends javax.swing.JPanel {
         voucherPayPoint.setText("0");
         refundAccountCredit.setText("0");
         purchase.setText("0");
+        accPay.setText("0");
+        alcohol.setText("0");
+        boAccPay.setText("0");
+        boAccount.setText("0");
+        boCard.setText("0");
+        boCash.setText("0");
+        boCashBack.setText("0");
+        boInstLottary.setText("0");
+        boInstPO.setText("0");
+        boLottary.setText("0");
+        boLottaryPO.setText("0");
+        boMilk.setText("0");
+        boOyster.setText("0");
+        boPayPoint.setText("0");
+        boPayZone.setText("0");
+        boVaucherPayPoint.setText("0");
+        callingCard.setText("0");
+        groceries.setText("0");
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -650,71 +670,76 @@ public class Till extends javax.swing.JPanel {
                     float cashBackReport = Float.parseFloat(cashBack.getText());
                     float cashBackBO = Float.parseFloat(boCashBack.getText());
                     float SOCashBack = cashBackReport - cashBackBO;
-                    
+
                     float instantPayOutReport = Float.parseFloat(instantPayOut.getText());
                     float instantPayOutBO = Float.parseFloat(boInstPO.getText());
                     float SOInstantPayOut = instantPayOutReport - instantPayOutBO;
-                    
+
                     float lottaryPayOutReport = Float.parseFloat(lottaryPayOut.getText());
                     float lottaryPayOutBO = Float.parseFloat(boLottaryPO.getText());
                     float SOLottaryPayOut = lottaryPayOutReport - lottaryPayOutBO;
-                    
+
                     float lottaryReport = Float.parseFloat(lottary.getText());
                     float lottaryBO = Float.parseFloat(boLottary.getText());
-                    float SOLottary = lottaryBO-lottaryReport;
-                    
+                    float SOLottary = lottaryBO - lottaryReport;
+
                     float oysterReport = Float.parseFloat(oyster.getText());
                     float oysterBO = Float.parseFloat(boOyster.getText());
-                    float SOOyster = oysterBO-oysterReport;
-                    
+                    float SOOyster = oysterBO - oysterReport;
+
                     float payPointReport = Float.parseFloat(payPoint.getText());
                     float payPointBO = Float.parseFloat(boPayPoint.getText());
-                    float SOPayPoint = payPointBO-payPointReport;
-                    
+                    float SOPayPoint = payPointBO - payPointReport;
+
                     float payZoneReport = Float.parseFloat(payZone.getText());
                     float payZoneBO = Float.parseFloat(boPayZone.getText());
-                    float SOPayZone = payZoneBO-payZoneReport;
-                    
+                    float SOPayZone = payZoneBO - payZoneReport;
+
                     float insLottaryReport = Float.parseFloat(insLottary.getText());
                     float insLottaryBO = Float.parseFloat(boInstLottary.getText());
-                    float SOInsLottary = insLottaryReport-insLottaryBO;
-                    
+
                     float cashReport = Float.parseFloat(cash.getText());
                     float cashBO = Float.parseFloat(boCash.getText());
                     float todayTillCountReport = Float.parseFloat(todayTillCount.getText());
                     float yesterdayTillCountReport = Float.parseFloat(yesterdayTillCount.getText());
+                    float todayTillCountReport1 = Float.parseFloat(todayTillCount1.getText());
+                    float yesterdayTillCountReport1 = Float.parseFloat(yesterdayTillCount1.getText());
                     float coinsReport = Float.parseFloat(coin.getText());
                     float purchaseReport = Float.parseFloat(purchase.getText());
                     float expenditureReport = Float.parseFloat(expenditure.getText());
                     float refundGoodsReport = Float.parseFloat(refundGoods.getText());
                     float refundServicesReport = Float.parseFloat(refundServices.getText());
-                    float SOCash = cashReport+todayTillCountReport-yesterdayTillCountReport-cashBO+coinsReport+purchaseReport+expenditureReport+refundGoodsReport+refundServicesReport;
-                    
-                    float SOTill = SOCash+coinsReport+SOCard+SOVoucherMilk+SOInstantPayOut+SOLottaryPayOut;
-                            
-                    float SOPay =SOInsLottary+SOLottary+SOOyster+SOPayPoint+SOPayZone ;
-                    
+                    float SOCash = cashReport + todayTillCountReport + todayTillCountReport1 - yesterdayTillCountReport
+                            - yesterdayTillCountReport1 - cashBO + coinsReport + purchaseReport + expenditureReport
+                            + refundGoodsReport + refundServicesReport;
+
+                    float SOTill = SOCash + coinsReport + SOCard + SOVoucherMilk + SOInstantPayOut + SOLottaryPayOut;
+
+                    float SOPay = SOLottary + SOOyster + SOPayPoint + SOPayZone;
+
                     HashMap<String, Float> tillValues = new HashMap();
-                    tillValues.put("R_YesterdayTillCount", yesterdayTillCountReport);
-                    tillValues.put("R_TodayTillCount", todayTillCountReport);
+                    tillValues.put("R_YesterdayTillCount1", yesterdayTillCountReport);
+                    tillValues.put("R_TodayTillCount1", todayTillCountReport);
+                    tillValues.put("R_YesterdayTillCount2", yesterdayTillCountReport1);
+                    tillValues.put("R_TodayTillCount2", todayTillCountReport1);
                     tillValues.put("R_Cash", cashReport);
-                    tillValues.put("R_Coin",coinsReport );
+                    tillValues.put("R_Coin", coinsReport);
                     tillValues.put("R_Card", cardReport);
                     tillValues.put("R_VoucherMilk", voucherMilkReport);
                     tillValues.put("R_VoucherPayPoint", voucherPayPointReport);
-                    tillValues.put("R_RefundGoods",refundGoodsReport );
-                    tillValues.put("R_RefundServices",refundServicesReport );
+                    tillValues.put("R_RefundGoods", refundGoodsReport);
+                    tillValues.put("R_RefundServices", refundServicesReport);
                     tillValues.put("R_AccountCredit", refundAccountCreditReport);
                     tillValues.put("R_Purchase", purchaseReport);
-                    tillValues.put("R_Expenditure",expenditureReport );
+                    tillValues.put("R_Expenditure", expenditureReport);
                     tillValues.put("R_AccPay", accPayReport);
                     tillValues.put("R_CashBack", cashBackReport);
                     tillValues.put("R_InstantPayOut", instantPayOutReport);
-                    tillValues.put("R_LottaryPayOut",lottaryPayOutReport );
-                    tillValues.put("R_InsLottary",insLottaryReport );
-                    tillValues.put("R_Lottary",lottaryReport );
-                    tillValues.put("R_Oyster",oysterReport );
-                    tillValues.put("R_PayPoint",payPointReport );
+                    tillValues.put("R_LottaryPayOut", lottaryPayOutReport);
+                    tillValues.put("R_InsLottary", insLottaryReport);
+                    tillValues.put("R_Lottary", lottaryReport);
+                    tillValues.put("R_Oyster", oysterReport);
+                    tillValues.put("R_PayPoint", payPointReport);
                     tillValues.put("R_PayZone", payZoneReport);
 
                     tillValues.put("Alcohol", Float.parseFloat(alcohol.getText()));
@@ -722,34 +747,33 @@ public class Till extends javax.swing.JPanel {
                     tillValues.put("Tobacco", Float.parseFloat(tabacco.getText()));
                     tillValues.put("CallingCard", Float.parseFloat(callingCard.getText()));
                     tillValues.put("BO_InsLottary", insLottaryBO);
-                    tillValues.put("BO_Lottary",lottaryBO );
-                    tillValues.put("BO_Oyster",oysterBO );
+                    tillValues.put("BO_Lottary", lottaryBO);
+                    tillValues.put("BO_Oyster", oysterBO);
                     tillValues.put("BO_PayPoint", voucherPayPointBO);
                     tillValues.put("BO_PayZone", payZoneBO);
                     tillValues.put("BO_AccPay", accPayBO);
                     tillValues.put("BO_InstantPayOut", instantPayOutBO);
                     tillValues.put("BO_LottaryPayOut", lottaryPayOutBO);
-                    tillValues.put("BO_Cash",cashBO );
+                    tillValues.put("BO_Cash", cashBO);
                     tillValues.put("BO_Card", cardBO);
                     tillValues.put("BO_AccountCredit", refundAccountCreditBO);
                     tillValues.put("BO_CashBack", cashBackBO);
                     tillValues.put("BO_VoucherMilk", voucherMilkBO);
-                    tillValues.put("BO_VoucherPayPoint",payPointBO );
+                    tillValues.put("BO_VoucherPayPoint", payPointBO);
 
-                    tillValues.put("SO_Cash",SOCash );
+                    tillValues.put("SO_Cash", SOCash);
                     tillValues.put("SO_Card", SOCard);
                     tillValues.put("SO_VoucherMilk", SOVoucherMilk);
                     tillValues.put("SO_VoucherPayPoint", SOVoucherPayPoint);
                     tillValues.put("SO_AccountCredit", SORefundAccountCredit);
                     tillValues.put("SO_AccPay", SOAccPay);
                     tillValues.put("SO_CashBack", SOCashBack);
-                    tillValues.put("SO_InstantPayOut",SOInstantPayOut);
-                    tillValues.put("SO_LottaryPayOut",SOLottaryPayOut );
-                    tillValues.put("SO_Lottary",SOLottary );
-                    tillValues.put("SO_Oyster",SOOyster );
+                    tillValues.put("SO_InstantPayOut", SOInstantPayOut);
+                    tillValues.put("SO_LottaryPayOut", SOLottaryPayOut);
+                    tillValues.put("SO_Lottary", SOLottary);
+                    tillValues.put("SO_Oyster", SOOyster);
                     tillValues.put("SO_PayPoint", SOPayPoint);
                     tillValues.put("SO_PayZone", SOPayZone);
-                    tillValues.put("SO_InsLottary", SOInsLottary);
                     tillValues.put("SO_Till", SOTill);
                     tillValues.put("SO_Pay", SOPay);
 
