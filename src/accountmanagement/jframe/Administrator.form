@@ -61,7 +61,7 @@
                       <Component id="bankButton" alignment="1" max="32767" attributes="0"/>
                       <Component id="commissionButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="pettyButton" alignment="0" max="32767" attributes="0"/>
-                      <Component id="salesButton1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="adminProfitButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -85,7 +85,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="commissionButton" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="salesButton1" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="adminProfitButton" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace pref="172" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -267,7 +267,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pettyButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="salesButton1">
+        <Component class="javax.swing.JButton" name="adminProfitButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="0" red="0" type="rgb"/>
@@ -287,9 +287,9 @@
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="salesButton1MouseHover"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="salesButton1MouseHoverOut"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salesButton1ActionPerformed"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="adminProfitButtonMouseHover"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="adminProfitButtonMouseHoverOut"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminProfitButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

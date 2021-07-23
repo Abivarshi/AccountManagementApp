@@ -9,6 +9,7 @@ import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.administrator.AdminBank;
 import accountmanagement.jframe.administrator.AdminExpenditure;
 import accountmanagement.jframe.administrator.AdminPetty;
+import accountmanagement.jframe.administrator.AdminProfitNew;
 import accountmanagement.jframe.administrator.AdminPurcharse;
 import accountmanagement.jframe.administrator.CommissionAndService;
 import accountmanagement.jframe.administrator.Staff;
@@ -36,6 +37,7 @@ public class Administrator extends javax.swing.JPanel {
 
     /**
      * Creates new form Administrator
+     *
      * @param shopName
      */
     public Administrator(String shopName) {
@@ -61,7 +63,7 @@ public class Administrator extends javax.swing.JPanel {
         bankButton = new javax.swing.JButton();
         commissionButton = new javax.swing.JButton();
         pettyButton = new javax.swing.JButton();
-        salesButton1 = new javax.swing.JButton();
+        adminProfitButton = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -222,25 +224,25 @@ public class Administrator extends javax.swing.JPanel {
             }
         });
 
-        salesButton1.setBackground(new java.awt.Color(0, 0, 51));
-        salesButton1.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        salesButton1.setText("Profit Percentage");
-        salesButton1.setBorder(null);
-        salesButton1.setBorderPainted(false);
-        salesButton1.setContentAreaFilled(false);
-        salesButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        salesButton1.setFocusPainted(false);
-        salesButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        adminProfitButton.setBackground(new java.awt.Color(0, 0, 51));
+        adminProfitButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        adminProfitButton.setText("Profit Percentage");
+        adminProfitButton.setBorder(null);
+        adminProfitButton.setBorderPainted(false);
+        adminProfitButton.setContentAreaFilled(false);
+        adminProfitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        adminProfitButton.setFocusPainted(false);
+        adminProfitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                salesButton1MouseHover(evt);
+                adminProfitButtonMouseHover(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                salesButton1MouseHoverOut(evt);
+                adminProfitButtonMouseHoverOut(evt);
             }
         });
-        salesButton1.addActionListener(new java.awt.event.ActionListener() {
+        adminProfitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salesButton1ActionPerformed(evt);
+                adminProfitButtonActionPerformed(evt);
             }
         });
 
@@ -258,7 +260,7 @@ public class Administrator extends javax.swing.JPanel {
                     .addComponent(bankButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(commissionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pettyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(salesButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(adminProfitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -279,7 +281,7 @@ public class Administrator extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(commissionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(salesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(adminProfitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
@@ -337,7 +339,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-        jPanel1.add("AdminExpenditure",new AdminExpenditure(shopName));
+        jPanel1.add("AdminExpenditure", new AdminExpenditure(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButtonActionPerformed
@@ -351,7 +353,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
-        jPanel1.add("AdminPurcharse",new AdminPurcharse(shopName));
+        jPanel1.add("AdminPurcharse", new AdminPurcharse(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed
@@ -365,7 +367,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButtonMouseHoverOut
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
-        jPanel1.add("AdminBank",new AdminBank(shopName));
+        jPanel1.add("AdminBank", new AdminBank(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_bankButtonActionPerformed
@@ -379,7 +381,7 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_commissionButtonMouseHoverOut
 
     private void commissionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commissionButtonActionPerformed
-        jPanel1.add("CommissionAndService",new CommissionAndService(shopName));
+        jPanel1.add("CommissionAndService", new CommissionAndService(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_commissionButtonActionPerformed
@@ -393,24 +395,27 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
-        jPanel1.add("AdminPetty",new AdminPetty(shopName));
+        jPanel1.add("AdminPetty", new AdminPetty(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_pettyButtonActionPerformed
 
-    private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
+    private void adminProfitButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminProfitButtonMouseHover
         // TODO add your handling code here:
-    }//GEN-LAST:event_salesButton1MouseHover
+    }//GEN-LAST:event_adminProfitButtonMouseHover
 
-    private void salesButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHoverOut
+    private void adminProfitButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminProfitButtonMouseHoverOut
         // TODO add your handling code here:
-    }//GEN-LAST:event_salesButton1MouseHoverOut
+    }//GEN-LAST:event_adminProfitButtonMouseHoverOut
 
-    private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
-
-    }//GEN-LAST:event_salesButton1ActionPerformed
+    private void adminProfitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminProfitButtonActionPerformed
+        jPanel1.add("AdminProfitNew", new AdminProfitNew(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_adminProfitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton adminProfitButton;
     private javax.swing.JButton bankButton;
     private javax.swing.JButton commissionButton;
     private javax.swing.JButton expenditureButton;
@@ -418,7 +423,6 @@ public class Administrator extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton pettyButton;
     private javax.swing.JButton purcharseButton;
-    private javax.swing.JButton salesButton1;
     private javax.swing.JButton staffButton;
     private javax.swing.JButton userButton;
     // End of variables declaration//GEN-END:variables

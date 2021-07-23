@@ -24,6 +24,7 @@ public class Dashboard extends javax.swing.JFrame {
     private final String shopName;
     private final String role;
     private final String userName;
+
     /**
      * Creates new form Dashboard
      *
@@ -33,13 +34,17 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard(String shopName, String role, String userName) {
         this.shopName = shopName;
-        this.role=role;
-        this.userName=userName;
+        this.role = role;
+        this.userName = userName;
         initComponents();
-        if(role.equals("admin")){
+        if (role.equals("admin")) {
             administratorButton.setVisible(true);
-        }else{
-            administratorButton.setVisible(false);
+            logoutButton.setVisible(true);
+            backUpButton.setVisible(true);
+        } else {
+            if (role.equals("user")) {
+                backUpButton.setVisible(false);
+            }
         }
         userNameLabal.setText(userName);
 //        getTabList();
@@ -57,6 +62,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         userNameLabal = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
+        backUpButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         administratorButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -126,6 +132,29 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        backUpButton.setBackground(new java.awt.Color(0, 0, 51));
+        backUpButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        backUpButton.setForeground(new java.awt.Color(255, 255, 255));
+        backUpButton.setText("BackUp");
+        backUpButton.setBorder(null);
+        backUpButton.setBorderPainted(false);
+        backUpButton.setContentAreaFilled(false);
+        backUpButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backUpButton.setFocusPainted(false);
+        backUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                backUpButtonMouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                backUpButtonMouseHoverOut(evt);
+            }
+        });
+        backUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backUpButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,17 +162,21 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(userNameLabal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(backUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userNameLabal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(userNameLabal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
@@ -185,7 +218,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(administratorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(225, 900));
@@ -608,15 +641,15 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_tillButtonHover
 
     private void userNameLabalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameLabalActionPerformed
-        
+
     }//GEN-LAST:event_userNameLabalActionPerformed
 
     private void MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHoverOut
-        
+
     }//GEN-LAST:event_MouseHoverOut
 
     private void MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseHover
-        
+
     }//GEN-LAST:event_MouseHover
 
     private void administratorButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_administratorButtonMouseHover
@@ -652,6 +685,18 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void backUpButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backUpButtonMouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backUpButtonMouseHover
+
+    private void backUpButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backUpButtonMouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backUpButtonMouseHoverOut
+
+    private void backUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUpButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backUpButtonActionPerformed
+
     private ActionListener populateTabPanel(String tabName) {
         return (ActionEvent e) -> {
             rightPanel.add("Items", new Items(shopName, tabName));
@@ -662,6 +707,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton administratorButton;
+    private javax.swing.JButton backUpButton;
     private javax.swing.JButton bankButton;
     private javax.swing.JButton expenditureButton;
     private javax.swing.JPanel jPanel1;

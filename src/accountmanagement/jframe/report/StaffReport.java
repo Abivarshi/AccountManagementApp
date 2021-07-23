@@ -161,7 +161,7 @@ public class StaffReport extends javax.swing.JPanel {
                 jt.setBounds(30, 40, 1500, 300);
                 jt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                 jt.setPreferredSize(new java.awt.Dimension(800, 64));
-                jt.setDefaultRenderer(String.class, new LineWrapCellRenderer());
+//                jt.setDefaultRenderer(String.class, new LineWrapCellRenderer());
 
                 JScrollPane sp = new JScrollPane(jt);
                 sp.setBounds(10, 20, 775, 500);
