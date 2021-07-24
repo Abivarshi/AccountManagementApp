@@ -7,7 +7,6 @@ package accountmanagement.jframe.report;
 
 import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.util.LineWrapCellRenderer;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
