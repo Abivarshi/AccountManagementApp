@@ -6,13 +6,7 @@
 package accountmanagement.jframe.report.till;
 
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.report.BankReport;
-import accountmanagement.jframe.report.DifferenceReport;
-import accountmanagement.jframe.report.PettyReport;
-import accountmanagement.jframe.report.SalesReport;
-import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.SingleReport;
-import accountmanagement.jframe.report.StaffReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Arrays;
@@ -28,6 +22,7 @@ public class TillReport extends javax.swing.JPanel {
 
     /**
      * Creates new form Administrator
+     *
      * @param shopName
      */
     public TillReport(String shopName) {
@@ -133,7 +128,7 @@ public class TillReport extends javax.swing.JPanel {
 
         expenditureButton.setBackground(new java.awt.Color(0, 0, 51));
         expenditureButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        expenditureButton.setText("Milk");
+        expenditureButton.setText("Voucher Milk");
         expenditureButton.setBorder(null);
         expenditureButton.setBorderPainted(false);
         expenditureButton.setContentAreaFilled(false);
@@ -202,7 +197,7 @@ public class TillReport extends javax.swing.JPanel {
 
         pettyButton.setBackground(new java.awt.Color(0, 0, 51));
         pettyButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        pettyButton.setText("Paypoint");
+        pettyButton.setText("Voucher Paypoint");
         pettyButton.setBorder(null);
         pettyButton.setBorderPainted(false);
         pettyButton.setContentAreaFilled(false);
@@ -686,7 +681,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add(new SingleReport(shopName, "TILL - CARD REPORT", "R_Coin", "Till"));
+        jPanel1.add(new SingleReport(shopName, "TILL - COIN REPORT", "R_Coin", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -714,7 +709,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-        jPanel1.add(new RBReport(shopName, "MILK - CARD REPORT", Arrays.asList("R_Milk", "BO_Milk", "SO_Milk")));
+        jPanel1.add(new RBReport(shopName, "TILL - VOUCHER MILK REPORT", Arrays.asList("R_VoucherMilk", "BO_VoucherMilk", "SO_VoucherMilk")));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButtonActionPerformed
@@ -738,11 +733,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_differenceButtonMouseHover
 
     private void differenceButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_differenceButtonMouseHoverOut
-       differenceButton.setForeground(Color.black);
+        differenceButton.setForeground(Color.black);
     }//GEN-LAST:event_differenceButtonMouseHoverOut
 
     private void differenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differenceButtonActionPerformed
-        jPanel1.add("DifferenceReport",new DifferenceReport(shopName));
+        jPanel1.add(new SingleReport(shopName, "TILL - PURCHASE REPORT", "R_Purchase", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_differenceButtonActionPerformed
@@ -756,7 +751,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
-        jPanel1.add("PettyReport",new PettyReport(shopName));
+        jPanel1.add(new RBReport(shopName, "TILL - VOUCHER PAYPOINT REPORT", Arrays.asList("R_VoucherPayPoint", "BO_VoucherPayPoint", "SO_VoucherPayPoint")));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_pettyButtonActionPerformed
@@ -770,7 +765,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButtonMouseHoverOut
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
-        jPanel1.add("BankReport", new BankReport(shopName));
+        jPanel1.add(new SingleReport(shopName, "TILL - REFUND GOODS REPORT", "R_RefundGoods", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_bankButtonActionPerformed
@@ -784,7 +779,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButtonMouseHoverOut
 
     private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
-        jPanel1.add("StaffReport", new StaffReport(shopName));
+        jPanel1.add(new SingleReport(shopName, "TILL - REFUND SERVICES REPORT", "R_RefundServices", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_staffButtonActionPerformed
@@ -798,7 +793,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButtonMouseHoverOut
 
     private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed
-        jPanel1.add("SalesReport", new SalesReport(shopName));
+        jPanel1.add(new SingleReport(shopName, "TILL - EXPENDITURE REPORT", "R_Expenditure", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButtonActionPerformed
@@ -812,7 +807,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_finalButtonMouseHoverOut
 
     private void finalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - ACCOUNT CREDIT REPORT", Arrays.asList("R_AccountCredit", "BO_AccountCredit", "SO_AccountCredit")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_finalButtonActionPerformed
 
     private void sheet2Button1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button1MouseHover
@@ -824,7 +821,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2Button1MouseHoverOut
 
     private void sheet2Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - ACC PAY REPORT", Arrays.asList("R_AccPay", "BO_AccPay", "SO_AccPay")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_sheet2Button1ActionPerformed
 
     private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
@@ -836,7 +835,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton1MouseHoverOut
 
     private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RefundReport(shopName, "TILL - REFUND REPORT", Arrays.asList("R_VoucherMilk", "BO_VoucherMilk", "SO_VoucherMilk", "R_VoucherPayPoint", "BO_VoucherPayPoint", "SO_VoucherPayPoint")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton1ActionPerformed
 
     private void differenceButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_differenceButton1MouseHover
@@ -848,7 +849,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_differenceButton1MouseHoverOut
 
     private void differenceButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differenceButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - PAYPOINT REPORT", Arrays.asList("R_PayPoint", "BO_PayPoint", "SO_PayPoint")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_differenceButton1ActionPerformed
 
     private void finalButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButton1MouseHover
@@ -860,7 +863,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_finalButton1MouseHoverOut
 
     private void finalButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - OYSTER REPORT", Arrays.asList("R_Oyster", "BO_Oyster", "SO_Oyster")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_finalButton1ActionPerformed
 
     private void staffButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButton1MouseHover
@@ -872,7 +877,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButton1MouseHoverOut
 
     private void staffButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - LOTTARY REPORT", Arrays.asList("R_Lottary", "BO_Lottary", "SO_Lottary")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_staffButton1ActionPerformed
 
     private void bankButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButton1MouseHover
@@ -884,7 +891,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButton1MouseHoverOut
 
     private void bankButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new SingleReport(shopName, "TILL - INS LOTTARY REPORT", "R_InsLottary", "Till"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_bankButton1ActionPerformed
 
     private void pettyButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButton1MouseHover
@@ -896,7 +905,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButton1MouseHoverOut
 
     private void pettyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - LOTTARY PAYOUT REPORT", Arrays.asList("R_LottaryPayOut", "BO_LottaryPayOut", "SO_LottaryPayOut")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_pettyButton1ActionPerformed
 
     private void expenditureButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButton1MouseHover
@@ -908,7 +919,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButton1MouseHoverOut
 
     private void expenditureButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - INSTANT PAYOUT REPORT", Arrays.asList("R_InstantPayOut", "BO_InstantPayOut", "SO_InstantPayOut")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButton1ActionPerformed
 
     private void purcharseButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButton1MouseHover
@@ -920,7 +933,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButton1MouseHoverOut
 
     private void purcharseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButton1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - CASH BACK REPORT", Arrays.asList("R_CashBack", "BO_CashBack", "SO_CashBack")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButton1ActionPerformed
 
     private void salesButton2MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton2MouseHover
@@ -932,7 +947,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton2MouseHoverOut
 
     private void salesButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton2ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new TotalPayoutReport(shopName, "TILL - TOTAL PAYOUT REPORT", Arrays.asList("R_LottaryPayOut", "R_InsLottary")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton2ActionPerformed
 
     private void salesButton3MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton3MouseHover
@@ -944,7 +961,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton3MouseHoverOut
 
     private void salesButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton3ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new TotalCommissionSalesReport(shopName, "TILL - TOTAL COMMISSION SALES REPORT", Arrays.asList("R_Lottary", "R_Oyster", "R_PayPoint", "R_PayZone")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton3ActionPerformed
 
     private void salesButton4MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton4MouseHover
@@ -956,7 +975,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton4MouseHoverOut
 
     private void salesButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton4ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new SingleReport(shopName, "TILL - Pay/Payzone Over/Short REPORT", "SO_Pay", "Till"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton4ActionPerformed
 
     private void salesButton5MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton5MouseHover
@@ -968,7 +989,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton5MouseHoverOut
 
     private void salesButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton5ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new VoucherReport(shopName, "TILL - VOUCHER REPORT", Arrays.asList("R_VoucherMilk", "R_VoucherPayPoint", "BO_VoucherMilk", "BO_VoucherPayPoint")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton5ActionPerformed
 
     private void salesButton6MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton6MouseHover
@@ -980,7 +1003,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton6MouseHoverOut
 
     private void salesButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton6ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new SingleReport(shopName, "TILL - Over/Short REPORT", "SO_Till", "Till"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton6ActionPerformed
 
     private void salesButton7MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton7MouseHover
@@ -992,7 +1017,9 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton7MouseHoverOut
 
     private void salesButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton7ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new RBReport(shopName, "TILL - PAYZONE REPORT", Arrays.asList("R_PayZone", "BO_PayZone", "SO_PayZone")));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton7ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

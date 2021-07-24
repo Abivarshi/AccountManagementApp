@@ -144,7 +144,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Calibri" size="16" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Milk"/>
+            <Property name="text" type="java.lang.String" value="Voucher Milk"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -234,7 +234,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Calibri" size="16" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Paypoint"/>
+            <Property name="text" type="java.lang.String" value="Voucher Paypoint"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
