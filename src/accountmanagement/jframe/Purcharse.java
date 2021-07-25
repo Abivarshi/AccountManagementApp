@@ -91,30 +91,27 @@ public class Purcharse extends javax.swing.JPanel {
 
         successLabel.setForeground(new java.awt.Color(51, 153, 0));
 
-        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(558, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(warningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(successLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(690, Short.MAX_VALUE)
+                .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(49, 49, 49)
                 .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(723, Short.MAX_VALUE))
+                .addContainerGap(701, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 800, 780));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 930, 770));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 290, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -131,7 +128,7 @@ public class Purcharse extends javax.swing.JPanel {
                     purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
                     total = total + Float.parseFloat(listOfTextFields.get(name).getText());
                 } catch (java.lang.NumberFormatException e) {
-                    warningLabel.setText("**Values should be decimal");
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
                     listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     canSave = false;
                     break;
@@ -156,7 +153,7 @@ public class Purcharse extends javax.swing.JPanel {
 
     private void resetText() {
         for (String name : listOfTextFields.keySet()) {
-            listOfTextFields.get(name).setText("0");
+            listOfTextFields.get(name).setText("");
         }
     }
 
@@ -175,7 +172,7 @@ public class Purcharse extends javax.swing.JPanel {
                     JTextField textField = new JTextField();
                     textField.setFont(new java.awt.Font("Tahoma", 0, 12));
                     textField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-                    textField.setText("0");
+                    textField.setText("");
                     textField.setBounds(220, 30 * i, 96, 25);
 
                     jPanel1.add(label);

@@ -11,20 +11,12 @@ import accountmanagement.jframe.administrator.AdminExpenditure;
 import accountmanagement.jframe.administrator.AdminPetty;
 import accountmanagement.jframe.administrator.AdminProfitNew;
 import accountmanagement.jframe.administrator.AdminPurcharse;
+import accountmanagement.jframe.administrator.AdminSales;
 import accountmanagement.jframe.administrator.CommissionAndService;
 import accountmanagement.jframe.administrator.Staff;
 import accountmanagement.jframe.administrator.User;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 
 /**
  *
@@ -64,6 +56,7 @@ public class Administrator extends javax.swing.JPanel {
         commissionButton = new javax.swing.JButton();
         pettyButton = new javax.swing.JButton();
         adminProfitButton = new javax.swing.JButton();
+        adminProfitButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -246,6 +239,28 @@ public class Administrator extends javax.swing.JPanel {
             }
         });
 
+        adminProfitButton1.setBackground(new java.awt.Color(0, 0, 51));
+        adminProfitButton1.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        adminProfitButton1.setText("Sales");
+        adminProfitButton1.setBorder(null);
+        adminProfitButton1.setBorderPainted(false);
+        adminProfitButton1.setContentAreaFilled(false);
+        adminProfitButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        adminProfitButton1.setFocusPainted(false);
+        adminProfitButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                adminProfitButton1MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                adminProfitButton1MouseHoverOut(evt);
+            }
+        });
+        adminProfitButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminProfitButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -260,7 +275,8 @@ public class Administrator extends javax.swing.JPanel {
                     .addComponent(bankButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(commissionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pettyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminProfitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(adminProfitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adminProfitButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -280,9 +296,11 @@ public class Administrator extends javax.swing.JPanel {
                 .addComponent(pettyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(commissionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(adminProfitButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(adminProfitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -414,8 +432,23 @@ public class Administrator extends javax.swing.JPanel {
         layout.next(jPanel1);
     }//GEN-LAST:event_adminProfitButtonActionPerformed
 
+    private void adminProfitButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminProfitButton1MouseHover
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminProfitButton1MouseHover
+
+    private void adminProfitButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminProfitButton1MouseHoverOut
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminProfitButton1MouseHoverOut
+
+    private void adminProfitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminProfitButton1ActionPerformed
+        jPanel1.add("AdminSales", new AdminSales(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_adminProfitButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adminProfitButton;
+    private javax.swing.JButton adminProfitButton1;
     private javax.swing.JButton bankButton;
     private javax.swing.JButton commissionButton;
     private javax.swing.JButton expenditureButton;

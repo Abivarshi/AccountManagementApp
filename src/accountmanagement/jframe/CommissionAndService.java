@@ -147,7 +147,7 @@ public class CommissionAndService extends javax.swing.JPanel {
                 warningLabel.setForeground(Color.green);
                 resetText();
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**Values should be decimal");
+                warningLabel.setText("**All Values are mandatory and should be decimal");
             }
         } else {
             warningLabel.setText("**Date should be selected");
@@ -161,7 +161,7 @@ public class CommissionAndService extends javax.swing.JPanel {
     private void resetText() {
         for (List<String> list : listOfTextFields.keySet()) {
             JTextField text = listOfTextFields.get(list);
-            text.setText("0");
+            text.setText("");
         }
     }
 
@@ -203,7 +203,7 @@ public class CommissionAndService extends javax.swing.JPanel {
                         JTextField jText = new JTextField();
                         jText.setFont(new java.awt.Font("Tahoma", 0, 12));
                         jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-                        jText.setText("0");
+                        jText.setText("");
                         jText.setBounds(220 + j, 30 * i, 96, 25);
                         i = i + 1;
 

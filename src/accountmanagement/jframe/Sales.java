@@ -141,7 +141,7 @@ public class Sales extends javax.swing.JPanel {
                 warningLabel.setForeground(Color.green);
                 resetText();
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**Values should be decimal");
+                warningLabel.setText("**All Values are mandatory and should be decimal");
             }
         } else {
             warningLabel.setText("**Date should be selected");
@@ -155,7 +155,7 @@ public class Sales extends javax.swing.JPanel {
     private void resetText() {
         for (List<String> list : listOfTextFields.keySet()) {
             JTextField text = listOfTextFields.get(list);
-            text.setText("0");
+            text.setText("");
         }
     }
 
@@ -184,7 +184,7 @@ public class Sales extends javax.swing.JPanel {
             JTextField jTextCus = new JTextField();
             jTextCus.setFont(new java.awt.Font("Tahoma", 0, 12));
             jTextCus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-            jTextCus.setText("0");
+            jTextCus.setText("");
             jTextCus.setBounds(220, 30 * i, 96, 25);
             jPanel1.add(jTextCus);
             i = i + 1;
@@ -204,7 +204,7 @@ public class Sales extends javax.swing.JPanel {
                 JTextField jText = new JTextField();
                 jText.setFont(new java.awt.Font("Tahoma", 0, 12));
                 jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-                jText.setText("0");
+                jText.setText("");
                 jText.setBounds(220, 20+30 * i, 96, 25);
                 i = i + 1;
 

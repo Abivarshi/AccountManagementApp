@@ -90,25 +90,21 @@ public class StaffTime extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 1200));
 
-        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(558, Short.MAX_VALUE)
-                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1187, Short.MAX_VALUE))
+            .addGap(0, 1200, Short.MAX_VALUE)
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 270, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -130,7 +126,7 @@ public class StaffTime extends javax.swing.JPanel {
                 warningLabel.setForeground(Color.green);
                 warningLabel.setText("**Staff time saved successfully..");
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**Values should be decimal");
+                warningLabel.setText("**All Values are mandatory and should be decimal");
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -199,7 +195,7 @@ public class StaffTime extends javax.swing.JPanel {
         JTextField startText1 = new JTextField();
         startText1.setFont(new java.awt.Font("Tahoma", 0, 12));
         startText1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        startText1.setText("0");
+        startText1.setText("");
         startText1.setBounds(220, 80 + 30 * i, 96, 25);
         i = i + 1;
 
@@ -210,7 +206,7 @@ public class StaffTime extends javax.swing.JPanel {
         JTextField endText1 = new JTextField();
         endText1.setFont(new java.awt.Font("Tahoma", 0, 12));
         endText1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        endText1.setText("0");
+        endText1.setText("");
         endText1.setBounds(220, 80 + 30 * i, 96, 25);
         i = i + 1;
 
