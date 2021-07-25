@@ -5,12 +5,16 @@
  */
 package accountmanagement.jframe.report.difference;
 
-import accountmanagement.jframe.report.till.*;
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.Expenditure;
 import accountmanagement.jframe.report.SingleReport;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.util.Arrays;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 
 /**
  *
@@ -29,6 +33,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     public DifferenceReport(String shopName) {
         this.shopName = shopName;
         initComponents();
+        populateDifferenceReport();
     }
 
     /**
@@ -63,7 +68,6 @@ public class DifferenceReport extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1, "card2");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
         sheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -86,7 +90,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 sheet2ButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(sheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 20));
 
         tillButton.setBackground(new java.awt.Color(0, 0, 51));
         tillButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -109,7 +112,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 tillButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(tillButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 130, 20));
 
         expenditureButton.setBackground(new java.awt.Color(0, 0, 51));
         expenditureButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -132,7 +134,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 expenditureButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(expenditureButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 130, 20));
 
         purcharseButton.setBackground(new java.awt.Color(0, 0, 51));
         purcharseButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -155,7 +156,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 purcharseButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(purcharseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 130, 20));
 
         pettyButton.setBackground(new java.awt.Color(0, 0, 51));
         pettyButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -178,7 +178,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 pettyButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(pettyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 130, 20));
 
         bankButton.setBackground(new java.awt.Color(0, 0, 51));
         bankButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -201,7 +200,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 bankButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(bankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 130, 20));
 
         staffButton.setBackground(new java.awt.Color(0, 0, 51));
         staffButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -224,7 +222,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 staffButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(staffButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 130, 20));
 
         salesButton1.setBackground(new java.awt.Color(0, 0, 51));
         salesButton1.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -247,7 +244,6 @@ public class DifferenceReport extends javax.swing.JPanel {
                 salesButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(salesButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 130, 20));
 
         salesButton5.setBackground(new java.awt.Color(0, 0, 51));
         salesButton5.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -270,7 +266,43 @@ public class DifferenceReport extends javax.swing.JPanel {
                 salesButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(salesButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, 20));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(sheet2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(purcharseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(salesButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(expenditureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pettyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(salesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bankButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(staffButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(tillButton)
+                .addGap(10, 10, 10)
+                .addComponent(sheet2Button)
+                .addGap(10, 10, 10)
+                .addComponent(purcharseButton)
+                .addGap(10, 10, 10)
+                .addComponent(salesButton5)
+                .addGap(10, 10, 10)
+                .addComponent(expenditureButton)
+                .addGap(10, 10, 10)
+                .addComponent(pettyButton)
+                .addGap(10, 10, 10)
+                .addComponent(salesButton1)
+                .addGap(10, 10, 10)
+                .addComponent(bankButton)
+                .addGap(10, 10, 10)
+                .addComponent(staffButton))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -284,7 +316,7 @@ public class DifferenceReport extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -397,6 +429,52 @@ public class DifferenceReport extends javax.swing.JPanel {
         
     }//GEN-LAST:event_salesButton5ActionPerformed
 
+    private void populateDifferenceReport() {
+        ResultSet res = db.getDeatilTableValue(shopName, "Staff");
+        try {
+            int i = 1;
+            while (res.next()) {
+                String staffName = res.getString("StaffName");
+                String staffColName = res.getString("StaffColName");
+                
+                String title = "DIFFERENCE - " + staffName.toUpperCase() + " REPORT";
+                
+                JButton button = new JButton();
+                button.setBackground(new java.awt.Color(0, 0, 51));
+                button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+                button.setText(staffName);
+                button.setBorder(null);
+                button.setBorderPainted(false);
+                button.setContentAreaFilled(false);
+                button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                button.setFocusPainted(false);
+                button.setBounds(0, 250 + i * 30, 130, 20);
+                button.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseEntered(java.awt.event.MouseEvent evt) {
+                        button.setForeground(Color.red);
+                    }
+
+                    public void mouseExited(java.awt.event.MouseEvent evt) {
+                        button.setForeground(Color.black);
+                    }
+                });
+                button.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                        jPanel1.add("report", new SingleReport(shopName, title, name, "Expenditure"));
+//                        CardLayout layout = (CardLayout) jPanel1.getLayout();
+//                        layout.next(jPanel1);
+                    }
+                });
+
+                jPanel2.add(button);
+                i = i + 1;
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DifferenceReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bankButton;
     private javax.swing.JButton expenditureButton;

@@ -7,12 +7,12 @@ package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.BankReport;
-import accountmanagement.jframe.report.DifferenceReport;
 import accountmanagement.jframe.report.PettyReport;
 import accountmanagement.jframe.report.expenditure.PurchaseReport;
 import accountmanagement.jframe.report.SalesReport;
 import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.StaffReport;
+import accountmanagement.jframe.report.difference.DifferenceReport;
 import accountmanagement.jframe.report.expenditure.ExpenditureReport;
 import accountmanagement.jframe.report.till.TillReport;
 import java.awt.CardLayout;
@@ -379,7 +379,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_differenceButtonMouseHoverOut
 
     private void differenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differenceButtonActionPerformed
-        jPanel1.add("DifferenceReport",new DifferenceReport(shopName));
+        jPanel1.add("DifferenceReport", new DifferenceReport(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_differenceButtonActionPerformed
@@ -451,7 +451,7 @@ public class Report extends javax.swing.JPanel {
     private void finalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_finalButtonActionPerformed
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bankButton;
     private javax.swing.JButton differenceButton;

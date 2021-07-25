@@ -122,32 +122,36 @@ public class CommissionAndService extends javax.swing.JPanel {
         warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            try {
-                float comTotal = 0;
-                float serviceTotal = 0;
+            if (!db.isDateExist(shopName, "Sheet2", sdf.format(jDateChooser1.getDate()))) {
+                try {
+                    float comTotal = 0;
+                    float serviceTotal = 0;
 
-                HashMap<String, Float> commissionAndServiceValues = new HashMap();
-                for (List<String> list : listOfTextFields.keySet()) {
-                    if (list.get(2).equalsIgnoreCase("Commision")) {
-                        comTotal = comTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    }
-                    if (list.get(2).equalsIgnoreCase("Service Charge")) {
-                        serviceTotal = serviceTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    }
+                    HashMap<String, Float> commissionAndServiceValues = new HashMap();
+                    for (List<String> list : listOfTextFields.keySet()) {
+                        if (list.get(2).equalsIgnoreCase("Commision")) {
+                            comTotal = comTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        }
+                        if (list.get(2).equalsIgnoreCase("Service Charge")) {
+                            serviceTotal = serviceTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        }
 
-                    JTextField text = listOfTextFields.get(list);
-                    commissionAndServiceValues.put(list.get(1), Float.parseFloat(text.getText()));
+                        JTextField text = listOfTextFields.get(list);
+                        commissionAndServiceValues.put(list.get(1), Float.parseFloat(text.getText()));
+                    }
+                    commissionAndServiceValues.put("ComTotal", comTotal);
+                    commissionAndServiceValues.put("ServiceTotal", serviceTotal);
+
+                    System.out.println(commissionAndServiceValues.toString());
+                    db.insertValuesTabTable(shopName, "Sheet2", sdf.format(jDateChooser1.getDate()), commissionAndServiceValues);
+                    warningLabel.setText("Commission And Service Charge added successfully..");
+                    warningLabel.setForeground(Color.green);
+                    resetText();
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
                 }
-                commissionAndServiceValues.put("ComTotal", comTotal);
-                commissionAndServiceValues.put("ServiceTotal", serviceTotal);
-
-                System.out.println(commissionAndServiceValues.toString());
-                db.insertValuesTabTable(shopName, "Sheet2", sdf.format(jDateChooser1.getDate()), commissionAndServiceValues);
-                warningLabel.setText("Commission And Service Charge added successfully..");
-                warningLabel.setForeground(Color.green);
-                resetText();
-            } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+            } else {
+                warningLabel.setText("**Date already exist");
             }
         } else {
             warningLabel.setText("**Date should be selected");
