@@ -57,7 +57,7 @@ public class TwoColReport extends javax.swing.JPanel {
         this.name = name;
         this.table1 = table1;
         this.col1 = col1;
-        this.table2 = table1;
+        this.table2 = table2;
         this.col2 = col2;
         initComponents();
     }
@@ -160,7 +160,7 @@ public class TwoColReport extends javax.swing.JPanel {
                         }
                     }
                     if (!valueAdded) {
-                        dataVal.add(new Object[]{date, 0, value, -value});
+                        dataVal.add(new Object[]{date, 0, value, 0-value});
                     }
                 }
 
@@ -170,14 +170,15 @@ public class TwoColReport extends javax.swing.JPanel {
                     map.put("Table1", val[1].toString());
                     map.put("Table2", val[2].toString());
                     map.put("Difference", val[3].toString());
-                    map.put("name", "");
-                    map.put("Title", "");
+                    map.put("ColName1", table1);
+                    map.put("ColName2", table2);
+                    map.put("title", "DIFFERENCE - "+name.toUpperCase()+" REPORT");
                     map.put("description", description);
                     data.add(map);
                 } 
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/RBReport.jrxml");
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/difference/TwoColReport.jrxml");
 
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);

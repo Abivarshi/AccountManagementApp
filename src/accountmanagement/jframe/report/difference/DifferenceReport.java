@@ -370,7 +370,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
-        jPanel1.add(new TwoColReport(shopName,"ElevenCard", "FB_ElevenCard", "R_Card", "Bank", "Till"));
+        jPanel1.add(new TwoColReport(shopName,"ElevenCard", "Bank", "FB_ElevenCard", "Till", "R_Card"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed
