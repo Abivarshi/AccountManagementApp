@@ -10,7 +10,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -329,7 +328,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add(new TwoColReport(shopName, "FB_CashPlus", "B_CashPlus", "Bank", "Petty"));
+        jPanel1.add(new TwoColReport(shopName, "Cash Plus", "Bank", "FB_CashPlus", "Petty", "B_CashPlus"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -343,7 +342,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-        jPanel1.add(new TwoColReport(shopName, "FB_NATWEST", "B_NATWEST", "Bank", "Petty"));
+        jPanel1.add(new TwoColReport(shopName, "NATWEST", "Bank", "FB_NATWEST", "Petty", "B_NATWEST"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
@@ -357,9 +356,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-        jPanel1.add(new TwoColReport(shopName, "SMO_PayZone", "", "Bank", ""));
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
+//        jPanel1.add(new TwoColReport(shopName, "SMO_PayZone", "", "Bank", ""));
+//        CardLayout layout = (CardLayout) jPanel1.getLayout();
+//        layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void purcharseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHover
@@ -371,7 +370,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
-        jPanel1.add(new TwoColReport(shopName, "FB_ElevenCard", "R_Card", "Bank", "Till"));
+        jPanel1.add(new TwoColReport(shopName,"ElevenCard", "FB_ElevenCard", "R_Card", "Bank", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed
@@ -435,9 +434,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton5MouseHoverOut
 
     private void salesButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton5ActionPerformed
-        jPanel1.add(new TwoColReport(shopName, "SMO_PayPoint", "", "Bank", ""));
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
+//        jPanel1.add(new TwoColReport(shopName, "SMO_PayPoint", "", "Bank", ""));
+//        CardLayout layout = (CardLayout) jPanel1.getLayout();
+//        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton5ActionPerformed
 
     private void populateDifferenceReport() {

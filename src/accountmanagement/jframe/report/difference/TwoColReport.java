@@ -36,30 +36,32 @@ public class TwoColReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-
-    private String name1;
-    private String name2;
-    private String table1;
-    private String table2;
+    private final String name;
+    private final String table1;
+    private final String table2;
+    private final String col1;
+    private final String col2;
 
     /**
      * Creates new form Till
      *
      * @param shopName
-     * @param name1
-     * @param name2
+     * @param name
      * @param table1
+     * @param col1
      * @param table2
+     * @param col2
      */
-    public TwoColReport(String shopName, String name1, String name2, String table1, String table2) {
+    public TwoColReport(String shopName, String name, String table1, String col1, String table2, String col2) {
         this.shopName = shopName;
-        this.name1=name1;
-        this.name2=name2;
-        this.table1=table1;
-        this.table2=table2;
+        this.name = name;
+        this.table1 = table1;
+        this.col1 = col1;
+        this.table2 = table1;
+        this.col2 = col2;
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,8 +124,7 @@ public class TwoColReport extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-
-        Date currentDate = new Date();
+       Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooserFrom.getDate() == null) {
             jDateChooserFrom.setDate(currentDate);
@@ -136,27 +137,47 @@ public class TwoColReport extends javax.swing.JPanel {
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             List<Map<String, String>> data = new ArrayList();
-            ResultSet res1 = db.getOneColValueTabTable(shopName, table1, name1, fromDate, toDate);
-            ResultSet res2 = db.getOneColValueTabTable(shopName, table2, name2, fromDate, toDate);
+            List<Object[]> dataVal = new ArrayList();
             
+            ResultSet res = db.getOneColValueTabTable(shopName, table1, col1, fromDate, toDate);
+            ResultSet res1 = db.getOneColValueTabTable(shopName, table2, col2, fromDate, toDate);
             String description = "Date: " + fromDate + " - " + toDate;
             try {
-                while (res1.next()) {
-                    Map<String, String> dataValue = new HashMap();
-                    dataValue.put("Date", res1.getString("Date"));
-                    dataValue.put(name1, res1.getString(name1));
-                    dataValue.put(name2, res2.getString(name2));
-                    System.out.println(res2.getString(name2));
-                    dataValue.put("Difference", String.valueOf(Float.parseFloat(res1.getString(name1))-Float.parseFloat(res2.getString(name2))));
-                    dataValue.put("description", description);
-//                    dataValue.put("title", title);
-
-                    System.out.println(dataValue.toString());
-
+                while (res.next()) {
+                    dataVal.add(new Object[]{res.getString("Date"), res.getFloat(col1), 0, res.getFloat(col1)});
                 }
+
+                while (res1.next()) {
+                    Float value = res1.getFloat(col2);
+                    String date = res1.getString("Date");
+                    boolean valueAdded = false;
+                    for (Object[] val : dataVal) {
+                        if (val[0].toString().equals(date)) {
+                            val[2] = value;
+                            val[3] = Float.parseFloat(val[3].toString()) - value;
+                            valueAdded = true;
+                            break;
+                        }
+                    }
+                    if (!valueAdded) {
+                        dataVal.add(new Object[]{date, 0, value, -value});
+                    }
+                }
+
+                for (Object[] val : dataVal) {
+                    Map<String, String> map = new HashMap();
+                    map.put("Date", val[0].toString());
+                    map.put("Table1", val[1].toString());
+                    map.put("Table2", val[2].toString());
+                    map.put("Difference", val[3].toString());
+                    map.put("name", "");
+                    map.put("Title", "");
+                    map.put("description", description);
+                    data.add(map);
+                } 
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/TwoColReport.jrxml");
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/RBReport.jrxml");
 
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);

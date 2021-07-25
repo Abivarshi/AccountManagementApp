@@ -136,9 +136,7 @@ public class Staff extends javax.swing.JPanel {
                 managementCheckBox.setSelected(false);
                 floorCheckBox.setSelected(false);
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NumberFormatException ex) {
                 successLabel.setText("**Salary Percentage should be a number");
