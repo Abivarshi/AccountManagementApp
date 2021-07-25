@@ -6,9 +6,6 @@
 package accountmanagement.jframe.report.difference;
 
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.Expenditure;
-import accountmanagement.jframe.report.SingleReport;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;

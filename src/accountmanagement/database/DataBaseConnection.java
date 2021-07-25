@@ -86,6 +86,11 @@ public class DataBaseConnection {
         prep.setBoolean(8, management);
         prep.execute();
 
+        alterTabTable(shopName, "Expenditure", staffColName);
+        insertEPDetailTable(shopName, staffName, staffColName, "ExpenditureDetail");
+        alterTabTable(shopName, "Bank", "EM_"+staffColName);
+        insertDetailTable(shopName, "Salary "+staffName, "EM_"+staffColName, "Expenditure Money Out (Monthly)", "BankDetail");
+        
         Statement state = con.createStatement();
         ResultSet res = state.executeQuery("SELECT * FROM Staff WHERE staffColName='" + staffColName + "'");
         return res;
