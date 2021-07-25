@@ -38,14 +38,16 @@ public class Detail extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+    private final String tableName;
 
     /**
      * Creates new form Till
      *
      * @param shopName
      */
-    public Detail(String shopName) {
+    public Detail(String shopName, String tableName) {
         this.shopName = shopName;
+        this.tableName = tableName;
         initComponents();
     }
 
@@ -131,22 +133,22 @@ public class Detail extends javax.swing.JPanel {
             column.add("Date");
 
             List<List<String>> valueRow = new ArrayList();
-            ResultSet resCol = db.getDeatilTableValue(shopName, "ExpenditureDetail");
-            ResultSet res = db.getValuesTabTable(shopName, "Expenditure", fromDate, toDate);
-            ResultSet resTill = db.getOneColValueTabTable(shopName, "Till", "R_Expenditure", fromDate, toDate);
+            ResultSet resCol = db.getDeatilTableValue(shopName, tableName+"Detail");
+            ResultSet res = db.getValuesTabTable(shopName, tableName, fromDate, toDate);
+            ResultSet resTill = db.getOneColValueTabTable(shopName, "Till", "R_"+tableName, fromDate, toDate);
 
             try {
                 while (resCol.next()) {
                     colDBName.add(resCol.getString("Name"));
                     column.add(resCol.getString("Item"));
                 }
-                column.add("Expenditure");
+                column.add(tableName);
                 column.add("Different");
                 valueRow.add(column);
 
                 while (resTill.next()) {
                     System.out.println(resTill.getString("Date"));
-                    tillExp.put(resTill.getString("Date"), resTill.getFloat("R_Expenditure"));
+                    tillExp.put(resTill.getString("Date"), resTill.getFloat("R_"+tableName));
                 }
 
                 while (res.next()) {

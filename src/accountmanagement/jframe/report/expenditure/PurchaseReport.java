@@ -148,7 +148,7 @@ public class PurchaseReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add("detail", new Detail(shopName));
+        jPanel1.add("detail", new Detail(shopName, "Purchase"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -162,9 +162,9 @@ public class PurchaseReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-//        jPanel1.add(new CashReport(shopName));
-//        CardLayout layout = (CardLayout) jPanel1.getLayout();
-//        layout.next(jPanel1);
+        jPanel1.add(new Summary(shopName, "Purchase", "Purchase"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
 
     private void populateExpenditureReport() {

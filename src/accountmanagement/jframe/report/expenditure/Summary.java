@@ -8,7 +8,6 @@ package accountmanagement.jframe.report.expenditure;
 import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
-import java.io.File;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,8 +37,8 @@ public class Summary extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-    private String title;
-    private String tableName;
+    private final String title;
+    private final String tableName;
 
     /**
      * Creates new form Till
@@ -134,16 +133,16 @@ public class Summary extends javax.swing.JPanel {
             List<Object[]> dataVal = new ArrayList();
 
             String description = "Date: " + fromDate + " - " + toDate;
-            ResultSet resExp = db.getOneColValueTabTable(shopName, "Till", "R_Expenditure", fromDate, toDate);
-            ResultSet resBank = db.getOneColValueTabTable(shopName, "Bank", "SubExpenditure", fromDate, toDate);
-            ResultSet resPetty = db.getOneColValueTabTable(shopName, "Petty", "SubExpenditure", fromDate, toDate);
+            ResultSet resExp = db.getOneColValueTabTable(shopName, "Till", "R_"+tableName, fromDate, toDate);
+            ResultSet resBank = db.getOneColValueTabTable(shopName, "Bank", "Sub"+tableName, fromDate, toDate);
+            ResultSet resPetty = db.getOneColValueTabTable(shopName, "Petty", "Sub"+tableName, fromDate, toDate);
             try {
                 while (resExp.next()) {
-                    dataVal.add(new Object[]{resExp.getString("Date"), resExp.getFloat("R_Expenditure"), 0, 0, resExp.getFloat("R_Expenditure")});
+                    dataVal.add(new Object[]{resExp.getString("Date"), resExp.getFloat("R_"+tableName), 0, 0, resExp.getFloat("R_"+tableName)});
                 }
 
                 while (resBank.next()) {
-                    Float value = resBank.getFloat("SubExpenditure");
+                    Float value = resBank.getFloat("Sub"+tableName);
                     String date = resBank.getString("Date");
                     boolean valueAdded = false;
                     for (Object[] val : dataVal) {
@@ -160,7 +159,7 @@ public class Summary extends javax.swing.JPanel {
                 }
 
                 while (resPetty.next()) {
-                    Float value = resPetty.getFloat("SubExpenditure");
+                    Float value = resPetty.getFloat("Sub"+tableName);
                     String date = resPetty.getString("Date");
                     boolean valueAdded = false;
                     for (Object[] val : dataVal) {
@@ -179,9 +178,9 @@ public class Summary extends javax.swing.JPanel {
                 for (Object[] val : dataVal) {
                     Map<String, String> map = new HashMap();
                     map.put("Date", val[0].toString());
-                    map.put("TillExpenditure", val[1].toString());
-                    map.put("BankExpenditure", val[2].toString());
-                    map.put("PettyExpenditure", val[3].toString());
+                    map.put("Till", val[1].toString());
+                    map.put("Bank", val[2].toString());
+                    map.put("Petty", val[3].toString());
                     map.put("Total", val[4].toString());
                     map.put("Title", title);
                     map.put("description", description);
@@ -189,7 +188,7 @@ public class Summary extends javax.swing.JPanel {
                 }
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/expenditure/Summary.jrxml");
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/expenditure/"+tableName+"Summary.jrxml");
 
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
@@ -230,7 +229,7 @@ public class Summary extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accountmanagement/image/loading.gif"))); // NOI18N
 
         jLabel4.setVisible(false);
-        jLabel4.setBounds(100, 100, 100, 100);
+        jLabel4.setBounds(100, 100, 20, 20);
         jPanel1.add(jLabel4);
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);

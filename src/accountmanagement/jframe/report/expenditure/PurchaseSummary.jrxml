@@ -5,10 +5,10 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="Date" class="java.lang.String"/>
-	<field name="TillExpenditure" class="java.lang.String"/>
-	<field name="BankExpenditure" class="java.lang.String"/>
+	<field name="Till" class="java.lang.String"/>
+	<field name="Bank" class="java.lang.String"/>
 	<field name="Total" class="java.lang.String"/>
-	<field name="PettyExpenditure" class="java.lang.String"/>
+	<field name="Petty" class="java.lang.String"/>
 	<field name="Title" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
 	<background>
@@ -51,14 +51,14 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Till Expenditure]]></text>
+				<text><![CDATA[Till Purchase]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="350" y="0" width="73" height="30" uuid="649081f1-105e-4944-9050-d5639005e797">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c777f02-938d-4307-9106-2c0e1f7d84d2"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Petty Expenditure]]></text>
+				<text><![CDATA[Petty Purchase]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="460" y="0" width="73" height="30" backcolor="#96BFEB" uuid="38ff8364-fbae-4ef1-8c11-aecdffcf7110">
@@ -72,7 +72,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Bank Expenditure]]></text>
+				<text><![CDATA[Bank Purchase]]></text>
 			</staticText>
 			<line>
 				<reportElement x="-20" y="30" width="595" height="1" forecolor="#666666" uuid="263a6cf4-7063-49a2-be3c-e5048ccbecc5"/>
@@ -95,14 +95,14 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{TillExpenditure}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Till}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="350" y="1" width="73" height="30" uuid="abe912b3-ca69-492e-a36d-b0d8b5ba4e69">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9c777f02-938d-4307-9106-2c0e1f7d84d2"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{PettyExpenditure}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Petty}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="460" y="1" width="73" height="30" backcolor="#96BFEB" uuid="556bf277-ddb1-42dc-a785-5e6f8032d914">
@@ -116,7 +116,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{BankExpenditure}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Bank}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

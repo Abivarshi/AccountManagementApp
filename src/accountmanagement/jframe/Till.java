@@ -679,6 +679,7 @@ public class Till extends javax.swing.JPanel {
         boVaucherPayPoint.setText("");
         callingCard.setText("");
         groceries.setText("");
+        tabacco.setText("");
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
