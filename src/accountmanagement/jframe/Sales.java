@@ -122,26 +122,30 @@ public class Sales extends javax.swing.JPanel {
         warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            try {
-                float bookoutTotal = 0;
+            if (!db.isDateExist(shopName, "Sales", sdf.format(jDateChooser1.getDate()))) {
+                try {
+                    float bookoutTotal = 0;
 
-                HashMap<String, Float> salesValues = new HashMap();
-                for (List<String> list : listOfTextFields.keySet()) {
-                    if (!list.get(1).equalsIgnoreCase("CustomerCount")) {
-                        bookoutTotal = bookoutTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    HashMap<String, Float> salesValues = new HashMap();
+                    for (List<String> list : listOfTextFields.keySet()) {
+                        if (!list.get(1).equalsIgnoreCase("CustomerCount")) {
+                            bookoutTotal = bookoutTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        }
+                        JTextField text = listOfTextFields.get(list);
+                        salesValues.put(list.get(1), Float.parseFloat(text.getText()));
                     }
-                    JTextField text = listOfTextFields.get(list);
-                    salesValues.put(list.get(1), Float.parseFloat(text.getText()));
-                }
-                salesValues.put("Total", bookoutTotal);
+                    salesValues.put("Total", bookoutTotal);
 
-                System.out.println(salesValues.toString());
-                db.insertValuesTabTable(shopName, "Sales", sdf.format(jDateChooser1.getDate()), salesValues);
-                warningLabel.setText("Sales added successfully..");
-                warningLabel.setForeground(Color.green);
-                resetText();
-            } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+                    System.out.println(salesValues.toString());
+                    db.insertValuesTabTable(shopName, "Sales", sdf.format(jDateChooser1.getDate()), salesValues);
+                    warningLabel.setText("Sales added successfully..");
+                    warningLabel.setForeground(Color.green);
+                    resetText();
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
+                }
+            } else {
+                warningLabel.setText("**Date already exist");
             }
         } else {
             warningLabel.setText("**Date should be selected");
@@ -193,19 +197,19 @@ public class Sales extends javax.swing.JPanel {
 
             JLabel label = new JLabel("Book Out List(As Purchase Price)");
             label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-            label.setBounds(30, 20+30 * i, 300, 20);
+            label.setBounds(30, 20 + 30 * i, 300, 20);
             jPanel1.add(label);
             i = i + 1;
             for (List<String> val : bankIn) {
                 JLabel jLabel = new JLabel(val.get(0));
                 jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                jLabel.setBounds(50, 20+30 * i, 130, 20);
+                jLabel.setBounds(50, 20 + 30 * i, 130, 20);
 
                 JTextField jText = new JTextField();
                 jText.setFont(new java.awt.Font("Tahoma", 0, 12));
                 jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
                 jText.setText("");
-                jText.setBounds(220, 20+30 * i, 96, 25);
+                jText.setBounds(220, 20 + 30 * i, 96, 25);
                 i = i + 1;
 
                 listOfTextFields.put(val, jText);

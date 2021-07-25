@@ -111,25 +111,29 @@ public class StaffTime extends javax.swing.JPanel {
         warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            try {
-                for (List list : listOfTextFields) {
+            if (!db.isDateExist(shopName, "StaffTime", sdf.format(jDateChooser1.getDate()))) {
+                try {
+                    for (List list : listOfTextFields) {
 
-                    JTextField startText = (JTextField) list.get(2);
-                    JTextField endText = (JTextField) list.get(3);
-                    Float startTime = Float.parseFloat(startText.getText());
-                    Float endTime = Float.parseFloat(endText.getText());
-                    Float hours = endTime - startTime;
+                        JTextField startText = (JTextField) list.get(2);
+                        JTextField endText = (JTextField) list.get(3);
+                        Float startTime = Float.parseFloat(startText.getText());
+                        Float endTime = Float.parseFloat(endText.getText());
+                        Float hours = endTime - startTime;
 
-                    db.insertStaffTime(shopName, sdf.format(jDateChooser1.getDate()), list.get(0).toString(), list.get(1).toString(),
-                            startTime, endTime, hours);
+                        db.insertStaffTime(shopName, sdf.format(jDateChooser1.getDate()), list.get(0).toString(), list.get(1).toString(),
+                                startTime, endTime, hours);
+                    }
+                    warningLabel.setForeground(Color.green);
+                    warningLabel.setText("**Staff time saved successfully..");
+                    resetText();
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                warningLabel.setForeground(Color.green);
-                warningLabel.setText("**Staff time saved successfully..");
-                resetText();
-            } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
+            } else {
+                warningLabel.setText("**Date already exist");
             }
         } else {
             warningLabel.setText("**Date should be selected");

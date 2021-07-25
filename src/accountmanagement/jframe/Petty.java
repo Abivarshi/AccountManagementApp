@@ -112,44 +112,49 @@ public class Petty extends javax.swing.JPanel {
         warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            try {
-                HashMap<String, Float> bankValues = new HashMap();
-                float beIOU = 0;
-                float expTotal = 0;
-                float purTotal = 0;
-                float balance = 0;
-                for (List<String> list : listOfTextFields.keySet()) {
-                    if (list.get(2).equalsIgnoreCase("Expenditure")) {
-                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Purchase")) {
-                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Cost Cutter")) {
-                        beIOU = beIOU + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Banking")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("BE IOU")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Borrow")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Pay Back")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+            if (!db.isDateExist(shopName, "Petty", sdf.format(jDateChooser1.getDate()))) {
+                try {
+                    HashMap<String, Float> bankValues = new HashMap();
+                    float beIOU = 0;
+                    float expTotal = 0;
+                    float purTotal = 0;
+                    float balance = 0;
+                    for (List<String> list : listOfTextFields.keySet()) {
+                        if (list.get(2).equalsIgnoreCase("Expenditure")) {
+                            expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("Purchase")) {
+                            purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("Cost Cutter")) {
+                            beIOU = beIOU + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("Banking")) {
+                            balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("BE IOU")) {
+                            balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("Borrow")) {
+                            balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("Pay Back")) {
+                            balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                        }
+                        JTextField text = listOfTextFields.get(list);
+                        bankValues.put(list.get(1), Float.parseFloat(text.getText()));
                     }
-                    JTextField text = listOfTextFields.get(list);
-                    bankValues.put(list.get(1), Float.parseFloat(text.getText()));
-                }
-                balance = balance - expTotal - purTotal - beIOU;
-                bankValues.put("CC_BE_IOU", beIOU);
-                bankValues.put("SubPurchase", expTotal);
-                bankValues.put("SubExpenditure", purTotal);
-                bankValues.put("PettyBalance", balance);
+                    balance = balance - expTotal - purTotal - beIOU;
+                    bankValues.put("CC_BE_IOU", beIOU);
+                    bankValues.put("SubPurchase", expTotal);
+                    bankValues.put("SubExpenditure", purTotal);
+                    bankValues.put("PettyBalance", balance);
 
-                System.out.println(bankValues.toString());
-                db.insertValuesTabTable(shopName, "Petty", sdf.format(jDateChooser1.getDate()), bankValues);
-                warningLabel.setText("Petty added successfully..");
-                warningLabel.setForeground(Color.green);
-                resetText();
-            } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+                    System.out.println(bankValues.toString());
+                    db.insertValuesTabTable(shopName, "Petty", sdf.format(jDateChooser1.getDate()), bankValues);
+                    warningLabel.setText("Petty added successfully..");
+                    warningLabel.setForeground(Color.green);
+                    resetText();
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
+                }
+
+            } else {
+                warningLabel.setText("**Date already exist");
             }
         } else {
             warningLabel.setText("**Date should be selected");
@@ -195,15 +200,13 @@ public class Petty extends javax.swing.JPanel {
                     i = 1;
                 }
 
-
-                    if (!"BE IOU".equals(type)) {
-                        JLabel label = new JLabel(type);
-                        label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                        label.setBounds(20 + j, 80 + 30 * i, 300, 20);
-                        jPanel1.add(label);
-                        i = i + 1;
-                    }
-
+                if (!"BE IOU".equals(type)) {
+                    JLabel label = new JLabel(type);
+                    label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
+                    label.setBounds(20 + j, 80 + 30 * i, 300, 20);
+                    jPanel1.add(label);
+                    i = i + 1;
+                }
 
                 for (List<String> val : bankIn) {
                     if (type.equals(val.get(2))) {

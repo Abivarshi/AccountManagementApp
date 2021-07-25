@@ -112,40 +112,45 @@ public class Bank extends javax.swing.JPanel {
         warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            try {
-                float expTotal = 0;
-                float purTotal = 0;
-                float balance = 0;
-                HashMap<String, Float> bankValues = new HashMap();
-                for (List<String> list : listOfTextFields.keySet()) {
-                    System.out.println(list+ listOfTextFields.get(list).getText());
-                    if (list.get(2).equalsIgnoreCase("Expenditure Money Out (Monthly)") || list.get(2).equalsIgnoreCase("Expenditure Money Out (Yearly)")
-                            || list.get(2).equalsIgnoreCase("Expenditure/ Bank Charge")) {
-                    System.out.println(list+ listOfTextFields.get(list).getText());
-                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Purchase")) {
-                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("From Bank") || list.get(2).equalsIgnoreCase("Money In (Commission)")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                    } else if (list.get(2).equalsIgnoreCase("Service Money Out") || list.get(2).equalsIgnoreCase("Pay Back")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+            if (!db.isDateExist(shopName, "Bank", sdf.format(jDateChooser1.getDate()))) {
+                try {
+                    float expTotal = 0;
+                    float purTotal = 0;
+                    float balance = 0;
+                    HashMap<String, Float> bankValues = new HashMap();
+                    for (List<String> list : listOfTextFields.keySet()) {
+                        System.out.println(list + listOfTextFields.get(list).getText());
+                        if (list.get(2).equalsIgnoreCase("Expenditure Money Out (Monthly)") || list.get(2).equalsIgnoreCase("Expenditure Money Out (Yearly)")
+                                || list.get(2).equalsIgnoreCase("Expenditure/ Bank Charge")) {
+                            System.out.println(list + listOfTextFields.get(list).getText());
+                            expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("Purchase")) {
+                            purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("From Bank") || list.get(2).equalsIgnoreCase("Money In (Commission)")) {
+                            balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                        } else if (list.get(2).equalsIgnoreCase("Service Money Out") || list.get(2).equalsIgnoreCase("Pay Back")) {
+                            balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                        }
+                        JTextField text = listOfTextFields.get(list);
+                        bankValues.put(list.get(1), Float.parseFloat(text.getText()));
                     }
-                    JTextField text = listOfTextFields.get(list);
-                    bankValues.put(list.get(1), Float.parseFloat(text.getText()));
+                    balance = balance - expTotal - purTotal;
+                    bankValues.put("SubPurchase", purTotal);
+                    bankValues.put("SubExpenditure", expTotal);
+                    bankValues.put("Balance", balance);
+
+                    System.out.println(bankValues.toString());
+                    db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
+
+                    warningLabel.setText("Bank added successfully..");
+                    warningLabel.setForeground(Color.green);
+                    resetText();
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
                 }
-                balance = balance - expTotal - purTotal;
-                bankValues.put("SubPurchase", purTotal);
-                bankValues.put("SubExpenditure", expTotal);
-                bankValues.put("Balance", balance);
-                
-                System.out.println(bankValues.toString());
-                db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
-                
-                warningLabel.setText("Bank added successfully..");
-                warningLabel.setForeground(Color.green);
-                resetText();
-            } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+
+            } else {
+                warningLabel.setText("**Date already exist");
             }
         } else {
             warningLabel.setText("**Date should be selected");
@@ -193,7 +198,7 @@ public class Bank extends javax.swing.JPanel {
 
                 JLabel label = new JLabel(type);
                 label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                label.setBounds(20 + j, 80+30 * i, 300, 20);
+                label.setBounds(20 + j, 80 + 30 * i, 300, 20);
                 jPanel1.add(label);
                 i = i + 1;
                 for (List<String> val : bankIn) {
@@ -202,13 +207,13 @@ public class Bank extends javax.swing.JPanel {
 
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(40 + j, 80+30 * i, 130, 20);
+                        jLabel.setBounds(40 + j, 80 + 30 * i, 130, 20);
 
                         JTextField jText = new JTextField();
                         jText.setFont(new java.awt.Font("Tahoma", 0, 12));
                         jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
                         jText.setText("");
-                        jText.setBounds(220 + j, 80+30 * i, 96, 25);
+                        jText.setBounds(220 + j, 80 + 30 * i, 96, 25);
                         i = i + 1;
 
                         listOfTextFields.put(val, jText);

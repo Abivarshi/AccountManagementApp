@@ -697,14 +697,6 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_backUpButtonActionPerformed
 
-    private ActionListener populateTabPanel(String tabName) {
-        return (ActionEvent e) -> {
-            rightPanel.add("Items", new Items(shopName, tabName));
-            CardLayout layout = (CardLayout) rightPanel.getLayout();
-            layout.next(rightPanel);
-        };
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton administratorButton;
     private javax.swing.JButton backUpButton;

@@ -108,29 +108,35 @@ public class Expenditure extends javax.swing.JPanel {
         successLabel.setText("");
         boolean canSave = true;
         float total = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser.getDate() != null) {
-            HashMap<String, Float> purchaseValues = new HashMap();
-            for (String name : listOfTextFields.keySet()) {
-                System.out.println(name + ": " + listOfTextFields.get(name).getText());
-                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
-                try {
-                    purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
-                    total = total + Float.parseFloat(listOfTextFields.get(name).getText());
-                } catch (java.lang.NumberFormatException e) {
-                    successLabel.setText("**All Values are mandatory and should be decimal");
-                    successLabel.setForeground(Color.red);
-                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    canSave = false;
-                    break;
+            if (!db.isDateExist(shopName, "Expenditure", sdf.format(jDateChooser.getDate()))) {
+                HashMap<String, Float> purchaseValues = new HashMap();
+                for (String name : listOfTextFields.keySet()) {
+                    System.out.println(name + ": " + listOfTextFields.get(name).getText());
+                    listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+                    try {
+                        purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                        total = total + Float.parseFloat(listOfTextFields.get(name).getText());
+                    } catch (java.lang.NumberFormatException e) {
+                        successLabel.setText("**All Values are mandatory and should be decimal");
+                        successLabel.setForeground(Color.red);
+                        listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                        canSave = false;
+                        break;
+                    }
                 }
-            }
-            purchaseValues.put("Total", total);
-            System.out.println("Total" + total);
-            if (canSave) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
-                successLabel.setText("Expenditure added successfully..");
-                resetText();
+                purchaseValues.put("Total", total);
+                System.out.println("Total" + total);
+                if (canSave) {
+                    db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
+                    successLabel.setText("Expenditure added successfully..");
+                    resetText();
+                }
+
+            } else {
+                successLabel.setText("**Date already exist");
+                successLabel.setForeground(Color.red);
             }
         } else {
             successLabel.setText("**Date should be selected");
@@ -147,7 +153,7 @@ public class Expenditure extends javax.swing.JPanel {
             listOfTextFields.get(name).setText("");
         }
     }
-    
+
     private void populateExpenditure() {
         ResultSet res = db.getDeatilTableValue(shopName, "ExpenditureDetail");
         try {

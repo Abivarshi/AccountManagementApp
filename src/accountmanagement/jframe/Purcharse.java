@@ -118,29 +118,34 @@ public class Purcharse extends javax.swing.JPanel {
         successLabel.setText("");
         warningLabel.setText("");
         boolean canSave = true;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            HashMap<String, Float> purchaseValues = new HashMap();
-            float total = 0;
-            for (String name : listOfTextFields.keySet()) {
-                System.out.println(name + ": " + listOfTextFields.get(name).getText());
-                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
-                try {
-                    purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
-                    total = total + Float.parseFloat(listOfTextFields.get(name).getText());
-                } catch (java.lang.NumberFormatException e) {
-                    warningLabel.setText("**All Values are mandatory and should be decimal");
-                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    canSave = false;
-                    break;
+            if (!db.isDateExist(shopName, "Purchase", sdf.format(jDateChooser1.getDate()))) {
+                HashMap<String, Float> purchaseValues = new HashMap();
+                float total = 0;
+                for (String name : listOfTextFields.keySet()) {
+                    System.out.println(name + ": " + listOfTextFields.get(name).getText());
+                    listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+                    try {
+                        purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                        total = total + Float.parseFloat(listOfTextFields.get(name).getText());
+                    } catch (java.lang.NumberFormatException e) {
+                        warningLabel.setText("**All Values are mandatory and should be decimal");
+                        listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                        canSave = false;
+                        break;
+                    }
                 }
-            }
-            purchaseValues.put("Total", total);
-            System.out.println("Total" + total);
-            if (canSave) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                db.insertValuesTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()), purchaseValues);
-                successLabel.setText("Purcharse added successfully..");
-                resetText();
+                purchaseValues.put("Total", total);
+                System.out.println("Total" + total);
+                if (canSave) {
+                    db.insertValuesTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()), purchaseValues);
+                    successLabel.setText("Purcharse added successfully..");
+                    resetText();
+                }
+
+            } else {
+                warningLabel.setText("**Date already exist");
             }
         } else {
             warningLabel.setText("**Date should be selected");
