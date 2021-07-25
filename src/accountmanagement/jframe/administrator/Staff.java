@@ -8,6 +8,8 @@ package accountmanagement.jframe.administrator;
 import accountmanagement.database.DataBaseConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,11 +24,13 @@ public class Staff extends javax.swing.JPanel {
 
     /**
      * Creates new form Staff
+     *
      * @param shopName
      */
     public Staff(String shopName) {
         this.shopName = shopName;
         initComponents();
+        getStaffList();
     }
 
     /**
@@ -50,6 +54,8 @@ public class Staff extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         successLabel = new javax.swing.JLabel();
         warningLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,6 +108,12 @@ public class Staff extends javax.swing.JPanel {
 
         warningLabel.setForeground(new java.awt.Color(204, 0, 0));
         add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 190, 20));
+
+        jScrollPane2.setBorder(null);
+
+        jScrollPane2.setViewportView(jList1);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 310, 510));
     }// </editor-fold>//GEN-END:initComponents
 
     private void staffNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffNameTextFieldActionPerformed
@@ -111,7 +123,7 @@ public class Staff extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String staffName = staffNameTextField.getText();
         String staffPercentage = salaryPercentageTextField.getText();
-        String staffColName = "Staff"+db.getStaffCount(shopName);
+        String staffColName = "Staff" + db.getStaffCount(shopName);
         if (!staffName.isEmpty() && !staffPercentage.isEmpty()) {
             try {
                 db.addStaff(shopName, staffName, staffColName, Float.parseFloat(staffPercentage), tillCheckBox.isSelected(),
@@ -123,7 +135,7 @@ public class Staff extends javax.swing.JPanel {
                 cashCarryCheckBox.setSelected(false);
                 managementCheckBox.setSelected(false);
                 floorCheckBox.setSelected(false);
-                
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -142,7 +154,20 @@ public class Staff extends javax.swing.JPanel {
 //            floorCheckBox.setSelected(false);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+    private void getStaffList() {
+        ResultSet res = db.getDeatilTableValue(shopName, "Staff");
+        List<String> items = new ArrayList();
 
+        try {
+            while (res.next()) {
+                String item = res.getString("StaffName");
+                items.add(item);
+            }
+            jList1.setListData(items.toArray());
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPurcharse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox cashCarryCheckBox;
@@ -151,6 +176,8 @@ public class Staff extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JCheckBox managementCheckBox;
     private javax.swing.JTextField salaryPercentageTextField;
     private javax.swing.JTextField staffNameTextField;

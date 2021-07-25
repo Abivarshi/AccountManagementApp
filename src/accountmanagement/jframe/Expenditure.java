@@ -54,7 +54,6 @@ public class Expenditure extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         successLabel = new javax.swing.JLabel();
-        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,15 +101,11 @@ public class Expenditure extends javax.swing.JPanel {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 510));
 
         successLabel.setForeground(new java.awt.Color(51, 153, 0));
-        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 230, 20));
-
-        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 230, 20));
+        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 330, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         successLabel.setText("");
-        warningLabel.setText("");
         boolean canSave = true;
         float total = 0;
         if (jDateChooser.getDate() != null) {
@@ -122,7 +117,8 @@ public class Expenditure extends javax.swing.JPanel {
                     purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
                     total = total + Float.parseFloat(listOfTextFields.get(name).getText());
                 } catch (java.lang.NumberFormatException e) {
-                    warningLabel.setText("**Values should be decimal");
+                    successLabel.setText("**All Values are mandatory and should be decimal");
+                    successLabel.setForeground(Color.red);
                     listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     canSave = false;
                     break;
@@ -137,7 +133,8 @@ public class Expenditure extends javax.swing.JPanel {
                 resetText();
             }
         } else {
-            warningLabel.setText("**Date should be selected");
+            successLabel.setText("**Date should be selected");
+            successLabel.setForeground(Color.red);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -147,7 +144,7 @@ public class Expenditure extends javax.swing.JPanel {
 
     private void resetText() {
         for (String name : listOfTextFields.keySet()) {
-            listOfTextFields.get(name).setText("0");
+            listOfTextFields.get(name).setText("");
         }
     }
     
@@ -166,7 +163,7 @@ public class Expenditure extends javax.swing.JPanel {
                     JTextField textField = new JTextField();
                     textField.setFont(new java.awt.Font("Tahoma", 0, 12));
                     textField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-                    textField.setText("0");
+                    textField.setText("");
                     textField.setBounds(220, 30 * i, 96, 25);
 
                     jPanel1.add(label);
@@ -187,6 +184,5 @@ public class Expenditure extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel successLabel;
-    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }
