@@ -6,9 +6,11 @@
 package accountmanagement.jframe.report.difference;
 
 import accountmanagement.database.DataBaseConnection;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -327,7 +329,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        
+        jPanel1.add(new TwoColReport(shopName, "FB_CashPlus", "B_CashPlus", "Bank", "Petty"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
 
     private void tillButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHover
@@ -339,7 +343,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-        
+        jPanel1.add(new TwoColReport(shopName, "FB_NATWEST", "B_NATWEST", "Bank", "Petty"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
 
     private void expenditureButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButtonMouseHover
@@ -351,7 +357,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-        
+        jPanel1.add(new TwoColReport(shopName, "SMO_PayZone", "", "Bank", ""));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void purcharseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHover
@@ -363,7 +371,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonMouseHoverOut
 
     private void purcharseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButtonActionPerformed
-        
+        jPanel1.add(new TwoColReport(shopName, "FB_ElevenCard", "R_Card", "Bank", "Till"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_purcharseButtonActionPerformed
 
     private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
@@ -375,7 +385,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
-        
+        jPanel1.add(new TwoColReport(shopName, "SMO_Oyster", "", "Bank", "Till"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_pettyButtonActionPerformed
 
     private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
@@ -387,7 +399,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButtonMouseHoverOut
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
-        
+
     }//GEN-LAST:event_bankButtonActionPerformed
 
     private void staffButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHover
@@ -399,7 +411,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButtonMouseHoverOut
 
     private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
-        
+
     }//GEN-LAST:event_staffButtonActionPerformed
 
     private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
@@ -411,7 +423,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton1MouseHoverOut
 
     private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
-        
+
     }//GEN-LAST:event_salesButton1ActionPerformed
 
     private void salesButton5MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton5MouseHover
@@ -423,7 +435,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton5MouseHoverOut
 
     private void salesButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton5ActionPerformed
-        
+        jPanel1.add(new TwoColReport(shopName, "SMO_PayPoint", "", "Bank", ""));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton5ActionPerformed
 
     private void populateDifferenceReport() {
@@ -433,9 +447,9 @@ public class DifferenceReport extends javax.swing.JPanel {
             while (res.next()) {
                 String staffName = res.getString("StaffName");
                 String staffColName = res.getString("StaffColName");
-                
+
                 String title = "DIFFERENCE - " + staffName.toUpperCase() + " REPORT";
-                
+
                 JButton button = new JButton();
                 button.setBackground(new java.awt.Color(0, 0, 51));
                 button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -471,7 +485,7 @@ public class DifferenceReport extends javax.swing.JPanel {
             Logger.getLogger(DifferenceReport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bankButton;
     private javax.swing.JButton expenditureButton;

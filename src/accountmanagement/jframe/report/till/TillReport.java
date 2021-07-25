@@ -799,11 +799,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButtonActionPerformed
 
     private void finalButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButtonMouseHover
-        // TODO add your handling code here:
+        finalButton.setForeground(Color.red);
     }//GEN-LAST:event_finalButtonMouseHover
 
     private void finalButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButtonMouseHoverOut
-        // TODO add your handling code here:
+        finalButton.setForeground(Color.black);
     }//GEN-LAST:event_finalButtonMouseHoverOut
 
     private void finalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButtonActionPerformed
@@ -813,11 +813,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_finalButtonActionPerformed
 
     private void sheet2Button1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button1MouseHover
-        // TODO add your handling code here:
+        sheet2Button1.setForeground(Color.red);
     }//GEN-LAST:event_sheet2Button1MouseHover
 
     private void sheet2Button1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button1MouseHoverOut
-        // TODO add your handling code here:
+        sheet2Button1.setForeground(Color.black);
     }//GEN-LAST:event_sheet2Button1MouseHoverOut
 
     private void sheet2Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button1ActionPerformed
@@ -827,11 +827,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2Button1ActionPerformed
 
     private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
-        // TODO add your handling code here:
+        salesButton1.setForeground(Color.red);
     }//GEN-LAST:event_salesButton1MouseHover
 
     private void salesButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHoverOut
-        // TODO add your handling code here:
+        salesButton1.setForeground(Color.black);
     }//GEN-LAST:event_salesButton1MouseHoverOut
 
     private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
@@ -841,11 +841,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton1ActionPerformed
 
     private void differenceButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_differenceButton1MouseHover
-        // TODO add your handling code here:
+        differenceButton1.setForeground(Color.red);
     }//GEN-LAST:event_differenceButton1MouseHover
 
     private void differenceButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_differenceButton1MouseHoverOut
-        // TODO add your handling code here:
+        differenceButton1.setForeground(Color.black);
     }//GEN-LAST:event_differenceButton1MouseHoverOut
 
     private void differenceButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differenceButton1ActionPerformed
@@ -855,11 +855,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_differenceButton1ActionPerformed
 
     private void finalButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButton1MouseHover
-        // TODO add your handling code here:
+        finalButton1.setForeground(Color.red);
     }//GEN-LAST:event_finalButton1MouseHover
 
     private void finalButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButton1MouseHoverOut
-        // TODO add your handling code here:
+        finalButton1.setForeground(Color.black);
     }//GEN-LAST:event_finalButton1MouseHoverOut
 
     private void finalButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButton1ActionPerformed
@@ -869,11 +869,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_finalButton1ActionPerformed
 
     private void staffButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButton1MouseHover
-        // TODO add your handling code here:
+        staffButton1.setForeground(Color.red);
     }//GEN-LAST:event_staffButton1MouseHover
 
     private void staffButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButton1MouseHoverOut
-        // TODO add your handling code here:
+        staffButton1.setForeground(Color.black);
     }//GEN-LAST:event_staffButton1MouseHoverOut
 
     private void staffButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButton1ActionPerformed
@@ -883,11 +883,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButton1ActionPerformed
 
     private void bankButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButton1MouseHover
-        // TODO add your handling code here:
+        bankButton1.setForeground(Color.red);
     }//GEN-LAST:event_bankButton1MouseHover
 
     private void bankButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButton1MouseHoverOut
-        // TODO add your handling code here:
+        bankButton1.setForeground(Color.black);
     }//GEN-LAST:event_bankButton1MouseHoverOut
 
     private void bankButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButton1ActionPerformed
@@ -897,11 +897,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButton1ActionPerformed
 
     private void pettyButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButton1MouseHover
-        // TODO add your handling code here:
+        pettyButton1.setForeground(Color.red);
     }//GEN-LAST:event_pettyButton1MouseHover
 
     private void pettyButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButton1MouseHoverOut
-        // TODO add your handling code here:
+        pettyButton1.setForeground(Color.black);
     }//GEN-LAST:event_pettyButton1MouseHoverOut
 
     private void pettyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButton1ActionPerformed
@@ -911,11 +911,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButton1ActionPerformed
 
     private void expenditureButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButton1MouseHover
-        // TODO add your handling code here:
+        expenditureButton1.setForeground(Color.red);
     }//GEN-LAST:event_expenditureButton1MouseHover
 
     private void expenditureButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenditureButton1MouseHoverOut
-        // TODO add your handling code here:
+        expenditureButton1.setForeground(Color.black);
     }//GEN-LAST:event_expenditureButton1MouseHoverOut
 
     private void expenditureButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButton1ActionPerformed
@@ -925,11 +925,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButton1ActionPerformed
 
     private void purcharseButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButton1MouseHover
-        // TODO add your handling code here:
+        purcharseButton1.setForeground(Color.red);
     }//GEN-LAST:event_purcharseButton1MouseHover
 
     private void purcharseButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButton1MouseHoverOut
-        // TODO add your handling code here:
+        purcharseButton1.setForeground(Color.black);
     }//GEN-LAST:event_purcharseButton1MouseHoverOut
 
     private void purcharseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purcharseButton1ActionPerformed
@@ -939,11 +939,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButton1ActionPerformed
 
     private void salesButton2MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton2MouseHover
-        // TODO add your handling code here:
+        salesButton2.setForeground(Color.red);
     }//GEN-LAST:event_salesButton2MouseHover
 
     private void salesButton2MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton2MouseHoverOut
-        // TODO add your handling code here:
+        salesButton2.setForeground(Color.black);
     }//GEN-LAST:event_salesButton2MouseHoverOut
 
     private void salesButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton2ActionPerformed
@@ -953,11 +953,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton2ActionPerformed
 
     private void salesButton3MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton3MouseHover
-        // TODO add your handling code here:
+        salesButton3.setForeground(Color.red);
     }//GEN-LAST:event_salesButton3MouseHover
 
     private void salesButton3MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton3MouseHoverOut
-        // TODO add your handling code here:
+        salesButton3.setForeground(Color.black);
     }//GEN-LAST:event_salesButton3MouseHoverOut
 
     private void salesButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton3ActionPerformed
@@ -967,11 +967,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton3ActionPerformed
 
     private void salesButton4MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton4MouseHover
-        // TODO add your handling code here:
+        salesButton4.setForeground(Color.red);
     }//GEN-LAST:event_salesButton4MouseHover
 
     private void salesButton4MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton4MouseHoverOut
-        // TODO add your handling code here:
+        salesButton4.setForeground(Color.black);
     }//GEN-LAST:event_salesButton4MouseHoverOut
 
     private void salesButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton4ActionPerformed
@@ -981,11 +981,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton4ActionPerformed
 
     private void salesButton5MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton5MouseHover
-        // TODO add your handling code here:
+        salesButton5.setForeground(Color.red);
     }//GEN-LAST:event_salesButton5MouseHover
 
     private void salesButton5MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton5MouseHoverOut
-        // TODO add your handling code here:
+        salesButton5.setForeground(Color.black);
     }//GEN-LAST:event_salesButton5MouseHoverOut
 
     private void salesButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton5ActionPerformed
@@ -995,11 +995,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton5ActionPerformed
 
     private void salesButton6MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton6MouseHover
-        // TODO add your handling code here:
+        salesButton6.setForeground(Color.red);
     }//GEN-LAST:event_salesButton6MouseHover
 
     private void salesButton6MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton6MouseHoverOut
-        // TODO add your handling code here:
+        salesButton6.setForeground(Color.black);
     }//GEN-LAST:event_salesButton6MouseHoverOut
 
     private void salesButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton6ActionPerformed
@@ -1009,11 +1009,11 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton6ActionPerformed
 
     private void salesButton7MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton7MouseHover
-        // TODO add your handling code here:
+        salesButton7.setForeground(Color.red);
     }//GEN-LAST:event_salesButton7MouseHover
 
     private void salesButton7MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton7MouseHoverOut
-        // TODO add your handling code here:
+        salesButton7.setForeground(Color.black);
     }//GEN-LAST:event_salesButton7MouseHoverOut
 
     private void salesButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton7ActionPerformed
