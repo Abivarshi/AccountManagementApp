@@ -359,11 +359,11 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_purcharseButtonActionPerformed
 
     private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
-        // TODO add your handling code here:
+        bankButton.setForeground(Color.red);
     }//GEN-LAST:event_bankButtonMouseHover
 
     private void bankButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHoverOut
-        // TODO add your handling code here:
+        bankButton.setForeground(Color.black);
     }//GEN-LAST:event_bankButtonMouseHoverOut
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
@@ -373,11 +373,11 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_bankButtonActionPerformed
 
     private void commissionButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_commissionButtonMouseHover
-        // TODO add your handling code here:
+        commissionButton.setForeground(Color.red);
     }//GEN-LAST:event_commissionButtonMouseHover
 
     private void commissionButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_commissionButtonMouseHoverOut
-        // TODO add your handling code here:
+        commissionButton.setForeground(Color.black);
     }//GEN-LAST:event_commissionButtonMouseHoverOut
 
     private void commissionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commissionButtonActionPerformed
@@ -387,11 +387,11 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_commissionButtonActionPerformed
 
     private void pettyButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHover
-        // TODO add your handling code here:
+        pettyButton.setForeground(Color.red);
     }//GEN-LAST:event_pettyButtonMouseHover
 
     private void pettyButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pettyButtonMouseHoverOut
-        // TODO add your handling code here:
+        pettyButton.setForeground(Color.black);
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
@@ -401,11 +401,11 @@ public class Administrator extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonActionPerformed
 
     private void adminProfitButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminProfitButtonMouseHover
-        // TODO add your handling code here:
+        adminProfitButton.setForeground(Color.red);
     }//GEN-LAST:event_adminProfitButtonMouseHover
 
     private void adminProfitButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminProfitButtonMouseHoverOut
-        // TODO add your handling code here:
+        adminProfitButton.setForeground(Color.black);
     }//GEN-LAST:event_adminProfitButtonMouseHoverOut
 
     private void adminProfitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminProfitButtonActionPerformed

@@ -441,11 +441,11 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButtonActionPerformed
 
     private void finalButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButtonMouseHover
-        // TODO add your handling code here:
+        finalButton.setForeground(Color.red);
     }//GEN-LAST:event_finalButtonMouseHover
 
     private void finalButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButtonMouseHoverOut
-        // TODO add your handling code here:
+        finalButton.setForeground(Color.black);
     }//GEN-LAST:event_finalButtonMouseHoverOut
 
     private void finalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButtonActionPerformed

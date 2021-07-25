@@ -71,21 +71,23 @@ public class DataBaseConnection {
         return res;
     }
 
-    public ResultSet addStaff(String shopName, String staffName, float salaryPercentage, Boolean till, Boolean floor, Boolean cashCarry, Boolean management) throws ClassNotFoundException, SQLException {
+    public ResultSet addStaff(String shopName, String staffName, String staffColName, float salaryPercentage, Boolean till, Boolean floor,
+            Boolean cashCarry, Boolean management) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff VALUES(?,?,?,?,?,?,?);");
+        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff VALUES(?,?,?,?,?,?,?,?);");
         prep.setString(2, staffName);
-        prep.setFloat(3, salaryPercentage);
-        prep.setBoolean(4, till);
-        prep.setBoolean(5, floor);
-        prep.setBoolean(6, cashCarry);
-        prep.setBoolean(7, management);
+        prep.setString(3, staffColName);
+        prep.setFloat(4, salaryPercentage);
+        prep.setBoolean(5, till);
+        prep.setBoolean(6, floor);
+        prep.setBoolean(7, cashCarry);
+        prep.setBoolean(8, management);
         prep.execute();
 
         Statement state = con.createStatement();
-        ResultSet res = state.executeQuery("SELECT * FROM Staff WHERE staffName='" + staffName + "'");
+        ResultSet res = state.executeQuery("SELECT * FROM Staff WHERE staffColName='" + staffColName + "'");
         return res;
     }
 
@@ -122,6 +124,7 @@ public class DataBaseConnection {
             Statement state2 = con.createStatement();
             state2.executeUpdate("CREATE TABLE Staff(id integer,"
                     + "StaffName VARCHAR(60),"
+                    + "StaffColName VARCHAR(60),"
                     + "SalaryPercentage FLOAT,"
                     + "Till YESNO,"
                     + "Floor YESNO,"
@@ -129,20 +132,6 @@ public class DataBaseConnection {
                     + "Management YESNO,"
                     + "primary key (id));");
         }
-    }
-
-    public void insertStaff(String shopName, String staffName, Float salaryPercentage, HashMap<String, Boolean> type) throws ClassNotFoundException, SQLException {
-        if (con == null || !connectedShop.equals(shopName)) {
-            getConnection(shopName);
-        }
-        PreparedStatement prep = con.prepareStatement("INSERT INTO Staff VALUES(?,?,?,?,?,?,?);");
-        prep.setString(2, staffName);
-        prep.setFloat(3, salaryPercentage);
-        prep.setBoolean(4, type.get("Till"));
-        prep.setBoolean(5, type.get("Floor"));
-        prep.setBoolean(6, type.get("CashCarry"));
-        prep.setBoolean(7, type.get("Management"));
-        prep.execute();
     }
 
     public ResultSet getStaff(String shopName) {
@@ -161,6 +150,24 @@ public class DataBaseConnection {
         }
     }
 
+    public int getStaffCount(String shopName) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT COUNT(id) AS count FROM Staff");
+            if(res.next())
+                return res.getInt("count")+1;
+            return 0;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
     public void createStaffTime(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -183,7 +190,8 @@ public class DataBaseConnection {
         }
     }
 
-    public void insertStaffTime(String shopName, String date, String staffName, String staffType, Float start, Float end, Float hours) throws ClassNotFoundException, SQLException {
+    public void insertStaffTime(String shopName, String date, String staffName, String staffType, Float start, 
+            Float end, Float hours) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }

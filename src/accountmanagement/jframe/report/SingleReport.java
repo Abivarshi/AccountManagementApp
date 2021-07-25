@@ -9,6 +9,7 @@ import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.io.File;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -152,7 +153,7 @@ public class SingleReport extends javax.swing.JPanel {
                 }
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    String sourceName = new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/SingleReport.jrxml";
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/SingleReport.jrxml");
 
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);

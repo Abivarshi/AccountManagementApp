@@ -9,9 +9,6 @@ import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.DynamicColumnDataSource;
 import accountmanagement.jframe.report.DynamicReportBuilder;
 import java.awt.CardLayout;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -175,7 +172,11 @@ public class Detail extends javax.swing.JPanel {
                     valueRow.add(values);
                 }
 
-                runReport(column, valueRow);
+                if (!valueRow.isEmpty()) {
+                    runReport(column, valueRow);
+                } else {
+                    warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
@@ -189,7 +190,7 @@ public class Detail extends javax.swing.JPanel {
 
         InputStream is = null;
         try {
-            is = new FileInputStream(new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/expenditure/Detail.jrxml");
+            is = getClass().getResourceAsStream("/accountmanagement/jframe/report/expenditure/Detail.jrxml");
             JasperDesign jasperReportDesign = JRXmlLoader.load(is);
             DynamicReportBuilder reportBuilder = new DynamicReportBuilder(jasperReportDesign, columnHeaders.size());
             reportBuilder.addDynamicColumns();
@@ -200,7 +201,7 @@ public class Detail extends javax.swing.JPanel {
             jPanel1.add(viewer);
             CardLayout layout = (CardLayout) jPanel1.getLayout();
             layout.next(jPanel1);
-        } catch (FileNotFoundException | JRException ex) {
+        } catch (JRException ex) {
             Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {

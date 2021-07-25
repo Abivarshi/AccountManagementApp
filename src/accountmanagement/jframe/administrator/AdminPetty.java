@@ -98,9 +98,6 @@ public class AdminPetty extends javax.swing.JPanel {
         value = value.replaceAll("\\s+", "");
 
         switch (type) {
-            case "Common":
-                valueEdited = "C_" + value;
-                break;
             case "Cost Cutter":
                 valueEdited = "CC_" + value;
                 break;
@@ -156,16 +153,14 @@ public class AdminPetty extends javax.swing.JPanel {
             int i = 1;
             int j = 0;
 
-            for (String type : Arrays.asList("Common", "Cost Cutter", "BE IOU", "Cash", "C/Card", "IOU",
-                    "Purchase", "Expenditure", "Banking")) {
+            for (String type : Arrays.asList("Cost Cutter", "BE IOU", "Borrow", "Pay Back", "Banking",
+                    "Purchase", "Expenditure")) {
 
-                int k = 20;
                 if ("Purchase".equals(type)) {
                     j = 420;
                     i = 1;
                 }
 
-                if (!"Common".equals(type)) {
                     if (!"BE IOU".equals(type)) {
                         JLabel label = new JLabel(type);
                         label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
@@ -173,16 +168,14 @@ public class AdminPetty extends javax.swing.JPanel {
                         add(label);
                         i = i + 1;
                     }
-                } else {
-                    k = 0;
-                }
+                
 
                 for (List<String> val : bankIn) {
                     if (type.equals(val.get(1))) {
 
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(20 + k + j, 200 + 30 * i, 130, 20);
+                        jLabel.setBounds(40 + j, 200 + 30 * i, 130, 20);
                         i = i + 1;
                         add(jLabel);
                     }

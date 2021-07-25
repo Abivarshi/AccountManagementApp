@@ -54,7 +54,6 @@ public class Bank extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         warningLabel = new javax.swing.JLabel();
 
@@ -89,9 +88,6 @@ public class Bank extends javax.swing.JPanel {
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 1200));
 
@@ -113,9 +109,7 @@ public class Bank extends javax.swing.JPanel {
                 .addGap(0, 1187, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jPanel1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -203,7 +197,7 @@ public class Bank extends javax.swing.JPanel {
 
                 JLabel label = new JLabel(type);
                 label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                label.setBounds(20 + j, 30 * i, 300, 20);
+                label.setBounds(20 + j, 80+30 * i, 300, 20);
                 jPanel1.add(label);
                 i = i + 1;
                 for (List<String> val : bankIn) {
@@ -212,13 +206,13 @@ public class Bank extends javax.swing.JPanel {
 
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(40 + j, 30 * i, 130, 20);
+                        jLabel.setBounds(40 + j, 80+30 * i, 130, 20);
 
                         JTextField jText = new JTextField();
                         jText.setFont(new java.awt.Font("Tahoma", 0, 12));
                         jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
                         jText.setText("0");
-                        jText.setBounds(220 + j, 30 * i, 96, 25);
+                        jText.setBounds(220 + j, 80+30 * i, 96, 25);
                         i = i + 1;
 
                         listOfTextFields.put(val, jText);
@@ -241,7 +235,6 @@ public class Bank extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

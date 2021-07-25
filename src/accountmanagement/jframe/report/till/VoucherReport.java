@@ -9,6 +9,7 @@ import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.io.File;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -136,27 +137,31 @@ public class VoucherReport extends javax.swing.JPanel {
                     Map<String, String> dataValue = new HashMap();
                     dataValue.put("Date", res.getString("Date"));
                     dataValue.put("From Report Milk", res.getString(colName.get(0)));
-                    dataValue.put("From Report Paypoint", res.getString(colName.get(1)));
+                    dataValue.put("From Report PayPoint", res.getString(colName.get(1)));
                     dataValue.put("From Report Total",String.valueOf(Float.parseFloat(res.getString(colName.get(0)))+Float.parseFloat(res.getString(colName.get(1)))) );
-                    dataValue.put("From Back Office Milk", res.getString(colName.get(2)));
-                    dataValue.put("From Back Office Paypoint", res.getString(colName.get(3)));
-                    dataValue.put("From Back Office Total",String.valueOf(Float.parseFloat(res.getString(colName.get(2)))+Float.parseFloat(res.getString(colName.get(3)))) );
+//                    dataValue.put("From Back Office Milk", res.getString(colName.get(2)));
+//                    dataValue.put("From Back Office Paypoint", res.getString(colName.get(3)));
+//                    dataValue.put("From Back Office Total",String.valueOf(Float.parseFloat(res.getString(colName.get(2)))+Float.parseFloat(res.getString(colName.get(3)))) );
                     dataValue.put("description", description);
                     dataValue.put("title", title);
 
                     System.out.println(dataValue.toString());
                     data.add(dataValue);
                 }
-                JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                String sourceName = new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/till/VoucherReport.jrxml";
+                if (!data.isEmpty()) {
+                    JRDataSource dataSource = new JRBeanCollectionDataSource(data);
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/VoucherReport.jrxml");
 
-                JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+                    JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-                JRViewer viewer = new JRViewer(jasperPrint);
-                jPanel1.add(viewer);
-                CardLayout layout = (CardLayout) jPanel1.getLayout();
-                layout.next(jPanel1);
+                    JRViewer viewer = new JRViewer(jasperPrint);
+                    jPanel1.add(viewer);
+                    CardLayout layout = (CardLayout) jPanel1.getLayout();
+                    layout.next(jPanel1);
+                } else {
+                    warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {

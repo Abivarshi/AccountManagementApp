@@ -22,6 +22,7 @@ public class Staff extends javax.swing.JPanel {
 
     /**
      * Creates new form Staff
+     * @param shopName
      */
     public Staff(String shopName) {
         this.shopName = shopName;
@@ -110,36 +111,35 @@ public class Staff extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String staffName = staffNameTextField.getText();
         String staffPercentage = salaryPercentageTextField.getText();
+        String staffColName = "Staff"+db.getStaffCount(shopName);
         if (!staffName.isEmpty() && !staffPercentage.isEmpty()) {
             try {
-                db.addStaff(shopName, staffName, Float.parseFloat(staffPercentage), tillCheckBox.isSelected(), floorCheckBox.isSelected(), cashCarryCheckBox.isSelected(), managementCheckBox.isSelected());
+                db.addStaff(shopName, staffName, staffColName, Float.parseFloat(staffPercentage), tillCheckBox.isSelected(),
+                        floorCheckBox.isSelected(), cashCarryCheckBox.isSelected(), managementCheckBox.isSelected());
                 successLabel.setText("Staff added successfully...");
-                ResultSet set = db.getStaff("Shop1");
-                while (set.next()) {
-                    System.out.print(set.getString("staffName"));
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NumberFormatException ex) {
-                successLabel.setText("**Salary Percentage should be a number");
                 staffNameTextField.setText("");
                 salaryPercentageTextField.setText("");
                 tillCheckBox.setSelected(false);
                 cashCarryCheckBox.setSelected(false);
                 managementCheckBox.setSelected(false);
                 floorCheckBox.setSelected(false);
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException ex) {
+                successLabel.setText("**Salary Percentage should be a number");
                 Logger.getLogger(Staff.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             successLabel.setText("**All are mandatory fields should be filled");
-            staffNameTextField.setText("");
-            salaryPercentageTextField.setText("");
-            tillCheckBox.setSelected(false);
-            cashCarryCheckBox.setSelected(false);
-            managementCheckBox.setSelected(false);
-            floorCheckBox.setSelected(false);
+//            staffNameTextField.setText("");
+//            salaryPercentageTextField.setText("");
+//            tillCheckBox.setSelected(false);
+//            cashCarryCheckBox.setSelected(false);
+//            managementCheckBox.setSelected(false);
+//            floorCheckBox.setSelected(false);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

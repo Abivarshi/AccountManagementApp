@@ -9,6 +9,7 @@ import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.io.File;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -186,17 +187,20 @@ public class Summary extends javax.swing.JPanel {
                     map.put("description", description);
                     data.add(map);
                 }
-System.out.println(data);
-                JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                String sourceName = new File("").getAbsolutePath() + "/src/accountmanagement/jframe/report/expenditure/Summary.jrxml";
+                if (!data.isEmpty()) {
+                    JRDataSource dataSource = new JRBeanCollectionDataSource(data);
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/expenditure/Summary.jrxml");
 
-                JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+                    JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-                JRViewer viewer = new JRViewer(jasperPrint);
-                jPanel1.add(viewer);
-                CardLayout layout = (CardLayout) jPanel1.getLayout();
-                layout.next(jPanel1);
+                    JRViewer viewer = new JRViewer(jasperPrint);
+                    jPanel1.add(viewer);
+                    CardLayout layout = (CardLayout) jPanel1.getLayout();
+                    layout.next(jPanel1);
+                } else {
+                    warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {
@@ -224,14 +228,12 @@ System.out.println(data);
         JLabel jLabel4 = new JLabel();
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accountmanagement/image/loading.gif"))); // NOI18N
-//        jLabel4.setMaximumSize(new java.awt.Dimension(300, 300));
-//        jLabel4.setMinimumSize(new java.awt.Dimension(300, 300));
-//        jLabel4.setPreferredSize(new java.awt.Dimension(300, 300));
-                jLabel4.setVisible(false);
-        jLabel4.setBounds(100, 100, 300, 300);
+
+        jLabel4.setVisible(false);
+        jLabel4.setBounds(100, 100, 100, 100);
         jPanel1.add(jLabel4);
-                CardLayout layout = (CardLayout) jPanel1.getLayout();
-                layout.next(jPanel1);
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
         return jLabel4;
     }
 }
