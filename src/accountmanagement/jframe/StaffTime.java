@@ -125,6 +125,7 @@ public class StaffTime extends javax.swing.JPanel {
                 }
                 warningLabel.setForeground(Color.green);
                 warningLabel.setText("**Staff time saved successfully..");
+                resetText();
             } catch (java.lang.NumberFormatException e) {
                 warningLabel.setText("**All Values are mandatory and should be decimal");
             } catch (SQLException | ClassNotFoundException ex) {
@@ -140,9 +141,12 @@ public class StaffTime extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void resetText() {
-//        for (String name : listOfTextFields.keySet()) {
-//            listOfTextFields.get(name).setText("0");
-//        }
+        for (List list : listOfTextFields) {
+            JTextField startText = (JTextField) list.get(2);
+            JTextField endText = (JTextField) list.get(3);
+            startText.setText("");
+            endText.setText("");
+        }
     }
 
     private void populateStaffTime() {
