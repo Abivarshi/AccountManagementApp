@@ -685,6 +685,7 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Sales", "OutOfDate");
         alterTabTable(shopName, "Sales", "ShopUse");
         alterTabTable(shopName, "Sales", "Total");
+        alterTabTable(shopName, "Sales", "CustomerCount");
     }
 
     public void createDefaultSheet2(String shopName) {
