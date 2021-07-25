@@ -150,9 +150,7 @@ public class TwoColReport extends javax.swing.JPanel {
                     dataValue.put("Difference", String.valueOf(Float.parseFloat(res1.getString(name1))-Float.parseFloat(res2.getString(name2))));
                     dataValue.put("description", description);
 //                    dataValue.put("title", title);
-
                     System.out.println(dataValue.toString());
-
                 }
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
