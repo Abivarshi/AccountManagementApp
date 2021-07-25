@@ -384,9 +384,7 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
-        jPanel1.add(new TwoColReport(shopName, "SMO_Oyster", "", "Bank", "Till"));
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
+
     }//GEN-LAST:event_pettyButtonActionPerformed
 
     private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
@@ -410,7 +408,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButtonMouseHoverOut
 
     private void staffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffButtonActionPerformed
-
+        jPanel1.add(new TwoColReport(shopName, "FB_MilkVouture", "R_VoucherMilk", "Bank", "Till"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_staffButtonActionPerformed
 
     private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
