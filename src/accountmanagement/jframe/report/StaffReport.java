@@ -5,11 +5,9 @@
  */
 package accountmanagement.jframe.report;
 
-import accountmanagement.jframe.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.Color;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -168,7 +166,7 @@ public class StaffReport extends javax.swing.JPanel {
                 jPanel1.add(sp);
 
             } catch (SQLException ex) {
-                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(StaffReport.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             warningLabel.setText("From Date should be earlier date");

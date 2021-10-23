@@ -5,7 +5,6 @@
  */
 package accountmanagement.jframe.report.difference;
 
-import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.io.InputStream;
@@ -191,7 +190,7 @@ public class TwoColReport extends javax.swing.JPanel {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TwoColReport.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {
                 Logger.getLogger(TwoColReport.class.getName()).log(Level.SEVERE, null, ex);
             }

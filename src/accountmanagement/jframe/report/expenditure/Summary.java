@@ -5,7 +5,6 @@
  */
 package accountmanagement.jframe.report.expenditure;
 
-import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.io.InputStream;
@@ -200,9 +199,7 @@ public class Summary extends javax.swing.JPanel {
                 } else {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JRException ex) {
+            } catch (SQLException | JRException ex) {
                 Logger.getLogger(Summary.class.getName()).log(Level.SEVERE, null, ex);
             }
 

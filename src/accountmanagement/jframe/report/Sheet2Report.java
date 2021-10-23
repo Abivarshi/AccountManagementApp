@@ -158,7 +158,7 @@ public class Sheet2Report extends javax.swing.JPanel {
                     tbModel.addRow(values.toArray());
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
             }
                     
             } else {

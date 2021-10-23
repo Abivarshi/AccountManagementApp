@@ -5,10 +5,8 @@
  */
 package accountmanagement.jframe.report.till;
 
-import accountmanagement.jframe.report.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
-import java.io.File;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -160,9 +158,7 @@ public class RefundReport extends javax.swing.JPanel {
                 } else {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(BankReport.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JRException ex) {
+            } catch (SQLException | JRException ex) {
                 Logger.getLogger(RefundReport.class.getName()).log(Level.SEVERE, null, ex);
             }
 

@@ -6,8 +6,8 @@
 package accountmanagement.jframe;
 
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.report.BankReport;
-import accountmanagement.jframe.report.PettyReport;
+import accountmanagement.jframe.report.bank.BankReport;
+import accountmanagement.jframe.report.petty.PettyReport;
 import accountmanagement.jframe.report.expenditure.PurchaseReport;
 import accountmanagement.jframe.report.SalesReport;
 import accountmanagement.jframe.report.Sheet2Report;
