@@ -9,10 +9,10 @@ import accountmanagement.database.DataBaseConnection;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +28,7 @@ public class StaffTime extends javax.swing.JPanel {
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     private static final List<List> listOfTextFields = new ArrayList<>();
+    private static final HashMap<String, Float> listOfStaffDetail = new HashMap<>();
 
     /**
      * Creates new form Till
@@ -111,7 +112,8 @@ public class StaffTime extends javax.swing.JPanel {
         warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            if (!db.isDateExist(shopName, "StaffTime", sdf.format(jDateChooser1.getDate()))) {
+            String date = sdf.format(jDateChooser1.getDate());
+            if (!db.isDateExist(shopName, "StaffTime", date)) {
                 try {
                     for (List list : listOfTextFields) {
 
@@ -121,16 +123,28 @@ public class StaffTime extends javax.swing.JPanel {
                         Float endTime = Float.parseFloat(endText.getText());
                         Float hours = endTime - startTime;
 
-                        db.insertStaffTime(shopName, sdf.format(jDateChooser1.getDate()), list.get(0).toString(), list.get(1).toString(),
+                        db.insertStaffTime(shopName, date, list.get(0).toString(), list.get(1).toString(),
                                 startTime, endTime, hours);
+                    }
+                    
+                    for (String staffName : listOfStaffDetail.keySet()){
+                        ResultSet staffTimeRes = db.getStaffTime(shopName, staffName, date, date);
+                        try {
+                            float totalHours = 0;
+                            while (staffTimeRes.next()) {
+                                totalHours = totalHours + staffTimeRes.getFloat("Hours");
+                            }
+                            db.insertStaffSummary(shopName, date, staffName, totalHours, totalHours*listOfStaffDetail.get(staffName));
+                        } catch (SQLException ex) {
+                            Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
                     }
                     warningLabel.setForeground(Color.green);
                     warningLabel.setText("**Staff time saved successfully..");
                     resetText();
                 } catch (java.lang.NumberFormatException e) {
                     warningLabel.setText("**All Values are mandatory and should be decimal");
-                } catch (SQLException | ClassNotFoundException ex) {
-                    Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 warningLabel.setText("**Date already exist");
@@ -161,6 +175,8 @@ public class StaffTime extends javax.swing.JPanel {
             while (res.next()) {
                 String staffName = res.getString("StaffName");
                 String staffColName = res.getString("StaffColName");
+                Float salaryPercent = res.getFloat("SalaryPercentage");
+                listOfStaffDetail.put(staffColName, salaryPercent);
                 JLabel label = new JLabel(staffName);
                 label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
                 label.setBounds(20, 80 + 30 * i, 130, 20);

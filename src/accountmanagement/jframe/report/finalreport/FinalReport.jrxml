@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StaffTimeReport" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5034c357-4ee9-417f-84f1-4a68c822c714">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="PettyPurchase" class="java.lang.Float"/>
+	<field name="BankPurchase" class="java.lang.Float"/>
+	<field name="TillPurchase" class="java.lang.Float"/>
+	<field name="BMPetty" class="java.lang.Float"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="PettyExpenditure" class="java.lang.Float"/>
+	<field name="BankExpenditure" class="java.lang.Float"/>
+	<field name="TillExpenditure" class="java.lang.Float"/>
+	<field name="BMPettyCC" class="java.lang.Float"/>
+	<field name="SalesBookOut" class="java.lang.Float"/>
+	<field name="TotalSales" class="java.lang.Float"/>
+	<field name="TotalGrossProfit" class="java.lang.Float"/>
+	<field name="TotalAccountCredit" class="java.lang.Float"/>
+	<field name="TotalAccPay" class="java.lang.Float"/>
+	<field name="BMPettyIOU" class="java.lang.Float"/>
+	<field name="ExpenditureCapitalGain" class="java.lang.Float"/>
+	<field name="PettyCapitalGain" class="java.lang.Float"/>
+	<field name="BankCapitalGain" class="java.lang.Float"/>
+	<field name="PBCash" class="java.lang.Float"/>
+	<field name="PBCCard" class="java.lang.Float"/>
+	<field name="PBIOU" class="java.lang.Float"/>
+	<field name="PBBank" class="java.lang.Float"/>
+	<field name="PettyBalance" class="java.lang.Float"/>
+	<field name="BankBalance" class="java.lang.Float"/>
+	<field name="DiffMilk" class="java.lang.Float"/>
+	<field name="DiffPayPoint" class="java.lang.Float"/>
+	<field name="DiffPayZone" class="java.lang.Float"/>
+	<field name="DiffOyster" class="java.lang.Float"/>
+	<field name="DiffCamlot" class="java.lang.Float"/>
+	<field name="DiffStaff" class="java.lang.Float"/>
+	<field name="DiffElevenCard" class="java.lang.Float"/>
+	<group name="Group1">
+		<groupHeader>
+			<band height="713">
+				<textField>
+					<reportElement x="469" y="319" width="98" height="20" uuid="5cba8380-c4f3-47e4-b59e-763f40ea05dc">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BMPetty}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="349" y="60" width="114" height="20" uuid="1546cab0-8529-4d2b-b680-b84e02f819a6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[TOTAL PURCHASE]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="251" y="41" width="80" height="20" uuid="d4650931-033a-45a6-b44f-4a435ad4cc7e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="531" width="138" height="20" uuid="df5d2291-04ec-4fd2-92f9-b530d836a6f2">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Bank Balance]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="315" width="101" height="30" uuid="b8f43886-25f4-4df3-87ed-9c1f3b874ec0">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[TOTAL NET PROFIT (AS ACCOUNTS)]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="470" y="480" width="97" height="20" uuid="85004927-ff65-4a73-a21f-3270d8366243">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BMPettyCC}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="179" width="138" height="20" uuid="61e8df68-18de-4164-aaa3-53e77373b524">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Total Sales]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="251" y="350" width="80" height="20" uuid="ee466f61-63e7-4085-a348-c9b32c1141b1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BMPetty}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="251" y="578" width="80" height="20" uuid="9a1111b3-fe7d-44fa-9e42-a966c99b389e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{DiffPayPoint}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="510" width="138" height="20" uuid="819ef289-08ce-4fac-b66b-6d70236691d4">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty Balance]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="320" width="80" height="20" uuid="f1453e6d-4d49-4943-a23a-6c786ff92c69">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{TotalAccPay}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="90" width="138" height="20" uuid="d17a422b-e77e-4d7e-bc35-fe2c1d609be6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty Sub Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="20" width="80" height="20" uuid="70a811f9-fbeb-4baf-8df6-fe5d824c6eef">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Purchase]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="300" width="80" height="20" uuid="6b75ff03-2838-4417-bacb-019a97ba8768">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{TotalAccountCredit}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="598" width="138" height="20" uuid="574f69b1-478a-4925-a2f5-1c1dd7774623">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Diff PayZone]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="481" width="80" height="20" uuid="4dd67021-3c1e-49bf-9906-5e6773757197">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PBBank}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="252" y="90" width="80" height="20" uuid="0482fc79-b0a4-4fa1-b2c6-939d56e5c910">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PettyExpenditure}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="252" y="131" width="80" height="20" uuid="9da7f824-5d46-4097-9715-bf5892a9a569">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{TillExpenditure}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="20" width="138" height="20" uuid="6a11d098-f0a1-410e-adde-0440dbe36ce2">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty Sub Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="103" y="482" width="138" height="20" uuid="172c5f32-c5ec-4adc-94ee-267d4a11a2ca">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Bank Barrow Money Pay Back]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="251" y="559" width="80" height="20" uuid="ec74b11d-1f9d-47b8-be8e-8ecc31c55646">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{DiffMilk}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="251" y="20" width="80" height="20" uuid="262d05b0-f377-42a7-8ba7-51b1df5000bc">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PettyPurchase}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="251" y="618" width="80" height="20" uuid="e0a741ae-810a-4ce9-98e7-bcf33de8241b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{DiffOyster}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="420" width="138" height="20" uuid="d54c100a-a70d-4024-971d-2a36db6d1fe1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty Cash Borrow Pay Back]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="468" y="60" width="98" height="20" uuid="f5950188-af05-45f8-a68f-df9243e9dca1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[SUM($F{PettyPurchase},$F{BankPurchase},$F{TillPurchase})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="251" y="598" width="80" height="20" uuid="25759d89-e657-462f-ba25-48dadaa8adb7">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{DiffPayZone}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="462" width="138" height="20" uuid="c76687c1-f967-4cdc-8e3a-8e447b1d3b21">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty IOU Pay Back]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="111" width="80" height="20" uuid="274c09ba-fc95-4fb7-96e4-5b1213d53ba0">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BankExpenditure}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="350" width="138" height="20" uuid="f14d10c8-08db-4354-b73a-34edd93143eb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty Borrow Money]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="441" width="80" height="20" uuid="a58dc9f4-96f4-404b-9c69-a0bc4099c1e4">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PBCCard}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="559" width="138" height="20" uuid="a25ba1cf-8852-4f1d-9d0f-45b63e78ca03">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Diff Milk]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="90" width="80" height="20" uuid="fc7dc21c-d006-4916-8998-5970ba444779">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Expenditure]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="102" y="578" width="138" height="20" uuid="c856f149-10e3-46e4-b5c7-519c0cd4dbad">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Diff PayPoint]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="177" width="114" height="20" uuid="69b0a341-56e7-45ae-9b4e-767120bd26a3">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[TOTAL SALES]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="178" width="80" height="20" uuid="e464198a-b44c-4ec6-bff4-6ccbc9d1b487">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{TotalSales}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="470" y="177" width="97" height="20" uuid="13725535-1018-4e84-81a3-8decf6f7a8bd">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{TotalSales}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="132" width="138" height="20" uuid="9444b568-9e1e-4874-82ca-fe03529402b6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Till Sub Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="350" width="80" height="20" uuid="c6651611-dec1-4a10-91e4-90828f16434e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Borrow Money]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="475" width="114" height="30" uuid="a7b713cd-af0a-44b1-b30a-6d9d1e81ea27">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[BALANCE BORROW MONEY TO PAY]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="465" y="670" width="97" height="20" uuid="a6eee39d-f52a-4f1b-8cca-2f2a070fb3e1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BMPettyCC}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="510" width="80" height="20" uuid="ed6bad56-1441-41b2-a342-fb7099b1ef3a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Money In Hand]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="279" width="80" height="20" uuid="664c5e57-fbe5-43ff-be78-cbed12fdc9d4">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{TotalGrossProfit}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="321" width="138" height="20" uuid="34b6242b-4a15-427c-8014-bb3551797ac3">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Total Acc Pay]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="102" y="618" width="138" height="20" uuid="a3f8ff3a-4fad-41b1-850c-359fc3223b05">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Diff Oyster]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="420" width="80" height="20" uuid="080357a6-e034-480e-9766-a962118184b5">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PBCash}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="300" width="138" height="20" uuid="71ed20ed-f744-4b2b-9376-414d25177b6d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Total Account Credit]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="102" y="657" width="138" height="20" uuid="1f23e6a1-7e85-4893-935e-d1bc495fb161">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Diff Staff Wages to Pay]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="251" y="637" width="80" height="20" uuid="bdca350d-1522-4026-8fca-1599f4f0b1d4">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{DiffCamlot}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="637" width="138" height="20" uuid="70a72829-cf2d-4db3-96da-4befb195afee">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Diff Camlot]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="251" y="61" width="80" height="20" uuid="24d09fc0-3dc2-46eb-b860-a0553247b864">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{TillPurchase}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="252" y="151" width="80" height="20" uuid="78787520-2752-4ef5-96cd-6fc1ce20b2bb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{SalesBookOut}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="62" width="138" height="20" uuid="abb45736-0c0b-4675-9f8c-360fdaa2bf98">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Till Sub Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="103" y="152" width="138" height="20" uuid="3280e040-4aa1-41b3-a5c9-af0ddc8186af">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Sales Book Out Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="420" width="80" height="20" uuid="3adf2f1f-8628-41d9-ab14-f122d6b2cc3c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Pay Back]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="102" y="392" width="138" height="20" uuid="386d53af-a703-456c-96f9-0e9bc9400b76">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty IOU]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="102" y="676" width="138" height="20" uuid="bad9340a-9f2b-4e6a-af23-892e41c3c998">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Diff Eleven Card]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="251" y="391" width="80" height="20" uuid="42f24fa8-2bb1-4bc6-bc94-3de09642b3de">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BMPettyIOU}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="371" width="138" height="20" uuid="bbc10541-9743-439a-ba01-3823d73959d8">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty C/Card Barrow]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="103" y="441" width="138" height="20" uuid="01f35def-10e7-4ab9-9178-3e4111895be2">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty C/Card Barrow Pay Back]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="510" width="80" height="20" uuid="44f0ec79-43eb-402d-9f21-5eedddd99b47">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PettyBalance}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="102" y="41" width="138" height="20" uuid="5f7c1018-4a65-4b9e-9e51-757d82fce840">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Bank Sub Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="461" width="80" height="20" uuid="4c12aed8-4f32-4c81-890a-35e564140924">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PBIOU}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="179" width="80" height="20" uuid="203079d8-1963-435a-b629-9b9494864674">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sales]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="251" y="657" width="80" height="20" uuid="48393b9a-87fc-45e9-82b0-cea0818a977a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{DiffStaff}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="103" y="111" width="138" height="20" uuid="02cb0359-7fcd-4cb3-a5ea-4615ee032bab">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Bank Sub Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="103" y="279" width="138" height="20" uuid="7b2f310e-2e19-42d6-9366-9d5389025ed1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Total Gross Profit]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="150" width="114" height="20" uuid="0cca8ac6-3df7-4fd2-a26a-8e69795d3e4d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[TOTAL EXPENDITURE]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="252" y="531" width="80" height="20" uuid="5be40c85-dcad-4b8d-81d2-d9c2c9b15ffe">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BankBalance}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="251" y="676" width="80" height="20" uuid="491c21fe-c332-4efb-9f3a-68535d18528f">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{DiffElevenCard}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="251" y="371" width="80" height="20" uuid="417e8042-f515-403b-9661-479d1a8200be">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BMPettyCC}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="279" width="89" height="20" uuid="d75b7787-5ba6-4d8a-bca0-2ce9b6cb4a4d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[From Accounts]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="346" y="665" width="114" height="30" uuid="55924bb7-5719-43ae-b316-b34c64c64137">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[BALANCE MONEY IN HAND]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="470" y="150" width="98" height="20" uuid="ba6092b8-061d-4952-a4f3-27b8146a2ee3">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[SUM($F{PettyExpenditure},$F{BankExpenditure},$F{TillExpenditure})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="467" y="249" width="98" height="20" uuid="3204445f-e77d-4606-90ce-c4caa73cc84b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[SUM($F{PettyCapitalGain},$F{ExpenditureCapitalGain},$F{BankCapitalGain})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="250" y="209" width="80" height="20" uuid="bed49ec3-1095-4b56-bafa-729f4db09d8f">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{ExpenditureCapitalGain}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="250" y="250" width="80" height="20" uuid="2b47a8de-b1dd-4a7d-b29f-adffe6361da2">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{BankCapitalGain}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="348" y="249" width="114" height="20" uuid="fa797ca6-2fb2-4dee-8ca7-45688ceb3c77">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[TOTAL CAPITAL GAINS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="251" width="138" height="20" uuid="329a44a1-cc64-4d37-ae13-415e25ec42be">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Bank Sub Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="209" width="138" height="20" uuid="4e69590e-5128-4566-8393-3979b8277d5e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Expenditure Sub Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="230" width="138" height="20" uuid="9327e6a0-af1c-40b2-912a-2ef359b58592">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<text><![CDATA[Petty Sub Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="250" y="230" width="80" height="20" uuid="f86c960d-e7d8-4539-850a-c6ef84b41715">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{PettyCapitalGain}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="-1" y="209" width="80" height="20" uuid="0f9dce22-069a-49ec-bb4c-04818be16acb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+					</reportElement>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Capital Gains]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="a61a1633-f84f-4f59-9b2a-d8d19d21cd92"/>
+				<staticText>
+					<reportElement x="20" y="20" width="555" height="43" forecolor="#FFFFFF" uuid="fe66fe08-b323-4483-91a4-e1312cf39e64"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FINAL REPORT]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="240" y="70" width="335" height="16" forecolor="#FFFCFC" uuid="9420ff11-8c45-45a0-a390-815e340828e6"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="554">
+			<staticText>
+				<reportElement x="1" y="131" width="89" height="34" uuid="8741bae4-927a-4414-8311-fbf3c9f93e85">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BALANCE ACCOUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="131" width="190" height="34" uuid="7d26e9ee-af6a-479f-887b-388d6b87d29b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL NET PEOFIT OVER /SORT(AS ACCOUNTS)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="131" width="209" height="34" uuid="e66a237c-a82b-4cc6-a89c-f4751328bf06">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BALANCE MONEY IN MY HAND]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="131" width="22" height="34" uuid="40f49277-eca2-47e2-b0ea-5dbb52811766">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="172" width="190" height="20" uuid="0a0ca166-a8ab-4833-90ff-1467ea524161">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="172" width="190" height="20" uuid="5143c6d2-88ae-49f4-9b61-6ce4ff6bc989">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="172" width="22" height="20" uuid="6c2e5502-24c6-4c5e-9090-37b7e7302879">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="210" width="553" height="34" uuid="8a444d8d-3add-48c7-a425-148e33dad1ab">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IF NOT , THINK ABOUT  OVER PURCHASE,  OVER NET PROFIT, OVER EXPENDITURE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="250" width="89" height="34" uuid="65a4a7ea-32cb-4e73-b3b1-827226086089">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSUMED ACCOUNTS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="250" width="190" height="34" uuid="15b0f9e1-139e-4f21-99bd-035d481becdb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OVER/SORT PURCHASE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="250" width="190" height="34" uuid="8ffe10eb-87f7-42d3-b33c-8e2597398cfb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL ASSUMED PURCHASE-TOTAL PURCHASE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="250" width="22" height="34" uuid="86088a38-7f91-405f-988c-b5a4b71a3ed5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="346" y="291" width="190" height="20" uuid="0263a165-02e3-4e9c-8485-48ad582b3498">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="291" width="22" height="20" uuid="4f034881-374d-4647-8b32-ebc1cf7e1ca5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="340" width="190" height="34" uuid="1b4e0394-a4f0-47b9-8027-806ac035b7fb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OVER/SORT EXPENDITURE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="340" width="209" height="34" uuid="c2c8eb0d-5a08-46b4-894f-659af5072f80">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL ASSUMMED EXPENDITURE -TOTAL GROSS PROFIT EXPENDITURE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="340" width="22" height="34" uuid="bf209e68-7208-4d35-83c0-8afdd2874dd0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="346" y="381" width="190" height="20" uuid="fd2801f3-1a13-48b4-891d-daed471cb0ba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="381" width="22" height="20" uuid="95db72be-d4de-4f36-a751-594e3fdb1c70">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="430" width="190" height="34" uuid="c92a9bd7-4e19-47c2-8afd-49ed5cc0d24a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OVER /SORT NET PROFIT AFTER CAPITAL GAIN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="430" width="198" height="34" uuid="94f4054d-85ef-4389-b667-0358ec322bcc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL ASSUMED NET PROFIT-TOTAL CAPITAL GAIN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="430" width="22" height="34" uuid="a10ee015-04ca-43ac-b251-c2097ae6f09f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="346" y="471" width="190" height="20" uuid="a0f61537-4707-4a94-af2c-7d82a5ce575f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="471" width="22" height="20" uuid="71589c2b-6d11-4c4d-99f1-baaa0db1c74f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="507" width="190" height="34" uuid="d885c03c-e318-4d19-985b-4ae3f294f9f5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXTRA MONEY OUT/OVER (AS ASSUMED)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="514" width="190" height="20" uuid="76d5ffd7-0e57-4e42-8e57-8055a9ae09da">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="304" y="514" width="22" height="20" uuid="19f8eb69-33a8-4354-b661-a9990f8128a6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="252" y="15" width="80" height="20" uuid="cff26167-5669-4d87-b20b-f81852d8e790">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{TotalGrossProfit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="103" y="10" width="138" height="30" uuid="d4134c35-0112-4b77-85b5-0393ac211a5b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<text><![CDATA[Sales Total Assumed Expenditure]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="10" width="89" height="20" uuid="d1deb43c-58cb-49ea-aa96-42f37b708ac3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From Assumed]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="117" width="595" height="1" forecolor="#666666" uuid="db0c487e-d6c7-43a3-bfbf-6e806273296c"/>
+			</line>
+			<textField>
+				<reportElement x="253" y="47" width="80" height="20" uuid="5beb130d-e33f-44c2-95bc-9c59094eb889">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{TotalGrossProfit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="104" y="42" width="138" height="30" uuid="42ecf957-a673-48fc-bdac-d6ad398590f1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<text><![CDATA[Sales Total Assumed Expenditure]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="253" y="77" width="80" height="20" uuid="09950dd4-72af-4006-afb6-2fa506a52535">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{TotalGrossProfit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="104" y="72" width="138" height="30" uuid="72b65058-b129-4b20-b9b8-84f310a45839">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<text><![CDATA[Sales Total Assumed Expenditure]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="49415a88-5835-47fb-9b20-b58224510e8d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="4f4dec61-b5ae-41f4-8425-c0d9daa80dae"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="81fe6ff4-04a4-4f3a-b49b-2718c21c34f1"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

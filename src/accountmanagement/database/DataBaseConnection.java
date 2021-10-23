@@ -88,9 +88,9 @@ public class DataBaseConnection {
 
         alterTabTable(shopName, "Expenditure", staffColName);
         insertEPDetailTable(shopName, staffName, staffColName, "ExpenditureDetail");
-        alterTabTable(shopName, "Bank", "EM_"+staffColName);
-        insertDetailTable(shopName, "Salary "+staffName, "EM_"+staffColName, "Expenditure Money Out (Monthly)", "BankDetail");
-        
+        alterTabTable(shopName, "Bank", "EM_" + staffColName);
+        insertDetailTable(shopName, "Salary " + staffName, "EM_" + staffColName, "Expenditure Money Out (Monthly)", "BankDetail");
+
         Statement state = con.createStatement();
         ResultSet res = state.executeQuery("SELECT * FROM Staff WHERE staffColName='" + staffColName + "'");
         return res;
@@ -163,16 +163,17 @@ public class DataBaseConnection {
 
             Statement state = con.createStatement();
             ResultSet res = state.executeQuery("SELECT COUNT(id) AS count FROM Staff");
-            if(res.next())
-                return res.getInt("count")+1;
+            if (res.next()) {
+                return res.getInt("count") + 1;
+            }
             return 0;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
     }
-    
+
     public void createStaffTime(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -181,7 +182,7 @@ public class DataBaseConnection {
         Statement state = con.createStatement();
         ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='StaffTime'");
         if (!res.next()) {
-            System.out.println("Building the Staff table...");
+            System.out.println("Building the StaffTime table...");
 
             Statement state2 = con.createStatement();
             state2.executeUpdate("CREATE TABLE StaffTime(id integer,"
@@ -195,18 +196,93 @@ public class DataBaseConnection {
         }
     }
 
-    public void insertStaffTime(String shopName, String date, String staffName, String staffType, Float start, 
-            Float end, Float hours) throws ClassNotFoundException, SQLException {
+    public void insertStaffTime(String shopName, String date, String staffName, String staffType, Float start,
+            Float end, Float hours) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            PreparedStatement prep = con.prepareStatement("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime, Hours) VALUES ("
+                    + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end + ", " + hours + ");");
+
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    public ResultSet getStaffTime(String shopName, String staffName, String dateFrom, String dateTo) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM StaffTime WHERE StaffName='" + staffName
+                    + "' AND Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
+                    + " ORDER BY Date ASC");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void createStaffSummary(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
 
-        PreparedStatement prep = con.prepareStatement("INSERT INTO StaffTime (Date, StaffName, Type, StartTime, EndTime, Hours) VALUES ("
-                + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end + ", " + hours + ");");
+        Statement state = con.createStatement();
+        ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='StaffSummary'");
+        if (!res.next()) {
+            System.out.println("Building the StaffSummary table...");
 
-        prep.execute();
+            Statement state2 = con.createStatement();
+            state2.executeUpdate("CREATE TABLE StaffSummary(id integer,"
+                    + "Date DATE,"
+                    + "StaffName VARCHAR(60),"
+                    + "TotalHours FLOAT,"
+                    + "Salary FLOAT,"
+                    + "primary key (id));");
+        }
     }
 
+    public void insertStaffSummary(String shopName, String date, String staffName, Float totalHours, Float salary) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            PreparedStatement prep = con.prepareStatement("INSERT INTO StaffSummary (Date, StaffName, TotalHours, Salary) VALUES ("
+                    + "'" + date + "', '" + staffName + "', " + totalHours + ", " + salary + ");");
+
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ResultSet getStaffSummary(String shopName, String staffName, String dateFrom, String dateTo) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM StaffSummary WHERE StaffName='" + staffName
+                    + "' AND Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
+                    + " ORDER BY Date ASC");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     public void createTabTable(String shopName, String tabName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -704,9 +780,9 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Sheet2", "SC_Lottary");
         alterTabTable(shopName, "Sheet2", "ComTotal");
         alterTabTable(shopName, "Sheet2", "ServiceTotal");
-//        alterTabTable(shopName, "Sheet2", "OysterDD");
-//        alterTabTable(shopName, "Sheet2", "PaypointDD");
-//        alterTabTable(shopName, "Sheet2", "LotteryDD");
+        alterTabTable(shopName, "Sheet2", "OysterDD");
+        alterTabTable(shopName, "Sheet2", "PaypointDD");
+        alterTabTable(shopName, "Sheet2", "LotteryDD");
 
     }
 
@@ -889,6 +965,7 @@ public class DataBaseConnection {
         createUserTable(shopName);
         createStaff(shopName);
         createStaffTime(shopName);
+        createStaffSummary(shopName);
         createAdminProfit(shopName);
         createTabTable(shopName, "Expenditure");
         createDefaultExpenditure(shopName);
@@ -981,8 +1058,8 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        
-        PreparedStatement prep = con.prepareStatement("UPDATE AdminProfit SET '"+ colName +"' = '"+ value+"'");
+
+        PreparedStatement prep = con.prepareStatement("UPDATE AdminProfit SET '" + colName + "' = '" + value + "'");
         prep.execute();
 
     }
