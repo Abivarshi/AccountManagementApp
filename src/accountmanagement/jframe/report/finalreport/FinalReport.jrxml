@@ -35,6 +35,19 @@
 	<field name="DiffCamlot" class="java.lang.Float"/>
 	<field name="DiffStaff" class="java.lang.Float"/>
 	<field name="DiffElevenCard" class="java.lang.Float"/>
+	<field name="AssumedPurchase" class="java.lang.Float"/>
+	<field name="AssumedProfit" class="java.lang.Float"/>
+	<field name="AssumedExpenditure" class="java.lang.Float"/>
+	<field name="NetProfitAccount" class="java.lang.Float"/>
+	<field name="BalanceMoneyToPay" class="java.lang.Float"/>
+	<field name="BalanceMoneyInHand" class="java.lang.Float"/>
+	<field name="SOPurchase" class="java.lang.Float"/>
+	<field name="SOExpenditure" class="java.lang.Float"/>
+	<field name="SONetProfit" class="java.lang.Float"/>
+	<field name="TotalPurchase" class="java.lang.Float"/>
+	<field name="TotalExpenditure" class="java.lang.Float"/>
+	<field name="TotalCapitalGain" class="java.lang.Float"/>
+	<field name="ExtraMoneyOut" class="java.lang.Float"/>
 	<group name="Group1">
 		<groupHeader>
 			<band height="713">
@@ -43,7 +56,7 @@
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$F{BMPetty}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{NetProfitAccount}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="349" y="60" width="114" height="20" uuid="1546cab0-8529-4d2b-b680-b84e02f819a6">
@@ -75,7 +88,7 @@
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$F{BMPettyCC}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{BalanceMoneyToPay}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="103" y="179" width="138" height="20" uuid="61e8df68-18de-4164-aaa3-53e77373b524">
@@ -203,7 +216,7 @@
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[SUM($F{PettyPurchase},$F{BankPurchase},$F{TillPurchase})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{TotalPurchase}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="251" y="598" width="80" height="20" uuid="25759d89-e657-462f-ba25-48dadaa8adb7">
@@ -305,7 +318,7 @@
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[$F{BMPettyCC}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{BalanceMoneyInHand}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="2" y="510" width="80" height="20" uuid="ed6bad56-1441-41b2-a342-fb7099b1ef3a">
@@ -528,14 +541,14 @@
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[SUM($F{PettyExpenditure},$F{BankExpenditure},$F{TillExpenditure})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{TotalExpenditure}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="467" y="249" width="98" height="20" uuid="3204445f-e77d-4606-90ce-c4caa73cc84b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 					</reportElement>
 					<textElement textAlignment="Right"/>
-					<textFieldExpression><![CDATA[SUM($F{PettyCapitalGain},$F{ExpenditureCapitalGain},$F{BankCapitalGain})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{TotalCapitalGain}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="250" y="209" width="80" height="20" uuid="bed49ec3-1095-4b56-bafa-729f4db09d8f">
@@ -661,14 +674,14 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NetProfitAccount}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="346" y="172" width="190" height="20" uuid="5143c6d2-88ae-49f4-9b61-6ce4ff6bc989">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{BalanceMoneyInHand}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="310" y="172" width="22" height="20" uuid="6c2e5502-24c6-4c5e-9090-37b7e7302879">
@@ -729,7 +742,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{SOPurchase}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="310" y="291" width="22" height="20" uuid="4f034881-374d-4647-8b32-ebc1cf7e1ca5">
@@ -767,13 +780,6 @@
 				</textElement>
 				<text><![CDATA[=]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="346" y="381" width="190" height="20" uuid="fd2801f3-1a13-48b4-891d-daed471cb0ba">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="310" y="381" width="22" height="20" uuid="95db72be-d4de-4f36-a751-594e3fdb1c70">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
@@ -815,7 +821,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{SONetProfit}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="310" y="471" width="22" height="20" uuid="71589c2b-6d11-4c4d-99f1-baaa0db1c74f">
@@ -840,7 +846,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{BankPurchase}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ExtraMoneyOut}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="304" y="514" width="22" height="20" uuid="19f8eb69-33a8-4354-b661-a9990f8128a6">
@@ -856,7 +862,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{TotalGrossProfit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{AssumedExpenditure}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="103" y="10" width="138" height="30" uuid="d4134c35-0112-4b77-85b5-0393ac211a5b">
@@ -881,27 +887,34 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{TotalGrossProfit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{AssumedProfit}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="104" y="42" width="138" height="30" uuid="42ecf957-a673-48fc-bdac-d6ad398590f1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
-				<text><![CDATA[Sales Total Assumed Expenditure]]></text>
+				<text><![CDATA[Sales Total Assumed Net Profit]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="253" y="77" width="80" height="20" uuid="09950dd4-72af-4006-afb6-2fa506a52535">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{TotalGrossProfit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{AssumedPurchase}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="104" y="72" width="138" height="30" uuid="72b65058-b129-4b20-b9b8-84f310a45839">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
-				<text><![CDATA[Sales Total Assumed Expenditure]]></text>
+				<text><![CDATA[Sales Total Assumed Purchase]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="346" y="380" width="190" height="20" uuid="0366891f-0d4e-4688-8411-dc2ee958e092">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SOExpenditure}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

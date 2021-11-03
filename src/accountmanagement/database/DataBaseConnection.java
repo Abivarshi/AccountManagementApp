@@ -212,7 +212,6 @@ public class DataBaseConnection {
         }
     }
 
-    
     public ResultSet getStaffTime(String shopName, String staffName, String dateFrom, String dateTo) {
 
         try {
@@ -230,7 +229,7 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
+
     public void createStaffSummary(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -283,6 +282,29 @@ public class DataBaseConnection {
             return null;
         }
     }
+    
+    public float getSumSalaryStaff(String shopName, String staffName, String dateFrom, String dateTo) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT Salary, Date FROM StaffSummary WHERE StaffName='" + staffName
+                    + "' AND Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
+                    + " ORDER BY Date ASC");
+            float sum = 0;
+            while (res.next()) {
+                sum = sum + res.getFloat("Salary");
+            }
+            return sum;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
     public void createTabTable(String shopName, String tabName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -499,6 +521,27 @@ public class DataBaseConnection {
 
     }
 
+    public void updateValuesTabTable(String shopName, String tabName, String date, HashMap<String, Float> values) {
+        if (con == null || !connectedShop.equals(shopName)) {
+            getConnection(shopName);
+        }
+
+        String fun = "UPDATE " + tabName + " SET ";
+        for (String i : values.keySet()) {
+            fun = fun + i + " = '" + values.get(i) + "' ,";
+        }
+        fun = fun.substring(0, fun.length() - 1) + " WHERE Date = '" + date + "';";
+System.out.println(fun);
+        PreparedStatement prep;
+        try {
+            prep = con.prepareStatement(fun);
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public ResultSet getValuesTabTable(String shopName, String tabName, String dateFrom, String dateTo) {
 
         try {
@@ -510,6 +553,25 @@ public class DataBaseConnection {
             ResultSet res = state.executeQuery("SELECT * FROM " + tabName
                     + " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
                     + " ORDER BY Date ASC");
+
+            return res;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public ResultSet getExistingValueTabTable(String shopName, String tabName, String date) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM " + tabName
+                    + " WHERE Date = '" + date + "'");
 
             return res;
 
@@ -537,6 +599,28 @@ public class DataBaseConnection {
         }
     }
 
+    public float getSumOneColValueTabTable(String shopName, String tableName, String colName, String dateFrom, String dateTo) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT " + colName + ", Date FROM " + tableName
+                    + " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
+                    + " ORDER BY Date ASC");
+            float sum = 0;
+            while (res.next()) {
+                sum = sum + res.getFloat(colName);
+            }
+            return sum;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
     public ResultSet getNColValueTabTable(String shopName, String tableName, List<String> colName, String dateFrom, String dateTo) {
 
         try {
@@ -554,6 +638,7 @@ public class DataBaseConnection {
                     + " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
                     + " ORDER BY Date ASC";
 
+                System.out.println("queryString "+queryString);
             Statement state = con.createStatement();
             ResultSet res = state.executeQuery(queryString);
             return res;
@@ -577,8 +662,8 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Bank", "SMO_PayZone");
         alterTabTable(shopName, "Bank", "SMO_Oyster");
         alterTabTable(shopName, "Bank", "SMO_Camlot");
-        alterTabTable(shopName, "Bank", "EM_SalarayMike");
-        alterTabTable(shopName, "Bank", "EM_SalarySathees");
+//        alterTabTable(shopName, "Bank", "EM_SalarayMike");
+//        alterTabTable(shopName, "Bank", "EM_SalarySathees");
         alterTabTable(shopName, "Bank", "EM_CapitalGains");
         alterTabTable(shopName, "Bank", "EM_BT");
         alterTabTable(shopName, "Bank", "EM_Nest");
@@ -671,6 +756,10 @@ public class DataBaseConnection {
         alterTabTable(shopName, tableType, "Groceries");
         alterTabTable(shopName, tableType, "Tobacco");
         alterTabTable(shopName, tableType, "CallingCard");
+        alterTabTable(shopName, tableType, "SalesSubTotal");
+        alterTabTable(shopName, tableType, "AssumePurchase");
+        alterTabTable(shopName, tableType, "AssumeExpenditure");
+        alterTabTable(shopName, tableType, "AssumeNetProfit");
 
         alterTabTable(shopName, tableType, "BO_InsLottary");
         alterTabTable(shopName, tableType, "BO_Lottary");
@@ -709,14 +798,14 @@ public class DataBaseConnection {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        alterTabTable(shopName, "Expenditure", "Staff1");
-        alterTabTable(shopName, "Expenditure", "Staff2");
-        alterTabTable(shopName, "Expenditure", "Staff3");
-        alterTabTable(shopName, "Expenditure", "Staff4");
-        alterTabTable(shopName, "Expenditure", "Staff5");
-        alterTabTable(shopName, "Expenditure", "Staff6");
-        alterTabTable(shopName, "Expenditure", "Staff7");
-        alterTabTable(shopName, "Expenditure", "Staff8");
+//        alterTabTable(shopName, "Expenditure", "Staff1");
+//        alterTabTable(shopName, "Expenditure", "Staff2");
+//        alterTabTable(shopName, "Expenditure", "Staff3");
+//        alterTabTable(shopName, "Expenditure", "Staff4");
+//        alterTabTable(shopName, "Expenditure", "Staff5");
+//        alterTabTable(shopName, "Expenditure", "Staff6");
+//        alterTabTable(shopName, "Expenditure", "Staff7");
+//        alterTabTable(shopName, "Expenditure", "Staff8");
         alterTabTable(shopName, "Expenditure", "CapitalGains");
         alterTabTable(shopName, "Expenditure", "Van");
         alterTabTable(shopName, "Expenditure", "Diesel");
@@ -780,10 +869,29 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Sheet2", "SC_Lottary");
         alterTabTable(shopName, "Sheet2", "ComTotal");
         alterTabTable(shopName, "Sheet2", "ServiceTotal");
-        alterTabTable(shopName, "Sheet2", "OysterDD");
-        alterTabTable(shopName, "Sheet2", "PaypointDD");
-        alterTabTable(shopName, "Sheet2", "LotteryDD");
+//        alterTabTable(shopName, "Sheet2", "OysterDD");
+//        alterTabTable(shopName, "Sheet2", "PaypointDD");
+//        alterTabTable(shopName, "Sheet2", "LotteryDD");
 
+    }
+    
+    public void createDefaultStaff(String shopName) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+            
+            addStaff(shopName, "Mike", "Staff1", 9.5f, true, false, true, true);
+            addStaff(shopName, "Sathees", "Staff2", 7.5f, true, true, false, false);
+            addStaff(shopName, "Sutha", "Staff3", 7.5f, true, false, false, false);
+            addStaff(shopName, "Tharsan", "Staff4", 7.5f, true, true, true, false);
+            addStaff(shopName, "Karan", "Staff5", 7.5f, true, true, false, true);
+            addStaff(shopName, "Suri", "Staff6", 7.5f, false, true, false, false);
+            addStaff(shopName, "Basker", "Staff7", 7.5f, false, true, false, false);
+            addStaff(shopName, "Viji", "Staff8", 7.5f, false, true, false, false);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void insertDefaultBankDetail(String shopName) {
@@ -967,6 +1075,7 @@ public class DataBaseConnection {
         createStaffTime(shopName);
         createStaffSummary(shopName);
         createAdminProfit(shopName);
+        createDefaultStaff(shopName);
         createTabTable(shopName, "Expenditure");
         createDefaultExpenditure(shopName);
         createTabTable(shopName, "Purchase");
@@ -1062,6 +1171,29 @@ public class DataBaseConnection {
         PreparedStatement prep = con.prepareStatement("UPDATE AdminProfit SET '" + colName + "' = '" + value + "'");
         prep.execute();
 
+    }
+
+    public HashMap<String, Float> getAdminProfit(String shopName) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM AdminProfit");
+
+            HashMap<String, Float> value = new HashMap<>();
+            value.put("PurchasePercentage", res.getFloat("PurchasePercentage"));
+            value.put("GrossProfitPercentage", res.getFloat("GrossProfitPercentage"));
+            value.put("NetProfitPercentage", res.getFloat("NetProfitPercentage"));
+
+            return value;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     public void dropTable(String shopName, String tableName) {

@@ -356,9 +356,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_expenditureButtonMouseHoverOut
 
     private void expenditureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenditureButtonActionPerformed
-//        jPanel1.add(new TwoColReport(shopName, "SMO_PayZone", "", "Bank", ""));
-//        CardLayout layout = (CardLayout) jPanel1.getLayout();
-//        layout.next(jPanel1);
+        jPanel1.add(new TwoColReport(shopName, "PayZone", "Bank", "SMO_PayZone", "Till", "R_PayZone"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_expenditureButtonActionPerformed
 
     private void purcharseButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purcharseButtonMouseHover
@@ -384,7 +384,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_pettyButtonMouseHoverOut
 
     private void pettyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pettyButtonActionPerformed
-
+        jPanel1.add(new TwoColReportWithDD(shopName, "Oyster", "Bank", "SMO_Oyster", "Till", "Oyster"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);    
     }//GEN-LAST:event_pettyButtonActionPerformed
 
     private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
@@ -397,6 +399,9 @@ public class DifferenceReport extends javax.swing.JPanel {
 
     private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
 
+        
+        
+        
     }//GEN-LAST:event_bankButtonActionPerformed
 
     private void staffButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHover
@@ -422,7 +427,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton1MouseHoverOut
 
     private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
-
+        jPanel1.add(new TwoColReportWithDD(shopName, "CAMLOT", "Bank", "SMO_Camlot", "Till", "CAMLOT"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton1ActionPerformed
 
     private void salesButton5MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton5MouseHover
@@ -434,9 +441,9 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton5MouseHoverOut
 
     private void salesButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton5ActionPerformed
-//        jPanel1.add(new TwoColReport(shopName, "SMO_PayPoint", "", "Bank", ""));
-//        CardLayout layout = (CardLayout) jPanel1.getLayout();
-//        layout.next(jPanel1);
+        jPanel1.add(new TwoColReportWithDD(shopName, "PayPoint", "Bank", "SMO_PayPoint", "Till", "PayPoint"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_salesButton5ActionPerformed
 
     private void populateDifferenceReport() {
@@ -446,8 +453,6 @@ public class DifferenceReport extends javax.swing.JPanel {
             while (res.next()) {
                 String staffName = res.getString("StaffName");
                 String staffColName = res.getString("StaffColName");
-
-                String title = "DIFFERENCE - " + staffName.toUpperCase() + " REPORT";
 
                 JButton button = new JButton();
                 button.setBackground(new java.awt.Color(0, 0, 51));
@@ -470,9 +475,9 @@ public class DifferenceReport extends javax.swing.JPanel {
                 });
                 button.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                        jPanel1.add("report", new SingleReport(shopName, title, name, "Expenditure"));
-//                        CardLayout layout = (CardLayout) jPanel1.getLayout();
-//                        layout.next(jPanel1);
+                        jPanel1.add("report", new StaffDiffReport(shopName, staffName, staffColName));
+                        CardLayout layout = (CardLayout) jPanel1.getLayout();
+                        layout.next(jPanel1);
                     }
                 });
 

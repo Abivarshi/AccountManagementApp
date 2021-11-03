@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accountmanagement.jframe.report.till;
+package accountmanagement.jframe.report.difference;
 
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
@@ -31,26 +31,26 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class TotalCommissionSalesReport extends javax.swing.JPanel {
+public class StaffDiffReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-    private String title;
-    private List<String> colName;
+    private final String name;
+    private final String staffName;
 
     /**
      * Creates new form Till
      *
      * @param shopName
-     * @param title
-     * @param colName
+     * @param name
+     * @param staffName
      */
-    public TotalCommissionSalesReport(String shopName, String title, List<String> colName) {
+    public StaffDiffReport(String shopName, String name, String staffName) {
         this.shopName = shopName;
-        this.title = title;
-        this.colName = colName;
+        this.name = name;
+        this.staffName = staffName;
         initComponents();
-        this.jLabel4.setText(title);
+        this.jLabel4.setText("DIFFERENCE - " + name.toUpperCase() + " REPORT");
     }
 
     /**
@@ -102,7 +102,7 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
 
         warningLabel1.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 410, 10));
+        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 400, 10));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
@@ -121,7 +121,6 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooserFrom.getDate() == null) {
@@ -135,26 +134,66 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             List<Map<String, String>> data = new ArrayList();
-            ResultSet res = db.getNColValueTabTable(shopName, "Till", colName, fromDate, toDate);
+            List<Object[]> dataVal = new ArrayList();
+
+            ResultSet res = db.getStaffSummary(shopName, staffName, fromDate, toDate);
+            ResultSet res1 = db.getOneColValueTabTable(shopName, "Bank", "EM_" + staffName, fromDate, toDate);
+            ResultSet res2 = db.getOneColValueTabTable(shopName, "Expenditure", staffName, fromDate, toDate);
+
             String description = "Date: " + fromDate + " - " + toDate;
             try {
                 while (res.next()) {
-                    Map<String, String> dataValue = new HashMap();
-                    dataValue.put("Date", res.getString("Date"));
-                    dataValue.put("Lottary", res.getString(colName.get(0)));
-                    dataValue.put("Oyster", res.getString(colName.get(1)));
-                    dataValue.put("PayPoint", res.getString(colName.get(2)));
-                    dataValue.put("PayZone", res.getString(colName.get(3)));
-                    dataValue.put("Total Commission Sales",String.valueOf(Float.parseFloat(res.getString(colName.get(0)))+Float.parseFloat(res.getString(colName.get(1)))+Float.parseFloat(res.getString(colName.get(2)))+Float.parseFloat(res.getString(colName.get(3)))) );
-                    dataValue.put("description", description);
-                    dataValue.put("title", title);
+                    dataVal.add(new Object[]{res.getString("Date"), res.getFloat("Salary"), 0, 0, res.getFloat("Salary")});
+                }
 
-                    System.out.println(dataValue.toString());
-                    data.add(dataValue);
+                while (res1.next()) {
+                    Float value = res1.getFloat("EM_" + staffName);
+                    String date = res1.getString("Date");
+                    boolean valueAdded = false;
+                    for (Object[] val : dataVal) {
+                        if (val[0].toString().equals(date)) {
+                            val[2] = value;
+                            val[4] = Float.parseFloat(val[4].toString()) - value;
+                            valueAdded = true;
+                            break;
+                        }
+                    }
+                    if (!valueAdded) {
+                        dataVal.add(new Object[]{date, 0, value, 0, 0 - value});
+                    }
+                }
+
+                while (res2.next()) {
+                    Float value = res2.getFloat(staffName);
+                    String date = res2.getString("Date");
+                    boolean valueAdded = false;
+                    for (Object[] val : dataVal) {
+                        if (val[0].toString().equals(date)) {
+                            val[3] = value;
+                            val[4] = Float.parseFloat(val[4].toString()) - value;
+                            valueAdded = true;
+                            break;
+                        }
+                    }
+                    if (!valueAdded) {
+                        dataVal.add(new Object[]{date, 0, 0, value, 0 - value});
+                    }
+                }
+
+                for (Object[] val : dataVal) {
+                    Map<String, String> map = new HashMap();
+                    map.put("Date", val[0].toString());
+                    map.put("Table1", val[1].toString());
+                    map.put("Table2", val[2].toString());
+                    map.put("Table3", val[3].toString());
+                    map.put("Difference", val[4].toString());
+                    map.put("title", "DIFFERENCE - " + name.toUpperCase() + " REPORT");
+                    map.put("description", description);
+                    data.add(map);
                 }
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/RBReport.jrxml");
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/difference/StaffDiffReport.jrxml");
 
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
@@ -166,8 +205,10 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
                 } else {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
-            } catch (SQLException | JRException ex) {
-                Logger.getLogger(TotalCommissionSalesReport.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TwoColReportWithDD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JRException ex) {
+                Logger.getLogger(TwoColReportWithDD.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {

@@ -31,11 +31,11 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class TotalCommissionSalesReport extends javax.swing.JPanel {
+public class RefundReport1 extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-    private String title;
+    private final String title;
     private List<String> colName;
 
     /**
@@ -45,7 +45,7 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
      * @param title
      * @param colName
      */
-    public TotalCommissionSalesReport(String shopName, String title, List<String> colName) {
+    public RefundReport1(String shopName, String title, List<String> colName) {
         this.shopName = shopName;
         this.title = title;
         this.colName = colName;
@@ -102,7 +102,7 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
 
         warningLabel1.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 410, 10));
+        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 380, 10));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
@@ -141,17 +141,16 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
                 while (res.next()) {
                     Map<String, String> dataValue = new HashMap();
                     dataValue.put("Date", res.getString("Date"));
-                    dataValue.put("Lottary", res.getString(colName.get(0)));
-                    dataValue.put("Oyster", res.getString(colName.get(1)));
-                    dataValue.put("PayPoint", res.getString(colName.get(2)));
-                    dataValue.put("PayZone", res.getString(colName.get(3)));
-                    dataValue.put("Total Commission Sales",String.valueOf(Float.parseFloat(res.getString(colName.get(0)))+Float.parseFloat(res.getString(colName.get(1)))+Float.parseFloat(res.getString(colName.get(2)))+Float.parseFloat(res.getString(colName.get(3)))) );
+                    dataValue.put("Goods", res.getString(colName.get(0)));
+                    dataValue.put("Services", res.getString(colName.get(1)));
+                    dataValue.put("Refund", String.valueOf(Float.parseFloat(res.getString(colName.get(0)))+Float.parseFloat(res.getString(colName.get(1)))));
                     dataValue.put("description", description);
                     dataValue.put("title", title);
 
                     System.out.println(dataValue.toString());
                     data.add(dataValue);
                 }
+                
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
                     InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/RBReport.jrxml");
@@ -167,7 +166,7 @@ public class TotalCommissionSalesReport extends javax.swing.JPanel {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
             } catch (SQLException | JRException ex) {
-                Logger.getLogger(TotalCommissionSalesReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RefundReport.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {

@@ -835,7 +835,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton1MouseHoverOut
 
     private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
-        jPanel1.add(new RefundReport(shopName, "TILL - REFUND REPORT", Arrays.asList("R_VoucherMilk", "BO_VoucherMilk", "SO_VoucherMilk", "R_VoucherPayPoint", "BO_VoucherPayPoint", "SO_VoucherPayPoint")));
+        jPanel1.add(new RefundReport1(shopName, "TILL - REFUND REPORT", Arrays.asList("R_VoucherMilk", "BO_VoucherMilk", "SO_VoucherMilk", "R_VoucherPayPoint", "BO_VoucherPayPoint", "SO_VoucherPayPoint")));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButton1ActionPerformed
@@ -975,7 +975,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton4MouseHoverOut
 
     private void salesButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton4ActionPerformed
-        jPanel1.add(new SingleReport(shopName, "TILL - Pay/Payzone Over/Short REPORT", "SO_Pay", "Till"));
+        jPanel1.add(new SingleReport(shopName, "TILL - PAY/PAYZONE OVER/SHORT REPORT", "SO_Pay", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButton4ActionPerformed
@@ -1003,7 +1003,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton6MouseHoverOut
 
     private void salesButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton6ActionPerformed
-        jPanel1.add(new SingleReport(shopName, "TILL - Over/Short REPORT", "SO_Till", "Till"));
+        jPanel1.add(new SingleReport(shopName, "TILL - OVER/SHORT REPORT", "SO_Till", "Till"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButton6ActionPerformed

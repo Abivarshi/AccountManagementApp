@@ -53,6 +53,7 @@ public class SingleReport extends javax.swing.JPanel {
         this.colName = colName;
         this.tableName = name;
         initComponents();
+        this.jLabel4.setText(title);
     }
 
     SingleReport(String shopName) {
@@ -76,6 +77,7 @@ public class SingleReport extends javax.swing.JPanel {
         warningLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -108,7 +110,7 @@ public class SingleReport extends javax.swing.JPanel {
 
         warningLabel1.setForeground(new java.awt.Color(153, 0, 0));
         warningLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 340, 10));
+        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 400, 10));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
@@ -119,6 +121,11 @@ public class SingleReport extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jPanel1);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 102));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 560, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -178,6 +185,7 @@ public class SingleReport extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooserTo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton searchButton;

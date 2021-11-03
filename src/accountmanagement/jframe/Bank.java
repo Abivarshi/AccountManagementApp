@@ -189,7 +189,7 @@ public class Bank extends javax.swing.JPanel {
             int j = 0;
 
             for (String type : Arrays.asList("From Bank", "Money In (Commission)", "Service Money Out", "Purchase", "Pay Back",
-                    "Expenditure Money Out (Monthly)", "Expenditure Money Out (Yearly)", "Expenditure/ Bank Charge")) {
+                    "Expenditure/ Bank Charge", "Expenditure Money Out (Monthly)", "Expenditure Money Out (Yearly)")) {
 
                 if ("Expenditure Money Out (Monthly)".equals(type)) {
                     j = 420;

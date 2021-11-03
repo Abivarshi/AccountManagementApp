@@ -31,7 +31,7 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class TwoColReport extends javax.swing.JPanel {
+public class TwoColReportWithDD extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
@@ -51,7 +51,7 @@ public class TwoColReport extends javax.swing.JPanel {
      * @param table2
      * @param col2
      */
-    public TwoColReport(String shopName, String name, String table1, String col1, String table2, String col2) {
+    public TwoColReportWithDD(String shopName, String name, String table1, String col1, String table2, String col2) {
         this.shopName = shopName;
         this.name = name;
         this.table1 = table1;
@@ -59,9 +59,9 @@ public class TwoColReport extends javax.swing.JPanel {
         this.table2 = table2;
         this.col2 = col2;
         initComponents();
-        this.jLabel4.setText("DIFFERENCE - "+name.toUpperCase()+" REPORT");
+        this.jLabel4.setText("DIFFERENCE - " + name.toUpperCase() + " REPORT");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,7 +111,7 @@ public class TwoColReport extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 20));
 
         warningLabel1.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 430, 10));
+        add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 400, 10));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
@@ -130,7 +130,7 @@ public class TwoColReport extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-       Date currentDate = new Date();
+        Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooserFrom.getDate() == null) {
             jDateChooserFrom.setDate(currentDate);
@@ -144,30 +144,157 @@ public class TwoColReport extends javax.swing.JPanel {
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             List<Map<String, String>> data = new ArrayList();
             List<Object[]> dataVal = new ArrayList();
-            
+
             ResultSet res = db.getOneColValueTabTable(shopName, table1, col1, fromDate, toDate);
-            ResultSet res1 = db.getOneColValueTabTable(shopName, table2, col2, fromDate, toDate);
+
             String description = "Date: " + fromDate + " - " + toDate;
             try {
                 while (res.next()) {
                     dataVal.add(new Object[]{res.getString("Date"), res.getFloat(col1), 0, res.getFloat(col1)});
                 }
 
-                while (res1.next()) {
-                    Float value = res1.getFloat(col2);
-                    String date = res1.getString("Date");
-                    boolean valueAdded = false;
-                    for (Object[] val : dataVal) {
-                        if (val[0].toString().equals(date)) {
-                            val[2] = value;
-                            val[3] = Float.parseFloat(val[3].toString()) - value;
-                            valueAdded = true;
-                            break;
+                if (col2.equalsIgnoreCase("PayPoint")) {
+                    List<String> colNameList = new ArrayList();
+                    colNameList.add("R_PayPoint");
+                    colNameList.add("R_VoucherPayPoint");
+                    ResultSet res1 = db.getNColValueTabTable(shopName, "Till", colNameList, fromDate, toDate);
+
+                    List<String> colNameList1 = new ArrayList();
+                    colNameList1.add("CommisionPayPoint");
+                    colNameList1.add("SC_PayPoint");
+                    ResultSet res2 = db.getNColValueTabTable(shopName, "Sheet2", colNameList1, fromDate, toDate);
+
+                    while (res1.next()) {
+                        Float R_PayPoint = res1.getFloat("R_PayPoint");
+                        Float R_VoucherPayPoint = res1.getFloat("R_VoucherPayPoint");
+                        Float value = R_PayPoint - R_VoucherPayPoint;
+                        String date = res1.getString("Date");
+                        boolean valueAdded = false;
+                        for (Object[] val : dataVal) {
+                            if (val[0].toString().equals(date)) {
+                                val[2] = value;
+                                val[3] = Float.parseFloat(val[3].toString()) - value;
+                                valueAdded = true;
+                                break;
+                            }
+                        }
+                        if (!valueAdded) {
+                            dataVal.add(new Object[]{date, 0, value, 0 - value});
                         }
                     }
-                    if (!valueAdded) {
-                        dataVal.add(new Object[]{date, 0, value, 0-value});
+                    
+                    while (res2.next()) {
+                        Float CommisionPayPoint = res2.getFloat("CommisionPayPoint");
+                        Float SC_PayPoint = res2.getFloat("SC_PayPoint");
+                        Float value = SC_PayPoint - CommisionPayPoint;
+                        String date = res2.getString("Date");
+                        boolean valueAdded = false;
+                        for (Object[] val : dataVal) {
+                            if (val[0].toString().equals(date)) {
+                                val[2] = Float.parseFloat(val[2].toString()) + value;
+                                val[3] = Float.parseFloat(val[3].toString()) - value;
+                                valueAdded = true;
+                                break;
+                            }
+                        }
+                        if (!valueAdded) {
+                            dataVal.add(new Object[]{date, 0, value, 0 - value});
+                        }
                     }
+
+                } else if (col2.equalsIgnoreCase("Oyster")) {
+
+                    ResultSet res1 = db.getOneColValueTabTable(shopName, "Till", "R_Oyster", fromDate, toDate);
+                    ResultSet res2 = db.getOneColValueTabTable(shopName, "Sheet2", "CommisionOyster", fromDate, toDate);
+
+                    while (res1.next()) {
+                        Float value = res1.getFloat("R_Oyster");
+                        String date = res1.getString("Date");
+                        boolean valueAdded = false;
+                        for (Object[] val : dataVal) {
+                            if (val[0].toString().equals(date)) {
+                                val[2] = value;
+                                val[3] = Float.parseFloat(val[3].toString()) - value;
+                                valueAdded = true;
+                                break;
+                            }
+                        }
+                        if (!valueAdded) {
+                            dataVal.add(new Object[]{date, 0, value, 0 - value});
+                        }
+                    }
+                    
+                    while (res2.next()) {
+                        Float value = res2.getFloat("CommisionOyster");
+                        String date = res2.getString("Date");
+                        boolean valueAdded = false;
+                        for (Object[] val : dataVal) {
+                            if (val[0].toString().equals(date)) {
+                                val[2] = Float.parseFloat(val[2].toString()) - value;
+                                val[3] = Float.parseFloat(val[3].toString()) + value;
+                                valueAdded = true;
+                                break;
+                            }
+                        }
+                        if (!valueAdded) {
+                            dataVal.add(new Object[]{date, 0, value, 0 + value});
+                        }
+                    }
+                    
+                } else if (col2.equalsIgnoreCase("CAMLOT")) {
+
+                    List<String> colNameList = new ArrayList();
+                    colNameList.add("R_Lottary");
+                    colNameList.add("R_InsLottary");
+                    colNameList.add("R_LottaryPayOut");
+                    colNameList.add("R_InstantPayOut");
+                    ResultSet res1 = db.getNColValueTabTable(shopName, "Till", colNameList, fromDate, toDate);
+
+                    List<String> colNameList1 = new ArrayList();
+                    colNameList1.add("CommisionLottary");
+                    colNameList1.add("SC_Lottary");
+                    ResultSet res2 = db.getNColValueTabTable(shopName, "Sheet2", colNameList1, fromDate, toDate);
+
+                    while (res1.next()) {
+                        Float R_Lottary = res1.getFloat("R_Lottary");
+                        Float R_InsLottary = res1.getFloat("R_InsLottary");
+                        Float R_LottaryPayOut = res1.getFloat("R_LottaryPayOut");
+                        Float R_InstantPayOut = res1.getFloat("R_InstantPayOut");
+                        Float value = R_Lottary + R_InsLottary - R_LottaryPayOut - R_InstantPayOut;
+                        String date = res1.getString("Date");
+                        boolean valueAdded = false;
+                        for (Object[] val : dataVal) {
+                            if (val[0].toString().equals(date)) {
+                                val[2] = value;
+                                val[3] = Float.parseFloat(val[3].toString()) - value;
+                                valueAdded = true;
+                                break;
+                            }
+                        }
+                        if (!valueAdded) {
+                            dataVal.add(new Object[]{date, 0, value, 0 - value});
+                        }
+                    }
+                    
+                    while (res2.next()) {
+                        Float CommisionLottary = res2.getFloat("CommisionLottary");
+                        Float SC_Lottary = res2.getFloat("SC_Lottary");
+                        Float value = SC_Lottary - CommisionLottary;
+                        String date = res2.getString("Date");
+                        boolean valueAdded = false;
+                        for (Object[] val : dataVal) {
+                            if (val[0].toString().equals(date)) {
+                                val[2] = Float.parseFloat(val[2].toString()) + value;
+                                val[3] = Float.parseFloat(val[3].toString()) - value;
+                                valueAdded = true;
+                                break;
+                            }
+                        }
+                        if (!valueAdded) {
+                            dataVal.add(new Object[]{date, 0, value, 0 - value});
+                        }
+                    }
+                    
                 }
 
                 for (Object[] val : dataVal) {
@@ -178,10 +305,10 @@ public class TwoColReport extends javax.swing.JPanel {
                     map.put("Difference", val[3].toString());
                     map.put("ColName1", table1);
                     map.put("ColName2", table2);
-                    map.put("title", "DIFFERENCE - "+name.toUpperCase()+" REPORT");
+                    map.put("title", "DIFFERENCE - " + name.toUpperCase() + " REPORT");
                     map.put("description", description);
                     data.add(map);
-                } 
+                }
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
                     InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/difference/TwoColReport.jrxml");
@@ -197,9 +324,9 @@ public class TwoColReport extends javax.swing.JPanel {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(TwoColReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TwoColReportWithDD.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {
-                Logger.getLogger(TwoColReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TwoColReportWithDD.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {

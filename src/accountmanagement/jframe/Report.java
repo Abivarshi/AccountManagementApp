@@ -14,6 +14,7 @@ import accountmanagement.jframe.report.Sheet2Report;
 import accountmanagement.jframe.report.StaffReport;
 import accountmanagement.jframe.report.difference.DifferenceReport;
 import accountmanagement.jframe.report.expenditure.ExpenditureReport;
+import accountmanagement.jframe.report.finalreport.FinalReport;
 import accountmanagement.jframe.report.till.TillReport;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -269,7 +270,7 @@ public class Report extends javax.swing.JPanel {
         });
         salesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salesButtonActionPerformed(evt);
+                finalButtonActionPerformed(evt);
             }
         });
         jPanel2.add(salesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 130, 33));
@@ -434,12 +435,6 @@ public class Report extends javax.swing.JPanel {
         salesButton.setForeground(Color.black);
     }//GEN-LAST:event_salesButtonMouseHoverOut
 
-    private void salesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButtonActionPerformed
-        jPanel1.add("SalesReport", new SalesReport(shopName));
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
-    }//GEN-LAST:event_salesButtonActionPerformed
-
     private void finalButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_finalButtonMouseHover
         finalButton.setForeground(Color.red);
     }//GEN-LAST:event_finalButtonMouseHover
@@ -449,7 +444,9 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_finalButtonMouseHoverOut
 
     private void finalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add("FinalReport", new FinalReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_finalButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
