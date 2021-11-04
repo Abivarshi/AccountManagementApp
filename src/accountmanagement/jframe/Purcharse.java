@@ -27,6 +27,7 @@ public class Purcharse extends javax.swing.JPanel {
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     private static HashMap<String, JTextField> listOfTextFields = new HashMap<>();
+    private boolean isUpdate = false;
 
     /**
      * Creates new form Till
@@ -60,6 +61,11 @@ public class Purcharse extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
         add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -119,34 +125,36 @@ public class Purcharse extends javax.swing.JPanel {
         warningLabel.setText("");
         boolean canSave = true;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if (jDateChooser1.getDate() != null) {
-            if (!db.isDateExist(shopName, "Purchase", sdf.format(jDateChooser1.getDate()))) {
-                HashMap<String, Float> purchaseValues = new HashMap();
-                float total = 0;
-                for (String name : listOfTextFields.keySet()) {
-                    System.out.println(name + ": " + listOfTextFields.get(name).getText());
-                    listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
-                    try {
-                        purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
-                        total = total + Float.parseFloat(listOfTextFields.get(name).getText());
-                    } catch (java.lang.NumberFormatException e) {
-                        warningLabel.setText("**All Values are mandatory and should be decimal");
-                        listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                        canSave = false;
-                        break;
-                    }
+        if (!db.isDateExist(shopName, "Purchase", sdf.format(jDateChooser1.getDate()))) {
+            HashMap<String, Float> purchaseValues = new HashMap();
+            float total = 0;
+            for (String name : listOfTextFields.keySet()) {
+                System.out.println(name + ": " + listOfTextFields.get(name).getText());
+                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+                try {
+                    purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                    total = total + Float.parseFloat(listOfTextFields.get(name).getText());
+                } catch (java.lang.NumberFormatException e) {
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
+                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    canSave = false;
+                    break;
                 }
-                purchaseValues.put("Total", total);
-                System.out.println("Total" + total);
-                if (canSave) {
+            }
+            purchaseValues.put("Total", total);
+            System.out.println("Total" + total);
+            if (canSave) {
+                if (!isUpdate) {
                     db.insertValuesTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()), purchaseValues);
                     successLabel.setText("Purcharse added successfully..");
                     resetText();
+                } else {
+                    db.updateValuesTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()), purchaseValues);
+                    successLabel.setText("Expenditure Updated successfully..");
+                    resetText();
                 }
-
-            } else {
-                warningLabel.setText("**Date already exist");
             }
+
         } else {
             warningLabel.setText("**Date should be selected");
         }
@@ -155,6 +163,34 @@ public class Purcharse extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         resetText();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        resetText();
+        getValues();
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void getValues() {
+        if (jDateChooser1.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (db.isDateExist(shopName, "Purchase", sdf.format(jDateChooser1.getDate()))) {
+                isUpdate = true;
+                try {
+                    ResultSet res = db.getExistingValueTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()));
+
+                    for (String col : listOfTextFields.keySet()) {
+                        JTextField text = listOfTextFields.get(col);
+                        text.setText(res.getString(col));
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(Till.class.getName()).log(Level.SEVERE, null, ex);
+                    successLabel.setText("**Error getting Purchase Detail");
+                    successLabel.setForeground(Color.red);
+                }
+
+            }
+        }
+    }
 
     private void resetText() {
         for (String name : listOfTextFields.keySet()) {

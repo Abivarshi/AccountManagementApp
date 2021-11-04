@@ -48,7 +48,7 @@ public class LoginPage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();

@@ -212,6 +212,22 @@ public class DataBaseConnection {
         }
     }
 
+    public void updateStaffTime(String shopName, String date, String staffName, String staffType, Float start,
+            Float end, Float hours) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            PreparedStatement prep = con.prepareStatement("UPDATE StaffTime SET StartTime = " + start + ", EndTime = " + end + ", Hours = " + hours
+                    + " WHERE Date = '" + date + "' AND StaffName = '" + staffName + "' AND Type = '"+staffType+"';");
+
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public ResultSet getStaffTime(String shopName, String staffName, String dateFrom, String dateTo) {
 
         try {
@@ -265,6 +281,21 @@ public class DataBaseConnection {
         }
     }
 
+    public void updateStaffSummaryTime(String shopName, String date, String staffName, Float totalHours, Float salary) {
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            PreparedStatement prep = con.prepareStatement("UPDATE StaffSummary SET TotalHours = " + totalHours
+                    + ", Salary = " + salary + " WHERE Date = '" + date + "' AND StaffName = '" + staffName + "';");
+
+            prep.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public ResultSet getStaffSummary(String shopName, String staffName, String dateFrom, String dateTo) {
 
         try {
@@ -282,7 +313,7 @@ public class DataBaseConnection {
             return null;
         }
     }
-    
+
     public float getSumSalaryStaff(String shopName, String staffName, String dateFrom, String dateTo) {
 
         try {
@@ -531,7 +562,7 @@ public class DataBaseConnection {
             fun = fun + i + " = '" + values.get(i) + "' ,";
         }
         fun = fun.substring(0, fun.length() - 1) + " WHERE Date = '" + date + "';";
-System.out.println(fun);
+
         PreparedStatement prep;
         try {
             prep = con.prepareStatement(fun);
@@ -638,7 +669,7 @@ System.out.println(fun);
                     + " WHERE Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
                     + " ORDER BY Date ASC";
 
-                System.out.println("queryString "+queryString);
+            System.out.println("queryString " + queryString);
             Statement state = con.createStatement();
             ResultSet res = state.executeQuery(queryString);
             return res;
@@ -874,13 +905,13 @@ System.out.println(fun);
 //        alterTabTable(shopName, "Sheet2", "LotteryDD");
 
     }
-    
+
     public void createDefaultStaff(String shopName) {
         try {
             if (con == null || !connectedShop.equals(shopName)) {
                 getConnection(shopName);
             }
-            
+
             addStaff(shopName, "Mike", "Staff1", 9.5f, true, false, true, true);
             addStaff(shopName, "Sathees", "Staff2", 7.5f, true, true, false, false);
             addStaff(shopName, "Sutha", "Staff3", 7.5f, true, false, false, false);
@@ -909,8 +940,8 @@ System.out.println(fun);
         insertDetailTable(shopName, "Pay Zone", "SMO_PayZone", "Service Money Out", "BankDetail");
         insertDetailTable(shopName, "Oyster", "SMO_Oyster", "Service Money Out", "BankDetail");
         insertDetailTable(shopName, "Camlot", "SMO_Camlot", "Service Money Out", "BankDetail");
-        insertDetailTable(shopName, "Salary Mike", "EM_SalarayMike", "Expenditure Money Out (Monthly)", "BankDetail");
-        insertDetailTable(shopName, "Salary Sathees", "EM_SalarySathees", "Expenditure Money Out (Monthly)", "BankDetail");
+//        insertDetailTable(shopName, "Salary Mike", "EM_SalarayMike", "Expenditure Money Out (Monthly)", "BankDetail");
+//        insertDetailTable(shopName, "Salary Sathees", "EM_SalarySathees", "Expenditure Money Out (Monthly)", "BankDetail");
         insertDetailTable(shopName, "Capital Gains", "EM_CapitalGains", "Expenditure Money Out (Monthly)", "BankDetail");
         insertDetailTable(shopName, "BT", "EM_BT", "Expenditure Money Out (Monthly)", "BankDetail");
         insertDetailTable(shopName, "Nest", "EM_Nest", "Expenditure Money Out (Monthly)", "BankDetail");
@@ -991,14 +1022,14 @@ System.out.println(fun);
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
         }
-        insertEPDetailTable(shopName, "Mike", "Staff1", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Sathees", "Staff2", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Tharsan", "Staff3", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Karan", "Staff4", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Suri", "Staff5", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Basker", "Staff6", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Viji", "Staff7", "ExpenditureDetail");
-        insertEPDetailTable(shopName, "Sutha", "Staff8", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Mike", "Staff1", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Sathees", "Staff2", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Tharsan", "Staff3", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Karan", "Staff4", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Suri", "Staff5", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Basker", "Staff6", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Viji", "Staff7", "ExpenditureDetail");
+//        insertEPDetailTable(shopName, "Sutha", "Staff8", "ExpenditureDetail");
         insertEPDetailTable(shopName, "Capital Gains", "CapitalGains", "ExpenditureDetail");
         insertEPDetailTable(shopName, "Van", "Van", "ExpenditureDetail");
         insertEPDetailTable(shopName, "Diesel", "Diesel", "ExpenditureDetail");
@@ -1075,7 +1106,6 @@ System.out.println(fun);
         createStaffTime(shopName);
         createStaffSummary(shopName);
         createAdminProfit(shopName);
-        createDefaultStaff(shopName);
         createTabTable(shopName, "Expenditure");
         createDefaultExpenditure(shopName);
         createTabTable(shopName, "Purchase");
@@ -1102,6 +1132,7 @@ System.out.println(fun);
         insertDefaultPurchaseDetail(shopName);
         createDetailTable(shopName, "SalesDetail");
         insertDefaultSalesDetail(shopName);
+        createDefaultStaff(shopName);
     }
 
     public ResultSet getShopList() {

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -27,6 +28,7 @@ public class Expenditure extends javax.swing.JPanel {
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     private static HashMap<String, JTextField> listOfTextFields = new HashMap<>();
+    private boolean isUpdate = false;
 
     /**
      * Creates new form Till
@@ -59,6 +61,11 @@ public class Expenditure extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDateChooser.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserPropertyChange(evt);
+            }
+        });
         add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -110,34 +117,35 @@ public class Expenditure extends javax.swing.JPanel {
         float total = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser.getDate() != null) {
-            if (!db.isDateExist(shopName, "Expenditure", sdf.format(jDateChooser.getDate()))) {
-                HashMap<String, Float> purchaseValues = new HashMap();
-                for (String name : listOfTextFields.keySet()) {
-                    System.out.println(name + ": " + listOfTextFields.get(name).getText());
-                    listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
-                    try {
-                        purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
-                        total = total + Float.parseFloat(listOfTextFields.get(name).getText());
-                    } catch (java.lang.NumberFormatException e) {
-                        successLabel.setText("**All Values are mandatory and should be decimal");
-                        successLabel.setForeground(Color.red);
-                        listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                        canSave = false;
-                        break;
-                    }
+            HashMap<String, Float> purchaseValues = new HashMap();
+            for (String name : listOfTextFields.keySet()) {
+                System.out.println(name + ": " + listOfTextFields.get(name).getText());
+                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+                try {
+                    purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
+                    total = total + Float.parseFloat(listOfTextFields.get(name).getText());
+                } catch (java.lang.NumberFormatException e) {
+                    successLabel.setText("**All Values are mandatory and should be decimal");
+                    successLabel.setForeground(Color.red);
+                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    canSave = false;
+                    break;
                 }
-                purchaseValues.put("Total", total);
-                System.out.println("Total" + total);
-                if (canSave) {
+            }
+            purchaseValues.put("Total", total);
+            System.out.println("Total" + total);
+            if (canSave) {
+                if (!isUpdate) {
                     db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
                     successLabel.setText("Expenditure added successfully..");
                     resetText();
+                } else {
+                    db.updateValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
+                    successLabel.setText("Expenditure Updated successfully..");
+                    resetText();
                 }
-
-            } else {
-                successLabel.setText("**Date already exist");
-                successLabel.setForeground(Color.red);
             }
+
         } else {
             successLabel.setText("**Date should be selected");
             successLabel.setForeground(Color.red);
@@ -147,6 +155,34 @@ public class Expenditure extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         resetText();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
+//        resetText();
+        getValues();
+    }//GEN-LAST:event_jDateChooserPropertyChange
+
+    private void getValues() {
+        if (jDateChooser.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (db.isDateExist(shopName, "Expenditure", sdf.format(jDateChooser.getDate()))) {
+                isUpdate = true;
+                try {
+                    ResultSet res = db.getExistingValueTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()));
+
+                    for (String col : listOfTextFields.keySet()) {
+                        JTextField text = listOfTextFields.get(col);
+                        text.setText(res.getString(col));
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(Till.class.getName()).log(Level.SEVERE, null, ex);
+                    successLabel.setText("**Error getting Expenditure Detail");
+                    successLabel.setForeground(Color.red);
+                }
+
+            }
+        }
+    }
 
     private void resetText() {
         for (String name : listOfTextFields.keySet()) {

@@ -100,7 +100,7 @@ public class FinalReport extends javax.swing.JPanel {
         add(warningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 230, 10));
 
         jScrollPane1.setBorder(null);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(800, 960));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(getSize());

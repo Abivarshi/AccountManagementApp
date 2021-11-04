@@ -159,11 +159,6 @@ public class Till extends javax.swing.JPanel {
 
         yesterdayTillCount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         yesterdayTillCount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        yesterdayTillCount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yesterdayTillCountActionPerformed(evt);
-            }
-        });
         add(yesterdayTillCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 96, 25));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -191,11 +186,6 @@ public class Till extends javax.swing.JPanel {
 
         coin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         coin.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        coin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coinActionPerformed(evt);
-            }
-        });
         add(coin, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 96, 25));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -205,11 +195,6 @@ public class Till extends javax.swing.JPanel {
 
         card.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         card.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        card.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardActionPerformed(evt);
-            }
-        });
         add(card, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 96, 25));
 
         voucherMilk.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -241,11 +226,6 @@ public class Till extends javax.swing.JPanel {
 
         purchase.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         purchase.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        purchase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchaseActionPerformed(evt);
-            }
-        });
         add(purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 570, 96, 25));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -287,11 +267,6 @@ public class Till extends javax.swing.JPanel {
 
         refundServices.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         refundServices.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        refundServices.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refundServicesActionPerformed(evt);
-            }
-        });
         add(refundServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, 96, 25));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
@@ -306,11 +281,6 @@ public class Till extends javax.swing.JPanel {
 
         cashBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cashBack.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        cashBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cashBackActionPerformed(evt);
-            }
-        });
         add(cashBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 660, 96, 25));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
@@ -329,11 +299,6 @@ public class Till extends javax.swing.JPanel {
 
         lottaryPayOut.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lottaryPayOut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        lottaryPayOut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lottaryPayOutActionPerformed(evt);
-            }
-        });
         add(lottaryPayOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 720, 96, 25));
 
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
@@ -343,11 +308,6 @@ public class Till extends javax.swing.JPanel {
 
         insLottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         insLottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        insLottary.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insLottaryActionPerformed(evt);
-            }
-        });
         add(insLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 750, 96, 25));
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
@@ -384,11 +344,6 @@ public class Till extends javax.swing.JPanel {
 
         payZone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         payZone.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        payZone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                payZoneActionPerformed(evt);
-            }
-        });
         add(payZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 870, 96, 25));
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
@@ -435,11 +390,6 @@ public class Till extends javax.swing.JPanel {
 
         alcohol.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         alcohol.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        alcohol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alcoholActionPerformed(evt);
-            }
-        });
         add(alcohol, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 96, 25));
 
         jLabel28.setBackground(new java.awt.Color(255, 255, 255));
@@ -449,11 +399,6 @@ public class Till extends javax.swing.JPanel {
 
         groceries.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         groceries.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        groceries.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                groceriesActionPerformed(evt);
-            }
-        });
         add(groceries, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 96, 25));
 
         jLabel29.setBackground(new java.awt.Color(255, 255, 255));
@@ -490,11 +435,6 @@ public class Till extends javax.swing.JPanel {
 
         boOyster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boOyster.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        boOyster.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boOysterActionPerformed(evt);
-            }
-        });
         add(boOyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, 96, 25));
 
         jLabel33.setBackground(new java.awt.Color(255, 255, 255));
@@ -522,11 +462,6 @@ public class Till extends javax.swing.JPanel {
 
         boAccPay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boAccPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        boAccPay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boAccPayActionPerformed(evt);
-            }
-        });
         add(boAccPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 96, 25));
 
         jLabel36.setBackground(new java.awt.Color(255, 255, 255));
@@ -563,11 +498,6 @@ public class Till extends javax.swing.JPanel {
 
         boCard.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boCard.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        boCard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boCardActionPerformed(evt);
-            }
-        });
         add(boCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 550, 96, 25));
 
         jLabel40.setBackground(new java.awt.Color(255, 255, 255));
@@ -586,20 +516,10 @@ public class Till extends javax.swing.JPanel {
 
         boCashBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boCashBack.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        boCashBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boCashBackActionPerformed(evt);
-            }
-        });
         add(boCashBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 630, 96, 25));
 
         boMilk.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boMilk.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        boMilk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boMilkActionPerformed(evt);
-            }
-        });
         add(boMilk, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 680, 96, 25));
 
         boVaucherPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -641,11 +561,6 @@ public class Till extends javax.swing.JPanel {
 
         todayTillCount1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         todayTillCount1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        todayTillCount1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                todayTillCount1ActionPerformed(evt);
-            }
-        });
         add(todayTillCount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 96, 25));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -827,76 +742,8 @@ public class Till extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void boMilkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boMilkActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boMilkActionPerformed
-
-    private void yesterdayTillCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesterdayTillCountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_yesterdayTillCountActionPerformed
-
-    private void todayTillCount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todayTillCount1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_todayTillCount1ActionPerformed
-
-    private void coinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_coinActionPerformed
-
-    private void cardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardActionPerformed
-
-    private void refundServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refundServicesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_refundServicesActionPerformed
-
-    private void purchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_purchaseActionPerformed
-
-    private void cashBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cashBackActionPerformed
-
-    private void lottaryPayOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lottaryPayOutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lottaryPayOutActionPerformed
-
-    private void insLottaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insLottaryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insLottaryActionPerformed
-
-    private void payZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payZoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_payZoneActionPerformed
-
-    private void boCashBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boCashBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boCashBackActionPerformed
-
-    private void boCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boCardActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boCardActionPerformed
-
-    private void boAccPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boAccPayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boAccPayActionPerformed
-
-    private void alcoholActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alcoholActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_alcoholActionPerformed
-
-    private void groceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groceriesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_groceriesActionPerformed
-
-    private void boOysterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boOysterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boOysterActionPerformed
-
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-        reset();
+//        reset();
         getValues();
     }//GEN-LAST:event_jDateChooser1PropertyChange
 

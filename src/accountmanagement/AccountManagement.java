@@ -25,7 +25,15 @@ public class AccountManagement {
         ResultSet rs;
 
         try {
-//            db.dropTable("Shop1", "StaffTime");
+            
+//        db.alterTabTable("Shop1", "Sales", "CustomerCount");
+//        db.dropTable("Shop1", "Staff");
+//        db.createStaff("Shop1");
+        db.dropTable("Shop1", "StaffTime");
+        db.createStaffTime("Shop1");
+//        db.createDetailTable("Shop1", "PettyDetail");
+//        db.insertDefaultPettyDetail("Shop1");
+
 //            db.createStaffTime("Shop1");
 //            db.createTabTable("Shop1", "Sheet2");
 //            db.createDefaultSheet2("Shop1");
@@ -38,13 +46,14 @@ public class AccountManagement {
 //            }
 
 //            db.createTabDetailTable("Shop1");
+//            db.createStaffSummary("Shop1");
         } catch (Exception e) {
             e.printStackTrace();
         }
 //
 //        LoginPage loginPage = new LoginPage();
 //        loginPage.run();
-            new Dashboard("Shop1", "admin","navanesan").setVisible(true);
+            new Dashboard("Shop1", "admin","a").setVisible(true);
 //            new Till("Shop1").setVisible(true);
 //            System.out.print(db.getUserType("Shop1", "a", "a"));
     }

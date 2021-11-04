@@ -29,6 +29,7 @@ public class Bank extends javax.swing.JPanel {
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     private static final HashMap<List<String>, JTextField> listOfTextFields = new HashMap<>();
+    private boolean isUpdate = false;
 
     /**
      * Creates new form Till
@@ -62,6 +63,11 @@ public class Bank extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
         add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 38, 161, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -112,46 +118,53 @@ public class Bank extends javax.swing.JPanel {
         warningLabel.setForeground(Color.red);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
-            if (!db.isDateExist(shopName, "Bank", sdf.format(jDateChooser1.getDate()))) {
-                try {
-                    float expTotal = 0;
-                    float purTotal = 0;
-                    float balance = 0;
-                    HashMap<String, Float> bankValues = new HashMap();
-                    for (List<String> list : listOfTextFields.keySet()) {
+            try {
+                float expTotal = 0;
+                float purTotal = 0;
+                float balance = 0;
+                HashMap<String, Float> bankValues = new HashMap();
+                for (List<String> list : listOfTextFields.keySet()) {
+                    System.out.println(list + listOfTextFields.get(list).getText());
+                    if (list.get(2).equalsIgnoreCase("Expenditure Money Out (Monthly)") || list.get(2).equalsIgnoreCase("Expenditure Money Out (Yearly)")
+                            || list.get(2).equalsIgnoreCase("Expenditure/ Bank Charge")) {
                         System.out.println(list + listOfTextFields.get(list).getText());
-                        if (list.get(2).equalsIgnoreCase("Expenditure Money Out (Monthly)") || list.get(2).equalsIgnoreCase("Expenditure Money Out (Yearly)")
-                                || list.get(2).equalsIgnoreCase("Expenditure/ Bank Charge")) {
-                            System.out.println(list + listOfTextFields.get(list).getText());
-                            expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                        } else if (list.get(2).equalsIgnoreCase("Purchase")) {
-                            purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
-                        } else if (list.get(2).equalsIgnoreCase("From Bank") || list.get(2).equalsIgnoreCase("Money In (Commission)")) {
-                            balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
-                        } else if (list.get(2).equalsIgnoreCase("Service Money Out") || list.get(2).equalsIgnoreCase("Pay Back")) {
-                            balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
-                        }
-                        JTextField text = listOfTextFields.get(list);
-                        bankValues.put(list.get(1), Float.parseFloat(text.getText()));
+                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Purchase")) {
+                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("From Bank") || list.get(2).equalsIgnoreCase("Money In (Commission)")) {
+                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                    } else if (list.get(2).equalsIgnoreCase("Service Money Out") || list.get(2).equalsIgnoreCase("Pay Back")) {
+                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
                     }
-                    balance = balance - expTotal - purTotal;
-                    bankValues.put("SubPurchase", purTotal);
-                    bankValues.put("SubExpenditure", expTotal);
-                    bankValues.put("Balance", balance);
+                    JTextField text = listOfTextFields.get(list);
+                    bankValues.put(list.get(1), Float.parseFloat(text.getText()));
+                }
+                balance = balance - expTotal - purTotal;
+                bankValues.put("SubPurchase", purTotal);
+                bankValues.put("SubExpenditure", expTotal);
+                bankValues.put("Balance", balance);
 
-                    System.out.println(bankValues.toString());
+                System.out.println(bankValues.toString());
+
+                if (!isUpdate) {
                     db.insertValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
 
                     warningLabel.setText("Bank added successfully..");
                     warningLabel.setForeground(Color.green);
                     resetText();
-                } catch (java.lang.NumberFormatException e) {
-                    warningLabel.setText("**All Values are mandatory and should be decimal");
-                }
+                } else {
+                    db.updateValuesTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()), bankValues);
 
-            } else {
-                warningLabel.setText("**Date already exist");
+                    warningLabel.setText("Bank Updated Successfuly..");
+                    warningLabel.setForeground(Color.green);
+                    resetText();
+                }
+            } catch (java.lang.NumberFormatException e) {
+                warningLabel.setText("**All Values are mandatory and should be decimal");
+            } catch (Exception e) {
+                warningLabel.setText("**Error in updating Bank");
             }
+
         } else {
             warningLabel.setText("**Date should be selected");
         }
@@ -161,6 +174,32 @@ public class Bank extends javax.swing.JPanel {
         resetText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        getValues();
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void getValues() {
+        if (jDateChooser1.getDate() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (db.isDateExist(shopName, "Bank", sdf.format(jDateChooser1.getDate()))) {
+                isUpdate = true;
+                try {
+                    ResultSet res = db.getExistingValueTabTable(shopName, "Bank", sdf.format(jDateChooser1.getDate()));
+
+                    for (List<String> list : listOfTextFields.keySet()) {
+                        JTextField text = listOfTextFields.get(list);
+                        text.setText(res.getString(list.get(1)));
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(Till.class.getName()).log(Level.SEVERE, null, ex);
+                    warningLabel.setText("**Error getting Bank Detail");
+                }
+
+            }
+        }
+    }
+    
     private void resetText() {
         for (List<String> list : listOfTextFields.keySet()) {
             JTextField text = listOfTextFields.get(list);
