@@ -53,7 +53,7 @@ public class CommissionDetailReport extends javax.swing.JPanel {
         this.colList = colList;
         this.title = title;
         initComponents();
-        this.jLabel4.setText(title);
+        this.jLabel4.setText(title.toUpperCase());
     }
 
     /**

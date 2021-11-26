@@ -185,7 +185,7 @@ public class Summary extends javax.swing.JPanel {
                     map.put("Bank", val[2].toString());
                     map.put("Petty", val[3].toString());
                     map.put("Total", val[4].toString());
-                    map.put("Title", title);
+                    map.put("Title", title.toUpperCase());
                     map.put("description", description);
                     data.add(map);
                 }

@@ -60,7 +60,7 @@ public class CommissionTotalReport extends javax.swing.JPanel {
         this.tableName1 = tableName1;
         this.tableName2 = tableName2;
         initComponents();
-        this.jLabel4.setText(title);
+        this.jLabel4.setText(title.toUpperCase());
     }
 
     /**

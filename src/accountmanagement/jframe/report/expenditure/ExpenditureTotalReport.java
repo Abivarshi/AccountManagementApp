@@ -152,7 +152,7 @@ public class ExpenditureTotalReport extends javax.swing.JPanel {
         String toDate = sdf.format(jDateChooserTo.getDate());
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
-            warningLabel1.setText("Loading..");
+//            warningLabel1.setText("Loading..");
             List<Map<String, String>> data = new ArrayList();
             Map<String, Float[]> dataVal = new HashMap();
 

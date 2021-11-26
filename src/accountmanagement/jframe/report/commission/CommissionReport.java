@@ -238,7 +238,7 @@ public class CommissionReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add(new CommissionTotalReport(shopName, "Commission Total Report", "Sheet2", "Bank", commissionList, bankCommissionList));
+        jPanel1.add(new CommissionTotalReport(shopName, "Commission - Total Report", "Sheet2", "Bank", commissionList, bankCommissionList));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -252,7 +252,7 @@ public class CommissionReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-        jPanel1.add(new CommissionDetailReport(shopName, "Sheet2", "Commission Report", commissionList));
+        jPanel1.add(new CommissionDetailReport(shopName, "Sheet2", "Commission - Report", commissionList));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
@@ -278,7 +278,7 @@ public class CommissionReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2Button2MouseHoverOut
 
     private void sheet2Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button2ActionPerformed
-        jPanel1.add(new CommissionDetailReport(shopName, "Sheet2", "Service Charge Report", serviceChargeList));
+        jPanel1.add(new CommissionDetailReport(shopName, "Sheet2", "Service Charge - Report", serviceChargeList));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2Button2ActionPerformed
@@ -292,7 +292,7 @@ public class CommissionReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2Button3MouseHoverOut
 
     private void sheet2Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button3ActionPerformed
-        jPanel1.add(new CommissionTotalReport(shopName, "Service Charge Total Report", "Sheet2", "Bank", serviceChargeList, bankServiceChargeList));
+        jPanel1.add(new CommissionTotalReport(shopName, "Service Charge - Total Report", "Sheet2", "Bank", serviceChargeList, bankServiceChargeList));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2Button3ActionPerformed
