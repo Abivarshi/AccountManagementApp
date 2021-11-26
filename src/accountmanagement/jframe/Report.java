@@ -9,9 +9,9 @@ import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.bank.BankReport;
 import accountmanagement.jframe.report.petty.PettyReport;
 import accountmanagement.jframe.report.expenditure.PurchaseReport;
-import accountmanagement.jframe.report.SalesReport;
-import accountmanagement.jframe.report.Sheet2Report;
+import accountmanagement.jframe.report.sales.SalesReport;
 import accountmanagement.jframe.report.StaffReport;
+import accountmanagement.jframe.report.commission.CommissionReport;
 import accountmanagement.jframe.report.difference.DifferenceReport;
 import accountmanagement.jframe.report.expenditure.ExpenditureReport;
 import accountmanagement.jframe.report.finalreport.FinalReport;
@@ -70,7 +70,7 @@ public class Report extends javax.swing.JPanel {
 
         sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
         sheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        sheet2Button.setText("Summary/DP Till");
+        sheet2Button.setText("<html><center>Commission & Service Charges</center></html>");
         sheet2Button.setBorder(null);
         sheet2Button.setBorderPainted(false);
         sheet2Button.setContentAreaFilled(false);
@@ -89,7 +89,7 @@ public class Report extends javax.swing.JPanel {
                 sheet2ButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(sheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 33));
+        jPanel2.add(sheet2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 130, 40));
 
         tillButton.setBackground(new java.awt.Color(0, 0, 51));
         tillButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -293,7 +293,7 @@ public class Report extends javax.swing.JPanel {
         });
         finalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                finalButtonActionPerformed(evt);
+                salesButton(evt);
             }
         });
         jPanel2.add(finalButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 130, 33));
@@ -324,7 +324,7 @@ public class Report extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add("sheet2Report",new Sheet2Report(shopName));
+        jPanel1.add("CommissionReport", new CommissionReport(shopName));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -448,6 +448,12 @@ public class Report extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_finalButtonActionPerformed
+
+    private void salesButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton
+        jPanel1.add("SalesReport", new SalesReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_salesButton
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bankButton;

@@ -419,11 +419,11 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_staffButtonActionPerformed
 
     private void salesButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHover
-        // TODO add your handling code here:
+        salesButton1.setForeground(Color.red);
     }//GEN-LAST:event_salesButton1MouseHover
 
     private void salesButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton1MouseHoverOut
-        // TODO add your handling code here:
+        salesButton1.setForeground(Color.black);
     }//GEN-LAST:event_salesButton1MouseHoverOut
 
     private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
@@ -433,11 +433,11 @@ public class DifferenceReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton1ActionPerformed
 
     private void salesButton5MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton5MouseHover
-        // TODO add your handling code here:
+        salesButton5.setForeground(Color.red);
     }//GEN-LAST:event_salesButton5MouseHover
 
     private void salesButton5MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesButton5MouseHoverOut
-        // TODO add your handling code here:
+        salesButton5.setForeground(Color.black);
     }//GEN-LAST:event_salesButton5MouseHoverOut
 
     private void salesButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton5ActionPerformed

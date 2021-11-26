@@ -5,17 +5,18 @@
  */
 package accountmanagement.jframe.report.sales;
 
-import accountmanagement.jframe.report.expenditure.*;
-import accountmanagement.jframe.report.SingleReport;
 import accountmanagement.database.DataBaseConnection;
-import accountmanagement.jframe.Expenditure;
+import accountmanagement.jframe.report.commission.CommissionDetailReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 
 /**
  *
@@ -25,6 +26,7 @@ public class SalesReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+    private Map<String, String> bookOutList = new HashMap();
 
     /**
      * Creates new form Administrator
@@ -34,7 +36,7 @@ public class SalesReport extends javax.swing.JPanel {
     public SalesReport(String shopName) {
         this.shopName = shopName;
         initComponents();
-//        populateExpenditureReport();
+        populateBankReport();
     }
 
     /**
@@ -48,10 +50,11 @@ public class SalesReport extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
-        sheet2Button = new javax.swing.JButton();
         tillButton = new javax.swing.JButton();
         tillButton1 = new javax.swing.JButton();
+        tillButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -63,32 +66,11 @@ public class SalesReport extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1, "card2");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
-        sheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        sheet2Button.setText("Book Out");
-        sheet2Button.setBorder(null);
-        sheet2Button.setBorderPainted(false);
-        sheet2Button.setContentAreaFilled(false);
-        sheet2Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sheet2Button.setFocusPainted(false);
-        sheet2Button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                sheet2ButtonMouseHover(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                sheet2ButtonMouseHoverOut(evt);
-            }
-        });
-        sheet2Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sheet2ButtonActionPerformed(evt);
-            }
-        });
+        jPanel2.setPreferredSize(new java.awt.Dimension(130, 860));
 
         tillButton.setBackground(new java.awt.Color(0, 0, 51));
         tillButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        tillButton.setText("Sales");
+        tillButton.setText("Goods");
         tillButton.setBorder(null);
         tillButton.setBorderPainted(false);
         tillButton.setContentAreaFilled(false);
@@ -110,7 +92,7 @@ public class SalesReport extends javax.swing.JPanel {
 
         tillButton1.setBackground(new java.awt.Color(0, 0, 51));
         tillButton1.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        tillButton1.setText("Assumptions");
+        tillButton1.setText("Book Out List");
         tillButton1.setBorder(null);
         tillButton1.setBorderPainted(false);
         tillButton1.setContentAreaFilled(false);
@@ -130,56 +112,69 @@ public class SalesReport extends javax.swing.JPanel {
             }
         });
 
+        tillButton2.setBackground(new java.awt.Color(0, 0, 51));
+        tillButton2.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        tillButton2.setText("Assumptions");
+        tillButton2.setBorder(null);
+        tillButton2.setBorderPainted(false);
+        tillButton2.setContentAreaFilled(false);
+        tillButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tillButton2.setFocusPainted(false);
+        tillButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tillButton2MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tillButton2MouseHoverOut(evt);
+            }
+        });
+        tillButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tillButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(sheet2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(tillButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tillButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tillButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(11, 11, 11)
                 .addComponent(tillButton)
-                .addGap(10, 10, 10)
-                .addComponent(sheet2Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tillButton1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tillButton2)
+                .addGap(0, 813, Short.MAX_VALUE))
         );
+
+        jScrollPane2.setViewportView(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void sheet2ButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHover
-        sheet2Button.setForeground(Color.red);
-    }//GEN-LAST:event_sheet2ButtonMouseHover
-
-    private void sheet2ButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2ButtonMouseHoverOut
-        sheet2Button.setForeground(Color.black);
-    }//GEN-LAST:event_sheet2ButtonMouseHoverOut
-
-    private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add("detail", new Detail(shopName, "Purchase"));
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
-    }//GEN-LAST:event_sheet2ButtonActionPerformed
 
     private void tillButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHover
         tillButton.setForeground(Color.red);
@@ -196,62 +191,49 @@ public class SalesReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonActionPerformed
 
     private void tillButton1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButton1MouseHover
-        // TODO add your handling code here:
+        tillButton1.setForeground(Color.red);
     }//GEN-LAST:event_tillButton1MouseHover
 
     private void tillButton1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButton1MouseHoverOut
-        // TODO add your handling code here:
+        tillButton1.setForeground(Color.black);
     }//GEN-LAST:event_tillButton1MouseHoverOut
 
     private void tillButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButton1ActionPerformed
-        jPanel1.add(new SalesAssumeReport(shopName));
+        jPanel1.add(new CommissionDetailReport(shopName, "Sales", "Sales - Book Out Report", bookOutList));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_tillButton1ActionPerformed
 
-    private void populateExpenditureReport() {
-        ResultSet res = db.getDeatilTableValue(shopName, "ExpenditureDetail");
+    private void tillButton2MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButton2MouseHover
+        tillButton2.setForeground(Color.red);
+    }//GEN-LAST:event_tillButton2MouseHover
+
+    private void tillButton2MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButton2MouseHoverOut
+        tillButton2.setForeground(Color.black);
+    }//GEN-LAST:event_tillButton2MouseHoverOut
+
+    private void tillButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButton2ActionPerformed
+        jPanel1.add(new SalesAssumeReport(shopName));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_tillButton2ActionPerformed
+
+    private void populateBankReport() {
+        ResultSet res = db.getDeatilTableValue(shopName, "SalesDetail");
+        List<List<String>> bankIn = new ArrayList();
+
+        int i = 0;
         try {
-            int i = 1;
             while (res.next()) {
                 String item = res.getString("Item");
                 String name = res.getString("Name");
+                String type = res.getString("Type");
+                bookOutList.put(name, item);
                 
-                String title = "EXPENDITURE - " + item.toUpperCase() + " REPORT";
-                
-                JButton button = new JButton();
-                button.setBackground(new java.awt.Color(0, 0, 51));
-                button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-                button.setText(item);
-                button.setBorder(null);
-                button.setBorderPainted(false);
-                button.setContentAreaFilled(false);
-                button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                button.setFocusPainted(false);
-                button.setBounds(0, 40 + i * 30, 130, 20);
-                button.addMouseListener(new java.awt.event.MouseAdapter() {
-                    public void mouseEntered(java.awt.event.MouseEvent evt) {
-                        button.setForeground(Color.red);
-                    }
-
-                    public void mouseExited(java.awt.event.MouseEvent evt) {
-                        button.setForeground(Color.black);
-                    }
-                });
-                button.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jPanel1.add("report", new SingleReport(shopName, title, name, "Expenditure"));
-                        CardLayout layout = (CardLayout) jPanel1.getLayout();
-                        layout.next(jPanel1);
-                    }
-                });
-
-                jPanel2.add(button);
-                i = i + 1;
-
             }
+            
         } catch (SQLException ex) {
-            Logger.getLogger(Expenditure.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesReport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -259,8 +241,9 @@ public class SalesReport extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton sheet2Button;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton tillButton;
     private javax.swing.JButton tillButton1;
+    private javax.swing.JButton tillButton2;
     // End of variables declaration//GEN-END:variables
 }

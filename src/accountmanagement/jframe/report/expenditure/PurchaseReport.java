@@ -12,6 +12,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -24,6 +26,7 @@ public class PurchaseReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+    private Map<String, String> purchaseList = new HashMap();
 
     /**
      * Creates new form Administrator
@@ -148,7 +151,7 @@ public class PurchaseReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add("detail", new Detail(shopName, "Purchase"));
+        jPanel1.add("detail", new ExpenditureTotalReport(shopName, "Purchase - Detail Report", "Purchase", "Till", purchaseList, "R_Purchase"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -174,13 +177,14 @@ public class PurchaseReport extends javax.swing.JPanel {
             while (res.next()) {
                 String item = res.getString("Item");
                 String name = res.getString("Name");
-                
+                if(!name.equalsIgnoreCase("Total"))
+                    purchaseList.put(name, item);
                 String title = "PURCHASE - " + item.toUpperCase() + " REPORT";
                 
                 JButton button = new JButton();
                 button.setBackground(new java.awt.Color(0, 0, 51));
                 button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-                button.setText(item);
+                button.setText("<html><center>"+item+"</center></html>");
                 button.setBorder(null);
                 button.setBorderPainted(false);
                 button.setContentAreaFilled(false);

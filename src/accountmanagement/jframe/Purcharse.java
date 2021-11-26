@@ -53,9 +53,9 @@ public class Purcharse extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         successLabel = new javax.swing.JLabel();
-        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,51 +92,52 @@ public class Purcharse extends javax.swing.JPanel {
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 90, 30));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 980));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
 
-        successLabel.setForeground(new java.awt.Color(51, 153, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 700));
+
+        successLabel.setForeground(new java.awt.Color(153, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(690, Short.MAX_VALUE)
-                .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(416, Short.MAX_VALUE)
+                .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(701, Short.MAX_VALUE))
+                .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 687, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 930, 770));
+        jScrollPane1.setViewportView(jPanel1);
 
-        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 290, 20));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         successLabel.setText("");
-        warningLabel.setText("");
+        successLabel.setText("");
         boolean canSave = true;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if (!db.isDateExist(shopName, "Purchase", sdf.format(jDateChooser1.getDate()))) {
+        if (jDateChooser1.getDate() != null) {
             HashMap<String, Float> purchaseValues = new HashMap();
             float total = 0;
             for (String name : listOfTextFields.keySet()) {
                 System.out.println(name + ": " + listOfTextFields.get(name).getText());
-                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
+//                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
                 try {
                     purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
                     total = total + Float.parseFloat(listOfTextFields.get(name).getText());
                 } catch (java.lang.NumberFormatException e) {
-                    warningLabel.setText("**All Values are mandatory and should be decimal");
-                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    successLabel.setText("**All Values are mandatory and should be decimal");
+//                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     canSave = false;
                     break;
                 }
@@ -147,16 +148,18 @@ public class Purcharse extends javax.swing.JPanel {
                 if (!isUpdate) {
                     db.insertValuesTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()), purchaseValues);
                     successLabel.setText("Purcharse added successfully..");
+                    successLabel.setForeground(Color.green);
                     resetText();
                 } else {
                     db.updateValuesTabTable(shopName, "Purchase", sdf.format(jDateChooser1.getDate()), purchaseValues);
                     successLabel.setText("Expenditure Updated successfully..");
+                    successLabel.setForeground(Color.green);
                     resetText();
                 }
             }
 
         } else {
-            warningLabel.setText("**Date should be selected");
+            successLabel.setText("**Date should be selected");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -165,6 +168,7 @@ public class Purcharse extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        successLabel.setText("");
         resetText();
         getValues();
     }//GEN-LAST:event_jDateChooser1PropertyChange
@@ -233,7 +237,7 @@ public class Purcharse extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel successLabel;
-    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

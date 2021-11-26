@@ -6,6 +6,7 @@
 package accountmanagement.jframe.report.petty;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.report.CombineColReport;
 import accountmanagement.jframe.report.SingleReport;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -13,7 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -104,13 +107,13 @@ public class PettyReport extends javax.swing.JPanel {
                 String item = res.getString("Item");
                 String name = res.getString("Name");
                 String type = res.getString("Type");
-                
+
                 List<String> bankVal = new ArrayList();
-                if (type.equalsIgnoreCase("Borrow") || type.equalsIgnoreCase("Pay Back")) {
-                    bankVal.add(item + " " + type);
-                } else {
+//                if (type.equalsIgnoreCase("Borrow") || type.equalsIgnoreCase("Pay Back")) {
+//                    bankVal.add(item + " " + type);
+//                } else {
                     bankVal.add(item);
-                }
+//                }
                 bankVal.add(name);
                 bankVal.add(type);
                 bankIn.add(bankVal);
@@ -118,7 +121,7 @@ public class PettyReport extends javax.swing.JPanel {
             System.out.print(bankIn);
             for (String type : Arrays.asList("Cost Cutter", "Borrow & Pay Back",
                     "Purchase", "Expenditure", "Banking")) {
-                createBankButton(i, type);
+                createPettyButton(i, type);
                 i = i + 1;
             }
 
@@ -133,7 +136,7 @@ public class PettyReport extends javax.swing.JPanel {
         }
     }
 
-    private void createBankButton(int i, String name) {
+    private void createPettyButton(int i, String name) {
         String title = "PETTY - " + name.toUpperCase() + " REPORT";
 
         JButton button = new JButton();
@@ -158,9 +161,19 @@ public class PettyReport extends javax.swing.JPanel {
         });
         button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jPanel1.add("report", new SingleReport(shopName, title, name, "Expenditure"));
-//                CardLayout layout = (CardLayout) jPanel1.getLayout();
-//                layout.next(jPanel1);
+                Map<String, String> map = new HashMap();
+                if (name.equalsIgnoreCase("Borrow & Pay Back")) {
+                    map = db.getNTypeDetailTable(shopName, "PettyDetail", "('Borrow', 'Pay Back')");
+                } else {
+                    map = db.getOneTypeDetailTable(shopName, "PettyDetail", name);
+                    if (name.equalsIgnoreCase("Cost Cutter")) {
+                        map.put("CC_BE_IOU_Paid", "BE IOU Paid");
+                        map.put("CC_BE_IOU", "BE IOU");
+                    }
+                }
+                jPanel1.add(new CombineColReport(shopName, "Petty", title, map));
+                CardLayout layout = (CardLayout) jPanel1.getLayout();
+                layout.next(jPanel1);
             }
         });
 

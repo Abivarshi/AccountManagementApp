@@ -176,6 +176,8 @@ public class CommissionAndService extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        warningLabel.setText("");
+        resetText();
         getValues();
     }//GEN-LAST:event_jDateChooser1PropertyChange
 

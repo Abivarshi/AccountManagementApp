@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -54,8 +53,9 @@ public class Expenditure extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        successLabel = new javax.swing.JLabel();
+        warningLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,27 +92,37 @@ public class Expenditure extends javax.swing.JPanel {
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 90, 30));
 
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 700));
+
+        warningLabel.setForeground(new java.awt.Color(153, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(558, Short.MAX_VALUE)
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 687, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 800, 510));
+        jScrollPane1.setViewportView(jPanel1);
 
-        successLabel.setForeground(new java.awt.Color(51, 153, 0));
-        add(successLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 330, 20));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        successLabel.setText("");
+        warningLabel.setText("");
         boolean canSave = true;
         float total = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -120,14 +130,13 @@ public class Expenditure extends javax.swing.JPanel {
             HashMap<String, Float> purchaseValues = new HashMap();
             for (String name : listOfTextFields.keySet()) {
                 System.out.println(name + ": " + listOfTextFields.get(name).getText());
-                listOfTextFields.get(name).setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
                 try {
                     purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
                     total = total + Float.parseFloat(listOfTextFields.get(name).getText());
                 } catch (java.lang.NumberFormatException e) {
-                    successLabel.setText("**All Values are mandatory and should be decimal");
-                    successLabel.setForeground(Color.red);
-                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    warningLabel.setText("**All Values are mandatory and should be decimal");
+                    warningLabel.setForeground(Color.red);
+//                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     canSave = false;
                     break;
                 }
@@ -137,18 +146,20 @@ public class Expenditure extends javax.swing.JPanel {
             if (canSave) {
                 if (!isUpdate) {
                     db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
-                    successLabel.setText("Expenditure added successfully..");
+                    warningLabel.setText("Expenditure added successfully..");
+                    warningLabel.setForeground(Color.green);
                     resetText();
                 } else {
                     db.updateValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);
-                    successLabel.setText("Expenditure Updated successfully..");
+                    warningLabel.setText("Expenditure Updated successfully..");
+                    warningLabel.setForeground(Color.green);
                     resetText();
                 }
             }
 
         } else {
-            successLabel.setText("**Date should be selected");
-            successLabel.setForeground(Color.red);
+            warningLabel.setText("**Date should be selected");
+            warningLabel.setForeground(Color.red);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -157,7 +168,8 @@ public class Expenditure extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
-//        resetText();
+        warningLabel.setText("");
+        resetText();
         getValues();
     }//GEN-LAST:event_jDateChooserPropertyChange
 
@@ -176,8 +188,8 @@ public class Expenditure extends javax.swing.JPanel {
 
                 } catch (Exception ex) {
                     Logger.getLogger(Till.class.getName()).log(Level.SEVERE, null, ex);
-                    successLabel.setText("**Error getting Expenditure Detail");
-                    successLabel.setForeground(Color.red);
+                    warningLabel.setText("**Error getting Expenditure Detail");
+                    warningLabel.setForeground(Color.red);
                 }
 
             }
@@ -186,7 +198,8 @@ public class Expenditure extends javax.swing.JPanel {
 
     private void resetText() {
         for (String name : listOfTextFields.keySet()) {
-            listOfTextFields.get(name).setText("");
+            JTextField text = listOfTextFields.get(name);
+            text.setText("");
         }
     }
 
@@ -225,6 +238,7 @@ public class Expenditure extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel successLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

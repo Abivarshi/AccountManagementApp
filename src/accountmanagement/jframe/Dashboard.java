@@ -8,8 +8,6 @@ package accountmanagement.jframe;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

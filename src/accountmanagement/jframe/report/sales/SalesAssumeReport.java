@@ -6,6 +6,8 @@
 package accountmanagement.jframe.report.sales;
 
 import accountmanagement.database.DataBaseConnection;
+import accountmanagement.jframe.report.Blank;
+import accountmanagement.jframe.report.Loading;
 import java.awt.CardLayout;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -42,7 +44,7 @@ public class SalesAssumeReport extends javax.swing.JPanel {
     public SalesAssumeReport(String shopName) {
         this.shopName = shopName;
         initComponents();
-        this.jLabel4.setText("SALES REPORT");
+        this.jLabel4.setText("SALES - ASSUME REPORT");
     }
 
     /**
@@ -104,7 +106,7 @@ public class SalesAssumeReport extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.CardLayout());
         jScrollPane1.setViewportView(jPanel1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -113,6 +115,10 @@ public class SalesAssumeReport extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        jPanel1.add(new Loading());
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooserFrom.getDate() == null) {
@@ -125,16 +131,18 @@ public class SalesAssumeReport extends javax.swing.JPanel {
         String toDate = sdf.format(jDateChooserTo.getDate());
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
+
+            warningLabel1.setText("Loading..");
             List<Map<String, String>> data = new ArrayList();
             List<Object[]> dataVal = new ArrayList();
 
             try {
                 String description = "Date: " + fromDate + " - " + toDate;
                 HashMap<String, Float> assumePercentage = db.getAdminProfit(shopName);
-                
-                String Purchase = "Assume Purchase ("+Float.toString(100 * assumePercentage.get("PurchasePercentage"))+"%)";
-                String Expenditure = "Assume Expenditure ("+Float.toString(100 * assumePercentage.get("GrossProfitPercentage"))+"%)";
-                String NetProfit = "Assume NetProfit ("+Float.toString(100 * assumePercentage.get("NetProfitPercentage"))+"%)";
+
+                String Purchase = "Assume Purchase (" + Float.toString(100 * assumePercentage.get("PurchasePercentage")) + "%)";
+                String Expenditure = "Assume Expenditure (" + Float.toString(100 * assumePercentage.get("GrossProfitPercentage")) + "%)";
+                String NetProfit = "Assume NetProfit (" + Float.toString(100 * assumePercentage.get("NetProfitPercentage")) + "%)";
 
                 List<String> colNameList = new ArrayList();
                 colNameList.add("AssumePurchase");
@@ -193,9 +201,13 @@ public class SalesAssumeReport extends javax.swing.JPanel {
 
                     JRViewer viewer = new JRViewer(jasperPrint);
                     jPanel1.add(viewer);
-                    CardLayout layout = (CardLayout) jPanel1.getLayout();
-                    layout.next(jPanel1);
+                    CardLayout layout2 = (CardLayout) jPanel1.getLayout();
+                    layout2.next(jPanel1);
+                    warningLabel1.setText("");
                 } else {
+                    jPanel1.add(new Blank());
+                    layout = (CardLayout) jPanel1.getLayout();
+                    layout.next(jPanel1);
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
             } catch (Exception ex) {

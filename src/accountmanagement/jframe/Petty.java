@@ -105,13 +105,13 @@ public class Petty extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 1100));
 
         warningLabel.setForeground(new java.awt.Color(153, 0, 0));
-        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 83, 340, 20));
+        add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 83, 450, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -179,7 +179,8 @@ public class Petty extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-//        resetText();
+        warningLabel.setText("");
+        resetText();
         getValues();
     }//GEN-LAST:event_jDateChooser1PropertyChange
 
@@ -243,7 +244,7 @@ public class Petty extends javax.swing.JPanel {
                 if (!"BE IOU".equals(type)) {
                     JLabel label = new JLabel(type);
                     label.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
-                    label.setBounds(20 + j, 80 + 30 * i, 300, 20);
+                    label.setBounds(20 + j, 30 * i, 300, 20);
                     jPanel1.add(label);
                     i = i + 1;
                 }
@@ -254,13 +255,13 @@ public class Petty extends javax.swing.JPanel {
                         System.out.println(type + " : " + val.toString());
                         JLabel jLabel = new JLabel(val.get(0));
                         jLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-                        jLabel.setBounds(40 + j, 80 + 30 * i, 130, 20);
+                        jLabel.setBounds(40 + j, 30 * i, 130, 20);
 
                         JTextField jText = new JTextField();
                         jText.setFont(new java.awt.Font("Tahoma", 0, 12));
                         jText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
                         jText.setText("");
-                        jText.setBounds(220 + j, 80 + 30 * i, 96, 25);
+                        jText.setBounds(220 + j, 30 * i, 96, 25);
                         i = i + 1;
 
                         listOfTextFields.put(val, jText);

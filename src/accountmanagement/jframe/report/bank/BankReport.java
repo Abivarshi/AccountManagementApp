@@ -7,6 +7,7 @@ package accountmanagement.jframe.report.bank;
 
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.report.SingleReport;
+import accountmanagement.jframe.report.commission.CommissionDetailReport;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ public class BankReport extends javax.swing.JPanel {
     public BankReport(String shopName) {
         this.shopName = shopName;
         initComponents();
-        populateDifferenceReport();
+        populateBankReport();
     }
 
     /**
@@ -62,7 +63,7 @@ public class BankReport extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1, "card2");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setPreferredSize(new java.awt.Dimension(130, 1260));
+        jPanel2.setPreferredSize(new java.awt.Dimension(130, 1800));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -72,7 +73,7 @@ public class BankReport extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1260, Short.MAX_VALUE)
+            .addGap(0, 1800, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(jPanel2);
@@ -94,7 +95,7 @@ public class BankReport extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void populateDifferenceReport() {
+    private void populateBankReport() {
         ResultSet res = db.getDeatilTableValue(shopName, "BankDetail");
         List<List<String>> bankIn = new ArrayList();
 
@@ -110,7 +111,10 @@ public class BankReport extends javax.swing.JPanel {
                 bankVal.add(type);
                 bankIn.add(bankVal);
             }
-            System.out.print(bankIn);
+
+            createSingleButton(i, "Balance", "Balance");
+            i = i + 1;
+
             for (String type : Arrays.asList("From Bank", "Money In (Commission)", "Service Money Out",
                     "Expenditure", "Purchase", "Pay Back")) {
                 createBankButton(i, type);
@@ -135,13 +139,17 @@ public class BankReport extends javax.swing.JPanel {
         button.setBackground(new Color(0, 0, 51));
         button.setForeground(Color.BLACK);
         button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N// NOI18N
-        button.setText(name);
+        button.setText("<html><center>" + name + "</center></html>");
         button.setBorder(null);
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         button.setFocusPainted(false);
-        button.setBounds(0, 10 + i * 30, 130, 20);
+        if (name.length() > 18) {
+            button.setBounds(0, 10 + i * 30, 130, 40);
+        } else {
+            button.setBounds(0, 10 + i * 30, 130, 20);
+        }
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setForeground(Color.red);
@@ -153,42 +161,7 @@ public class BankReport extends javax.swing.JPanel {
         });
         button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jPanel1.add("report", new SingleReport(shopName, title, name, "Expenditure"));
-//                CardLayout layout = (CardLayout) jPanel1.getLayout();
-//                layout.next(jPanel1);
-            }
-        });
-
-        jPanel2.add(button);
-    }
-
-    
-    private void createSingleButton(int i, String name, String colName) {
-        String title = "BANK - " + name.toUpperCase() + " REPORT";
-
-        JButton button = new JButton();
-        button.setBackground(new Color(0, 0, 51));
-        button.setForeground(Color.BLACK);
-        button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N// NOI18N
-        button.setText(name);
-        button.setBorder(null);
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        button.setFocusPainted(false);
-        button.setBounds(0, 10 + i * 30, 130, 20);
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setForeground(Color.red);
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setForeground(Color.black);
-            }
-        });
-        button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPanel1.add("report", new SingleReport(shopName, title, colName, "Bank"));
+                jPanel1.add(new CommissionDetailReport(shopName, "Bank", title, db.getOneTypeDetailTable(shopName, "BankDetail", name)));
                 CardLayout layout = (CardLayout) jPanel1.getLayout();
                 layout.next(jPanel1);
             }
@@ -196,7 +169,49 @@ public class BankReport extends javax.swing.JPanel {
 
         jPanel2.add(button);
     }
-    
+
+    private void createSingleButton(int i, String name, String colName) {
+        if (!name.equalsIgnoreCase("Balance") || i == 0) {
+            String title = "BANK - " + name.toUpperCase() + " REPORT";
+
+            JButton button = new JButton();
+            button.setBackground(new Color(0, 0, 51));
+            button.setForeground(Color.BLACK);
+            button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N// NOI18N
+
+            button.setText("<html><center>" + name + "</center></html>");
+            button.setBorder(null);
+            button.setBorderPainted(false);
+            button.setContentAreaFilled(false);
+            button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            button.setFocusPainted(false);
+            if (name.length() > 18) {
+                button.setBounds(0, 10 + i * 30, 130, 40);
+            } else {
+                button.setBounds(0, 10 + i * 30, 130, 20);
+            }
+
+            button.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    button.setForeground(Color.red);
+                }
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    button.setForeground(Color.black);
+                }
+            });
+            button.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jPanel1.add("report", new SingleReport(shopName, title, colName, "Bank"));
+                    CardLayout layout = (CardLayout) jPanel1.getLayout();
+                    layout.next(jPanel1);
+                }
+            });
+
+            jPanel2.add(button);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

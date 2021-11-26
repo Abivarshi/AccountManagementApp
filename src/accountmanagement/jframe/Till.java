@@ -743,7 +743,7 @@ public class Till extends javax.swing.JPanel {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-//        reset();
+        reset();
         getValues();
     }//GEN-LAST:event_jDateChooser1PropertyChange
 

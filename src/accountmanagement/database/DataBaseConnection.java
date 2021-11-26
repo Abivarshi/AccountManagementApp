@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -679,6 +680,54 @@ public class DataBaseConnection {
         }
     }
 
+    public Map<String, String> getOneTypeDetailTable(String shopName, String tableName, String type) {
+
+        Map<String, String> list = new HashMap();
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT Item, Name FROM " + tableName
+                    + " WHERE Type LIKE '%" + type + "%'");
+            
+            while (res.next()) {
+                String item = res.getString("Item");
+                String name = res.getString("Name");
+                list.put(name, item);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public Map<String, String> getNTypeDetailTable(String shopName, String tableName, String type) {
+
+        Map<String, String> list = new HashMap();
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT Item, Name FROM " + tableName
+                    + " WHERE Type IN " + type);
+            
+            while (res.next()) {
+                String item = res.getString("Item");
+                String name = res.getString("Name");
+                list.put(name, item);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
     public void createDefaultBank(String shopName) {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);
@@ -714,6 +763,8 @@ public class DataBaseConnection {
         alterTabTable(shopName, "Bank", "P_CostCutter");
         alterTabTable(shopName, "Bank", "P_NI");
         alterTabTable(shopName, "Bank", "P_BestWay");
+        alterTabTable(shopName, "Bank", "P_EazyCopy");
+        alterTabTable(shopName, "Bank", "P_DHAMECHA");
         alterTabTable(shopName, "Bank", "PB_BorrowMoney");
         alterTabTable(shopName, "Bank", "SubPurchase");
         alterTabTable(shopName, "Bank", "SubExpenditure");
@@ -961,6 +1012,8 @@ public class DataBaseConnection {
         insertDetailTable(shopName, "Costcutter", "P_CostCutter", "Purchase", "BankDetail");
         insertDetailTable(shopName, "NI", "P_NI", "Purchase", "BankDetail");
         insertDetailTable(shopName, "BestWay", "P_BestWay", "Purchase", "BankDetail");
+        insertDetailTable(shopName, "Eazy Copy", "P_EazyCopy", "Purchase", "BankDetail");
+        insertDetailTable(shopName, "DHAMECHA", "P_DHAMECHA", "Purchase", "BankDetail");
         insertDetailTable(shopName, "Borrow Money", "PB_BorrowMoney", "Pay Back", "BankDetail");
         insertDetailTable(shopName, "SubTotal Purchase", "SubPurchase", "Summary", "BankDetail");
         insertDetailTable(shopName, "SubTotal Expenditure", "SubExpenditure", "Summary", "BankDetail");
@@ -977,12 +1030,12 @@ public class DataBaseConnection {
         insertDetailTable(shopName, "Ambiant", "CC_Ambiant", "Cost Cutter", "PettyDetail");
         insertDetailTable(shopName, "Chilled", "CC_Chilled", "Cost Cutter", "PettyDetail");
         insertDetailTable(shopName, "Frozen", "CC_Frozen", "Cost Cutter", "PettyDetail");
-        insertDetailTable(shopName, "Cash", "BO_Cash", "Borrow", "PettyDetail");
-        insertDetailTable(shopName, "Cash", "PB_Cash", "Pay Back", "PettyDetail");
-        insertDetailTable(shopName, "C/Card", "BO_CCard", "Borrow", "PettyDetail");
-        insertDetailTable(shopName, "C/Card", "PB_CCard", "Pay Back", "PettyDetail");
-        insertDetailTable(shopName, "IOU", "BO_IOU", "Borrow", "PettyDetail");
-        insertDetailTable(shopName, "IOU", "PB_IOU", "Pay Back", "PettyDetail");
+        insertDetailTable(shopName, "Cash Borrow", "BO_Cash", "Borrow", "PettyDetail");
+        insertDetailTable(shopName, "Cash Pay Back", "PB_Cash", "Pay Back", "PettyDetail");
+        insertDetailTable(shopName, "C/Card Borrow", "BO_CCard", "Borrow", "PettyDetail");
+        insertDetailTable(shopName, "C/Card Pay Back", "PB_CCard", "Pay Back", "PettyDetail");
+        insertDetailTable(shopName, "IOU Borrow", "BO_IOU", "Borrow", "PettyDetail");
+        insertDetailTable(shopName, "IOU Pay Back", "PB_IOU", "Pay Back", "PettyDetail");
         insertDetailTable(shopName, "Cost Cutter", "P_CostCutter", "Purchase", "PettyDetail");
         insertDetailTable(shopName, "Dhamecha", "P_Dhamecha", "Purchase", "PettyDetail");
         insertDetailTable(shopName, "Beer Shop", "P_BeerShop", "Purchase", "PettyDetail");
@@ -1102,6 +1155,7 @@ public class DataBaseConnection {
         prep.execute();
 
         createUserTable(shopName);
+        addUser(shopName, "admin", "admin", "admin");
         createStaff(shopName);
         createStaffTime(shopName);
         createStaffSummary(shopName);

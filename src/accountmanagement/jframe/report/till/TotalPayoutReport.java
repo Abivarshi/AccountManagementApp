@@ -141,9 +141,9 @@ public class TotalPayoutReport extends javax.swing.JPanel {
                 while (res.next()) {
                     Map<String, String> dataValue = new HashMap();
                     dataValue.put("Date", res.getString("Date"));
-                    dataValue.put("Lottery Payout", res.getString(colName.get(0)));
-                    dataValue.put("Ins Lottery", res.getString(colName.get(1)));
-                    dataValue.put("Total Payout", String.valueOf(Float.parseFloat(res.getString(colName.get(0)))+Float.parseFloat(res.getString(colName.get(1)))));
+                    dataValue.put("LottaryPayOut", res.getString(colName.get(0)));
+                    dataValue.put("InstantPayOut", res.getString(colName.get(1)));
+                    dataValue.put("Total", String.valueOf(Float.parseFloat(res.getString(colName.get(0)))+Float.parseFloat(res.getString(colName.get(1)))));
                     dataValue.put("description", description);
                     dataValue.put("title", title);
 
@@ -152,7 +152,7 @@ public class TotalPayoutReport extends javax.swing.JPanel {
                 }
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/RBReport.jrxml");
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/till/TotalPayoutReport.jrxml");
 
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);

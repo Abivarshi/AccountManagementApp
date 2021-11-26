@@ -42,101 +42,101 @@
 		<band height="13"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="32">
+		<band height="50">
 			<staticText>
-				<reportElement x="0" y="1" width="71" height="30" uuid="e7f4617b-a276-4a47-b3a3-076771d57ccf">
+				<reportElement x="0" y="0" width="71" height="49" uuid="e7f4617b-a276-4a47-b3a3-076771d57ccf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="86" y="1" width="90" height="30" uuid="c4db0840-86bf-45e9-a614-0e160a8de5dd">
+				<reportElement x="86" y="0" width="90" height="49" uuid="c4db0840-86bf-45e9-a614-0e160a8de5dd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Total Day Sales]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="192" y="0" width="61" height="30" uuid="a754253c-e33b-4013-8f5c-028a14c191cf">
+				<reportElement x="192" y="0" width="61" height="49" uuid="a754253c-e33b-4013-8f5c-028a14c191cf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Customer Count Day]]></text>
 			</staticText>
-			<line>
-				<reportElement x="-20" y="30" width="595" height="1" forecolor="#666666" uuid="263a6cf4-7063-49a2-be3c-e5048ccbecc5"/>
-			</line>
 			<textField>
-				<reportElement mode="Opaque" x="269" y="1" width="83" height="29" backcolor="#96BFEB" uuid="814eb3d8-2665-41fb-8906-4cfeee9b5672">
+				<reportElement mode="Opaque" x="269" y="0" width="83" height="48" backcolor="#96BFEB" uuid="814eb3d8-2665-41fb-8906-4cfeee9b5672">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PurchaseCol}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="369" y="1" width="83" height="29" backcolor="#96BFEB" uuid="691a0afe-490d-4a83-953f-03872a395a23">
+				<reportElement mode="Opaque" x="369" y="0" width="83" height="48" backcolor="#96BFEB" uuid="691a0afe-490d-4a83-953f-03872a395a23">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ExpenditureCol}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="467" y="1" width="84" height="30" backcolor="#96BFEB" uuid="b46d2776-8cc1-48c8-8ca1-f8afb33b3a32">
+				<reportElement mode="Opaque" x="467" y="-1" width="84" height="49" backcolor="#96BFEB" uuid="b46d2776-8cc1-48c8-8ca1-f8afb33b3a32">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{NetProfitCol}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="-20" y="48" width="595" height="1" forecolor="#666666" uuid="3cbc870a-bcb8-4343-ab99-819706c23a7f"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="37">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="-11" y="32" width="564" height="2" uuid="3310c2ab-609b-4a91-95a9-e9a69629ba1f"/>
-			</line>
+		<band height="34">
 			<textField>
-				<reportElement x="0" y="2" width="71" height="30" uuid="b1480f9b-ad82-405b-ac0d-9f6852d8cdad">
+				<reportElement x="0" y="1" width="71" height="30" uuid="b1480f9b-ad82-405b-ac0d-9f6852d8cdad">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="86" y="2" width="90" height="30" uuid="5aca28bd-6055-41db-8ead-93c48ef668fc">
+				<reportElement x="86" y="1" width="90" height="30" uuid="5aca28bd-6055-41db-8ead-93c48ef668fc">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{DaySales}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="467" y="2" width="84" height="30" backcolor="#96BFEB" uuid="556bf277-ddb1-42dc-a785-5e6f8032d914">
+				<reportElement mode="Opaque" x="467" y="1" width="84" height="30" backcolor="#96BFEB" uuid="556bf277-ddb1-42dc-a785-5e6f8032d914">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{NetProfit}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="192" y="1" width="61" height="30" uuid="a15b64dc-11cf-4c5e-b175-9094e5d7f180">
+				<reportElement x="192" y="0" width="61" height="30" uuid="a15b64dc-11cf-4c5e-b175-9094e5d7f180">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1764b382-101e-48e6-80b5-4c91de87443f"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Customer}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="269" y="2" width="83" height="30" backcolor="#96BFEB" uuid="acc9e4c6-8991-49b6-bee3-fd95bd99a464">
+				<reportElement mode="Opaque" x="269" y="1" width="83" height="30" backcolor="#96BFEB" uuid="acc9e4c6-8991-49b6-bee3-fd95bd99a464">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Purchase}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="369" y="2" width="83" height="30" backcolor="#96BFEB" uuid="c9fc777e-e9eb-4ab5-a6a9-2beb3727ec45">
+				<reportElement mode="Opaque" x="369" y="1" width="83" height="30" backcolor="#96BFEB" uuid="c9fc777e-e9eb-4ab5-a6a9-2beb3727ec45">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="efb84b33-1b3d-41b8-9d6f-1fd266c4f9ce"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Expenditure}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="-2" y="33" width="555" height="1" uuid="2037eb09-d461-4e7b-ae6a-635fc1282df0"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>

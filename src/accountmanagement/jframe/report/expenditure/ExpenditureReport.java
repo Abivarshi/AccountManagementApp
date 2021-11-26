@@ -6,7 +6,6 @@
 package accountmanagement.jframe.report.expenditure;
 
 import accountmanagement.jframe.report.SingleReport;
-import accountmanagement.jframe.report.till.*;
 import accountmanagement.database.DataBaseConnection;
 import accountmanagement.jframe.Expenditure;
 import java.awt.CardLayout;
@@ -14,11 +13,10 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -28,6 +26,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
+    private Map<String, String> expenditureList = new HashMap();
 
     /**
      * Creates new form Administrator
@@ -152,7 +151,7 @@ public class ExpenditureReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-        jPanel1.add("detail", new Detail(shopName, "Purchase"));
+        jPanel1.add("detail", new ExpenditureTotalReport(shopName, "Expenditure - Detail Report", "Expenditure", "Till", expenditureList, "R_Expenditure"));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
@@ -179,12 +178,14 @@ public class ExpenditureReport extends javax.swing.JPanel {
                 String item = res.getString("Item");
                 String name = res.getString("Name");
                 
+                if(!name.equalsIgnoreCase("Total"))
+                    expenditureList.put(name, item);
                 String title = "EXPENDITURE - " + item.toUpperCase() + " REPORT";
                 
                 JButton button = new JButton();
                 button.setBackground(new java.awt.Color(0, 0, 51));
                 button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-                button.setText(item);
+                button.setText("<html><center>"+item+"</center></html>");
                 button.setBorder(null);
                 button.setBorderPainted(false);
                 button.setContentAreaFilled(false);

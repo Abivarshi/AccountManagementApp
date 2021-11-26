@@ -125,52 +125,52 @@ public class StaffTime extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateChooser1.getDate() != null) {
             String date = sdf.format(jDateChooser1.getDate());
-                try {
-                    for (List list : listOfTextFields) {
+            try {
+                for (List list : listOfTextFields) {
 
-                        JTextField startText = (JTextField) list.get(2);
-                        JTextField endText = (JTextField) list.get(3);
-                        Float startTime = Float.parseFloat(startText.getText());
-                        Float endTime = Float.parseFloat(endText.getText());
-                        Float hours = endTime - startTime;
+                    JTextField startText = (JTextField) list.get(2);
+                    JTextField endText = (JTextField) list.get(3);
+                    Float startTime = Float.parseFloat(startText.getText());
+                    Float endTime = Float.parseFloat(endText.getText());
+                    Float hours = endTime - startTime;
 
-                        if (!isUpdate) {
-                        System.out.println("Add" + list.get(0).toString() + " "+ list.get(1).toString());
-                            db.insertStaffTime(shopName, date, list.get(0).toString(), list.get(1).toString(),
-                                    startTime, endTime, hours);
-                        } else {
-                        System.out.println("Update" + list.get(0).toString() + " "+ list.get(1).toString());
-                            db.updateStaffTime(shopName, date, list.get(0).toString(), list.get(1).toString(),
-                                    startTime, endTime, hours);
-                        }
+                    if (!isUpdate) {
+                        System.out.println("Add" + list.get(0).toString() + " " + list.get(1).toString());
+                        db.insertStaffTime(shopName, date, list.get(0).toString(), list.get(1).toString(),
+                                startTime, endTime, hours);
+                    } else {
+                        System.out.println("Update" + list.get(0).toString() + " " + list.get(1).toString());
+                        db.updateStaffTime(shopName, date, list.get(0).toString(), list.get(1).toString(),
+                                startTime, endTime, hours);
                     }
-
-                    for (String staffName : listOfStaffDetail.keySet()) {
-                        ResultSet staffTimeRes = db.getStaffTime(shopName, staffName, date, date);
-                        try {
-                            float totalHours = 0;
-                            while (staffTimeRes.next()) {
-                                totalHours = totalHours + staffTimeRes.getFloat("Hours");
-                            }
-                            if (!isUpdate) {
-                                db.insertStaffSummary(shopName, date, staffName, totalHours, totalHours * listOfStaffDetail.get(staffName));
-                                warningLabel.setForeground(Color.green);
-                                warningLabel.setText("**Staff time saved successfully..");
-                                resetText();
-                            } else {
-                                db.updateStaffSummaryTime(shopName, date, staffName, totalHours, totalHours * listOfStaffDetail.get(staffName));
-                                warningLabel.setForeground(Color.green);
-                                warningLabel.setText("**Staff time updated successfully..");
-                                resetText();
-                            }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                    }
-                } catch (java.lang.NumberFormatException e) {
-                    warningLabel.setText("**All Values are mandatory and should be decimal");
                 }
+
+                for (String staffName : listOfStaffDetail.keySet()) {
+                    ResultSet staffTimeRes = db.getStaffTime(shopName, staffName, date, date);
+                    try {
+                        float totalHours = 0;
+                        while (staffTimeRes.next()) {
+                            totalHours = totalHours + staffTimeRes.getFloat("Hours");
+                        }
+                        if (!isUpdate) {
+                            db.insertStaffSummary(shopName, date, staffName, totalHours, totalHours * listOfStaffDetail.get(staffName));
+                            warningLabel.setForeground(Color.green);
+                            warningLabel.setText("**Staff time saved successfully..");
+                            resetText();
+                        } else {
+                            db.updateStaffSummaryTime(shopName, date, staffName, totalHours, totalHours * listOfStaffDetail.get(staffName));
+                            warningLabel.setForeground(Color.green);
+                            warningLabel.setText("**Staff time updated successfully..");
+                            resetText();
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StaffTime.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            } catch (java.lang.NumberFormatException e) {
+                warningLabel.setText("**All Values are mandatory and should be decimal");
+            }
 
         } else {
             warningLabel.setText("**Date should be selected");
@@ -183,6 +183,7 @@ public class StaffTime extends javax.swing.JPanel {
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
         warningLabel.setText("");
+        resetText();
         getValues();
     }//GEN-LAST:event_jDateChooser1PropertyChange
 
@@ -196,18 +197,14 @@ public class StaffTime extends javax.swing.JPanel {
                     ResultSet res = db.getExistingValueTabTable(shopName, "StaffTime", sdf.format(jDateChooser1.getDate()));
 
                     while (res.next()) {
-                        System.out.println(res.getString("StaffName")+res.getString("Type"));
                         for (List list : listOfTextFields) {
-                            if (res.getString("StaffName").equalsIgnoreCase(list.get(0).toString())&& 
-                                    res.getString("Type").equalsIgnoreCase(list.get(1).toString())) {
-                                    JTextField startText = (JTextField) list.get(2);
-                                    JTextField endText = (JTextField) list.get(3);
-                                    startText.setText(res.getString("StartTime"));
-                                    endText.setText(res.getString("EndTime"));
-//                        System.out.println(res.getString("StaffName")+res.getString("Type"));
-                                
+                            if (res.getString("StaffName").equalsIgnoreCase(list.get(0).toString())
+                                    && res.getString("Type").equalsIgnoreCase(list.get(1).toString())) {
+                                JTextField startText = (JTextField) list.get(2);
+                                JTextField endText = (JTextField) list.get(3);
+                                startText.setText(res.getString("StartTime"));
+                                endText.setText(res.getString("EndTime"));
                             }
-
                         }
                     }
 

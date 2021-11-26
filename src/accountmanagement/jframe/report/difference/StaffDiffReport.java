@@ -181,6 +181,7 @@ public class StaffDiffReport extends javax.swing.JPanel {
                 }
 
                 for (Object[] val : dataVal) {
+                    System.out.println(val[0]+ " " + val[1] + " "+ " " + val[2]+ " " + val[3]+ " " + val[4]);
                     Map<String, String> map = new HashMap();
                     map.put("Date", val[0].toString());
                     map.put("Table1", val[1].toString());

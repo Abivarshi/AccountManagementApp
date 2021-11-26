@@ -947,7 +947,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton2MouseHoverOut
 
     private void salesButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton2ActionPerformed
-        jPanel1.add(new TotalPayoutReport(shopName, "TILL - TOTAL PAYOUT REPORT", Arrays.asList("R_LottaryPayOut", "R_InsLottary")));
+        jPanel1.add(new TotalPayoutReport(shopName, "TILL - TOTAL PAYOUT REPORT", Arrays.asList("R_LottaryPayOut", "R_InstantPayOut")));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButton2ActionPerformed
