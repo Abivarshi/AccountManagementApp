@@ -51,7 +51,6 @@ public class DifferenceReport extends javax.swing.JPanel {
         expenditureButton = new javax.swing.JButton();
         purcharseButton = new javax.swing.JButton();
         pettyButton = new javax.swing.JButton();
-        bankButton = new javax.swing.JButton();
         staffButton = new javax.swing.JButton();
         salesButton1 = new javax.swing.JButton();
         salesButton5 = new javax.swing.JButton();
@@ -177,28 +176,6 @@ public class DifferenceReport extends javax.swing.JPanel {
             }
         });
 
-        bankButton.setBackground(new java.awt.Color(0, 0, 51));
-        bankButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        bankButton.setText("Cash & Coin");
-        bankButton.setBorder(null);
-        bankButton.setBorderPainted(false);
-        bankButton.setContentAreaFilled(false);
-        bankButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        bankButton.setFocusPainted(false);
-        bankButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                bankButtonMouseHover(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                bankButtonMouseHoverOut(evt);
-            }
-        });
-        bankButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bankButtonActionPerformed(evt);
-            }
-        });
-
         staffButton.setBackground(new java.awt.Color(0, 0, 51));
         staffButton.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         staffButton.setText("Milk");
@@ -276,7 +253,6 @@ public class DifferenceReport extends javax.swing.JPanel {
             .addComponent(expenditureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(pettyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(salesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(bankButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(staffButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -296,10 +272,9 @@ public class DifferenceReport extends javax.swing.JPanel {
                 .addComponent(pettyButton)
                 .addGap(10, 10, 10)
                 .addComponent(salesButton1)
-                .addGap(10, 10, 10)
-                .addComponent(bankButton)
-                .addGap(10, 10, 10)
-                .addComponent(staffButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(staffButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -389,21 +364,6 @@ public class DifferenceReport extends javax.swing.JPanel {
         layout.next(jPanel1);    
     }//GEN-LAST:event_pettyButtonActionPerformed
 
-    private void bankButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHover
-        bankButton.setForeground(Color.red);
-    }//GEN-LAST:event_bankButtonMouseHover
-
-    private void bankButtonMouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bankButtonMouseHoverOut
-        bankButton.setForeground(Color.black);
-    }//GEN-LAST:event_bankButtonMouseHoverOut
-
-    private void bankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankButtonActionPerformed
-
-        
-        
-        
-    }//GEN-LAST:event_bankButtonActionPerformed
-
     private void staffButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffButtonMouseHover
         staffButton.setForeground(Color.red);
     }//GEN-LAST:event_staffButtonMouseHover
@@ -463,7 +423,7 @@ public class DifferenceReport extends javax.swing.JPanel {
                 button.setContentAreaFilled(false);
                 button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
                 button.setFocusPainted(false);
-                button.setBounds(0, 250 + i * 30, 130, 20);
+                button.setBounds(0, 230 + i * 30, 130, 20);
                 button.addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseEntered(java.awt.event.MouseEvent evt) {
                         button.setForeground(Color.red);
@@ -491,7 +451,6 @@ public class DifferenceReport extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bankButton;
     private javax.swing.JButton expenditureButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

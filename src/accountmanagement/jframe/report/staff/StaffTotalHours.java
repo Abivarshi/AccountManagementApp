@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package accountmanagement.jframe.report.difference;
+package accountmanagement.jframe.report.staff;
 
+import accountmanagement.jframe.report.difference.*;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.CardLayout;
 import java.io.InputStream;
@@ -31,23 +32,23 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author acer
  */
-public class CashCoinReport extends javax.swing.JPanel {
+public class StaffTotalHours extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
-    private final String name;
+    private final String title;
 
     /**
      * Creates new form Till
      *
      * @param shopName
-     * @param name
+     * @param title
      */
-    public CashCoinReport(String shopName, String name) {
+    public StaffTotalHours(String shopName, String title) {
         this.shopName = shopName;
-        this.name = name;
+        this.title = title;
         initComponents();
-        this.jLabel4.setText("DIFFERENCE - " + name.toUpperCase() + " REPORT");
+        this.jLabel4.setText(title.toUpperCase());
     }
 
     /**
@@ -131,58 +132,74 @@ public class CashCoinReport extends javax.swing.JPanel {
 
         if (fromDate.compareTo(toDate) < 0 || fromDate.compareTo(toDate) == 0) {
             List<Map<String, String>> data = new ArrayList();
-            List<Object[]> dataVal = new ArrayList();
+            Map<String, Float[]> dataVal = new HashMap();
 
-            List<String> colTillList = new ArrayList();
-            colTillList.add("R_Cash");
-            colTillList.add("R_Coin");
-            
-            List<String> colPettyList = new ArrayList();
-//            colPettyList.add("R_Lottary");
-//            colPettyList.add("R_InsLottary");
-
-            ResultSet res = db.getNColValueTabTable(shopName, "Till", colTillList, fromDate, toDate);
-//            ResultSet res1 = db.getNColValueTabTable(shopName, "Petty", colPettyList, fromDate, toDate);
-            String description = "Date: " + fromDate + " - " + toDate;
             try {
+                String description = "Date: " + fromDate + " - " + toDate;
+
+                ResultSet res = db.getTotalStaffTime(shopName, fromDate, toDate);
                 while (res.next()) {
-                    dataVal.add(new Object[]{res.getString("Date"), res.getFloat("R_Cash"), res.getFloat("R_Coin"),
-                        res.getFloat("R_Cash"), res.getFloat("R_Coin"), 0});
+                    if (dataVal.containsKey(res.getString("Date"))) {
+                        Float[] val = dataVal.get(res.getString("Date"));
+                        String type = res.getString("Type");
+                        if(type.equalsIgnoreCase("Till")){
+                            val[0] = val[0] + res.getFloat("Hours");
+                        } else if(type.equalsIgnoreCase("Floor")){
+                            val[1] = val[1] + res.getFloat("Hours");
+                        } else if(type.equalsIgnoreCase("CashCarry")){
+                            val[2] = val[2] + res.getFloat("Hours");
+                        } else if(type.equalsIgnoreCase("Management")){
+                            val[3] = val[3] + res.getFloat("Hours");
+                        }
+
+                        dataVal.replace(res.getString("Date"), val);
+                    } else {
+
+                        Float[] val = new Float[]{0f, 0f, 0f, 0f};
+                        String type = res.getString("Type");
+                        if(type.equalsIgnoreCase("Till")){
+                            val[0] = res.getFloat("Hours");
+                        } else if(type.equalsIgnoreCase("Floor")){
+                            val[1] = res.getFloat("Hours");
+                        } else if(type.equalsIgnoreCase("CashCarry")){
+                            val[2] = res.getFloat("Hours");
+                        } else if(type.equalsIgnoreCase("Management")){
+                            val[3] = res.getFloat("Hours");
+                        }
+
+
+                        dataVal.put(res.getString("Date"), val);
+                    }
                 }
 
-//                while (res1.next()) {
-//                    Float value = res1.getFloat(col2);
-//                    String date = res1.getString("Date");
-//                    boolean valueAdded = false;
-//                    for (Object[] val : dataVal) {
-//                        if (val[0].toString().equals(date)) {
-//                            val[2] = value;
-//                            val[3] = Float.parseFloat(val[3].toString()) - value;
-//                            valueAdded = true;
-//                            break;
-//                        }
-//                    }
-//                    if (!valueAdded) {
-//                        dataVal.add(new Object[]{date, 0, value, 0 - value});
-//                    }
-//                }
-
-                for (Object[] val : dataVal) {
+                for (String date : dataVal.keySet()) {
+                    Float[] val = dataVal.get(date);
                     Map<String, String> map = new HashMap();
-                    map.put("Date", val[0].toString());
-                    map.put("Table1", val[1].toString());
-                    map.put("Table2", val[2].toString());
-                    map.put("Table3", val[3].toString());
-                    map.put("Table4", val[4].toString());
-                    map.put("Table5", val[4].toString());
-                    map.put("Difference", val[3].toString());
-                    map.put("title", "DIFFERENCE - " + name.toUpperCase() + " REPORT");
+                    map.put("Date", date);
+                    map.put("title", title.toUpperCase());
                     map.put("description", description);
+                    Float total = 0f;
+                    for (int i =0; i<4 ;i++){
+                        if (val[i] == null) {
+                            map.put("Col" + (i + 1), "");
+                        } else {
+                            map.put("Col" + (i + 1), Float.toString(val[i]));
+                            total = total + val[i];
+                        }
+                    }
+                    
+                    map.put("Col5", Float.toString(total));
+                    map.put("ColName1", "Till");
+                    map.put("ColName2", "Floor");
+                    map.put("ColName3", "Cash Carry");
+                    map.put("ColName4", "Management");
+                    map.put("ColName5", "Total");
                     data.add(map);
                 }
+
                 if (!data.isEmpty()) {
                     JRDataSource dataSource = new JRBeanCollectionDataSource(data);
-                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/difference/TwoColReport.jrxml");
+                    InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/Col5Report.jrxml");
 
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
@@ -195,16 +212,15 @@ public class CashCoinReport extends javax.swing.JPanel {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(CashCoinReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TwoColReportWithDD.class.getName()).log(Level.SEVERE, null, ex);
             } catch (JRException ex) {
-                Logger.getLogger(CashCoinReport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TwoColReportWithDD.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
             warningLabel1.setText("From Date should be earlier date");
         }
     }//GEN-LAST:event_searchButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooserFrom;

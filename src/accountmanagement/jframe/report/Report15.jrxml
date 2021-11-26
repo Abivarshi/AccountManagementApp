@@ -90,7 +90,7 @@
 				<reportElement x="-11" y="-1" width="28" height="78" uuid="e7f4617b-a276-4a47-b3a3-076771d57ccf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3cd3b3b-18c2-4f42-8b98-6bbcfb2f8cf8"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle" rotation="Left"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left"/>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<line>

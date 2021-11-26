@@ -5,18 +5,34 @@
  */
 package accountmanagement.jframe.report;
 
+import java.util.List;
+import java.util.Map;
+import java.io.InputStream;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
+
 /**
  *
  * @author acer
  */
-public class Blank extends javax.swing.JPanel {
+public class ReportGenerate extends javax.swing.JPanel {
 
     /**
      * Creates new form Till
      *
+     * @param data
+     * @throws net.sf.jasperreports.engine.JRException
      */
-    public Blank() {
+    public ReportGenerate(List<Map<String, String>> data) throws JRException {
         initComponents();
+        System.out.println("In report:::");
+        generateReport(data);
     }
 
     /**
@@ -51,7 +67,17 @@ public class Blank extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private void generateReport(List<Map<String, String>> data) throws JRException {
+        JRDataSource dataSource = new JRBeanCollectionDataSource(data);
+        InputStream sourceName = getClass().getResourceAsStream("/accountmanagement/jframe/report/sales/SalesAssumeReport.jrxml");
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+
+        JRViewer viewer = new JRViewer(jasperPrint);
+        jPanel1.add(viewer);
+        System.out.println("In report");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

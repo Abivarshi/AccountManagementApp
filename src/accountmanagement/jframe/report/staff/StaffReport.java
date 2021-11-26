@@ -34,7 +34,7 @@ public class StaffReport extends javax.swing.JPanel {
     public StaffReport(String shopName) {
         this.shopName = shopName;
         initComponents();
-        populateExpenditureReport();
+//        populateExpenditureReport();
     }
 
     /**
@@ -53,6 +53,9 @@ public class StaffReport extends javax.swing.JPanel {
         tillButton = new javax.swing.JButton();
         sheet2Button1 = new javax.swing.JButton();
         sheet2Button2 = new javax.swing.JButton();
+        sheet2Button3 = new javax.swing.JButton();
+        sheet2Button4 = new javax.swing.JButton();
+        sheet2Button5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -64,6 +67,7 @@ public class StaffReport extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1, "card2");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setPreferredSize(new java.awt.Dimension(130, 980));
 
         sheet2Button.setBackground(new java.awt.Color(0, 0, 51));
         sheet2Button.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
@@ -153,6 +157,72 @@ public class StaffReport extends javax.swing.JPanel {
             }
         });
 
+        sheet2Button3.setBackground(new java.awt.Color(0, 0, 51));
+        sheet2Button3.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        sheet2Button3.setText("Total Hours");
+        sheet2Button3.setBorder(null);
+        sheet2Button3.setBorderPainted(false);
+        sheet2Button3.setContentAreaFilled(false);
+        sheet2Button3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sheet2Button3.setFocusPainted(false);
+        sheet2Button3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sheet2Button3MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sheet2Button3MouseHoverOut(evt);
+            }
+        });
+        sheet2Button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sheet2Button3ActionPerformed(evt);
+            }
+        });
+
+        sheet2Button4.setBackground(new java.awt.Color(0, 0, 51));
+        sheet2Button4.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        sheet2Button4.setText("Staff Salary");
+        sheet2Button4.setBorder(null);
+        sheet2Button4.setBorderPainted(false);
+        sheet2Button4.setContentAreaFilled(false);
+        sheet2Button4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sheet2Button4.setFocusPainted(false);
+        sheet2Button4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sheet2Button4MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sheet2Button4MouseHoverOut(evt);
+            }
+        });
+        sheet2Button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sheet2Button4ActionPerformed(evt);
+            }
+        });
+
+        sheet2Button5.setBackground(new java.awt.Color(0, 0, 51));
+        sheet2Button5.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        sheet2Button5.setText("Staff Hours");
+        sheet2Button5.setBorder(null);
+        sheet2Button5.setBorderPainted(false);
+        sheet2Button5.setContentAreaFilled(false);
+        sheet2Button5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sheet2Button5.setFocusPainted(false);
+        sheet2Button5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sheet2Button5MouseHover(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sheet2Button5MouseHoverOut(evt);
+            }
+        });
+        sheet2Button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sheet2Button5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -161,6 +231,9 @@ public class StaffReport extends javax.swing.JPanel {
             .addComponent(sheet2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(sheet2Button1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(sheet2Button2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(sheet2Button3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(sheet2Button4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(sheet2Button5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +245,14 @@ public class StaffReport extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sheet2Button1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sheet2Button2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addComponent(sheet2Button2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sheet2Button3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sheet2Button4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sheet2Button5)
+                .addContainerGap(785, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -187,8 +267,10 @@ public class StaffReport extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -201,9 +283,9 @@ public class StaffReport extends javax.swing.JPanel {
     }//GEN-LAST:event_sheet2ButtonMouseHoverOut
 
     private void sheet2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2ButtonActionPerformed
-//        jPanel1.add("detail", new Detail(shopName, "Purchase"));
-//        CardLayout layout = (CardLayout) jPanel1.getLayout();
-//        layout.next(jPanel1);
+        jPanel1.add(new StaffHours(shopName, "Staff - Floor Hours Report", "Floor"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_sheet2ButtonActionPerformed
 
     private void tillButtonMouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tillButtonMouseHover
@@ -215,34 +297,80 @@ public class StaffReport extends javax.swing.JPanel {
     }//GEN-LAST:event_tillButtonMouseHoverOut
 
     private void tillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillButtonActionPerformed
-//        jPanel1.add(new Summary(shopName, "Expenditure", "Expenditure"));
-//        CardLayout layout = (CardLayout) jPanel1.getLayout();
-//        layout.next(jPanel1);
+        jPanel1.add(new StaffHours(shopName, "Staff - Till Hours Report", "Till"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_tillButtonActionPerformed
 
     private void sheet2Button1MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button1MouseHover
-        // TODO add your handling code here:
+        sheet2Button1.setForeground(Color.red);
     }//GEN-LAST:event_sheet2Button1MouseHover
 
     private void sheet2Button1MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button1MouseHoverOut
-        // TODO add your handling code here:
+        sheet2Button1.setForeground(Color.black);
     }//GEN-LAST:event_sheet2Button1MouseHoverOut
 
     private void sheet2Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button1ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new StaffHours(shopName, "Staff - Cash Carry Hours Report", "CashCarry"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_sheet2Button1ActionPerformed
 
     private void sheet2Button2MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button2MouseHover
-        // TODO add your handling code here:
+        sheet2Button2.setForeground(Color.red);
     }//GEN-LAST:event_sheet2Button2MouseHover
 
     private void sheet2Button2MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button2MouseHoverOut
-        // TODO add your handling code here:
+        sheet2Button2.setForeground(Color.black);
     }//GEN-LAST:event_sheet2Button2MouseHoverOut
 
     private void sheet2Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button2ActionPerformed
-        // TODO add your handling code here:
+        jPanel1.add(new StaffHours(shopName, "Staff - Management Hours Report", "Management"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
     }//GEN-LAST:event_sheet2Button2ActionPerformed
+
+    private void sheet2Button3MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button3MouseHover
+        sheet2Button3.setForeground(Color.red);
+    }//GEN-LAST:event_sheet2Button3MouseHover
+
+    private void sheet2Button3MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button3MouseHoverOut
+        sheet2Button3.setForeground(Color.black);
+    }//GEN-LAST:event_sheet2Button3MouseHoverOut
+
+    private void sheet2Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button3ActionPerformed
+        jPanel1.add(new StaffTotalHours(shopName, "Staff - Total Hours Report"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_sheet2Button3ActionPerformed
+
+    private void sheet2Button4MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button4MouseHover
+        sheet2Button4.setForeground(Color.red);
+    }//GEN-LAST:event_sheet2Button4MouseHover
+
+    private void sheet2Button4MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button4MouseHoverOut
+        sheet2Button4.setForeground(Color.black);
+    }//GEN-LAST:event_sheet2Button4MouseHoverOut
+
+    private void sheet2Button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button4ActionPerformed
+        jPanel1.add(new StaffSalary(shopName, "Staff - Salary Report", "Salary"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_sheet2Button4ActionPerformed
+
+    private void sheet2Button5MouseHover(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button5MouseHover
+        sheet2Button5.setForeground(Color.red);
+    }//GEN-LAST:event_sheet2Button5MouseHover
+
+    private void sheet2Button5MouseHoverOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sheet2Button5MouseHoverOut
+        sheet2Button5.setForeground(Color.black);
+    }//GEN-LAST:event_sheet2Button5MouseHoverOut
+
+    private void sheet2Button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sheet2Button5ActionPerformed
+        jPanel1.add(new StaffSalary(shopName, "Staff - Total Hours Report", "TotalHours"));
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+    }//GEN-LAST:event_sheet2Button5ActionPerformed
 
     private void populateExpenditureReport() {
         ResultSet res = db.getStaff(shopName);
@@ -297,6 +425,9 @@ public class StaffReport extends javax.swing.JPanel {
     private javax.swing.JButton sheet2Button;
     private javax.swing.JButton sheet2Button1;
     private javax.swing.JButton sheet2Button2;
+    private javax.swing.JButton sheet2Button3;
+    private javax.swing.JButton sheet2Button4;
+    private javax.swing.JButton sheet2Button5;
     private javax.swing.JButton tillButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -247,6 +247,42 @@ public class DataBaseConnection {
         }
     }
 
+    public ResultSet getTotalStaffTime(String shopName, String dateFrom, String dateTo) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM StaffTime WHERE"
+                    + " Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
+                    + " ORDER BY Date ASC");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public ResultSet getStaffTimeType(String shopName, String staffName, String dateFrom, String dateTo, String type) {
+
+        try {
+            if (con == null || !connectedShop.equals(shopName)) {
+                getConnection(shopName);
+            }
+
+            Statement state = con.createStatement();
+            ResultSet res = state.executeQuery("SELECT * FROM StaffTime WHERE StaffName='" + staffName
+                    + "' AND Type='" + type + "' AND Date BETWEEN '" + dateFrom + "' AND '" + dateTo + "'"
+                    + " ORDER BY Date ASC");
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
     public void createStaffSummary(String shopName) throws ClassNotFoundException, SQLException {
         if (con == null || !connectedShop.equals(shopName)) {
             getConnection(shopName);

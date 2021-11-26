@@ -10,7 +10,7 @@ import accountmanagement.jframe.report.bank.BankReport;
 import accountmanagement.jframe.report.petty.PettyReport;
 import accountmanagement.jframe.report.expenditure.PurchaseReport;
 import accountmanagement.jframe.report.sales.SalesReport;
-import accountmanagement.jframe.report.StaffReport;
+import accountmanagement.jframe.report.staff.StaffReport;
 import accountmanagement.jframe.report.commission.CommissionReport;
 import accountmanagement.jframe.report.difference.DifferenceReport;
 import accountmanagement.jframe.report.expenditure.ExpenditureReport;
