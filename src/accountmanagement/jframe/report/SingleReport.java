@@ -26,6 +26,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -163,10 +164,7 @@ public class SingleReport extends javax.swing.JPanel {
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-                    JRViewer viewer = new JRViewer(jasperPrint);
-                    jPanel1.add(viewer);
-                    CardLayout layout = (CardLayout) jPanel1.getLayout();
-                    layout.next(jPanel1);
+                    JasperViewer.viewReport(jasperPrint, false);
                 } else{
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }

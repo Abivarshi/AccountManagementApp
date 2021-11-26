@@ -835,7 +835,7 @@ public class TillReport extends javax.swing.JPanel {
     }//GEN-LAST:event_salesButton1MouseHoverOut
 
     private void salesButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesButton1ActionPerformed
-        jPanel1.add(new RefundReport1(shopName, "TILL - REFUND REPORT", Arrays.asList("R_VoucherMilk", "BO_VoucherMilk", "SO_VoucherMilk", "R_VoucherPayPoint", "BO_VoucherPayPoint", "SO_VoucherPayPoint")));
+        jPanel1.add(new RefundReport(shopName, "TILL - REFUND REPORT", Arrays.asList("R_VoucherMilk", "BO_VoucherMilk", "SO_VoucherMilk", "R_VoucherPayPoint", "BO_VoucherPayPoint", "SO_VoucherPayPoint")));
         CardLayout layout = (CardLayout) jPanel1.getLayout();
         layout.next(jPanel1);
     }//GEN-LAST:event_salesButton1ActionPerformed

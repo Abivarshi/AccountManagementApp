@@ -6,7 +6,6 @@
 package accountmanagement.jframe.report.finalreport;
 
 import accountmanagement.database.DataBaseConnection;
-import java.awt.CardLayout;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -26,7 +24,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -245,10 +243,7 @@ public class FinalReport extends javax.swing.JPanel {
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-                    JRViewer viewer = new JRViewer(jasperPrint);
-                    jPanel1.add(viewer);
-                    CardLayout layout = (CardLayout) jPanel1.getLayout();
-                    layout.next(jPanel1);
+                    JasperViewer.viewReport(jasperPrint, false);
                 } else {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
@@ -336,16 +331,4 @@ public class FinalReport extends javax.swing.JPanel {
     private javax.swing.JLabel warningLabel1;
     // End of variables declaration//GEN-END:variables
 
-    private JLabel loader() {
-        JLabel jLabel4 = new JLabel();
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accountmanagement/image/loading.gif"))); // NOI18N
-
-        jLabel4.setVisible(false);
-        jLabel4.setBounds(100, 100, 20, 20);
-        jPanel1.add(jLabel4);
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
-        return jLabel4;
-    }
 }

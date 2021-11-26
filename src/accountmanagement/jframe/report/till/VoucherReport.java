@@ -6,7 +6,6 @@
 package accountmanagement.jframe.report.till;
 
 import accountmanagement.database.DataBaseConnection;
-import java.awt.CardLayout;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +24,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -36,7 +35,7 @@ public class VoucherReport extends javax.swing.JPanel {
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
     private final String title;
-    private List<String> colName;
+    private final List<String> colName;
 
     /**
      * Creates new form Till
@@ -160,10 +159,7 @@ public class VoucherReport extends javax.swing.JPanel {
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-                    JRViewer viewer = new JRViewer(jasperPrint);
-                    jPanel1.add(viewer);
-                    CardLayout layout = (CardLayout) jPanel1.getLayout();
-                    layout.next(jPanel1);
+                    JasperViewer.viewReport(jasperPrint, false);
                 } else {
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }

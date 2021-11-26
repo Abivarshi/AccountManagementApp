@@ -29,6 +29,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -134,10 +135,10 @@ public class ExpenditureTotalReport extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        jPanel1.removeAll();
-        jPanel1.add(new Loading());
-        CardLayout layout = (CardLayout) jPanel1.getLayout();
-        layout.next(jPanel1);
+//        jPanel1.removeAll();
+//        jPanel1.add(new Loading());
+//        CardLayout layout = (CardLayout) jPanel1.getLayout();
+//        layout.next(jPanel1);
 
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -250,15 +251,16 @@ public class ExpenditureTotalReport extends javax.swing.JPanel {
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-                    JRViewer viewer = new JRViewer(jasperPrint);
-                    jPanel1.add(viewer);
-                    layout = (CardLayout) jPanel1.getLayout();
-                    layout.next(jPanel1);
-                    warningLabel1.setText("");
+                    JasperViewer.viewReport(jasperPrint, false);
+//                    JRViewer viewer = new JRViewer(jasperPrint);
+//                    jPanel1.add(viewer);
+//                    layout = (CardLayout) jPanel1.getLayout();
+//                    layout.next(jPanel1);
+//                    warningLabel1.setText("");
                 } else {
-                    jPanel1.add(new Blank());
-                    layout = (CardLayout) jPanel1.getLayout();
-                    layout.next(jPanel1);
+//                    jPanel1.add(new Blank());
+//                    layout = (CardLayout) jPanel1.getLayout();
+//                    layout.next(jPanel1);
                     warningLabel1.setText("No record available within date " + fromDate + " - " + toDate);
                 }
             } catch (SQLException ex) {

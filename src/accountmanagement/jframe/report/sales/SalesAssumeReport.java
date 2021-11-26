@@ -27,6 +27,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -241,8 +242,7 @@ public class SalesAssumeReport extends javax.swing.JPanel {
                     JasperReport jasperReport = JasperCompileManager.compileReport(sourceName);
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-                    JRViewer viewer = new JRViewer(jasperPrint);
-                    jPanel1.add(viewer);
+                    JasperViewer.viewReport(jasperPrint, false);
 //                    jPanel1.add(new ReportGenerate(data));
 //                    CardLayout layout2 = (CardLayout) jPanel1.getLayout();
 //                    layout2.next(jPanel1);

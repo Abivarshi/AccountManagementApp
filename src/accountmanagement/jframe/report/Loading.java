@@ -5,6 +5,9 @@
  */
 package accountmanagement.jframe.report;
 
+import java.awt.CardLayout;
+import javax.swing.JLabel;
+
 
 /**
  *
@@ -19,6 +22,7 @@ public class Loading extends javax.swing.JPanel {
      */
     public Loading() {
         initComponents();
+        JLabel jLabel4 = loader();
     }
 
     /**
@@ -55,7 +59,18 @@ public class Loading extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private JLabel loader() {
+        JLabel jLabel4 = new JLabel();
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accountmanagement/image/loading.gif"))); // NOI18N
+
+        jLabel4.setVisible(false);
+        jLabel4.setBounds(100, 100, 20, 20);
+        jPanel1.add(jLabel4);
+        CardLayout layout = (CardLayout) jPanel1.getLayout();
+        layout.next(jPanel1);
+        return jLabel4;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
