@@ -108,8 +108,8 @@ public class CommissionAndService extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(558, Short.MAX_VALUE)
-                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(450, Short.MAX_VALUE)
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -134,15 +134,18 @@ public class CommissionAndService extends javax.swing.JPanel {
 
                 HashMap<String, Float> commissionAndServiceValues = new HashMap();
                 for (List<String> list : listOfTextFields.keySet()) {
-                    if (list.get(2).equalsIgnoreCase("Commision")) {
-                        comTotal = comTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                
+                Float val = listOfTextFields.get(list).getText()== null || listOfTextFields.get(list).getText().isEmpty() ?
+                            0 : Float.parseFloat(listOfTextFields.get(list).getText());
+                    
+                if (list.get(2).equalsIgnoreCase("Commision")) {
+                        comTotal = comTotal + val;
                     }
                     if (list.get(2).equalsIgnoreCase("Service Charge")) {
-                        serviceTotal = serviceTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        serviceTotal = serviceTotal + val;
                     }
 
-                    JTextField text = listOfTextFields.get(list);
-                    commissionAndServiceValues.put(list.get(1), Float.parseFloat(text.getText()));
+                    commissionAndServiceValues.put(list.get(1), val);
                 }
                 commissionAndServiceValues.put("ComTotal", comTotal);
                 commissionAndServiceValues.put("ServiceTotal", serviceTotal);
@@ -161,9 +164,10 @@ public class CommissionAndService extends javax.swing.JPanel {
                     resetText();
                 }
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+                warningLabel.setText("**All Values should be decimal");
             } catch (Exception e) {
-                warningLabel.setText("**Error in updating Petty");
+                System.out.println(e);
+                warningLabel.setText("**Error in Updating Commission And Service Charge");
             }
 
         } else {

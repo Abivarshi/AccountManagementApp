@@ -48,11 +48,11 @@ public class LoginPage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -92,9 +92,6 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 102));
         jLabel3.setText("Shop");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 194, 70, 30));
-
-        jComboBox2.setModel(getShopList());
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 200, 130, 30));
         getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 130, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/accountmanagement/image/mgt.jpg"))); // NOI18N
@@ -106,19 +103,28 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
 
+        jComboBox2.setModel(getShopList());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(57, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(445, Short.MAX_VALUE)
+                .addGap(199, 199, 199)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(235, 235, 235))
         );
@@ -135,9 +141,10 @@ public class LoginPage extends javax.swing.JFrame {
         passWord = new String(jPasswordField1.getPassword());
         shopName = jComboBox2.getItemAt(jComboBox2.getSelectedIndex());
 
-        if (db.login(shopName, username, passWord)) {
-            String role =db.getUserType(shopName, username, passWord);
-            new Dashboard(shopName,role,username).setVisible(true);
+        String shop = shopName.equalsIgnoreCase("Costcutter") ? "Shop1" : "Shop2";
+        if (db.login(shop, username, passWord)) {
+            String role =db.getUserType(shop, username, passWord);
+            new Dashboard(shop,role,username).setVisible(true);
             setVisible(false);
         } else{
             jLabel5.setText("**UserName or Password Incorrect");
@@ -146,14 +153,16 @@ public class LoginPage extends javax.swing.JFrame {
 
     private ComboBoxModel getShopList() {
         ArrayList<String> shopList = new ArrayList<>();
-        ResultSet res = db.getShopList();
-        try {
-            while (res.next()) {
-                shopList.add(res.getString("shopName"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        shopList.add("Costcutter");
+        shopList.add("Bell Green Food and Wine");
+//        ResultSet res = db.getShopList();
+//        try {
+//            while (res.next()) {
+//                shopList.add(res.getString("shopName"));
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         ComboBoxModel model = new DefaultComboBoxModel(shopList.toArray());
         return model;

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author acer
  */
-public class Till extends javax.swing.JPanel {
+public class Till_old extends javax.swing.JPanel {
 
     DataBaseConnection db = new DataBaseConnection();
     private final String shopName;
@@ -29,7 +29,7 @@ public class Till extends javax.swing.JPanel {
      *
      * @param shopName
      */
-    public Till(String shopName) {
+    public Till_old(String shopName) {
         this.shopName = shopName;
         initComponents();
     }
@@ -134,7 +134,6 @@ public class Till extends javax.swing.JPanel {
         yesterdayTillCount1 = new javax.swing.JTextField();
         jLabel46 = new javax.swing.JLabel();
         todayTillCount1 = new javax.swing.JTextField();
-        jLabel47 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(760, 900));
@@ -205,7 +204,7 @@ public class Till extends javax.swing.JPanel {
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("Voucher");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 167, 20));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 167, 20));
 
         voucherPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         voucherPayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -414,137 +413,137 @@ public class Till extends javax.swing.JPanel {
         jLabel30.setBackground(new java.awt.Color(255, 255, 255));
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel30.setText("Inst. Lottary");
-        add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 750, 167, 20));
+        add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 167, 20));
 
         boInstLottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boInstLottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boInstLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 750, 96, 25));
+        add(boInstLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 96, 25));
 
         jLabel31.setBackground(new java.awt.Color(255, 255, 255));
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel31.setText("Lottary");
-        add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 780, 167, 20));
+        add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 167, 20));
 
         boLottary.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boLottary.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 780, 96, 25));
+        add(boLottary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 96, 25));
 
         jLabel32.setBackground(new java.awt.Color(255, 255, 255));
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel32.setText("Oyster");
-        add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 810, 167, 20));
+        add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 167, 20));
 
         boOyster.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boOyster.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boOyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 810, 96, 25));
+        add(boOyster, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, 96, 25));
 
         jLabel33.setBackground(new java.awt.Color(255, 255, 255));
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setText("PayPoint");
-        add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 840, 167, 20));
+        add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 167, 20));
 
         boPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boPayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 840, 96, 25));
+        add(boPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 330, 96, 25));
 
         jLabel34.setBackground(new java.awt.Color(255, 255, 255));
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel34.setText("PayZone");
-        add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 870, 167, 20));
+        add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 167, 20));
 
         boPayZone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boPayZone.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boPayZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 870, 96, 25));
+        add(boPayZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 96, 25));
 
         jLabel35.setBackground(new java.awt.Color(255, 255, 255));
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel35.setText("Acc Pay");
-        add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 630, 167, 20));
+        add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 167, 20));
 
         boAccPay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boAccPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boAccPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 630, 96, 25));
+        add(boAccPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 96, 25));
 
         jLabel36.setBackground(new java.awt.Color(255, 255, 255));
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel36.setText("Inst PO");
-        add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 690, 167, 20));
+        add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, 167, 20));
 
         boInstPO.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boInstPO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boInstPO, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 690, 96, 25));
+        add(boInstPO, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, 96, 25));
 
         jLabel37.setBackground(new java.awt.Color(255, 255, 255));
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel37.setText("Lottary PO");
-        add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 720, 167, 20));
+        add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 167, 20));
 
         boLottaryPO.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boLottaryPO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boLottaryPO, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 720, 96, 25));
+        add(boLottaryPO, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 470, 96, 25));
 
         jLabel38.setBackground(new java.awt.Color(255, 255, 255));
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel38.setText("Cash");
-        add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 167, 20));
+        add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 520, 167, 20));
 
         boCash.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boCash.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 96, 25));
+        add(boCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, 96, 25));
 
         jLabel39.setBackground(new java.awt.Color(255, 255, 255));
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel39.setText("Card");
-        add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 167, 20));
+        add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 550, 167, 20));
 
         boCard.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boCard.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, 96, 25));
+        add(boCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 550, 96, 25));
 
         jLabel40.setBackground(new java.awt.Color(255, 255, 255));
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel40.setText("Account");
-        add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 167, 20));
+        add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 580, 167, 20));
 
         boAccount.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boAccount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 540, 96, 25));
+        add(boAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 580, 96, 25));
 
         jLabel41.setBackground(new java.awt.Color(255, 255, 255));
         jLabel41.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel41.setText("Cash Back");
-        add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 660, 167, 20));
+        add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 630, 167, 20));
 
         boCashBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boCashBack.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boCashBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, 96, 25));
+        add(boCashBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 630, 96, 25));
 
         boMilk.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boMilk.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boMilk, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 96, 25));
+        add(boMilk, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 680, 96, 25));
 
         boVaucherPayPoint.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         boVaucherPayPoint.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(boVaucherPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, 96, 25));
+        add(boVaucherPayPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 710, 96, 25));
 
         jLabel42.setBackground(new java.awt.Color(255, 255, 255));
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel42.setText("PayPoint");
-        add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 120, 20));
+        add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 710, 120, 20));
 
         jLabel43.setBackground(new java.awt.Color(255, 255, 255));
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel43.setText("Milk");
-        add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 130, 20));
+        add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 680, 130, 20));
 
         jLabel44.setBackground(new java.awt.Color(255, 255, 255));
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel44.setText("Calling Card");
-        add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 167, 20));
+        add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 167, 20));
 
         callingCard.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         callingCard.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        add(callingCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 96, 25));
+        add(callingCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, 96, 25));
 
         jLabel45.setBackground(new java.awt.Color(255, 255, 255));
         jLabel45.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -563,11 +562,6 @@ public class Till extends javax.swing.JPanel {
         todayTillCount1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         todayTillCount1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         add(todayTillCount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 96, 25));
-
-        jLabel47.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel47.setText("Voucher");
-        add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 167, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
@@ -580,73 +574,73 @@ public class Till extends javax.swing.JPanel {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             HashMap<String, Float> assumePercentage = db.getAdminProfit(shopName);
             try {
-                float cardReport = card.getText().isEmpty() ? 0 : Float.parseFloat(card.getText());
-                float cardBO = boCard.getText().isEmpty() ? 0 : Float.parseFloat(boCard.getText());
+                float cardReport = Float.parseFloat(card.getText());
+                float cardBO = Float.parseFloat(boCard.getText());
                 float SOCard = cardReport - cardBO;
 
-                float voucherMilkReport = voucherMilk.getText().isEmpty() ? 0 : Float.parseFloat(voucherMilk.getText());
-                float voucherMilkBO = boMilk.getText().isEmpty() ? 0 : Float.parseFloat(boMilk.getText());
+                float voucherMilkReport = Float.parseFloat(voucherMilk.getText());
+                float voucherMilkBO = Float.parseFloat(boMilk.getText());
                 float SOVoucherMilk = voucherMilkReport - voucherMilkBO;
 
-                float voucherPayPointReport = voucherPayPoint.getText().isEmpty() ? 0 : Float.parseFloat(voucherPayPoint.getText());
-                float voucherPayPointBO = boVaucherPayPoint.getText().isEmpty() ? 0 : Float.parseFloat(boVaucherPayPoint.getText());
+                float voucherPayPointReport = Float.parseFloat(voucherPayPoint.getText());
+                float voucherPayPointBO = Float.parseFloat(boVaucherPayPoint.getText());
                 float SOVoucherPayPoint = voucherPayPointReport - voucherPayPointBO;
 
-                float refundAccountCreditReport = refundAccountCredit.getText().isEmpty() ? 0 : Float.parseFloat(refundAccountCredit.getText());
-                float refundAccountCreditBO = boAccount.getText().isEmpty() ? 0 : Float.parseFloat(boAccount.getText());
+                float refundAccountCreditReport = Float.parseFloat(refundAccountCredit.getText());
+                float refundAccountCreditBO = Float.parseFloat(boAccount.getText());
                 float SORefundAccountCredit = refundAccountCreditReport - refundAccountCreditBO;
 
-                float accPayReport = accPay.getText().isEmpty() ? 0 : Float.parseFloat(accPay.getText());
-                float accPayBO = boAccPay.getText().isEmpty() ? 0 : Float.parseFloat(boAccPay.getText());
+                float accPayReport = Float.parseFloat(accPay.getText());
+                float accPayBO = Float.parseFloat(boAccPay.getText());
                 float SOAccPay = accPayReport - accPayBO;
 
-                float cashBackReport = cashBack.getText().isEmpty() ? 0 : Float.parseFloat(cashBack.getText());
-                float cashBackBO = boCashBack.getText().isEmpty() ? 0 : Float.parseFloat(boCashBack.getText());
+                float cashBackReport = Float.parseFloat(cashBack.getText());
+                float cashBackBO = Float.parseFloat(boCashBack.getText());
                 float SOCashBack = cashBackReport - cashBackBO;
 
-                float instantPayOutReport = instantPayOut.getText().isEmpty() ? 0 : Float.parseFloat(instantPayOut.getText());
-                float instantPayOutBO = boInstPO.getText().isEmpty() ? 0 : Float.parseFloat(boInstPO.getText());
+                float instantPayOutReport = Float.parseFloat(instantPayOut.getText());
+                float instantPayOutBO = Float.parseFloat(boInstPO.getText());
                 float SOInstantPayOut = instantPayOutReport - instantPayOutBO;
 
-                float lottaryPayOutReport = lottaryPayOut.getText().isEmpty() ? 0 : Float.parseFloat(lottaryPayOut.getText());
-                float lottaryPayOutBO = boLottaryPO.getText().isEmpty() ? 0 : Float.parseFloat(boLottaryPO.getText());
+                float lottaryPayOutReport = Float.parseFloat(lottaryPayOut.getText());
+                float lottaryPayOutBO = Float.parseFloat(boLottaryPO.getText());
                 float SOLottaryPayOut = lottaryPayOutReport - lottaryPayOutBO;
 
-                float lottaryReport = lottary.getText().isEmpty() ? 0 : Float.parseFloat(lottary.getText());
-                float lottaryBO = boLottary.getText().isEmpty() ? 0 : Float.parseFloat(boLottary.getText());
+                float lottaryReport = Float.parseFloat(lottary.getText());
+                float lottaryBO = Float.parseFloat(boLottary.getText());
                 float SOLottary = lottaryBO - lottaryReport;
 
-                float oysterReport = oyster.getText().isEmpty() ? 0 : Float.parseFloat(oyster.getText());
-                float oysterBO = boOyster.getText().isEmpty() ? 0 : Float.parseFloat(boOyster.getText());
+                float oysterReport = Float.parseFloat(oyster.getText());
+                float oysterBO = Float.parseFloat(boOyster.getText());
                 float SOOyster = oysterBO - oysterReport;
 
-                float payPointReport = payPoint.getText().isEmpty() ? 0 : Float.parseFloat(payPoint.getText());
-                float payPointBO = boPayPoint.getText().isEmpty() ? 0 : Float.parseFloat(boPayPoint.getText());
+                float payPointReport = Float.parseFloat(payPoint.getText());
+                float payPointBO = Float.parseFloat(boPayPoint.getText());
                 float SOPayPoint = payPointBO - payPointReport;
 
-                float payZoneReport = payZone.getText().isEmpty() ? 0 : Float.parseFloat(payZone.getText());
-                float payZoneBO = boPayZone.getText().isEmpty() ? 0 : Float.parseFloat(boPayZone.getText());
+                float payZoneReport = Float.parseFloat(payZone.getText());
+                float payZoneBO = Float.parseFloat(boPayZone.getText());
                 float SOPayZone = payZoneBO - payZoneReport;
 
-                float insLottaryReport = insLottary.getText().isEmpty() ? 0 : Float.parseFloat(insLottary.getText());
-                float insLottaryBO = boInstLottary.getText().isEmpty() ? 0 : Float.parseFloat(boInstLottary.getText());
+                float insLottaryReport = Float.parseFloat(insLottary.getText());
+                float insLottaryBO = Float.parseFloat(boInstLottary.getText());
 
-                float cashReport = cash.getText().isEmpty() ? 0 : Float.parseFloat(cash.getText());
-                float cashBO = boCash.getText().isEmpty() ? 0 : Float.parseFloat(boCash.getText());
-                float todayTillCountReport = todayTillCount.getText().isEmpty() ? 0 : Float.parseFloat(todayTillCount.getText());
-                float yesterdayTillCountReport = yesterdayTillCount.getText().isEmpty() ? 0 : Float.parseFloat(yesterdayTillCount.getText());
-                float todayTillCountReport1 = todayTillCount1.getText().isEmpty() ? 0 : Float.parseFloat(todayTillCount1.getText());
-                float yesterdayTillCountReport1 = yesterdayTillCount1.getText().isEmpty() ? 0 : Float.parseFloat(yesterdayTillCount1.getText());
-                float coinsReport = coin.getText().isEmpty() ? 0 : Float.parseFloat(coin.getText());
-                float purchaseReport = purchase.getText().isEmpty() ? 0 : Float.parseFloat(purchase.getText());
-                float expenditureReport = expenditure.getText().isEmpty() ? 0 : Float.parseFloat(expenditure.getText());
-                float refundGoodsReport = refundGoods.getText().isEmpty() ? 0 : Float.parseFloat(refundGoods.getText());
-                float refundServicesReport = refundServices.getText().isEmpty() ? 0 : Float.parseFloat(refundServices.getText());
+                float cashReport = Float.parseFloat(cash.getText());
+                float cashBO = Float.parseFloat(boCash.getText());
+                float todayTillCountReport = Float.parseFloat(todayTillCount.getText());
+                float yesterdayTillCountReport = Float.parseFloat(yesterdayTillCount.getText());
+                float todayTillCountReport1 = Float.parseFloat(todayTillCount1.getText());
+                float yesterdayTillCountReport1 = Float.parseFloat(yesterdayTillCount1.getText());
+                float coinsReport = Float.parseFloat(coin.getText());
+                float purchaseReport = Float.parseFloat(purchase.getText());
+                float expenditureReport = Float.parseFloat(expenditure.getText());
+                float refundGoodsReport = Float.parseFloat(refundGoods.getText());
+                float refundServicesReport = Float.parseFloat(refundServices.getText());
 
-                float Alcohol = alcohol.getText().isEmpty() ? 0 : Float.parseFloat(alcohol.getText());
-                float Groceries = groceries.getText().isEmpty() ? 0 : Float.parseFloat(groceries.getText());
-                float Tobacco = tabacco.getText().isEmpty() ? 0 : Float.parseFloat(tabacco.getText());
-                float CallingCard = callingCard.getText().isEmpty() ? 0 : Float.parseFloat(callingCard.getText());
+                float Alcohol = Float.parseFloat(alcohol.getText());
+                float Groceries = Float.parseFloat(groceries.getText());
+                float Tobacco = Float.parseFloat(tabacco.getText());
+                float CallingCard = Float.parseFloat(callingCard.getText());
 
                 float subTotalSales = Alcohol + Groceries + Tobacco + CallingCard - refundGoodsReport;
 
@@ -740,9 +734,7 @@ public class Till extends javax.swing.JPanel {
                     reset();
                 }
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values should be decimal");
-            } catch (Exception e) {
-                warningLabel.setText("**Error in updating Till");
+                warningLabel.setText("**All Values are mandatory and should be decimal");
             }
 
         } else {
@@ -807,7 +799,7 @@ public class Till extends javax.swing.JPanel {
                     tabacco.setText(Float.toString(res.getFloat("Tobacco")));
 
                 } catch (SQLException ex) {
-                    Logger.getLogger(Till.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Till_old.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
@@ -927,7 +919,6 @@ public class Till extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

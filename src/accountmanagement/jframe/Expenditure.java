@@ -13,10 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 /**
  *
@@ -129,20 +127,28 @@ public class Expenditure extends javax.swing.JPanel {
         if (jDateChooser.getDate() != null) {
             HashMap<String, Float> purchaseValues = new HashMap();
             for (String name : listOfTextFields.keySet()) {
-                System.out.println(name + ": " + listOfTextFields.get(name).getText());
+                
                 try {
-                    purchaseValues.put(name, Float.parseFloat(listOfTextFields.get(name).getText()));
-                    total = total + Float.parseFloat(listOfTextFields.get(name).getText());
+                    Float val = listOfTextFields.get(name).getText()== null || listOfTextFields.get(name).getText().isEmpty() ?
+                            0 : Float.parseFloat(listOfTextFields.get(name).getText());
+
+                    purchaseValues.put(name, val);
+                    total = total + val;
                 } catch (java.lang.NumberFormatException e) {
-                    warningLabel.setText("**All Values are mandatory and should be decimal");
+                    warningLabel.setText("**All Values should be decimal");
                     warningLabel.setForeground(Color.red);
 //                    listOfTextFields.get(name).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     canSave = false;
                     break;
+                } catch (Exception e) {
+                    warningLabel.setText("**Error in updating Expediture");
+                    warningLabel.setForeground(Color.red);
+                    canSave = false;
                 }
             }
             purchaseValues.put("Total", total);
-            System.out.println("Total" + total);
+            System.out.println(purchaseValues.toString());
+            
             if (canSave) {
                 if (!isUpdate) {
                     db.insertValuesTabTable(shopName, "Expenditure", sdf.format(jDateChooser.getDate()), purchaseValues);

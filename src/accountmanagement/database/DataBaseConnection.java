@@ -69,6 +69,7 @@ public class DataBaseConnection {
 
         Statement state = con.createStatement();
         ResultSet res = state.executeQuery("SELECT * FROM user WHERE username='" + username + "'");
+        BackUp.getBackUp(shopName);
         return res;
     }
 
@@ -94,6 +95,7 @@ public class DataBaseConnection {
 
         Statement state = con.createStatement();
         ResultSet res = state.executeQuery("SELECT * FROM Staff WHERE staffColName='" + staffColName + "'");
+        BackUp.getBackUp(shopName);
         return res;
     }
 
@@ -208,6 +210,7 @@ public class DataBaseConnection {
                     + "'" + date + "', '" + staffName + "', '" + staffType + "', " + start + ", " + end + ", " + hours + ");");
 
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -224,6 +227,7 @@ public class DataBaseConnection {
                     + " WHERE Date = '" + date + "' AND StaffName = '" + staffName + "' AND Type = '"+staffType+"';");
 
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -313,6 +317,7 @@ public class DataBaseConnection {
                     + "'" + date + "', '" + staffName + "', " + totalHours + ", " + salary + ");");
 
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,6 +333,7 @@ public class DataBaseConnection {
                     + ", Salary = " + salary + " WHERE Date = '" + date + "' AND StaffName = '" + staffName + "';");
 
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -405,7 +411,7 @@ public class DataBaseConnection {
             Statement state = con.createStatement();
             state.executeUpdate("ALTER TABLE " + tabName + " ADD " + item + " FLOAT NULL;");
             System.out.println("Alter the " + tabName + " table..." + item);
-
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -470,6 +476,7 @@ public class DataBaseConnection {
                     + "'" + item + "', '" + name + "', '" + type + "');");
 
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -485,6 +492,7 @@ public class DataBaseConnection {
                     + "'" + item + "', '" + name + "');");
 
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -583,6 +591,7 @@ public class DataBaseConnection {
         try {
             prep = con.prepareStatement(fun);
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -604,6 +613,7 @@ public class DataBaseConnection {
         try {
             prep = con.prepareStatement(fun);
             prep.execute();
+            BackUp.getBackUp(shopName);
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1191,7 +1201,10 @@ public class DataBaseConnection {
         prep.execute();
 
         createUserTable(shopName);
-        addUser(shopName, "admin", "admin", "admin");
+        if("Shop1".equals(shopName))
+            addUser(shopName, "admin", "admin", "admin");
+        else
+            addUser(shopName, "a", "admin", "admin");
         createStaff(shopName);
         createStaffTime(shopName);
         createStaffSummary(shopName);
@@ -1291,7 +1304,7 @@ public class DataBaseConnection {
 
         PreparedStatement prep = con.prepareStatement("UPDATE AdminProfit SET '" + colName + "' = '" + value + "'");
         prep.execute();
-
+        BackUp.getBackUp(shopName);
     }
 
     public HashMap<String, Float> getAdminProfit(String shopName) {

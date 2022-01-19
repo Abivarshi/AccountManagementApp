@@ -105,10 +105,10 @@ public class Bank extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 1100));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 900));
 
         warningLabel.setForeground(new java.awt.Color(153, 0, 0));
         add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 470, 20));
@@ -123,21 +123,24 @@ public class Bank extends javax.swing.JPanel {
                 float purTotal = 0;
                 float balance = 0;
                 HashMap<String, Float> bankValues = new HashMap();
+                
                 for (List<String> list : listOfTextFields.keySet()) {
-                    System.out.println(list + listOfTextFields.get(list).getText());
+                    
+                    Float val = listOfTextFields.get(list).getText()== null || listOfTextFields.get(list).getText().isEmpty() ?
+                            0 : Float.parseFloat(listOfTextFields.get(list).getText());
+                    
                     if (list.get(2).equalsIgnoreCase("Expenditure Money Out (Monthly)") || list.get(2).equalsIgnoreCase("Expenditure Money Out (Yearly)")
                             || list.get(2).equalsIgnoreCase("Expenditure/ Bank Charge")) {
-                        System.out.println(list + listOfTextFields.get(list).getText());
-                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        expTotal = expTotal + val;
                     } else if (list.get(2).equalsIgnoreCase("Purchase")) {
-                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        purTotal = purTotal + val;
                     } else if (list.get(2).equalsIgnoreCase("From Bank") || list.get(2).equalsIgnoreCase("Money In (Commission)")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                        balance = balance + val;
                     } else if (list.get(2).equalsIgnoreCase("Service Money Out") || list.get(2).equalsIgnoreCase("Pay Back")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                        balance = balance - val;
                     }
-                    JTextField text = listOfTextFields.get(list);
-                    bankValues.put(list.get(1), Float.parseFloat(text.getText()));
+                    
+                    bankValues.put(list.get(1), val);
                 }
                 balance = balance - expTotal - purTotal;
                 bankValues.put("SubPurchase", purTotal);
@@ -160,7 +163,7 @@ public class Bank extends javax.swing.JPanel {
                     resetText();
                 }
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+                warningLabel.setText("**All Values should be decimal");
             } catch (Exception e) {
                 warningLabel.setText("**Error in updating Bank");
             }

@@ -8,6 +8,7 @@ package accountmanagement.jframe;
 import accountmanagement.database.DataBaseConnection;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Dimension;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -99,7 +100,7 @@ public class StaffTime extends javax.swing.JPanel {
         add(warningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 270, 20));
 
         jScrollPane1.setBorder(null);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(960, 800));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 860));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 1700));
@@ -108,7 +109,7 @@ public class StaffTime extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 979, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,8 +131,10 @@ public class StaffTime extends javax.swing.JPanel {
 
                     JTextField startText = (JTextField) list.get(2);
                     JTextField endText = (JTextField) list.get(3);
-                    Float startTime = Float.parseFloat(startText.getText());
-                    Float endTime = Float.parseFloat(endText.getText());
+                    Float startTime = startText.getText()== null || startText.getText().isEmpty() ?
+                            0 : Float.parseFloat(startText.getText());
+                    Float endTime = endText.getText()== null || endText.getText().isEmpty() ?
+                            0 : Float.parseFloat(endText.getText());
                     Float hours = endTime - startTime;
 
                     if (!isUpdate) {
@@ -169,7 +172,7 @@ public class StaffTime extends javax.swing.JPanel {
 
                 }
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+                warningLabel.setText("**All Values should be decimal");
             }
 
         } else {
@@ -253,7 +256,7 @@ public class StaffTime extends javax.swing.JPanel {
                 if (res.getString("Management").equals("1")) {
                     i = insertTime("Management", i, staffColName);
                 }
-
+                jPanel1.setPreferredSize(new java.awt.Dimension(800, i*34));
                 jPanel1.add(label);
             }
         } catch (SQLException ex) {

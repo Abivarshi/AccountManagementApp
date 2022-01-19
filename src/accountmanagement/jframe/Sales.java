@@ -133,11 +133,14 @@ public class Sales extends javax.swing.JPanel {
 
                 HashMap<String, Float> salesValues = new HashMap();
                 for (List<String> list : listOfTextFields.keySet()) {
+                    
+                    Float val = listOfTextFields.get(list).getText()== null || listOfTextFields.get(list).getText().isEmpty() ?
+                            0 : Float.parseFloat(listOfTextFields.get(list).getText());
+                    
                     if (!list.get(1).equalsIgnoreCase("CustomerCount")) {
-                        bookoutTotal = bookoutTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        bookoutTotal = bookoutTotal + val;
                     }
-                    JTextField text = listOfTextFields.get(list);
-                    salesValues.put(list.get(1), Float.parseFloat(text.getText()));
+                    salesValues.put(list.get(1), val);
                 }
                 salesValues.put("Total", bookoutTotal);
 
@@ -156,7 +159,7 @@ public class Sales extends javax.swing.JPanel {
                     resetText();
                 }
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+                warningLabel.setText("**All Values should be decimal");
             } catch (Exception e) {
                 warningLabel.setText("**Error in updating Sales");
             }

@@ -125,23 +125,27 @@ public class Petty extends javax.swing.JPanel {
                 float purTotal = 0;
                 float balance = 0;
                 for (List<String> list : listOfTextFields.keySet()) {
+                    
+                    Float val = listOfTextFields.get(list).getText()== null || listOfTextFields.get(list).getText().isEmpty() ?
+                            0 : Float.parseFloat(listOfTextFields.get(list).getText());
+                    
                     if (list.get(2).equalsIgnoreCase("Expenditure")) {
-                        expTotal = expTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        expTotal = expTotal + val;
                     } else if (list.get(2).equalsIgnoreCase("Purchase")) {
-                        purTotal = purTotal + Float.parseFloat(listOfTextFields.get(list).getText());
+                        purTotal = purTotal + val;
                     } else if (list.get(2).equalsIgnoreCase("Cost Cutter")) {
-                        beIOU = beIOU + Float.parseFloat(listOfTextFields.get(list).getText());
+                        beIOU = beIOU + val;
                     } else if (list.get(2).equalsIgnoreCase("Banking")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                        balance = balance - val;
                     } else if (list.get(2).equalsIgnoreCase("BE IOU")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                        balance = balance + val;
                     } else if (list.get(2).equalsIgnoreCase("Borrow")) {
-                        balance = balance + Float.parseFloat(listOfTextFields.get(list).getText());
+                        balance = balance + val;
                     } else if (list.get(2).equalsIgnoreCase("Pay Back")) {
-                        balance = balance - Float.parseFloat(listOfTextFields.get(list).getText());
+                        balance = balance - val;
                     }
-                    JTextField text = listOfTextFields.get(list);
-                    bankValues.put(list.get(1), Float.parseFloat(text.getText()));
+                    
+                    bankValues.put(list.get(1), val);
                 }
                 balance = balance - expTotal - purTotal - beIOU;
                 bankValues.put("CC_BE_IOU", beIOU);
@@ -164,7 +168,7 @@ public class Petty extends javax.swing.JPanel {
                     resetText();
                 }
             } catch (java.lang.NumberFormatException e) {
-                warningLabel.setText("**All Values are mandatory and should be decimal");
+                warningLabel.setText("**All Values should be decimal");
             } catch (Exception e) {
                 warningLabel.setText("**Error in updating Petty");
             }
